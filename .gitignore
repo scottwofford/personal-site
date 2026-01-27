@@ -1,0 +1,13 @@
+# macOS
+.DS_Store
+
+# Office temp files
+~$*
+
+# Personal planning docs (not for public)
+Personal-Site-Brain-Dump.*
+Personal-Site-Nov-10-2025.docx
+2026-01-03_publish-claude-md-file.md
+
+# Editor configs (optional - remove if you want to share)
+.cursor/
