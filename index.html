@@ -1,620 +1,218 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Scott Wofford | AI Safety & Development</title>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scott Wofford</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <style>
-    :root {
-      --primary: #1a1a2e;
-      --secondary: #16213e;
-      --accent: #e94560;
-      --text-light: #ffffff;
-      --text-gray: #b8b8b8;
-      --card-bg: rgba(22, 33, 62, 0.8);
-      --gradient: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-    }
-    
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-    
+
     html, body {
-      font-family: 'Inter', 'Segoe UI', sans-serif;
-      background: var(--gradient);
-      color: var(--text-light);
-      scroll-behavior: smooth;
-      line-height: 1.6;
+      height: 100%;
     }
-    
-    /* Navigation */
+
+    body {
+      font-family: 'Inconsolata', monospace;
+      background: #1a1a1a;
+      color: #e5e5e5;
+      min-height: 100vh;
+      padding: 2rem;
+    }
+
     nav {
-      background: rgba(22, 33, 62, 0.95);
-      backdrop-filter: blur(10px);
-      padding: 1rem 2rem;
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: fixed;
-      top: 0;
-      width: 100%;
-      z-index: 1000;
-      transition: all 0.3s ease;
+      justify-content: flex-end;
+      gap: 2.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 4rem;
     }
-    
-    .nav-brand {
-      font-weight: 700;
-      font-size: 1.5rem;
-      color: var(--accent);
-      text-decoration: none;
-    }
-    
-    .nav-links {
-      list-style: none;
-      display: flex;
-      gap: 2rem;
-    }
-    
-    .nav-links a {
-      color: var(--text-light);
-      text-decoration: none;
-      font-weight: 500;
-      transition: all 0.3s ease;
+
+    .nav-item {
       position: relative;
     }
-    
-    .nav-links a:hover {
-      color: var(--accent);
+
+    .nav-item > a {
+      color: #888;
+      text-decoration: none;
+      font-size: 1.1rem;
+      padding: 0.5rem 0;
+      transition: color 0.2s;
     }
-    
-    .nav-links a::after {
-      content: '';
+
+    .nav-item:hover > a {
+      color: #fff;
+    }
+
+    .dropdown {
       position: absolute;
-      width: 0;
-      height: 2px;
-      bottom: -5px;
-      left: 0;
-      background: var(--accent);
-      transition: width 0.3s ease;
-    }
-    
-    .nav-links a:hover::after {
-      width: 100%;
-    }
-    
-    /* Mobile menu */
-    .mobile-menu {
-      display: none;
-      flex-direction: column;
-      cursor: pointer;
-    }
-    
-    .mobile-menu span {
-      width: 25px;
-      height: 3px;
-      background: var(--text-light);
-      margin: 3px 0;
-      transition: 0.3s;
-    }
-    
-    /* Container */
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 2rem;
-    }
-    
-    /* Sections */
-    section {
-      padding: 4rem 0;
-      margin-top: 2rem;
-    }
-    
-    .section-title {
-      font-size: 2.5rem;
-      text-align: center;
-      margin-bottom: 3rem;
-      color: var(--accent);
-      position: relative;
-    }
-    
-    .section-title::after {
-      content: '';
-      position: absolute;
-      bottom: -10px;
+      top: 100%;
       left: 50%;
       transform: translateX(-50%);
-      width: 80px;
-      height: 3px;
-      background: var(--accent);
+      background: #252525;
+      border: 1px solid #333;
+      border-radius: 4px;
+      padding: 0.75rem 1rem;
+      min-width: 180px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.2s, visibility 0.2s;
+      margin-top: 0.5rem;
+      z-index: 100;
     }
-    
-    /* Hero Section */
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding-top: 80px;
-      background: var(--gradient);
+
+    .nav-item:hover .dropdown {
+      opacity: 1;
+      visibility: visible;
     }
-    
-    .hero-content h1 {
-      font-size: 3.5rem;
-      margin-bottom: 1rem;
-      color: var(--text-light);
-      animation: fadeInUp 1s ease-out;
-    }
-    
-    .hero-content .highlight {
-      color: var(--accent);
-    }
-    
-    .hero-content p {
-      font-size: 1.3rem;
-      max-width: 700px;
-      margin: 0 auto 2rem;
-      color: var(--text-gray);
-      animation: fadeInUp 1s ease-out 0.2s both;
-    }
-    
-    .cta-buttons {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
-      animation: fadeInUp 1s ease-out 0.4s both;
-    }
-    
-    .btn {
-      padding: 12px 30px;
-      border: none;
-      border-radius: 50px;
-      font-weight: 600;
+
+    .dropdown a {
+      display: block;
+      color: #999;
       text-decoration: none;
-      transition: all 0.3s ease;
-      cursor: pointer;
-      display: inline-flex;
+      font-size: 0.95rem;
+      padding: 0.4rem 0;
+      transition: color 0.15s;
+    }
+
+    .dropdown a:hover {
+      color: #fff;
+    }
+
+    .content {
+      display: flex;
       align-items: center;
-      gap: 0.5rem;
+      justify-content: center;
+      min-height: calc(100vh - 12rem);
     }
-    
-    .btn-primary {
-      background: var(--accent);
-      color: white;
-    }
-    
-    .btn-secondary {
-      background: transparent;
-      color: var(--text-light);
-      border: 2px solid var(--text-light);
-    }
-    
-    .btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 25px rgba(233, 69, 96, 0.3);
-    }
-    
-    /* Card Styles */
+
     .card {
-      background: var(--card-bg);
-      border-radius: 15px;
-      padding: 2rem;
-      margin-bottom: 2rem;
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      transition: all 0.3s ease;
-    }
-    
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-    }
-    
-    .card h3 {
-      color: var(--accent);
-      margin-bottom: 1rem;
-      font-size: 1.5rem;
-    }
-    
-    /* Grid Layouts */
-    .grid {
-      display: grid;
-      gap: 2rem;
-    }
-    
-    .grid-2 {
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    }
-    
-    .grid-3 {
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    }
-    
-    /* Skills */
-    .skill-item {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin-bottom: 1rem;
-    }
-    
-    .skill-icon {
-      font-size: 1.5rem;
-      color: var(--accent);
-      width: 30px;
-    }
-    
-    /* Projects */
-    .project-card {
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .project-links {
-      display: flex;
-      gap: 1rem;
-      margin-top: 1rem;
-    }
-    
-    .project-links .btn {
-      padding: 8px 20px;
-      font-size: 0.9rem;
-    }
-    
-    /* Contact */
-    .contact-info {
       text-align: center;
+      max-width: 550px;
     }
-    
-    .contact-links {
+
+    h1 {
+      font-size: 2.6rem;
+      font-weight: 600;
+      color: #ffffff;
+      margin-bottom: 1rem;
+      white-space: nowrap;
+    }
+
+    h1 a {
+      color: inherit;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .tagline {
+      font-size: 1.15rem;
+      color: #777;
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+
+    .social {
       display: flex;
       justify-content: center;
-      gap: 2rem;
-      margin-top: 2rem;
-      flex-wrap: wrap;
+      gap: 1.5rem;
     }
-    
-    .contact-link {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      color: var(--text-light);
-      text-decoration: none;
-      padding: 1rem;
-      border-radius: 10px;
-      transition: all 0.3s ease;
-      background: rgba(255, 255, 255, 0.05);
+
+    .social a {
+      color: #666;
+      font-size: 1.3rem;
+      transition: color 0.2s;
     }
-    
-    .contact-link:hover {
-      background: var(--accent);
-      transform: translateY(-2px);
+
+    .social a:hover {
+      color: #fff;
     }
-    
-    /* Animations */
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 1.6rem;
+        white-space: normal;
       }
-      to {
-        opacity: 1;
-        transform: translateY(0);
+
+      nav {
+        gap: 1.25rem;
       }
-    }
-    
-    /* Responsive Design */
-    @media (max-width: 768px) {
-      .nav-links {
+
+      .dropdown {
         display: none;
-      }
-      
-      .mobile-menu {
-        display: flex;
-      }
-      
-      .hero-content h1 {
-        font-size: 2.5rem;
-      }
-      
-      .hero-content p {
-        font-size: 1.1rem;
-      }
-      
-      .cta-buttons {
-        flex-direction: column;
-        align-items: center;
-      }
-      
-      .section-title {
-        font-size: 2rem;
-      }
-      
-      .container {
-        padding: 0 1rem;
-      }
-      
-      .contact-links {
-        flex-direction: column;
-        align-items: center;
       }
     }
   </style>
 </head>
 <body>
-  <!-- Navigation -->
   <nav>
-    <a href="#hero" class="nav-brand">Scott Wofford</a>
-    <ul class="nav-links">
-      <li><a href="#hero">Home</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-    <div class="mobile-menu">
-      <span></span>
-      <span></span>
-      <span></span>
+    <div class="nav-item">
+      <a href="/focus/">focus</a>
+      <div class="dropdown">
+        <a href="/focus/5-choices.html">5 Choices</a>
+        <a href="/focus/eisenhower-method.html">Eisenhower Method</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="/reading/">reading</a>
+      <div class="dropdown">
+        <a href="/reading/goodreads.html">Goodreads</a>
+        <a href="/reading/first-90-days.html">First 90 Days</a>
+        <a href="/reading/book-snippets.html">Book Snippets</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="/people/">people</a>
+      <div class="dropdown">
+        <a href="/people/meeting-culture.html">Meeting Culture</a>
+        <a href="/people/priorities-template.html">Priorities Template</a>
+        <a href="/people/retrospective-template.html">Retrospective Template</a>
+        <a href="/people/meeting-agenda-template.html">Meeting Agenda</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="/building/">building</a>
+      <div class="dropdown">
+        <a href="/building/day-1-philosophy.html">Day 1 Philosophy</a>
+        <a href="/building/mini-prfaq-template.html">Mini-PRFAQ Template</a>
+        <a href="/building/tracker-templates.html">Tracker Templates</a>
+        <a href="/building/onboarding-reading-list.html">Onboarding Reading List</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="/writing/">writing</a>
+      <div class="dropdown">
+        <a href="/writing/pyramid-principle.html">Pyramid Principle</a>
+        <a href="/writing/writing-resources.html">Writing Resources</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="/blog/">blog</a>
+      <div class="dropdown">
+        <a href="https://scwoff.substack.com" target="_blank">Substack</a>
+      </div>
     </div>
   </nav>
 
-  <!-- Hero Section -->
-  <section id="hero" class="hero">
-    <div class="container">
-      <div class="hero-content">
-        <h1>Hi, I'm <span class="highlight">Scott Wofford</span></h1>
-        <p>AI Safety Researcher & Developer focused on building responsible AI systems and tools for a safer future. Passionate about the intersection of technology, ethics, and human flourishing.</p>
-        <div class="cta-buttons">
-          <a href="#projects" class="btn btn-primary">
-            <i class="fas fa-code"></i> View My Work
-          </a>
-          <a href="#contact" class="btn btn-secondary">
-            <i class="fas fa-envelope"></i> Get In Touch
-          </a>
-        </div>
+  <main class="content">
+    <div class="card">
+      <h1>Scott is building <a href="https://luthienresearch.org" target="_blank">Luthien</a></h1>
+      <p class="tagline">...and doing some other things including raising two <a href="https://www.instagram.com/p/DNmp4rgODFzCiRnhnw-Ppwpv1CjpCI8e1M7zRc0/?img_index=1" target="_blank" style="color: inherit;">dope kids</a>, reading 📚, listening to/playing music 🎸🎧, and being outside 🧗🚵‍♂️</p>
+      <p class="tagline">I live in Seattle, but spend time in SF, Colombia, Tennessee, and Mexico when I'm tired of the rain 🌧️🤷‍♂️</p>
+      <div class="social">
+        <a href="https://www.linkedin.com/in/scottwofford/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        <a href="https://x.com/scottwofford" target="_blank" title="X"><i class="fab fa-x-twitter"></i></a>
+        <a href="https://www.instagram.com/sqwofford/" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.facebook.com/scottwofford" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
       </div>
     </div>
-  </section>
-
-  <!-- About Section -->
-  <section id="about">
-    <div class="container">
-      <h2 class="section-title">About Me</h2>
-      <div class="grid grid-2">
-        <div class="card">
-          <h3><i class="fas fa-brain"></i> AI Safety Focus</h3>
-          <p>Dedicated to developing and researching AI systems that are aligned with human values. I work on control frameworks, safety protocols, and tools that help organizations deploy AI responsibly while mitigating risks.</p>
-        </div>
-        <div class="card">
-          <h3><i class="fas fa-code-branch"></i> Technical Expertise</h3>
-          <p>Full-stack developer with expertise in Python, FastAPI, React, and modern web technologies. I build scalable applications, proxy systems, and data analysis tools that bridge the gap between research and practical implementation.</p>
-        </div>
-        <div class="card">
-          <h3><i class="fas fa-chart-line"></i> Data & Analysis</h3>
-          <p>Experienced in analyzing complex datasets, from AI model efficiency metrics to energy infrastructure data. I create visualizations and insights that inform decision-making and drive understanding.</p>
-        </div>
-        <div class="card">
-          <h3><i class="fas fa-users"></i> Community Builder</h3>
-          <p>Passionate about fostering collaboration in the AI safety community. I contribute to open-source projects, educational resources, and initiatives that promote responsible AI development.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Projects Section -->
-  <section id="projects">
-    <div class="container">
-      <h2 class="section-title">Featured Projects</h2>
-      <div class="grid grid-2">
-        <div class="card project-card">
-          <h3><i class="fas fa-shield-alt"></i> Luthien Control Framework</h3>
-          <p>A comprehensive proxy server for monitoring and controlling AI model API interactions. Features policy-based request filtering, comprehensive logging, and safety controls for responsible AI deployment.</p>
-          <div class="project-links">
-            <a href="https://github.com/scottwofford/luthien-control" class="btn btn-primary" target="_blank">
-              <i class="fab fa-github"></i> View Code
-            </a>
-            <a href="#" class="btn btn-secondary">
-              <i class="fas fa-external-link-alt"></i> Live Demo
-            </a>
-          </div>
-        </div>
-        <div class="card project-card">
-          <h3><i class="fas fa-chart-bar"></i> AI Model Efficiency Analysis</h3>
-          <p>Comprehensive analysis of AI model efficiency metrics, comparing performance, cost, and resource requirements across major models. Includes interactive visualizations and efficiency frontier analysis.</p>
-          <div class="project-links">
-            <a href="#" class="btn btn-primary">
-              <i class="fab fa-github"></i> View Analysis
-            </a>
-            <a href="#" class="btn btn-secondary">
-              <i class="fas fa-chart-line"></i> Interactive Dashboard
-            </a>
-          </div>
-        </div>
-        <div class="card project-card">
-          <h3><i class="fas fa-bolt"></i> Energy Infrastructure Insights</h3>
-          <p>Data visualization platform for power plant operations and energy generation analysis. Built with Python, Flask, and interactive Plotly visualizations to understand energy infrastructure patterns.</p>
-          <div class="project-links">
-            <a href="#" class="btn btn-primary">
-              <i class="fab fa-github"></i> Source Code
-            </a>
-            <a href="#" class="btn btn-secondary">
-              <i class="fas fa-eye"></i> View Demo
-            </a>
-          </div>
-        </div>
-        <div class="card project-card">
-          <h3><i class="fas fa-globe"></i> AI Safety Community Hub</h3>
-          <p>Static website and resource hub for the AI safety community, featuring educational content, community links, and resources for those interested in AI alignment and safety research.</p>
-          <div class="project-links">
-            <a href="#" class="btn btn-primary">
-              <i class="fas fa-globe"></i> Visit Site
-            </a>
-            <a href="#" class="btn btn-secondary">
-              <i class="fas fa-info-circle"></i> Learn More
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Skills Section -->
-  <section id="skills">
-    <div class="container">
-      <h2 class="section-title">Skills & Technologies</h2>
-      <div class="grid grid-3">
-        <div class="card">
-          <h3><i class="fas fa-code"></i> Programming Languages</h3>
-          <div class="skill-item">
-            <i class="fab fa-python skill-icon"></i>
-            <span>Python (FastAPI, Flask, Data Science)</span>
-          </div>
-          <div class="skill-item">
-            <i class="fab fa-js-square skill-icon"></i>
-            <span>JavaScript (ES6+, Node.js)</span>
-          </div>
-          <div class="skill-item">
-            <i class="fab fa-html5 skill-icon"></i>
-            <span>HTML5 & CSS3</span>
-          </div>
-          <div class="skill-item">
-            <i class="fas fa-database skill-icon"></i>
-            <span>SQL & Database Design</span>
-          </div>
-        </div>
-        <div class="card">
-          <h3><i class="fas fa-tools"></i> Frameworks & Tools</h3>
-          <div class="skill-item">
-            <i class="fab fa-react skill-icon"></i>
-            <span>React & Modern Web Frameworks</span>
-          </div>
-          <div class="skill-item">
-            <i class="fas fa-server skill-icon"></i>
-            <span>FastAPI & REST APIs</span>
-          </div>
-          <div class="skill-item">
-            <i class="fab fa-git-alt skill-icon"></i>
-            <span>Git & Version Control</span>
-          </div>
-          <div class="skill-item">
-            <i class="fab fa-docker skill-icon"></i>
-            <span>Docker & Containerization</span>
-          </div>
-        </div>
-        <div class="card">
-          <h3><i class="fas fa-brain"></i> AI & Data Science</h3>
-          <div class="skill-item">
-            <i class="fas fa-chart-line skill-icon"></i>
-            <span>Data Analysis & Visualization</span>
-          </div>
-          <div class="skill-item">
-            <i class="fas fa-robot skill-icon"></i>
-            <span>AI Safety & Alignment Research</span>
-          </div>
-          <div class="skill-item">
-            <i class="fas fa-shield-alt skill-icon"></i>
-            <span>AI Control & Monitoring Systems</span>
-          </div>
-          <div class="skill-item">
-            <i class="fas fa-microscope skill-icon"></i>
-            <span>Research & Technical Writing</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact Section -->
-  <section id="contact">
-    <div class="container">
-      <h2 class="section-title">Let's Connect</h2>
-      <div class="contact-info">
-        <p>Interested in AI safety, collaborative projects, or just want to chat? I'd love to hear from you!</p>
-        <div class="contact-links">
-          <a href="mailto:scott@example.com" class="contact-link">
-            <i class="fas fa-envelope"></i>
-            <span>Email Me</span>
-          </a>
-          <a href="https://github.com/scottwofford" class="contact-link" target="_blank">
-            <i class="fab fa-github"></i>
-            <span>GitHub</span>
-          </a>
-          <a href="https://linkedin.com/in/scottwofford" class="contact-link" target="_blank">
-            <i class="fab fa-linkedin"></i>
-            <span>LinkedIn</span>
-          </a>
-          <a href="https://twitter.com/scottwofford" class="contact-link" target="_blank">
-            <i class="fab fa-twitter"></i>
-            <span>Twitter</span>
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- JavaScript -->
-  <script>
-    // Smooth scrolling for navigation links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-          });
-        }
-      });
-    });
-
-    // Mobile menu toggle
-    const mobileMenu = document.querySelector('.mobile-menu');
-    const navLinks = document.querySelector('.nav-links');
-    
-    mobileMenu.addEventListener('click', () => {
-      navLinks.classList.toggle('active');
-      mobileMenu.classList.toggle('active');
-    });
-
-    // Navbar scroll effect
-    window.addEventListener('scroll', () => {
-      const nav = document.querySelector('nav');
-      if (window.scrollY > 100) {
-        nav.style.background = 'rgba(22, 33, 62, 0.98)';
-      } else {
-        nav.style.background = 'rgba(22, 33, 62, 0.95)';
-      }
-    });
-
-    // Add animation on scroll
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.style.opacity = '1';
-          entry.target.style.transform = 'translateY(0)';
-        }
-      });
-    }, observerOptions);
-
-    // Observe all cards and sections
-    document.querySelectorAll('.card, section').forEach(el => {
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(20px)';
-      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-      observer.observe(el);
-    });
-  </script>
+  </main>
 </body>
 </html>
