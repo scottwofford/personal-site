@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Luthien Customer Discovery - Scott Wofford</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inconsolata', monospace;
+      background: #1a1a1a;
+      color: #e5e5e5;
+      padding: 2rem;
+      line-height: 1.6;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    h1 { font-size: 1.8rem; margin-bottom: 0.5rem; color: #fff; }
+    h2 { font-size: 1.3rem; margin: 2rem 0 1rem; color: #fff; border-bottom: 1px solid #333; padding-bottom: 0.5rem; }
+    h3 { font-size: 1.1rem; margin: 1.5rem 0 0.75rem; color: #ccc; }
+    p { margin-bottom: 1rem; color: #aaa; }
+    a { color: #6b9fff; }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.9rem; }
+    th, td { padding: 0.5rem; text-align: left; border-bottom: 1px solid #333; }
+    th { color: #888; font-weight: 400; }
+    td { color: #ccc; }
+    .subtitle { color: #666; margin-bottom: 2rem; }
+    hr { border: none; border-top: 1px solid #333; margin: 2rem 0; }
+    .back { margin-bottom: 2rem; }
+    .back a { color: #666; text-decoration: none; }
+    .back a:hover { color: #fff; }
+    .updated { color: #555; font-size: 0.85rem; margin-top: 3rem; }
+  </style>
+</head>
+<body>
+  <div class="back"><a href="/">← scottwofford.com</a></div>
+
+  <h1>Luthien Customer Discovery</h1>
+  <p class="subtitle">The Story So Far — March 2025 – January 2026</p>
+
+  <hr>
+
+  <h2>What We're Doing</h2>
+  <p>We're trying to build an org to reduce the risk of catastrophic outcomes from AI. Everything else is up for grabs.</p>
+  <p>In March 2025, we completed a Theory of Change exercise and wrote v12. That document captures our thinking at the time, but we're currently reevaluating.</p>
+
+  <hr>
+
+  <h2>What We've Done</h2>
+
+  <h3>Discovery Interviews (Jun–Aug 2025)</h3>
+  <p>9 interviews. People started saying the same things.</p>
+
+  <table>
+    <tr><th>Date</th><th>Name</th><th>Role</th><th>Transcript</th></tr>
+    <tr><td>Jun 25</td><td>Nico</td><td>CTO, Veleiro</td><td><a href="https://docs.google.com/document/d/1u_WdPExBOLmQV4oSRZ1EX07MXUj74qsmoOxOppqLpG0/edit">Link</a></td></tr>
+    <tr><td>Jul 1</td><td>Saranya</td><td>Staff Engineer, IntentAI</td><td>—</td></tr>
+    <tr><td>Jul 14</td><td>Anthony</td><td>Sr. Developer, PauseAI</td><td><a href="https://docs.google.com/document/d/1LIxnEXIcjL1gU7IT1wUtqzZOo4Sn49Z-ENKbrBdTI_c/edit">Link</a></td></tr>
+    <tr><td>Jul 23</td><td>Aleksandr</td><td>Developer Advocate</td><td><a href="https://docs.google.com/document/d/XeeI23EVa41BYJ_JCFlmQPLtbEDmyQfym77SaJpwBs/edit">Link</a></td></tr>
+    <tr><td>Jul 30</td><td>Nathan</td><td>AI Safety Researcher</td><td><a href="https://docs.google.com/document/d/1CbIkTinKXVUXgDycRsG73t6UwifqL0w0dB7--S8lF4I/edit">Link</a></td></tr>
+    <tr><td>Jul 30</td><td>Vipul & Smriti</td><td>Echovane</td><td><a href="https://docs.google.com/document/d/1PWJDWj_2jnFPPhzQjEi6qD_6-e3FAlX3lcCeoW6016U/edit">Link</a></td></tr>
+    <tr><td>Aug 18</td><td>Kirk</td><td>CTO, Graphlit</td><td><a href="https://docs.google.com/document/d/1KKJu0YwZq3bXVvlOD9LooC0l0GB8h-G3-w5BtKHeWXM/edit">Link</a></td></tr>
+  </table>
+
+  <p><strong>Validated problems:</strong> <a href="https://docs.google.com/spreadsheets/d/1Ob_mgKqYZphRvli37X6DJQ-TdYtgBlXb5Y9TFxmEyec/edit">User Frustrations Database</a></p>
+
+  <hr>
+
+  <h3>Architecture Iterations (Jan 2025–present)</h3>
+  <p>Three cycles:</p>
+  <table>
+    <tr><td>1. <strong>DIY</strong> (Jan–Aug 2025)</td><td>562 commits, proved feasibility</td></tr>
+    <tr><td>2. <strong>LiteLLM-everything</strong> (Aug–Oct)</td><td>Delegated too much, lost control</td></tr>
+    <tr><td>3. <strong>Integrated</strong> (Oct 16+)</td><td><a href="https://github.com/LuthienResearch/luthien-proxy/pull/40">PR #40</a>, brought critical components back in-house</td></tr>
+  </table>
+
+  <hr>
+
+  <h3>Current State (Jan 2026)</h3>
+  <p>We're trying to figure out how to build a thing that makes it possible to put AI control into production. Specifically: building arbitrary policies for an LLM proxy.</p>
+  <p>Right now we're testing and debugging as things come up.</p>
+  <p><strong>Status:</strong> Neither Scott nor Jai is dogfooding aggressively. Product is too buggy for daily use.</p>
+  <p><strong>Recent example:</strong> Demo to Seldon folks (Jan 24) hit 500 errors from thinking blocks streaming bug. <a href="https://github.com/LuthienResearch/luthien-proxy/pull/134">PR #134</a> fixed it, but the pattern persists—we need demo prep checklists, not just code fixes.</p>
+  <p><strong>Open question from Jai (Jan 20):</strong> Models are getting noticeably better. His pdoom has gone down. Does model improvement reduce the leverage of control work?</p>
+
+  <hr>
+
+  <h2>Approximate Milestones</h2>
+
+  <table>
+    <tr><th>Milestone</th><th>Description</th><th>Status</th></tr>
+    <tr><td>1</td><td>Unblock dogfooding: Scott & Jai use Luthien daily</td><td>2/4 blockers fixed</td></tr>
+    <tr><td>2</td><td>Unblock guided external trials: 3 users complete 30-min session</td><td>Nearly done</td></tr>
+    <tr><td>3</td><td>Unblock independent trials: <10 min setup</td><td>Not started</td></tr>
+  </table>
+
+  <h3>Dogfooding Blockers</h3>
+
+  <table>
+    <tr><th>Blocker</th><th>Status</th><th>PR</th></tr>
+    <tr><td>Thinking blocks (non-streaming)</td><td>Done</td><td><a href="https://github.com/LuthienResearch/luthien-proxy/pull/131">#131</a></td></tr>
+    <tr><td>Thinking blocks (streaming)</td><td>In review</td><td><a href="https://github.com/LuthienResearch/luthien-proxy/pull/134">#134</a></td></tr>
+    <tr><td>/compact "Tool names must be unique"</td><td>No PR</td><td>—</td></tr>
+    <tr><td>Session viewer polish</td><td>In review</td><td><a href="https://github.com/LuthienResearch/luthien-proxy/pull/133">#133</a></td></tr>
+  </table>
+
+  <hr>
+
+  <h2>Pipeline</h2>
+
+  <table>
+    <tr><th>Type</th><th>Count</th></tr>
+    <tr><td>Potential users (expressed interest)</td><td>50</td></tr>
+    <tr><td>Networking contacts</td><td>20+</td></tr>
+    <tr><td>Total tracked</td><td>196</td></tr>
+  </table>
+
+  <p><a href="https://docs.google.com/spreadsheets/d/1lKNWdLRrkRu4VtxLsdWnKF_OFPBXAgG1aMioS9shHSM/edit">Luthien People Database</a></p>
+
+  <hr>
+
+  <h2>Source Documents</h2>
+  <ul style="list-style: none; color: #aaa;">
+    <li>• <a href="https://docs.google.com/spreadsheets/d/1Ob_mgKqYZphRvli37X6DJQ-TdYtgBlXb5Y9TFxmEyec/edit">User Frustrations Database</a></li>
+    <li>• <a href="https://docs.google.com/spreadsheets/d/1lKNWdLRrkRu4VtxLsdWnKF_OFPBXAgG1aMioS9shHSM/edit">Luthien People Database</a></li>
+  </ul>
+
+  <p class="updated"><em>Last updated: Sunday, January 26, 2026</em></p>
+</body>
+</html>
