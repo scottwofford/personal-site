@@ -1,12 +1,20 @@
 # Current Objective
 
-Launch scottwofford.com with core homepage content.
+*Cleared - site launched and content migrated.*
 
-## Acceptance Criteria
+## Completed 2026-01-27
 
 - [x] Homepage live at scottwofford.com
 - [x] Nav with dropdowns
-- [x] Social links (LinkedIn, X, Instagram, Facebook, Spotify)
+- [x] Social links
 - [x] External links marked with icon
-- [ ] HTTPS enabled
-- [ ] All changes pushed to GitHub
+- [x] HTTPS enabled (GitHub Pages)
+- [x] All content pages migrated from markdown
+- [x] GoatCounter analytics added
+- [x] Mobile nav fixed (3x3 right-aligned)
+
+## Next Up (from TODO.md)
+
+- Nav "Show All" affordance
+- Spotify widget
+- Favicon

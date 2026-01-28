@@ -3,28 +3,30 @@
 ## High Priority
 
 - [ ] **Recreate Been app account** - Traveling link needs destination
-- [ ] **Enable HTTPS** - Check GitHub Pages settings once certificate is issued
-- [ ] **Push latest changes to GitHub** - Deploy site updates
 
-## Content to Add
+## UX Improvements
 
-- [ ] **First 90 Days** - reading/first-90-days.html
-- [ ] **Book Snippets** - reading/book-snippets.html
-- [ ] **5 Choices** - focus/5-choices.html
-- [ ] **Eisenhower Method** - focus/eisenhower-method.html
-- [ ] **Meeting Culture** - people/meeting-culture.html
-- [ ] **Priorities Template** - people/priorities-template.html
-- [ ] **Retrospective Template** - people/retrospective-template.html
-- [ ] **Meeting Agenda** - people/meeting-agenda-template.html
-- [ ] **Day 1 Philosophy** - building/day-1-philosophy.html
-- [ ] **Mini-PRFAQ Template** - building/mini-prfaq-template.html
-- [ ] **Tracker Templates** - building/tracker-templates.html
-- [ ] **Onboarding Reading List** - building/onboarding-reading-list.html
-- [ ] **Pyramid Principle** - writing/pyramid-principle.html
-- [ ] **Writing Resources** - writing/writing-resources.html
+- [ ] **Nav "Show All" affordance** - Add a way for users to see everything from all dropdowns at once (see UX patterns below)
 
 ## Nice to Have
 
 - [ ] **Spotify "Now Playing" widget** - Show current/last played track
-- [ ] **Convert .md pages to .html** - Match site styling
 - [ ] **Add favicon**
+
+---
+
+## UX Patterns for "Show All" Nav
+
+Options to explore:
+
+1. **Sitemap Link** - Add a "View All →" link that goes to a dedicated /sitemap.html page showing all content organized by category
+
+2. **Mega Menu on Hover** - When hovering over a "☰" or "All" button, show a full-width dropdown with all categories side-by-side
+
+3. **Expand All Toggle** - A button/link that expands all dropdowns simultaneously (CSS-only using `:target` or a small JS toggle)
+
+4. **Footer Directory** - Full site directory in the footer (common pattern - users scroll down to find everything)
+
+5. **Keyboard Shortcut** - Press `/` or `?` to reveal a command palette / full nav overlay (power user pattern)
+
+**Recommendation**: Start with #1 (Sitemap page) - simplest to implement, always works, mobile-friendly
