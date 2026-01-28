@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Writing Guide - Scott Wofford</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inconsolata', monospace;
+      background: #1a1a1a;
+      color: #e5e5e5;
+      padding: 2rem;
+      line-height: 1.7;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    h1 { font-size: 1.8rem; margin-bottom: 0.5rem; color: #fff; }
+    h2 { font-size: 1.3rem; margin: 2rem 0 1rem; color: #fff; border-bottom: 1px solid #333; padding-bottom: 0.5rem; }
+    h3 { font-size: 1.1rem; margin: 1.5rem 0 0.75rem; color: #ccc; }
+    p { margin-bottom: 1rem; color: #bbb; }
+    a { color: #6b9fff; }
+    ul, ol { margin: 1rem 0 1rem 1.5rem; color: #bbb; }
+    li { margin-bottom: 0.5rem; }
+    strong { color: #fff; }
+    em { color: #999; }
+    code { background: #252525; padding: 0.2rem 0.4rem; border-radius: 3px; font-size: 0.9rem; }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.85rem; }
+    th, td { padding: 0.75rem; text-align: left; border: 1px solid #333; vertical-align: top; }
+    th { color: #fff; background: #252525; font-weight: 600; }
+    td { color: #bbb; }
+    .subtitle { color: #666; margin-bottom: 2rem; font-style: italic; }
+    hr { border: none; border-top: 1px solid #333; margin: 2rem 0; }
+    .back { margin-bottom: 2rem; }
+    .back a { color: #666; text-decoration: none; }
+    .back a:hover { color: #fff; }
+    .callout { background: #252525; padding: 1rem; border-radius: 4px; margin: 1rem 0; }
+    .callout p { margin: 0; }
+  </style>
+</head>
+<body>
+  <div class="back"><a href="/">← scottwofford.com</a></div>
+
+  <h1>Writing Guide</h1>
+  <p class="subtitle">A framework for producing drafts quickly without getting stuck.</p>
+
+  <hr>
+
+  <h2>Core Principle: The Reaction Draft</h2>
+
+  <p>The goal is to produce something a collaborator can react to in 10 minutes — not a polished final draft. Gaps marked as <code>[GAP: need X]</code> or <code>[INCOMPLETE: X]</code> are fine.</p>
+
+  <div class="callout">
+    <p><strong>Remember:</strong> Rough draft beats no draft. Ship at timebox, incomplete is OK.</p>
+  </div>
+
+  <hr>
+
+  <h2>Writing Workflow</h2>
+
+  <h3>Step 1: Big Picture First</h3>
+  <p>Before writing anything, establish:</p>
+  <ul>
+    <li><strong>Audience:</strong> Who is reading this? What's their background?</li>
+    <li><strong>Goal:</strong> What do I want them to do/believe after reading?</li>
+    <li><strong>Shared beliefs:</strong> Don't waste words convincing on these</li>
+    <li><strong>Key points to emphasize:</strong> What's novel or differentiating?</li>
+  </ul>
+
+  <h3>Step 2: Pyramid Principle Structure</h3>
+  <p>Especially for introductions — establish shared understanding, then pivot to your contribution.</p>
+  <p><strong>Pattern:</strong> Context (what exists) → Gap (what's missing) → Question → Your contribution</p>
+
+  <h3>Step 3: Establish Outline</h3>
+  <p>Before drafting sections, write section anchors: "This section shows [X] by [evidence]."</p>
+  <p>The outline should make the pyramid logic and story flow clear to the reader. If you can't anchor a section in 2 min, skip and return later.</p>
+
+  <h3>Step 4: Sentence by Sentence</h3>
+  <p>Don't write whole paragraphs or sections at once — that's a failure mode that causes cognitive overload.</p>
+  <p>Mark gaps explicitly: <code>[GAP: need X]</code> or <code>[INCOMPLETE: X]</code></p>
+
+  <hr>
+
+  <h2>Time Management</h2>
+
+  <p>Set a timebox before you start. Monitor time vs. progress and give yourself one of three nudges:</p>
+
+  <ol>
+    <li><strong>"Good enough — move on"</strong> if section meets the bar for a reaction draft</li>
+    <li><strong>"Keep working"</strong> if it's not yet up to standard and there's time</li>
+    <li><strong>"Mark incomplete and move on"</strong> if hitting diminishing returns — add <code>[INCOMPLETE: X]</code> and proceed</li>
+  </ol>
+
+  <p>If you're polishing past the timebox, stop. Ship what you have.</p>
+
+  <hr>
+
+  <h2>Red Flags</h2>
+
+  <table>
+    <tr>
+      <th>If you notice...</th>
+      <th>Do this...</th>
+    </tr>
+    <tr>
+      <td>Researching instead of writing</td>
+      <td>Just try a sentence first. Research after if it doesn't work.</td>
+    </tr>
+    <tr>
+      <td>Adding scope beyond the section anchor</td>
+      <td>Ask: does it fit this section's anchor?</td>
+    </tr>
+    <tr>
+      <td>Polishing the same sentence repeatedly</td>
+      <td>Good enough for reaction draft. Move on.</td>
+    </tr>
+    <tr>
+      <td>Comparing multiple drafts/voices</td>
+      <td>Pick one and commit. Collaborator can redirect if needed.</td>
+    </tr>
+    <tr>
+      <td>Stuck inventing a narrative</td>
+      <td>What do you actually know? What's assumption?</td>
+    </tr>
+  </table>
+
+  <hr>
+
+  <h2>Quality Checklist</h2>
+
+  <ul>
+    <li><strong>Direct claims, then evidence:</strong> State the point first, support with specifics</li>
+    <li><strong>Technical precision:</strong> Use exact terms, not vague language</li>
+    <li><strong>Acknowledge uncertainty:</strong> "I think," "I believe," "this is provisional"</li>
+    <li><strong>Concrete examples:</strong> Reference specific incidents, not generic claims</li>
+  </ul>
+
+  <h3>Things to Avoid</h3>
+  <ul>
+    <li>Generic language without specifics</li>
+    <li>Overpromising or hype</li>
+    <li>Burying the point in qualifications</li>
+    <li>Sounding like marketing copy</li>
+    <li>Unnecessary hedging that weakens claims</li>
+    <li>Obvious statements the reader already knows</li>
+  </ul>
+
+  <hr>
+
+  <p><em>Last updated: January 2026</em></p>
+</body>
+</html>
