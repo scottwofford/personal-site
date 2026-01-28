@@ -9,34 +9,40 @@
   <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;600&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Inconsolata', monospace;
-      background: #1a1a1a;
-      color: #e5e5e5;
-      padding: 2rem;
-      line-height: 1.7;
-      max-width: 900px;
-      margin: 0 auto;
-    }
+    body { font-family: 'Inconsolata', monospace; background: #1a1a1a; color: #e5e5e5; padding: 2rem; line-height: 1.5; max-width: 900px; margin: 0 auto; }
+    .section-nav { margin-bottom: 2rem; }
+    .section-nav a { color: #666; text-decoration: none; }
+    .section-nav a:hover { color: #fff; }
+    .section-nav .section-name { color: #888; }
+    .siblings { margin-top: 0.5rem; font-size: 0.85rem; }
+    .siblings a { margin-right: 1rem; }
+    .siblings a.current { color: #fff; }
     h1 { font-size: 1.8rem; margin-bottom: 0.5rem; color: #fff; }
-    h2 { font-size: 1.3rem; margin: 2rem 0 1rem; color: #fff; border-bottom: 1px solid #333; padding-bottom: 0.5rem; }
-    p { margin-bottom: 1rem; color: #bbb; }
+    h2 { font-size: 1.3rem; margin: 1.5rem 0 0.75rem; color: #fff; border-bottom: 1px solid #333; padding-bottom: 0.5rem; }
+    p { margin-bottom: 0.75rem; color: #bbb; }
     a { color: #6b9fff; }
-    ul { margin: 1rem 0 1rem 1.5rem; color: #bbb; }
-    li { margin-bottom: 0.5rem; }
+    ul { margin: 0.75rem 0 0.75rem 1.5rem; color: #bbb; }
+    li { margin-bottom: 0.35rem; }
     strong { color: #fff; }
-    .subtitle { color: #666; margin-bottom: 2rem; font-style: italic; }
-    hr { border: none; border-top: 1px solid #333; margin: 2rem 0; }
-    .back { margin-bottom: 2rem; }
-    .back a { color: #666; text-decoration: none; }
-    .back a:hover { color: #fff; }
-    .callout { background: #252525; padding: 1rem; border-radius: 4px; margin: 1rem 0; }
+    .subtitle { color: #666; margin-bottom: 1.5rem; font-style: italic; }
+    hr { border: none; border-top: 1px solid #333; margin: 1.5rem 0; }
+    .callout { background: #252525; padding: 1rem; border-radius: 4px; margin: 0.75rem 0; }
     .callout p { margin: 0; }
   </style>
 </head>
 <body>
-  <div class="back"><a href="/">← scottwofford.com</a></div>
-
+  <div class="section-nav">
+    <a href="/">← home</a> / <a href="/building/" class="section-name">building</a>
+    <div class="siblings">
+      <a href="/building/day-1-philosophy.html">Day 1</a>
+      <a href="/building/making-decisions.html">Decisions</a>
+      <a href="/building/mini-prfaq-template.html">Mini-PRFAQ</a>
+      <a href="/building/tracker-templates.html">Trackers</a>
+      <a href="/building/onboarding-reading-list.html">Onboarding</a>
+      <a href="/building/claude-system-prompt.html" class="current">Claude Prompt</a>
+      <a href="/building/claude-code-config.html">Claude Code</a>
+    </div>
+  </div>
   <h1>My Claude System Prompt</h1>
   <p class="subtitle">The system prompt I use in Claude.ai's profile settings. Applies to all my conversations.</p>
 

@@ -9,14 +9,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;600&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Inconsolata', monospace; background: #1a1a1a; color: #e5e5e5; padding: 2rem; line-height: 1.7; max-width: 900px; margin: 0 auto; }
+    body { font-family: 'Inconsolata', monospace; background: #1a1a1a; color: #e5e5e5; padding: 2rem; line-height: 1.5; max-width: 900px; margin: 0 auto; }
     h1 { font-size: 1.8rem; margin-bottom: 0.5rem; color: #fff; }
-    h2 { font-size: 1.3rem; margin: 2rem 0 1rem; color: #fff; border-bottom: 1px solid #333; padding-bottom: 0.5rem; }
+    h2 { font-size: 1.3rem; margin: 1.5rem 0 0.75rem; color: #fff; border-bottom: 1px solid #333; padding-bottom: 0.5rem; }
     h3 { font-size: 1.1rem; margin: 1.5rem 0 0.75rem; color: #ccc; }
-    p { margin-bottom: 1rem; color: #bbb; }
+    p { margin-bottom: 0.75rem; color: #bbb; }
     a { color: #6b9fff; }
-    ul, ol { margin: 1rem 0 1rem 1.5rem; color: #bbb; }
-    li { margin-bottom: 0.5rem; }
+    ul, ol { margin: 0.75rem 0 0.75rem 1.5rem; color: #bbb; }
+    li { margin-bottom: 0.35rem; }
     strong { color: #fff; }
     code { background: #252525; padding: 0.2rem 0.4rem; border-radius: 3px; font-size: 0.9rem; }
     pre { background: #252525; padding: 1rem; border-radius: 4px; overflow-x: auto; margin: 1rem 0; font-size: 0.85rem; color: #bbb; }
@@ -25,14 +25,27 @@
     th { color: #fff; background: #252525; }
     td { color: #bbb; }
     .subtitle { color: #666; margin-bottom: 2rem; font-style: italic; }
-    hr { border: none; border-top: 1px solid #333; margin: 2rem 0; }
-    .back { margin-bottom: 2rem; }
-    .back a { color: #666; text-decoration: none; }
-    .back a:hover { color: #fff; }
+    hr { border: none; border-top: 1px solid #333; margin: 1.5rem 0; }
+    .section-nav { margin-bottom: 2rem; }
+    .section-nav a { color: #666; text-decoration: none; }
+    .section-nav a:hover { color: #fff; }
+    .section-nav .section-name { color: #6b9fff; }
+    .section-nav .siblings { margin-top: 0.5rem; display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; font-size: 0.85rem; }
+    .section-nav .siblings a { color: #555; }
+    .section-nav .siblings a:hover { color: #fff; }
+    .section-nav .siblings a.current { color: #6b9fff; }
   </style>
 </head>
 <body>
-  <div class="back"><a href="/">← scottwofford.com</a></div>
+  <div class="section-nav">
+    <a href="/">← home</a> / <a href="/people/" class="section-name">people</a>
+    <div class="siblings">
+      <a href="/people/meeting-culture.html">Meeting Culture</a>
+      <a href="/people/priorities-template.html" class="current">Priorities</a>
+      <a href="/people/retrospective-template.html">Retros</a>
+      <a href="/people/meeting-agenda-template.html">Agendas</a>
+    </div>
+  </div>
   <h1>Priorities Template</h1>
   <p class="subtitle">A framework for tracking and communicating your current priorities.</p>
   <hr>
