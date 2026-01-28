@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scott Wofford - Expand Toggle Test</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inconsolata', monospace; background: #1a1a1a; color: #e5e5e5; min-height: 100vh; padding: 2rem; }
+
+    nav { display: flex; justify-content: flex-end; gap: 2rem; flex-wrap: wrap; margin-bottom: 4rem; align-items: flex-start; }
+    .nav-item { position: relative; }
+    .nav-item > a { color: #888; text-decoration: none; font-size: 1.1rem; }
+    .nav-item:hover > a { color: #fff; }
+
+    .dropdown {
+      position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
+      background: #252525; border: 1px solid #333; border-radius: 4px;
+      padding: 0.75rem 1rem; min-width: 160px;
+      opacity: 0; visibility: hidden; transition: opacity 0.2s;
+      margin-top: 0.5rem; z-index: 100;
+    }
+    .nav-item:hover .dropdown { opacity: 1; visibility: visible; }
+    .dropdown a { display: block; color: #999; text-decoration: none; font-size: 0.9rem; padding: 0.3rem 0; text-align: center; }
+    .dropdown a:hover { color: #fff; }
+
+    /* Expand all toggle */
+    .expand-toggle { color: #666; text-decoration: none; font-size: 0.9rem; cursor: pointer; border: 1px solid #444; padding: 0.2rem 0.5rem; border-radius: 3px; }
+    .expand-toggle:hover { color: #fff; border-color: #666; }
+
+    /* When expanded */
+    body.expanded .dropdown {
+      position: static; transform: none; opacity: 1; visibility: visible;
+      margin-top: 0.5rem; background: transparent; border: none; padding: 0;
+    }
+    body.expanded .dropdown a { text-align: left; }
+    body.expanded nav { flex-direction: row; gap: 3rem; }
+    body.expanded .nav-item { min-width: 120px; }
+
+    .content { display: flex; align-items: center; justify-content: center; min-height: calc(100vh - 12rem); }
+    .card { text-align: center; max-width: 550px; }
+    h1 { font-size: 2.6rem; color: #fff; margin-bottom: 1rem; }
+    h1 a { color: inherit; text-decoration: underline; }
+    .tagline { font-size: 1.15rem; color: #777; line-height: 1.5; margin-bottom: 1rem; }
+  </style>
+</head>
+<body>
+  <nav>
+    <span class="expand-toggle" onclick="document.body.classList.toggle('expanded'); this.textContent = document.body.classList.contains('expanded') ? '− collapse' : '+ expand all'">+ expand all</span>
+
+    <div class="nav-item">
+      <a href="/focus/">focus</a>
+      <div class="dropdown">
+        <a href="/focus/5-choices.html">5 Choices</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="#">reading</a>
+      <div class="dropdown">
+        <a href="https://www.goodreads.com/user/show/21741061-scott-wofford">Goodreads ↗</a>
+        <a href="/reading/first-90-days.html">First 90 Days</a>
+        <a href="/reading/book-snippets.html">Book Snippets</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="/people/">people</a>
+      <div class="dropdown">
+        <a href="/people/meeting-culture.html">Meeting Culture</a>
+        <a href="/people/priorities-template.html">Priorities</a>
+        <a href="/people/retrospective-template.html">Retros</a>
+        <a href="/people/meeting-agenda-template.html">Agendas</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="/building/">building</a>
+      <div class="dropdown">
+        <a href="/building/day-1-philosophy.html">Day 1</a>
+        <a href="/building/making-decisions.html">Decisions</a>
+        <a href="/building/mini-prfaq-template.html">Mini-PRFAQ</a>
+        <a href="/building/tracker-templates.html">Trackers</a>
+        <a href="/building/onboarding-reading-list.html">Onboarding</a>
+        <a href="/building/claude-system-prompt.html">Claude Prompt</a>
+        <a href="/building/claude-code-config.html">Claude Code</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="/writing/">writing</a>
+      <div class="dropdown">
+        <a href="/writing/writing-guide.html">Writing Guide</a>
+        <a href="/writing/pyramid-principle.html">Pyramid Principle</a>
+        <a href="/writing/writing-resources.html">Resources</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="/blog/">blog</a>
+      <div class="dropdown">
+        <a href="https://scwoff.substack.com">Substack ↗</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="content">
+    <div class="card">
+      <h1>Scott is building <a href="https://luthienresearch.org" target="_blank">Luthien</a></h1>
+      <p class="tagline">Click "+ expand all" in the top left to show all dropdowns at once.</p>
+      <p class="tagline">Click again to collapse back to normal hover behavior.</p>
+    </div>
+  </main>
+</body>
+</html>
