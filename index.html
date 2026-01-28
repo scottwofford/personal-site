@@ -30,9 +30,10 @@
     nav {
       display: flex;
       justify-content: flex-end;
-      gap: 2.5rem;
+      gap: 2rem;
       flex-wrap: wrap;
       margin-bottom: 4rem;
+      align-items: center;
     }
 
     .nav-item {
@@ -92,6 +93,25 @@
       margin-left: 0.3rem;
       opacity: 0.6;
     }
+
+    /* Expand toggle button */
+    .expand-toggle {
+      width: 28px; height: 28px;
+      display: flex; align-items: center; justify-content: center;
+      background: #2a2a2a; border: 1px solid #444; border-radius: 4px;
+      color: #999; font-size: 1.2rem; line-height: 1;
+      cursor: pointer; transition: all 0.2s;
+    }
+    .expand-toggle:hover { background: #333; border-color: #666; color: #fff; }
+
+    /* Expanded state */
+    body.expanded .expand-toggle { background: #3a3a3a; color: #fff; }
+    body.expanded .dropdown {
+      position: static; transform: none; opacity: 1; visibility: visible;
+      margin-top: 0.5rem; background: transparent; border: none; padding: 0;
+    }
+    body.expanded .dropdown a { text-align: left; padding: 0.2rem 0; color: #666; }
+    body.expanded .dropdown a:hover { color: #6b9fff; }
 
     .content {
       display: flex;
@@ -158,6 +178,11 @@
       .dropdown {
         display: none;
       }
+
+      /* On mobile, expanded state shows dropdowns */
+      body.expanded .dropdown {
+        display: block;
+      }
     }
   </style>
 </head>
@@ -212,6 +237,7 @@
         <a href="https://scwoff.substack.com" target="_blank">Substack <i class="fas fa-external-link-alt"></i></a>
       </div>
     </div>
+    <span class="expand-toggle" onclick="document.body.classList.toggle('expanded'); this.textContent = document.body.classList.contains('expanded') ? '−' : '+'">+</span>
   </nav>
 
   <main class="content">
