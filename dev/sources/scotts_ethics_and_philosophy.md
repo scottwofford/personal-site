@@ -1,3 +1,5 @@
+<!-- Source: https://docs.google.com/document/d/1AxOqkLbJVZQnUKg6iaS8GJRXcU8K1Oxx/edit -->
+
 # **Scott's Ethics and Philosophy**
 
 # **Core Framework**
