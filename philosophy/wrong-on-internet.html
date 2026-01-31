@@ -9,37 +9,49 @@
   <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/styles.css">
   <style>
-    .intro-section {
-      display: flex;
-      gap: 1.5rem;
-      align-items: flex-start;
-      margin: 1rem 0;
-    }
-    .intro-text {
-      flex: 1;
-    }
-    .meme-container {
-      flex-shrink: 0;
+    .pull-right {
+      float: right;
+      margin: 0 0 1rem 1.5rem;
       text-align: center;
+      max-width: 320px;
     }
-    .meme-container img {
-      max-width: 300px;
+    .pull-right img {
+      max-width: 100%;
       border-radius: 4px;
-    }
-    .twitter-tweet {
-      max-width: 400px !important;
     }
     .meme-caption {
       font-size: 0.75rem;
       color: #666;
       margin-top: 0.3rem;
     }
+    .example-box {
+      background: rgba(255,255,255,0.03);
+      border-left: 2px solid #666;
+      padding: 0.75rem 1rem;
+      margin: 1.5rem auto;
+      max-width: 350px;
+      text-align: center;
+    }
+    .example-box p {
+      margin: 0 0 0.5rem 0;
+      font-size: 0.8rem;
+      color: #999;
+    }
+    p {
+      margin: 0 0 0.75em 0;
+    }
+    h1 {
+      margin-bottom: 0.5em;
+    }
+    .clearfix::after {
+      content: "";
+      display: table;
+      clear: both;
+    }
     @media (max-width: 600px) {
-      .intro-section {
-        flex-direction: column;
-      }
-      .meme-container img {
-        max-width: 100%;
+      .pull-right {
+        float: none;
+        margin: 1rem auto;
       }
     }
   </style>
@@ -55,33 +67,28 @@
 
   <h1>Someone is Wrong on the Internet</h1>
 
-  <hr>
-
-  <div class="intro-section">
-    <div class="intro-text">
-      <p>I contribute to <strong>Community Notes</strong> on X and occasionally edit <strong>Wikipedia</strong>. It's satisfying to fix small errors where people actually look for answers. Nothing grand—just a hobby.</p>
-      <p>Most of my Community Notes are in Spanish. There seems to be a supply gap: not enough contributors who speak Spanish relative to the demand. So that's where I end up being useful.</p>
-    </div>
-    <div class="meme-container">
+  <div class="clearfix">
+    <div class="pull-right">
       <img src="https://imgs.xkcd.com/comics/duty_calls.png" alt="xkcd 386: Duty Calls">
       <p class="meme-caption"><a href="https://xkcd.com/386/">xkcd #386</a></p>
     </div>
+
+    <p>I contribute to <strong>Community Notes</strong> on X and occasionally edit <strong>Wikipedia</strong>. It's satisfying to fix small errors where people actually look for answers. Nothing grand—just a hobby.</p>
+
+    <p>Most of my Community Notes are in Spanish. There seems to be a supply gap: not enough contributors who speak Spanish relative to the demand. So that's where I end up being useful.</p>
+
+    <p>I've been tinkering with how to automate parts of this process with Claude Code / Cowork. Suggestions welcome.</p>
+
+    <p>My friend <a href="https://www.linkedin.com/in/stevecisley/">Steve Isley</a> built something interesting: an AI system that <a href="https://www.linkedin.com/posts/stevecisley_i-built-an-ai-that-community-noted-elon-musk-activity-7387269881848684544-KNtV">fact-checked Elon Musk's Cybertruck post</a> and got a Community Note approved. Check out the <a href="https://www.opennotenetwork.com">Open Note Network</a>, his <a href="https://github.com/scisley/opennotenetwork/blob/main/docs/writeup/final_writeup.md">detailed writeup</a>, the <a href="https://github.com/scisley/opennotenetwork">GitHub</a>, and the <a href="https://aiforhumanreasoning.com/">AI For Human Reasoning Fellowship</a>.</p>
+
+    <p>From Steve's writeup: <em>"I'm not actually going to continue maintaining this project, but I hope that the lessons I learned will be helpful to other people attempting to build AI-based fact checking systems."</em> If you're interested in picking this up, reach out to him or me.</p>
   </div>
 
-  <h2>Automation?</h2>
-  <p>One person can only fix so many errors. I've been curious whether AI could help.</p>
-
-  <p>My friend <a href="https://www.linkedin.com/in/stevecisley/">Steve Isley</a> built something interesting: an AI system that <a href="https://www.linkedin.com/posts/stevecisley_i-built-an-ai-that-community-noted-elon-musk-activity-7387269881848684544-KNtV">fact-checked Elon Musk's Cybertruck post</a> and got a Community Note approved. Check out the <a href="https://www.opennotenetwork.com">Open Note Network</a>, his <a href="https://github.com/scisley/opennotenetwork/blob/main/docs/writeup/final_writeup.md">detailed writeup</a>, the <a href="https://github.com/scisley/opennotenetwork">GitHub</a>, and the <a href="https://aiforhumanreasoning.com/">AI For Human Reasoning Fellowship</a>.</p>
-
-  <p>I've been tinkering with how to automate this process with Claude Code / Cowork. Suggestions welcome.</p>
-
-  <hr>
-
-  <p>Steve's AI-generated Community Note (still live):</p>
-  <div style="max-width: 350px;">
-    <blockquote class="twitter-tweet" data-theme="dark" data-width="350"><p lang="en" dir="ltr">Tesla Cybertruck beats a 911 while towing a 911, which mean it can carry a 911 faster down a 1/4 mile than the Porsche can travel by itself 🤯 <a href="https://t.co/LkxQJr41Mg">https://t.co/LkxQJr41Mg</a></p>&mdash; Elon Musk (@elonmusk) <a href="https://twitter.com/elonmusk/status/1973656653208924402">October 2, 2025</a></blockquote>
+  <div class="example-box">
+    <p>Steve's AI-generated Community Note:</p>
+    <blockquote class="twitter-tweet" data-theme="dark" data-width="280"><p lang="en" dir="ltr">Tesla Cybertruck beats a 911 while towing a 911, which mean it can carry a 911 faster down a 1/4 mile than the Porsche can travel by itself 🤯 <a href="https://t.co/LkxQJr41Mg">https://t.co/LkxQJr41Mg</a></p>&mdash; Elon Musk (@elonmusk) <a href="https://twitter.com/elonmusk/status/1973656653208924402">October 2, 2025</a></blockquote>
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
   </div>
-  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 </body>
 </html>
