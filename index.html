@@ -106,6 +106,7 @@
 
     /* Expanded state */
     body.expanded .expand-toggle { background: #3a3a3a; color: #fff; }
+    body.expanded nav { align-items: flex-start; }
     body.expanded .dropdown {
       position: static; transform: none; opacity: 1; visibility: visible;
       margin-top: 0.5rem; background: transparent; border: none; padding: 0;
@@ -140,7 +141,7 @@
     }
 
     .tagline {
-      font-size: 1.15rem;
+      font-size: 1.2rem;
       color: #777;
       line-height: 1.7;
       margin-bottom: 1.5rem;
@@ -160,6 +161,57 @@
 
     .social a:hover {
       color: #fff;
+    }
+
+    /* Hover image preview */
+    .hover-preview {
+      position: relative;
+      display: inline;
+    }
+    .hover-preview img {
+      position: absolute;
+      max-width: 320px;
+      max-height: 400px;
+      width: auto;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+      border: 1px solid #333;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.25s ease, visibility 0.25s ease;
+      pointer-events: none;
+      z-index: 100;
+    }
+    /* Default: hover right */
+    .hover-preview img {
+      top: 50%;
+      left: 100%;
+      transform: translateY(-50%);
+      margin-left: 16px;
+    }
+    /* Hover left */
+    .hover-preview.hover-left img {
+      left: auto;
+      right: 100%;
+      margin-left: 0;
+      margin-right: 16px;
+    }
+    /* Hover below */
+    .hover-preview.hover-below img {
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      margin-left: 0;
+      margin-top: 12px;
+    }
+    .hover-preview:hover img {
+      opacity: 1;
+      visibility: visible;
+    }
+    /* Hide hover previews on mobile */
+    @media (max-width: 900px) {
+      .hover-preview img { display: none; }
     }
 
     @media (max-width: 600px) {
@@ -249,9 +301,9 @@
 
   <main class="content">
     <div class="card">
-      <h1>Scott is building <a href="https://luthienresearch.org" target="_blank">Luthien</a></h1>
-      <p class="tagline">...and doing other stuff including raising <a href="https://www.instagram.com/p/DNmp4rgODFzCiRnhnw-Ppwpv1CjpCI8e1M7zRc0/?img_index=1" target="_blank" style="color: inherit;">2 dope kids</a>, <a href="https://www.goodreads.com/user/show/21741061-scott-wofford" target="_blank" style="color: inherit;">reading</a> 📚, <a href="https://open.spotify.com/user/1239730132" target="_blank" style="color: inherit;">listening to</a> 🎧/playing music 🎸, and <span style="white-space: nowrap;">being outside 🚵‍♂️⛵🎾🏕️</span></p>
-      <p class="tagline">I'm from Nashville, and I live in Seattle. I also spend time in SF, Colombia, and Mexico when I want some more <span style="white-space: nowrap;">sun ☀️ 😎</span></p>
+      <h1>Scott is building <span class="hover-preview"><a href="https://luthienresearch.org" target="_blank">Luthien</a><img src="/images/luthien.png" alt="Luthien"></span></h1>
+      <p class="tagline">...and doing other stuff including raising <span class="hover-preview"><a href="https://www.instagram.com/p/DNmp4rgODFzCiRnhnw-Ppwpv1CjpCI8e1M7zRc0/?img_index=1" target="_blank" style="color: inherit; white-space: nowrap;">2 dope kids</a><img src="/images/family.png" alt="Family photo"></span>, <span class="hover-preview hover-left"><a href="https://www.goodreads.com/user/show/21741061-scott-wofford" target="_blank" style="color: inherit;">reading</a><img src="/images/goodreads.png" alt="Goodreads profile"></span> 📚, <span class="hover-preview hover-below"><a href="https://open.spotify.com/user/1239730132" target="_blank" style="color: inherit;">listening to</a><img src="/images/spotify.png" alt="Spotify profile"></span> 🎧/<span style="white-space: nowrap;">playing music 🎸</span>, and <span style="white-space: nowrap;">being outside 🚵‍♂️⛵🎾🏕️</span></p>
+      <p class="tagline">I'm from Nashville, and I live in Seattle.<br>I also spend time in SF, Colombia, and Mexico when<br>I want some more <span style="white-space: nowrap;">sun ☀️ 😎</span></p>
       <div class="social">
         <a href="https://www.linkedin.com/in/scottwofford/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
         <a href="https://x.com/scottwofford" target="_blank" title="X"><i class="fab fa-x-twitter"></i></a>
