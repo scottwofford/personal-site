@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Don't Abandon Claude Conversations After Compaction - Scott Wofford</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="section-nav">
+    <a href="/">← home</a> / <a href="/productivity/" class="section-name">productivity</a>
+    <div class="siblings">
+      <a href="/productivity/5-choices.html">5 Choices</a>
+      <a href="/productivity/claude-system-prompt.html">Claude Prompt</a>
+      <a href="/productivity/context-management.html" class="current">Context Mgmt</a>
+    </div>
+  </div>
+  <h1>Don't Abandon Claude Conversations After Compaction</h1>
+  <p class="subtitle">February 2026</p>
+
+  <hr>
+
+  <p>When Claude runs out of context window space, it shows a progress bar: <em>"Compacting our conversation so we can keep chatting… 36%"</em></p>
+
+  <p>My instinct was to start a new chat. The progress bar felt like a warning — like the conversation was degrading. I'd open a fresh chat and say "search past chats for context on what we were working on."</p>
+
+  <p><strong>This was wrong.</strong></p>
+
+  <h2>What's actually happening</h2>
+
+  <p><strong>Compaction</strong> summarizes your conversation history and keeps a rich summary in the active context window. You lose some detail from earlier messages, but you retain the full arc — decisions made, context established, work in progress.</p>
+
+  <p><strong>"Search past chats"</strong> from a new conversation is keyword search. It returns short snippets that match your query — think <code>grep</code>, not replay. You get fragments, not the full working context of a long session.</p>
+
+  <p>The practical difference is huge:</p>
+
+  <table style="width: 100%; border-collapse: collapse; margin: 1.5rem 0;">
+    <thead>
+      <tr>
+        <th style="text-align: left; padding: 0.5rem; border-bottom: 2px solid #666;"></th>
+        <th style="text-align: left; padding: 0.5rem; border-bottom: 2px solid #666;">Continue after compaction</th>
+        <th style="text-align: left; padding: 0.5rem; border-bottom: 2px solid #666;">New chat + search</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="padding: 0.5rem; border-bottom: 1px solid #333;">Context richness</td>
+        <td style="padding: 0.5rem; border-bottom: 1px solid #333;">High — full summary in window</td>
+        <td style="padding: 0.5rem; border-bottom: 1px solid #333;">Low — keyword snippets</td>
+      </tr>
+      <tr>
+        <td style="padding: 0.5rem; border-bottom: 1px solid #333;">Effort to restore</td>
+        <td style="padding: 0.5rem; border-bottom: 1px solid #333;">Zero</td>
+        <td style="padding: 0.5rem; border-bottom: 1px solid #333;">You have to prompt for it</td>
+      </tr>
+      <tr>
+        <td style="padding: 0.5rem; border-bottom: 1px solid #333;">Risk of losing context</td>
+        <td style="padding: 0.5rem; border-bottom: 1px solid #333;">Low (degrades after 3+ compactions)</td>
+        <td style="padding: 0.5rem; border-bottom: 1px solid #333;">High</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>The rule of thumb</h2>
+
+  <p>Continue after compaction unless you're switching topics entirely or you're past your 3rd compaction in a single chat.</p>
+
+  <h2>The UX gap</h2>
+
+  <p>Anthropic's docs say: <em>"Your full chat history is preserved so Claude can reference it."</em> This creates a false equivalence — users assume searching from a new chat gives them the same context as continuing. It doesn't.</p>
+
+  <p>A single line in the compaction UI would fix the mental model: <em>"Your conversation has been summarized. We recommend continuing here — this preserves more context than starting a new chat."</em></p>
+
+  <hr>
+
+  <p><em>Last updated: February 2026</em></p>
+</body>
+</html>
