@@ -1,22 +1,20 @@
-# Current Objective
+# Current Objective: Dropbox Content Audit for scottwofford.com
 
-Add "Philosophy & Epistemics" section to personal site navigation with dropdown containing:
+Audit Dropbox files for content worth publishing on personal site. Inspired by [sigilwen.ca](https://sigilwen.ca/) — reading logs, essays, reflective writing.
 
-1. **Personal Philosophy** - Scrubbed version of personal philosophy (okay to have spicy AI takes like p(doom), timelines)
-2. **X: Somebody is wrong on the internet** - Page about X/Twitter contributions
-3. **Wikipedia: Somebody is wrong on the internet** - Page about Wikipedia & Community Notes contributions, include relevant meme, mention working on automating this task
+## Context
+
+- Dropbox Smart Sync was keeping files as online-only placeholders (0 bytes locally)
+- Built a hydration script to force-download all content via Quick Look
+- Once hydrated, scan for publishable content (book notes, essays, quotes, reflections)
 
 ## Acceptance Criteria
 
-- [ ] New nav item "Philosophy & Epistemics" appears in header with dropdown
-- [ ] `philosophy/` directory created with index and 3 subpages
-- [ ] Personal philosophy page has placeholder content (will fill in later)
-- [ ] X page explains X engagement philosophy
-- [ ] Wikipedia page includes meme, explains love of contributing, mentions automation work
-- [ ] All pages follow existing site styling
+- [ ] All Dropbox files hydrated (downloaded locally)
+- [ ] Content audit complete — categorized as publish / skip / redact-needed
+- [ ] Shortlist of ~10-20 pieces worth publishing on scottwofford.com
+- [ ] Draft plan for how to present content (reading log? essays section? blog posts?)
 
-## Next Up (from TODO.md)
+## Previous Objective (Paused)
 
-- Recreate Been app account
-- Spotify widget
-- Favicon
+Philosophy & Epistemics section — see git history on `main` for details.
