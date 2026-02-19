@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tomar decisiones - Scott Wofford</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="section-nav">
+    <a href="/es/">← inicio</a> / <a href="/es/building/" class="section-name">construir</a>
+    <div class="siblings">
+      <a href="/es/building/day-1-philosophy.html">Dia 1</a>
+      <a href="/es/building/making-decisions.html" class="current">Decisiones</a>
+      <a href="/es/building/mini-prfaq-template.html">Mini-PRFAQ</a>
+      <a href="/es/building/tracker-templates.html">Seguimiento</a>
+      <a href="/es/building/onboarding-reading-list.html">Onboarding</a>
+      <a href="/es/building/claude-code-config.html">CLAUDE.md</a>
+    </div>
+  </div>
+  <div style="text-align:right;margin-bottom:1rem"><a href="/building/making-decisions.html" style="color:#555;font-size:0.85rem">EN</a></div>
+  <h1>Tomar decisiones</h1>
+  <p class="subtitle">Un marco para navegar compensaciones complejas y escalaciones.</p>
+  <hr>
+  <h2>Cuando necesitas esto</h2>
+  <p>Usa este marco cuando:</p>
+  <ul>
+    <li>Una decision es una <strong>puerta de una sola via</strong> (dificil de revertir)</li>
+    <li>Dos equipos no estan de acuerdo y necesitan resolucion</li>
+    <li>Las compensaciones son complejas y disputadas</li>
+    <li>Necesitas aporte del liderazgo para avanzar</li>
+  </ul>
+  <p>Si puedes revertir facilmente la decision despues, simplemente elige una y avanza. Este marco es para las decisiones dificiles.</p>
+  <hr>
+  <h2>La estructura central</h2>
+  <p>Destila el debate a una sola declaracion, opciones y pros/contras:</p>
+  <pre>We are debating whether to do X, Y, or Z.
+
+Option A (Recommended by [Person/Team]):
+[Brief description]
+- Pros: ...
+- Cons: ...
+
+Option B (Recommended by [Person/Team]):
+[Brief description]
+- Pros: ...
+- Cons: ...
+
+Option C (Not recommended):
+[Brief description]
+- Pros: ...
+- Cons: ...</pre>
+  <hr>
+  <h2>Plantilla</h2>
+  <h3>Decision: [Encuadre de la eleccion en una oracion]</h3>
+  <p><strong>Contexto:</strong> Por que se necesita esta decision ahora? Cual es el costo de retrasar?</p>
+  <p><strong>Puerta de una sola via?</strong> Si/No — Podemos revertir esto facilmente si nos equivocamos?</p>
+  <p><strong>Opciones:</strong></p>
+  <table>
+    <tr><th>Opcion</th><th>Descripcion</th><th>Pros</th><th>Contras</th><th>Recomendado por</th></tr>
+    <tr><td>A</td><td></td><td></td><td></td><td></td></tr>
+    <tr><td>B</td><td></td><td></td><td></td><td></td></tr>
+    <tr><td>C</td><td></td><td></td><td></td><td></td></tr>
+  </table>
+  <p><strong>Recomendacion:</strong> [Tu recomendacion y por que]</p>
+  <p><strong>Lo que necesitamos:</strong> [Decision? Aporte? Ruta de escalacion?]</p>
+  <hr>
+  <h2>Principios</h2>
+  <h3>Representar todas las posiciones de manera justa</h3>
+  <p>Si dos partes no estan de acuerdo, presenta ambas posiciones de la mejor manera posible. Esto construye confianza y a menudo revela el verdadero nucleo del desacuerdo.</p>
+  <h3>Liderar con datos</h3>
+  <p>El debate debe estar fundamentado en evidencia, no en opiniones. Que datos respaldan cada opcion? Que falta?</p>
+  <h3>Simplificar el debate</h3>
+  <p>Simplificar la decision y sus factores basados en datos a menudo ilumina la respuesta sin necesidad de escalacion. Si no puedes expresar la compensacion de forma simple, aun no la entiendes.</p>
+  <h3>Explicar por que es dificil</h3>
+  <p>Si la decision fuera obvia, no necesitarias este marco. Haz explicito por que personas razonables no estan de acuerdo.</p>
+  <hr>
+  <h2>Anti-patrones</h2>
+  <ul>
+    <li><strong>Hombre de paja</strong> — presentar el otro lado debilmente para que tu recomendacion se vea mejor</li>
+    <li><strong>El fregadero de la cocina</strong> — listar 7 opciones cuando realmente hay 2-3 viables</li>
+    <li><strong>Recomendacion oculta</strong> — enterrar tu opinion real; simplemente expresala claramente</li>
+    <li><strong>Escalar demasiado pronto</strong> — usa este marco para clarificar tu propio pensamiento primero; a veces eso lo resuelve</li>
+  </ul>
+  <hr>
+  <h2>Puertas de una via vs. puertas de dos vias</h2>
+  <table>
+    <tr><th>Puerta de una via</th><th>Puerta de dos vias</th></tr>
+    <tr><td>Dificil o costosa de revertir</td><td>Facil de revertir</td></tr>
+    <tr><td>Requiere analisis cuidadoso</td><td>Sesgo hacia la accion</td></tr>
+    <tr><td>Obtener mas aporte</td><td>Decidir e iterar</td></tr>
+    <tr><td>Ejemplos: elecciones de arquitectura, compromisos publicos, reestructuraciones de equipo</td><td>Ejemplos: texto de interfaz, feature flags, la mayoria de experimentos</td></tr>
+  </table>
+  <p>Para puertas de dos vias, no inviertas demasiado en marcos de decision. Simplemente prueba algo.</p>
+  <hr>
+  <p><em>El objetivo no es evitar decisiones, sino tomarlas bien cuando importan y tomarlas rapido cuando no.</em></p>
+</body>
+</html>

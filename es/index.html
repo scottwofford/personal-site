@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -214,6 +214,14 @@
       .hover-preview img { display: none; }
     }
 
+    .lang-switch {
+      color: #555;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+    .lang-switch:hover { color: #fff; }
+
     @media (max-width: 600px) {
       h1 {
         font-size: 1.6rem;
@@ -241,54 +249,54 @@
 <body>
   <nav>
     <div class="nav-item">
-      <a href="/productivity/">productivity</a>
+      <a href="/es/productivity/">productividad</a>
       <div class="dropdown">
-        <a href="/productivity/5-choices.html">5 Choices</a>
-        <a href="/productivity/claude-system-prompt.html">Claude System Prompt</a>
-        <a href="/productivity/context-management.html">Context Management</a>
+        <a href="/es/productivity/5-choices.html">5 Decisiones</a>
+        <a href="/es/productivity/claude-system-prompt.html">Prompt de Claude</a>
+        <a href="/es/productivity/context-management.html">Gesti&oacute;n de Contexto</a>
       </div>
     </div>
     <div class="nav-item">
-      <a href="https://www.goodreads.com/user/show/21741061-scott-wofford" target="_blank">reading</a>
+      <a href="https://www.goodreads.com/user/show/21741061-scott-wofford" target="_blank">lectura</a>
       <div class="dropdown">
         <a href="https://www.goodreads.com/user/show/21741061-scott-wofford" target="_blank">Goodreads <i class="fas fa-external-link-alt"></i></a>
-        <a href="/reading/first-90-days.html">First 90 Days</a>
-        <a href="/reading/book-snippets.html">Book Snippets</a>
+        <a href="/es/reading/first-90-days.html">Los Primeros 90 D&iacute;as</a>
+        <a href="/es/reading/book-snippets.html">Notas de Libros</a>
       </div>
     </div>
     <div class="nav-item">
-      <a href="/philosophy/">philosophy</a>
+      <a href="/es/philosophy/">filosof&iacute;a</a>
       <div class="dropdown">
-        <a href="/philosophy/personal-philosophy.html">Personal Philosophy</a>
-        <a href="/philosophy/wrong-on-internet.html">Wrong on Internet</a>
+        <a href="/es/philosophy/personal-philosophy.html">Filosof&iacute;a Personal</a>
+        <a href="/es/philosophy/wrong-on-internet.html">Error en Internet</a>
       </div>
     </div>
     <div class="nav-item">
-      <a href="/people/">people</a>
+      <a href="/es/people/">personas</a>
       <div class="dropdown">
-        <a href="/people/meeting-culture.html">Meeting Culture</a>
-        <a href="/people/priorities-template.html">Priorities Template</a>
-        <a href="/people/retrospective-template.html">Retrospective Template</a>
-        <a href="/people/meeting-agenda-template.html">Meeting Agenda</a>
+        <a href="/es/people/meeting-culture.html">Cultura de Reuniones</a>
+        <a href="/es/people/priorities-template.html">Plantilla de Prioridades</a>
+        <a href="/es/people/retrospective-template.html">Plantilla de Retrospectiva</a>
+        <a href="/es/people/meeting-agenda-template.html">Agenda de Reuni&oacute;n</a>
       </div>
     </div>
     <div class="nav-item">
-      <a href="/building/">building</a>
+      <a href="/es/building/">construir</a>
       <div class="dropdown">
-        <a href="/building/day-1-philosophy.html">Day 1 Philosophy</a>
-        <a href="/building/mini-prfaq-template.html">Mini-PRFAQ Template</a>
-        <a href="/building/tracker-templates.html">Tracker Templates</a>
-        <a href="/building/onboarding-reading-list.html">Onboarding Reading List</a>
-        <a href="/building/claude-code-config.html">CLAUDE.md</a>
-        <a href="/building/making-decisions.html">Making Decisions</a>
+        <a href="/es/building/day-1-philosophy.html">Filosof&iacute;a D&iacute;a 1</a>
+        <a href="/es/building/mini-prfaq-template.html">Plantilla Mini-PRFAQ</a>
+        <a href="/es/building/tracker-templates.html">Plantillas de Seguimiento</a>
+        <a href="/es/building/onboarding-reading-list.html">Lecturas de Onboarding</a>
+        <a href="/es/building/claude-code-config.html">CLAUDE.md</a>
+        <a href="/es/building/making-decisions.html">Tomar Decisiones</a>
       </div>
     </div>
     <div class="nav-item">
-      <a href="/writing/">writing</a>
+      <a href="/es/writing/">escritura</a>
       <div class="dropdown">
-        <a href="/writing/writing-guide.html">Writing Guide</a>
-        <a href="/writing/pyramid-principle.html">Pyramid Principle</a>
-        <a href="/writing/writing-resources.html">Writing Resources</a>
+        <a href="/es/writing/writing-guide.html">Gu&iacute;a de Escritura</a>
+        <a href="/es/writing/pyramid-principle.html">Principio de la Pir&aacute;mide</a>
+        <a href="/es/writing/writing-resources.html">Recursos de Escritura</a>
       </div>
     </div>
     <div class="nav-item">
@@ -297,15 +305,15 @@
         <a href="https://scwoff.substack.com" target="_blank">Substack <i class="fas fa-external-link-alt"></i></a>
       </div>
     </div>
-    <a href="/es/" style="color:#555;text-decoration:none;font-size:0.9rem;transition:color 0.2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#555'">ES</a>
+    <a href="/" class="lang-switch">EN</a>
     <span class="expand-toggle" onclick="document.body.classList.toggle('expanded'); this.textContent = document.body.classList.contains('expanded') ? '−' : '+'">+</span>
   </nav>
 
   <main class="content">
     <div class="card">
-      <h1>Scott is building <span class="hover-preview"><a href="https://luthienresearch.org" target="_blank">Luthien</a><img src="/images/luthien.png" alt="Luthien"></span></h1>
-      <p class="tagline">...and doing other stuff including raising <span class="hover-preview"><a href="https://www.instagram.com/p/DNmp4rgODFzCiRnhnw-Ppwpv1CjpCI8e1M7zRc0/?img_index=1" target="_blank" style="color: inherit; white-space: nowrap;">2 dope kids</a><img src="/images/family.png" alt="Family photo"></span>, <span class="hover-preview hover-left"><a href="https://www.goodreads.com/user/show/21741061-scott-wofford" target="_blank" style="color: inherit;">reading</a><img src="/images/goodreads.png" alt="Goodreads profile"></span> 📚, <span class="hover-preview hover-below"><a href="https://open.spotify.com/user/1239730132" target="_blank" style="color: inherit;">listening to</a><img src="/images/spotify.png" alt="Spotify profile"></span> 🎧/<span style="white-space: nowrap;">playing music 🎸</span>, and <span style="white-space: nowrap;">being outside 🚵‍♂️⛵🎾🏕️</span></p>
-      <p class="tagline">I'm from Nashville, and I live in Seattle.<br>I also spend time in SF, Colombia, and Mexico when<br>I want some more <span style="white-space: nowrap;">sun ☀️ 😎</span></p>
+      <h1>Scott construye <span class="hover-preview"><a href="https://luthienresearch.org" target="_blank">Luthien</a><img src="/images/luthien.png" alt="Luthien"></span></h1>
+      <p class="tagline">...y hace otras cosas como criar <span class="hover-preview"><a href="https://www.instagram.com/p/DNmp4rgODFzCiRnhnw-Ppwpv1CjpCI8e1M7zRc0/?img_index=1" target="_blank" style="color: inherit; white-space: nowrap;">2 hijos geniales</a><img src="/images/family.png" alt="Foto familiar"></span>, <span class="hover-preview hover-left"><a href="https://www.goodreads.com/user/show/21741061-scott-wofford" target="_blank" style="color: inherit;">leer</a><img src="/images/goodreads.png" alt="Perfil de Goodreads"></span> 📚, <span class="hover-preview hover-below"><a href="https://open.spotify.com/user/1239730132" target="_blank" style="color: inherit;">escuchar</a><img src="/images/spotify.png" alt="Perfil de Spotify"></span> 🎧/<span style="white-space: nowrap;">tocar m&uacute;sica 🎸</span>, y <span style="white-space: nowrap;">estar al aire libre 🚵‍♂️⛵🎾🏕️</span></p>
+      <p class="tagline">Soy de Nashville y vivo en Seattle.<br>Tambi&eacute;n paso tiempo en SF, Colombia y M&eacute;xico<br>cuando quiero m&aacute;s <span style="white-space: nowrap;">sol ☀️ 😎</span></p>
       <div class="social">
         <a href="https://github.com/scottwofford" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
         <a href="https://open.spotify.com/user/1239730132" target="_blank" title="Spotify"><i class="fab fa-spotify"></i></a>
