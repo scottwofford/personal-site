@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>No Abandones las Conversaciones de Claude Después de la Compactación - Scott Wofford</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="section-nav">
+    <a href="/es/">← inicio</a> / <a href="/es/productivity/" class="section-name">productividad</a>
+    <div class="siblings">
+      <a href="/es/productivity/5-choices.html">5 Decisiones</a>
+      <a href="/es/productivity/claude-system-prompt.html">Prompt de Claude</a>
+      <a href="/es/productivity/context-management.html" class="current">Contexto</a>
+    </div>
+  </div>
+  <div style="text-align:right;margin-bottom:1rem"><a href="/productivity/context-management.html" style="color:#555;font-size:0.85rem">EN</a></div>
+  <h1>No Abandones las Conversaciones de Claude Después de la Compactación</h1>
+  <p class="subtitle">Febrero 2026</p>
+
+  <hr>
+
+  <p>Cuando Claude se queda sin espacio en la ventana de contexto, muestra una barra de progreso: <em>"Compactando nuestra conversación para que podamos seguir chateando... 36%"</em></p>
+
+  <p>Mi instinto era iniciar un chat nuevo. La barra de progreso se sentía como una advertencia, como si la conversación se estuviera degradando. Abría un chat nuevo y decía "busca en chats anteriores el contexto de lo que estábamos trabajando."</p>
+
+  <p><strong>Esto era un error.</strong></p>
+
+  <h2>Lo que realmente ocurre</h2>
+
+  <p><strong>La compactación</strong> resume el historial de tu conversación y mantiene un resumen detallado en la ventana de contexto activa. Pierdes algunos detalles de mensajes anteriores, pero conservas el arco completo: decisiones tomadas, contexto establecido, trabajo en progreso.</p>
+
+  <p><strong>"Buscar en chats anteriores"</strong> desde una conversación nueva es búsqueda por palabras clave. Devuelve fragmentos cortos que coinciden con tu consulta, piensa en <code>grep</code>, no en reproducción. Obtienes fragmentos, no el contexto completo de trabajo de una sesión larga.</p>
+
+  <p>La diferencia práctica es enorme:</p>
+
+  <table style="width: 100%; border-collapse: collapse; margin: 1.5rem 0;">
+    <thead>
+      <tr>
+        <th style="text-align: left; padding: 0.5rem; border-bottom: 2px solid #666;"></th>
+        <th style="text-align: left; padding: 0.5rem; border-bottom: 2px solid #666;">Continuar después de la compactación</th>
+        <th style="text-align: left; padding: 0.5rem; border-bottom: 2px solid #666;">Chat nuevo + búsqueda</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="padding: 0.5rem; border-bottom: 1px solid #333;">Riqueza del contexto</td>
+        <td style="padding: 0.5rem; border-bottom: 1px solid #333;">Alta — resumen completo en la ventana</td>
+        <td style="padding: 0.5rem; border-bottom: 1px solid #333;">Baja — fragmentos por palabras clave</td>
+      </tr>
+      <tr>
+        <td style="padding: 0.5rem; border-bottom: 1px solid #333;">Esfuerzo para restaurar</td>
+        <td style="padding: 0.5rem; border-bottom: 1px solid #333;">Cero</td>
+        <td style="padding: 0.5rem; border-bottom: 1px solid #333;">Tienes que solicitarlo con un prompt</td>
+      </tr>
+      <tr>
+        <td style="padding: 0.5rem; border-bottom: 1px solid #333;">Riesgo de perder contexto</td>
+        <td style="padding: 0.5rem; border-bottom: 1px solid #333;">Bajo (se degrada después de 3+ compactaciones)</td>
+        <td style="padding: 0.5rem; border-bottom: 1px solid #333;">Alto</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>La regla general</h2>
+
+  <p>Continúa después de la compactación a menos que estés cambiando de tema por completo o estés más allá de tu tercera compactación en un mismo chat.</p>
+
+  <h2>La brecha de UX</h2>
+
+  <p>La documentación de Anthropic dice: <em>"Tu historial completo del chat se preserva para que Claude pueda referenciarlo."</em> Esto crea una falsa equivalencia: los usuarios asumen que buscar desde un chat nuevo les da el mismo contexto que continuar. No es así.</p>
+
+  <p>Una sola línea en la interfaz de compactación arreglaría el modelo mental: <em>"Tu conversación ha sido resumida. Recomendamos continuar aquí — esto preserva más contexto que iniciar un chat nuevo."</em></p>
+
+  <hr>
+
+  <p><em>Última actualización: febrero 2026</em></p>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plantillas de seguimiento de proyectos - Scott Wofford</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="section-nav">
+    <a href="/es/">← inicio</a> / <a href="/es/building/" class="section-name">construir</a>
+    <div class="siblings">
+      <a href="/es/building/day-1-philosophy.html">Dia 1</a>
+      <a href="/es/building/making-decisions.html">Decisiones</a>
+      <a href="/es/building/mini-prfaq-template.html">Mini-PRFAQ</a>
+      <a href="/es/building/tracker-templates.html" class="current">Seguimiento</a>
+      <a href="/es/building/onboarding-reading-list.html">Onboarding</a>
+      <a href="/es/building/claude-code-config.html">CLAUDE.md</a>
+    </div>
+  </div>
+  <div style="text-align:right;margin-bottom:1rem"><a href="/building/tracker-templates.html" style="color:#555;font-size:0.85rem">EN</a></div>
+  <h1>Plantillas de seguimiento de proyectos</h1>
+  <p class="subtitle">Fuente unica de verdad para iniciativas, objetivos y alianzas.</p>
+  <hr>
+  <h2>Por que usar un tracker?</h2>
+  <p>Un buen tracker mantiene a todos alineados sin reuniones de estado constantes. Deberia:</p>
+  <ul>
+    <li>Ser la <strong>fuente unica de verdad</strong> para la iniciativa</li>
+    <li>Capturar <strong>decisiones</strong> (para no volver a debatirlas)</li>
+    <li>Rastrear <strong>elementos de accion</strong> con responsables y fechas</li>
+    <li>Almacenar <strong>notas de reuniones</strong> en contexto (no dispersas en otros documentos)</li>
+  </ul>
+  <hr>
+  <h2>Estructura de la plantilla</h2>
+  <h3>1. Seccion de resumen</h3>
+  <p><strong>Objetivo:</strong> Una oracion describiendo como se ve el exito.</p>
+  <p><strong>Tabla de objetivos/hitos:</strong></p>
+  <table>
+    <tr><th>Objetivo</th><th>Estado</th><th>Fecha limite</th><th>Responsable</th><th>Actualizaciones</th></tr>
+    <tr><td></td><td>Verde/Amarillo/Rojo</td><td></td><td></td><td></td></tr>
+  </table>
+  <h3>2. Directorio de documentos</h3>
+  <p>Enlaces a todos los documentos relevantes: PRFAQs, especificaciones, disenos, grabaciones de reuniones, proyectos relacionados.</p>
+  <p><em>Consejo: Crea una carpeta compartida y enlaza a ella en lugar de documentos individuales.</em></p>
+  <h3>3. Registro de decisiones</h3>
+  <table>
+    <tr><th>Decision</th><th>Fecha</th><th>Contexto</th><th>Quien decidio</th></tr>
+    <tr><td></td><td></td><td></td><td></td></tr>
+  </table>
+  <p><em>Captura las decisiones explicitamente. Tu yo del futuro (y los nuevos miembros del equipo) te lo agradeceran.</em></p>
+  <h3>4. Preguntas abiertas</h3>
+  <table>
+    <tr><th>Pregunta</th><th>Planteada por</th><th>Estado</th><th>Responsable</th><th>Fecha limite</th></tr>
+    <tr><td></td><td></td><td></td><td></td><td></td></tr>
+  </table>
+  <h3>5. Elementos de accion</h3>
+  <table>
+    <tr><th>Elemento</th><th>Estado</th><th>Fecha limite</th><th>Responsable</th><th>Actualizaciones</th></tr>
+    <tr><td></td><td></td><td></td><td></td><td></td></tr>
+  </table>
+  <h3>6. Registro de reuniones</h3>
+  <pre>## [Date] - [Meeting Title]
+
+**Objective:**
+**Attendees:**
+
+### Agenda
+1. ...
+
+### Notes
+1. ...
+
+### Action Items
+1. [Action] (Owner: X, Due: Y)</pre>
+  <hr>
+  <h2>Mejores practicas</h2>
+  <ol>
+    <li><strong>Actualizar regularmente</strong> - los trackers desactualizados pierden confianza</li>
+    <li><strong>Las decisiones quedan decididas</strong> - referencia el registro de decisiones cuando los temas resurjan</li>
+    <li><strong>Las notas van en el tracker</strong> - no en documentos separados o hilos de Slack</li>
+    <li><strong>Un tracker por iniciativa</strong> - no lo dividas en multiples documentos</li>
+    <li><strong>Mantenlo escaneable</strong> - los ejecutivos deberian entender el estado en 30 segundos</li>
+  </ol>
+  <hr>
+  <h2>Anti-patrones</h2>
+  <ul>
+    <li><strong>El tracker cementerio</strong> - creado una vez, nunca actualizado</li>
+    <li><strong>El vertedero de actas</strong> - paginas de notas, sin estructura</li>
+    <li><strong>El tracker de todo</strong> - demasiadas iniciativas, pierde el enfoque</li>
+    <li><strong>El tracker duplicado</strong> - la misma informacion en multiples lugares</li>
+  </ul>
+  <hr>
+  <p><em>Un tracker es una herramienta, no un entregable. Si mantenerlo toma mas tiempo del que ahorra, simplifica.</em></p>
+</body>
+</html>
