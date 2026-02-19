@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Luthien Customer Discovery - Scott Wofford</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inconsolata', monospace;
+      background: #1a1a1a;
+      color: #e5e5e5;
+      padding: 2rem;
+      line-height: 1.6;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    h1 { font-size: 1.8rem; margin-bottom: 0.5rem; color: #fff; }
+    h2 { font-size: 1.3rem; margin: 2rem 0 1rem; color: #fff; border-bottom: 1px solid #333; padding-bottom: 0.5rem; }
+    h3 { font-size: 1.1rem; margin: 1.5rem 0 0.75rem; color: #ccc; }
+    p { margin-bottom: 1rem; color: #aaa; }
+    a { color: #6b9fff; }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.9rem; }
+    th, td { padding: 0.5rem; text-align: left; border-bottom: 1px solid #333; }
+    th { color: #888; font-weight: 400; }
+    td { color: #ccc; }
+    .subtitle { color: #666; margin-bottom: 2rem; }
+    hr { border: none; border-top: 1px solid #333; margin: 2rem 0; }
+    .back { margin-bottom: 2rem; }
+    .back a { color: #666; text-decoration: none; }
+    .back a:hover { color: #fff; }
+    .updated { color: #555; font-size: 0.85rem; margin-top: 3rem; }
+  </style>
+</head>
+<body>
+  <div class="back"><a href="/es/">&larr; scottwofford.com</a></div>
+  <div style="text-align:right;margin-bottom:1rem"><a href="/luthien/customer-discovery.html" style="color:#555;font-size:0.85rem">EN</a></div>
+
+  <h1>Luthien: Descubrimiento de Clientes</h1>
+  <p class="subtitle">La historia hasta ahora &mdash; Marzo 2025 &ndash; Enero 2026</p>
+
+  <hr>
+
+  <h2>Lo que estamos haciendo</h2>
+  <p>Estamos intentando construir una organizaci&oacute;n para reducir el riesgo de resultados catastr&oacute;ficos de la IA. Todo lo dem&aacute;s est&aacute; por definir.</p>
+  <p>En marzo de 2025, completamos un ejercicio de Teor&iacute;a del Cambio y escribimos la v12. Ese documento captura nuestro pensamiento de aquel momento, pero actualmente estamos reevaluando.</p>
+
+  <hr>
+
+  <h2>Lo que hemos hecho</h2>
+
+  <h3>Entrevistas de descubrimiento (Jun&ndash;Ago 2025)</h3>
+  <p>9 entrevistas. La gente empez&oacute; a decir las mismas cosas.</p>
+
+  <table>
+    <tr><th>Fecha</th><th>Nombre</th><th>Rol</th><th>Transcripci&oacute;n</th></tr>
+    <tr><td>Jun 25</td><td>Nico</td><td>CTO, Veleiro</td><td><a href="https://docs.google.com/document/d/1u_WdPExBOLmQV4oSRZ1EX07MXUj74qsmoOxOppqLpG0/edit">Enlace</a></td></tr>
+    <tr><td>Jul 1</td><td>Saranya</td><td>Staff Engineer, IntentAI</td><td>&mdash;</td></tr>
+    <tr><td>Jul 14</td><td>Anthony</td><td>Sr. Developer, PauseAI</td><td><a href="https://docs.google.com/document/d/1LIxnEXIcjL1gU7IT1wUtqzZOo4Sn49Z-ENKbrBdTI_c/edit">Enlace</a></td></tr>
+    <tr><td>Jul 23</td><td>Aleksandr</td><td>Developer Advocate</td><td><a href="https://docs.google.com/document/d/XeeI23EVa41BYJ_JCFlmQPLtbEDmyQfym77SaJpwBs/edit">Enlace</a></td></tr>
+    <tr><td>Jul 30</td><td>Nathan</td><td>AI Safety Researcher</td><td><a href="https://docs.google.com/document/d/1CbIkTinKXVUXgDycRsG73t6UwifqL0w0dB7--S8lF4I/edit">Enlace</a></td></tr>
+    <tr><td>Jul 30</td><td>Vipul & Smriti</td><td>Echovane</td><td><a href="https://docs.google.com/document/d/1PWJDWj_2jnFPPhzQjEi6qD_6-e3FAlX3lcCeoW6016U/edit">Enlace</a></td></tr>
+    <tr><td>Ago 18</td><td>Kirk</td><td>CTO, Graphlit</td><td><a href="https://docs.google.com/document/d/1KKJu0YwZq3bXVvlOD9LooC0l0GB8h-G3-w5BtKHeWXM/edit">Enlace</a></td></tr>
+  </table>
+
+  <p><strong>Problemas validados:</strong> <a href="https://docs.google.com/spreadsheets/d/1Ob_mgKqYZphRvli37X6DJQ-TdYtgBlXb5Y9TFxmEyec/edit">Base de datos de frustraciones de usuarios</a></p>
+
+  <hr>
+
+  <h3>Iteraciones de arquitectura (Ene 2025&ndash;presente)</h3>
+  <p>Tres ciclos:</p>
+  <table>
+    <tr><td>1. <strong>DIY</strong> (Ene&ndash;Ago 2025)</td><td>562 commits, prob&oacute; viabilidad</td></tr>
+    <tr><td>2. <strong>LiteLLM-everything</strong> (Ago&ndash;Oct)</td><td>Delegamos demasiado, perdimos control</td></tr>
+    <tr><td>3. <strong>Integrado</strong> (Oct 16+)</td><td><a href="https://github.com/LuthienResearch/luthien-proxy/pull/40">PR #40</a>, trajimos componentes cr&iacute;ticos de vuelta</td></tr>
+  </table>
+
+  <hr>
+
+  <h3>Estado actual (Ene 2026)</h3>
+  <p>Estamos intentando descubrir c&oacute;mo construir algo que permita poner el control de IA en producci&oacute;n. Espec&iacute;ficamente: construir pol&iacute;ticas arbitrarias para un proxy LLM.</p>
+  <p>Ahora mismo estamos probando y depurando seg&uacute;n surgen los problemas.</p>
+  <p><strong>Estado:</strong> Ni Scott ni Jai est&aacute;n haciendo dogfooding agresivamente. El producto tiene demasiados bugs para uso diario.</p>
+  <p><strong>Ejemplo reciente:</strong> Demo para la gente de Seldon (Ene 24) tuvo errores 500 por un bug de streaming de thinking blocks. <a href="https://github.com/LuthienResearch/luthien-proxy/pull/134">PR #134</a> lo arregl&oacute;, pero el patr&oacute;n persiste &mdash; necesitamos checklists de preparaci&oacute;n para demos, no solo correcciones de c&oacute;digo.</p>
+  <p><strong>Pregunta abierta de Jai (Ene 20):</strong> Los modelos est&aacute;n mejorando notablemente. Su pdoom ha bajado. &iquest;La mejora de los modelos reduce el impacto del trabajo de control?</p>
+
+  <hr>
+
+  <h2>Hitos aproximados</h2>
+
+  <table>
+    <tr><th>Hito</th><th>Descripci&oacute;n</th><th>Estado</th></tr>
+    <tr><td>1</td><td>Desbloquear dogfooding: Scott y Jai usan Luthien diariamente</td><td>2/4 blockers resueltos</td></tr>
+    <tr><td>2</td><td>Desbloquear pruebas externas guiadas: 3 usuarios completan sesi&oacute;n de 30 min</td><td>Casi listo</td></tr>
+    <tr><td>3</td><td>Desbloquear pruebas independientes: &lt;10 min de setup</td><td>No iniciado</td></tr>
+  </table>
+
+  <h3>Blockers de dogfooding</h3>
+
+  <table>
+    <tr><th>Blocker</th><th>Estado</th><th>PR</th></tr>
+    <tr><td>Thinking blocks (non-streaming)</td><td>Hecho</td><td><a href="https://github.com/LuthienResearch/luthien-proxy/pull/131">#131</a></td></tr>
+    <tr><td>Thinking blocks (streaming)</td><td>En revisi&oacute;n</td><td><a href="https://github.com/LuthienResearch/luthien-proxy/pull/134">#134</a></td></tr>
+    <tr><td>/compact "Tool names must be unique"</td><td>Sin PR</td><td>&mdash;</td></tr>
+    <tr><td>Session viewer polish</td><td>En revisi&oacute;n</td><td><a href="https://github.com/LuthienResearch/luthien-proxy/pull/133">#133</a></td></tr>
+  </table>
+
+  <hr>
+
+  <h2>Pipeline</h2>
+
+  <table>
+    <tr><th>Tipo</th><th>Cantidad</th></tr>
+    <tr><td>Usuarios potenciales (expresaron inter&eacute;s)</td><td>50</td></tr>
+    <tr><td>Contactos de networking</td><td>20+</td></tr>
+    <tr><td>Total rastreados</td><td>196</td></tr>
+  </table>
+
+  <p><a href="https://docs.google.com/spreadsheets/d/1lKNWdLRrkRu4VtxLsdWnKF_OFPBXAgG1aMioS9shHSM/edit">Base de datos de personas de Luthien</a></p>
+
+  <hr>
+
+  <h2>Documentos fuente</h2>
+  <ul style="list-style: none; color: #aaa;">
+    <li>&bull; <a href="https://docs.google.com/spreadsheets/d/1Ob_mgKqYZphRvli37X6DJQ-TdYtgBlXb5Y9TFxmEyec/edit">Base de datos de frustraciones de usuarios</a></li>
+    <li>&bull; <a href="https://docs.google.com/spreadsheets/d/1lKNWdLRrkRu4VtxLsdWnKF_OFPBXAgG1aMioS9shHSM/edit">Base de datos de personas de Luthien</a></li>
+  </ul>
+
+  <p class="updated"><em>&Uacute;ltima actualizaci&oacute;n: Domingo, 26 de enero de 2026</em></p>
+</body>
+</html>
