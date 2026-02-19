@@ -25,15 +25,15 @@
 
   <p>When Claude runs out of context window space, it shows a progress bar: <em>"Compacting our conversation so we can keep chatting… 36%"</em></p>
 
-  <p>My instinct was to start a new chat. The progress bar felt like a warning — like the conversation was degrading. I'd open a fresh chat and say "search past chats for context on what we were working on."</p>
+  <p>My instinct was to start a new chat. The progress bar felt like a warning, like the conversation was degrading. I'd open a fresh chat and say "search past chats for context on what we were working on."</p>
 
   <p><strong>This was wrong.</strong></p>
 
   <h2>What's actually happening</h2>
 
-  <p><strong>Compaction</strong> summarizes your conversation history and keeps a rich summary in the active context window. You lose some detail from earlier messages, but you retain the full arc — decisions made, context established, work in progress.</p>
+  <p><strong>Compaction</strong> summarizes your conversation history and keeps a rich summary in the active context window. You lose some detail from earlier messages, but you retain the full arc: decisions made, context established, work in progress.</p>
 
-  <p><strong>"Search past chats"</strong> from a new conversation is keyword search. It returns short snippets that match your query — think <code>grep</code>, not replay. You get fragments, not the full working context of a long session.</p>
+  <p><strong>"Search past chats"</strong> from a new conversation is keyword search. It returns short snippets that match your query. Think <code>grep</code>, not replay. You get fragments, not the full working context of a long session.</p>
 
   <p>The practical difference is huge:</p>
 
@@ -48,8 +48,8 @@
     <tbody>
       <tr>
         <td style="padding: 0.5rem; border-bottom: 1px solid #333;">Context richness</td>
-        <td style="padding: 0.5rem; border-bottom: 1px solid #333;">High — full summary in window</td>
-        <td style="padding: 0.5rem; border-bottom: 1px solid #333;">Low — keyword snippets</td>
+        <td style="padding: 0.5rem; border-bottom: 1px solid #333;">High, full summary in window</td>
+        <td style="padding: 0.5rem; border-bottom: 1px solid #333;">Low, keyword snippets</td>
       </tr>
       <tr>
         <td style="padding: 0.5rem; border-bottom: 1px solid #333;">Effort to restore</td>
@@ -70,9 +70,9 @@
 
   <h2>The UX gap</h2>
 
-  <p>Anthropic's docs say: <em>"Your full chat history is preserved so Claude can reference it."</em> This creates a false equivalence — users assume searching from a new chat gives them the same context as continuing. It doesn't.</p>
+  <p>Anthropic's docs say: <em>"Your full chat history is preserved so Claude can reference it."</em> This creates a false equivalence. Users assume searching from a new chat gives them the same context as continuing. It doesn't.</p>
 
-  <p>A single line in the compaction UI would fix the mental model: <em>"Your conversation has been summarized. We recommend continuing here — this preserves more context than starting a new chat."</em></p>
+  <p>A single line in the compaction UI would fix the mental model: <em>"Your conversation has been summarized. We recommend continuing here. This preserves more context than starting a new chat."</em></p>
 
   <hr>
 
