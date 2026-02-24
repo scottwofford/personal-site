@@ -187,7 +187,7 @@
       padding-bottom: 0.4rem;
     }
     #about h2 { color: var(--teal); }
-    #game h2 { color: var(--purple); }
+    #sampler h2 { color: var(--coral); }
     #schedule h2 { color: var(--gold); }
     #details h2 { color: var(--blue); }
     #faq h2 { color: var(--green); }
@@ -470,8 +470,8 @@
       <span class="sticky-brand">Tio Escott's Camp</span>
       <div class="sticky-links">
         <a href="#about">About</a>
+        <a href="#sampler">Sampler</a>
         <a href="#schedule">Schedule</a>
-        <a href="#game">Game</a>
         <a href="#details">Details</a>
         <a href="#faq">FAQ</a>
         <a href="#signup" class="signup-link">Express Interest</a>
@@ -482,7 +482,7 @@
   <!-- Hero -->
   <header class="hero">
     <div class="hero-emoji">&#127908; &#127928; &#129311; &#127912; &#129302; &#128131;</div>
-    <h1>Tio Escott's Summer Day Camp</h1>
+    <h1>Tio Escott's Summer Day Camp 2026</h1>
     <p class="tagline">3 days and 1 night of Spanish immersion, music, karaoke, game-building, art, and dance parties for kids ages 5&ndash;7 in Burien (Shorewood).</p>
     <div class="hero-details">
       <span class="hero-detail"><strong>Aug 31 &ndash; Sep 2</strong></span>
@@ -502,12 +502,6 @@
   <section id="about">
     <h2>What Is This?</h2>
     <p class="section-intro">An inaugural day camp run by one dad for friends and family. All instruction is in Spanish &mdash; kids who know it help translate for friends who don't. That's <strong style="color: var(--gold);">prestige bilingualism</strong>: speaking Spanish is the superpower at this camp.</p>
-    <div class="karaoke-video">
-      <video controls preload="metadata" playsinline>
-        <source src="../images/camp-video.mp4" type="video/mp4">
-      </video>
-      <div class="caption">Kids karaoke in action.</div>
-    </div>
     <div class="community-photo">
       <img src="../images/camp-community.jpg" alt="Tio Escott's community — families, kids, and friends gathered together">
       <div class="caption">Our community. These are the kind of people (and kids) you'll find at camp.</div>
@@ -516,10 +510,19 @@
 
   <hr class="section-divider">
 
-  <!-- Game Showcase -->
-  <section id="game">
-    <h2>Try Adrian's Game!</h2>
-    <p class="section-intro">Adrian (age 6) designed this multiplayer maze game using AI. At camp, your kids will build their own games just like this. Give it a try &mdash; grab a friend and share the keyboard!</p>
+  <!-- Sampler -->
+  <section id="sampler">
+    <h2>A Taste of Camp</h2>
+
+    <div class="karaoke-video">
+      <video controls preload="metadata" playsinline>
+        <source src="../images/camp-video.mp4" type="video/mp4">
+      </video>
+      <div class="caption">Kids karaoke in action.</div>
+    </div>
+
+    <h3 style="color: var(--purple); margin-top: 2rem; margin-bottom: 0.75rem;">Try Adrian's Game!</h3>
+    <p style="color: #888; margin-bottom: 1rem;">Adrian (age 6) designed this multiplayer maze game using AI. At camp, your kids build their own. Grab a friend and share the keyboard!</p>
     <div class="game-showcase">
       <div class="game-controls">
         <div class="player-controls">
@@ -536,7 +539,7 @@
           <span class="play-text">Click to Play!</span>
         </div>
       </div>
-      <p class="game-note">Race to the green door to win! Built by a 6-year-old game designer with help from Claude Code. <a href="https://github.com/scottwofford/adrian-maze-game" target="_blank">See the full project on GitHub &rarr;</a></p>
+      <p class="game-note">Race to the green door to win! Built by a 6-year-old with Claude Code. <a href="https://github.com/scottwofford/adrian-maze-game" target="_blank">See the project on GitHub &rarr;</a></p>
       <div class="game-deactivate"><button onclick="document.getElementById('gameContainer').classList.remove('active')">Done playing? Click to resume scrolling</button></div>
     </div>
   </section>
