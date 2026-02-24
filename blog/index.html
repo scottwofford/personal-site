@@ -3,134 +3,36 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Blog · Scott Wofford</title>
+  <title>Blog - Scott Wofford</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-      background: #fafafa;
-      color: #333;
-      padding: 2rem;
-      max-width: 650px;
-      margin: 0 auto;
-      line-height: 1.6;
-    }
-
-    header {
-      margin-bottom: 2rem;
-    }
-
-    .back {
-      color: #666;
-      text-decoration: none;
-      font-size: 0.9rem;
-    }
-
-    .back:hover {
-      color: #333;
-    }
-
-    h1 {
-      font-size: 2rem;
-      font-weight: 600;
-      color: #1a1a1a;
-      margin-top: 1rem;
-    }
-
-    .subtitle {
-      color: #666;
-      margin-top: 0.5rem;
-    }
-
-    .subtitle a {
-      color: #555;
-    }
-
-    .subtitle a:hover {
-      color: #1a1a1a;
-    }
-
-    .posts {
-      margin-top: 2rem;
-    }
-
-    .post {
-      margin-bottom: 1.5rem;
-      padding-bottom: 1.5rem;
-      border-bottom: 1px solid #eee;
-    }
-
-    .post:last-child {
-      border-bottom: none;
-    }
-
-    .post a {
-      color: #1a1a1a;
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 1.1rem;
-    }
-
-    .post a:hover {
-      color: #555;
-    }
-
-    .post-date {
-      color: #999;
-      font-size: 0.85rem;
-      margin-top: 0.25rem;
-    }
-
-    .post-excerpt {
-      color: #666;
-      font-size: 0.95rem;
-      margin-top: 0.5rem;
-    }
-
-    .loading, .error {
-      color: #666;
-      font-style: italic;
-    }
-
-    .subscribe {
-      margin-top: 2rem;
-      padding: 1.5rem;
-      background: #f5f5f5;
-      border-radius: 8px;
-      text-align: center;
-    }
-
-    .subscribe p {
-      margin-bottom: 1rem;
-      color: #555;
-    }
-
-    .subscribe a {
-      display: inline-block;
-      background: #1a1a1a;
-      color: white;
-      padding: 0.6rem 1.2rem;
-      border-radius: 4px;
-      text-decoration: none;
-      font-size: 0.9rem;
-    }
-
-    .subscribe a:hover {
-      background: #333;
-    }
+    .posts { margin-top: 1.5rem; }
+    .post { margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid #333; }
+    .post:last-child { border-bottom: none; }
+    .post a { color: #fff; text-decoration: none; font-weight: 600; font-size: 1.1rem; }
+    .post a:hover { color: #6b9fff; }
+    .post-date { color: #666; font-size: 0.85rem; margin-top: 0.25rem; }
+    .post-excerpt { color: #999; font-size: 0.95rem; margin-top: 0.5rem; }
+    .loading, .error { color: #666; font-style: italic; }
+    .subscribe { margin-top: 2rem; padding: 1.5rem; background: #252525; border-radius: 4px; text-align: center; }
+    .subscribe p { margin-bottom: 1rem; color: #888; }
+    .subscribe a { display: inline-block; background: #6b9fff; color: #1a1a1a; padding: 0.6rem 1.2rem; border-radius: 4px; text-decoration: none; font-size: 0.9rem; font-weight: 600; }
+    .subscribe a:hover { background: #8bb4ff; }
   </style>
 </head>
 <body>
-  <header>
-    <a href="/" class="back">← Scott Wofford</a>
-    <h1>Blog</h1>
-    <p class="subtitle">Also on <a href="https://scwoff.substack.com" target="_blank">Substack</a></p>
-  </header>
+  <div class="section-nav">
+    <a href="/">&larr; home</a> / <span class="section-name">blog</span>
+    <div class="siblings">
+      <a href="https://scwoff.substack.com" target="_blank">Substack</a>
+    </div>
+  </div>
+
+  <h1>Blog</h1>
+  <p class="subtitle">Also on <a href="https://scwoff.substack.com" target="_blank">Substack</a></p>
 
   <section class="posts" id="posts">
     <p class="loading">Loading posts...</p>
@@ -142,7 +44,6 @@
   </section>
 
   <script>
-    // Using rss2json.com to handle CORS (free tier: 10k requests/day)
     const RSS_URL = 'https://scwoff.substack.com/feed';
     const API_URL = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(RSS_URL)}`;
 
@@ -157,7 +58,7 @@
           container.innerHTML = `
             <p class="error">No posts yet. Check back soon!</p>
             <p style="margin-top: 1rem;">
-              <a href="https://scwoff.substack.com" target="_blank">Visit Substack →</a>
+              <a href="https://scwoff.substack.com" target="_blank">Visit Substack &rarr;</a>
             </p>
           `;
           return;
@@ -170,7 +71,6 @@
             day: 'numeric'
           });
 
-          // Strip HTML and truncate excerpt
           const excerpt = post.description
             .replace(/<[^>]*>/g, '')
             .substring(0, 150)
@@ -189,7 +89,7 @@
         container.innerHTML = `
           <p class="error">Couldn't load posts.</p>
           <p style="margin-top: 1rem;">
-            <a href="https://scwoff.substack.com" target="_blank">Read on Substack →</a>
+            <a href="https://scwoff.substack.com" target="_blank">Read on Substack &rarr;</a>
           </p>
         `;
       }
@@ -197,5 +97,9 @@
 
     loadPosts();
   </script>
+
+  <!-- GoatCounter analytics -->
+  <script data-goatcounter="https://scwoff.goatcounter.com/count"
+          async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>

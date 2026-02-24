@@ -214,15 +214,20 @@ h1 a {
   opacity: 1;
   visibility: visible;
 }
-/* Hide hover previews on mobile */
+/* Tablet: allow h1 wrap, hide hover previews, tighten nav */
 @media (max-width: 900px) {
+  h1 {
+    white-space: normal;
+  }
   .hover-preview img { display: none; }
+  .desktop-br { display: none; }
+  nav { gap: 1.5rem; }
 }
 
+/* Mobile: compact nav, overlay expand */
 @media (max-width: 600px) {
   h1 {
     font-size: 1.6rem;
-    white-space: normal;
   }
 
   nav {
@@ -233,10 +238,6 @@ h1 a {
   }
 
   .dropdown {
-    display: none;
-  }
-
-  .desktop-br {
     display: none;
   }
 
