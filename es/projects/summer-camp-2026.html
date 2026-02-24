@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Campamento de Verano de Tio Escott - Scott Wofford</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inconsolata', monospace;
+      background: #1a1a1a;
+      color: #e5e5e5;
+      line-height: 1.6;
+    }
+
+    /* --- Color accents --- */
+    :root {
+      --coral: #ff6b6b;
+      --teal: #4ecdc4;
+      --gold: #fbbf24;
+      --purple: #a78bfa;
+      --blue: #6b9fff;
+      --green: #34d399;
+      --pink: #f472b6;
+      --card-bg: #252525;
+      --border: #333;
+    }
+
+    /* --- Site nav (matches scottwofford.com) --- */
+    .site-nav {
+      padding: 1rem 2rem;
+      font-size: 0.85rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .site-nav a { color: #666; text-decoration: none; }
+    .site-nav a:hover { color: #fff; }
+    .site-nav .section-name { color: #888; }
+    .siblings { margin-top: 0.5rem; }
+    .siblings a { margin-right: 1rem; }
+    .siblings a.current { color: #fff; }
+
+    /* --- Sticky section nav --- */
+    .section-sticky-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(26, 26, 26, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      padding: 0.6rem 2rem;
+      transition: box-shadow 0.3s;
+    }
+    .section-sticky-nav.scrolled {
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    }
+    .sticky-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .sticky-brand {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--gold);
+      white-space: nowrap;
+    }
+    .sticky-links {
+      display: flex;
+      gap: 1.25rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .sticky-links a {
+      color: #888;
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: color 0.2s;
+    }
+    .sticky-links a:hover { color: #fff; }
+    .sticky-links .signup-link {
+      background: var(--coral);
+      color: #fff;
+      padding: 0.3rem 0.9rem;
+      border-radius: 4px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      transition: background 0.2s;
+    }
+    .sticky-links .signup-link:hover {
+      background: #ff8787;
+    }
+
+    /* --- Hero --- */
+    .hero {
+      text-align: center;
+      padding: 3rem 2rem 2.5rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .hero-emoji {
+      font-size: 2.5rem;
+      margin-bottom: 0.75rem;
+    }
+    .hero h1 {
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+    }
+    .hero .tagline {
+      font-size: 1.1rem;
+      color: #999;
+      max-width: 600px;
+      margin: 0 auto 1.25rem;
+    }
+    .hero-details {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+      font-size: 0.9rem;
+    }
+    .hero-detail {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 0.3rem 0.75rem;
+    }
+    .hero-detail strong { color: #fff; }
+    .hero-detail:nth-child(1) strong { color: var(--teal); }
+    .hero-detail:nth-child(2) strong { color: var(--blue); }
+    .hero-detail:nth-child(3) strong { color: var(--pink); }
+    .hero-detail:nth-child(4) strong { color: var(--gold); }
+    .cta-btn {
+      display: inline-block;
+      background: var(--coral);
+      color: #fff;
+      font-family: 'Inconsolata', monospace;
+      font-size: 1.1rem;
+      font-weight: 700;
+      padding: 0.7rem 2rem;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .cta-btn:hover {
+      background: #ff8787;
+      transform: translateY(-1px);
+    }
+    .cta-btn:active { transform: translateY(0); }
+
+    /* --- Disclaimer --- */
+    .disclaimer {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      border-left: 3px solid var(--gold);
+      background: var(--card-bg);
+      color: #bbb;
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+    .disclaimer strong { color: var(--gold); }
+
+    /* --- Sections --- */
+    section {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2.5rem 2rem;
+    }
+    section h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.4rem;
+    }
+    #about h2 { color: var(--teal); }
+    #philosophy h2 { color: var(--gold); }
+    #sampler h2 { color: var(--coral); }
+    #schedule h2 { color: var(--gold); }
+    #faq h2 { color: var(--green); }
+    section .section-intro {
+      color: #888;
+      margin-bottom: 1.5rem;
+      font-size: 1rem;
+    }
+
+    /* --- Community photo --- */
+    .community-photo {
+      margin-top: 1.5rem;
+      border-radius: 4px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .community-photo img { width: 100%; display: block; }
+    .community-photo .caption {
+      background: var(--card-bg);
+      padding: 0.6rem 1rem;
+      color: #666;
+      font-size: 0.85rem;
+      font-style: italic;
+      text-align: center;
+    }
+
+    /* --- Karaoke video --- */
+    .karaoke-video { margin-bottom: 0.5rem; text-align: center; }
+    .karaoke-video video {
+      width: 100%;
+      max-width: 640px;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+    }
+    .karaoke-video .caption {
+      color: #666;
+      font-size: 0.85rem;
+      font-style: italic;
+      margin-top: 0.5rem;
+    }
+
+    /* --- Game Showcase --- */
+    .game-showcase { text-align: center; }
+    .game-controls {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+    .player-controls {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 0.5rem 1rem;
+      font-size: 0.85rem;
+      color: #bbb;
+    }
+    .player-controls strong { color: var(--purple); }
+    .game-container {
+      background: #111;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 0.5rem;
+      display: inline-block;
+      max-width: 100%;
+      position: relative;
+    }
+    .game-container iframe { display: block; pointer-events: none; }
+    .game-container.active iframe { pointer-events: auto; }
+    .game-overlay {
+      position: absolute;
+      inset: 0.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: rgba(17, 17, 17, 0.8);
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .game-overlay:hover { background: rgba(17, 17, 17, 0.6); }
+    .game-overlay .play-icon { font-size: 3.5rem; margin-bottom: 0.5rem; }
+    .game-overlay .play-text {
+      color: var(--purple);
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+    .game-container.active .game-overlay { display: none; }
+    .game-note {
+      color: #666;
+      font-size: 0.85rem;
+      margin-top: 0.75rem;
+      font-style: italic;
+    }
+    .game-note a { color: var(--blue); text-decoration: none; }
+    .game-note a:hover { text-decoration: underline; }
+    .game-deactivate { display: none; margin-top: 0.5rem; }
+    .game-container.active + .game-note + .game-deactivate { display: block; }
+    .game-deactivate button {
+      background: var(--card-bg);
+      color: #888;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 0.3rem 0.75rem;
+      font-family: 'Inconsolata', monospace;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .game-deactivate button:hover { color: #fff; }
+
+    /* --- Schedule --- */
+    .schedule-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0.75rem 0;
+      font-size: 0.85rem;
+    }
+    .schedule-table th {
+      background: var(--card-bg);
+      color: #fff;
+      font-weight: 600;
+      padding: 0.5rem;
+      text-align: left;
+      border: 1px solid var(--border);
+    }
+    .schedule-table td {
+      padding: 0.5rem;
+      color: #bbb;
+      border: 1px solid var(--border);
+    }
+    .schedule-table tr:hover td { background: var(--card-bg); }
+    .schedule-note {
+      color: #666;
+      font-size: 0.85rem;
+      margin-top: 0.75rem;
+      font-style: italic;
+    }
+
+    /* --- FAQ --- */
+    .faq-item {
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      margin-bottom: 0.25rem;
+      overflow: hidden;
+    }
+    .faq-question {
+      background: var(--card-bg);
+      padding: 0.5rem 0.75rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.75rem;
+      transition: background 0.2s;
+      user-select: none;
+    }
+    .faq-question:hover { background: #2a2a2a; }
+    .faq-question span {
+      color: #e5e5e5;
+      font-weight: 600;
+      font-size: 0.85rem;
+    }
+    .faq-arrow {
+      color: var(--green);
+      font-size: 0.75rem;
+      transition: transform 0.3s;
+      flex-shrink: 0;
+    }
+    .faq-item.open .faq-arrow { transform: rotate(180deg); }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+    .faq-answer-inner {
+      padding: 0 0.75rem 0.5rem;
+      color: #999;
+      font-size: 0.85rem;
+      line-height: 1.5;
+    }
+    .faq-item.open .faq-answer { max-height: 300px; }
+
+    /* --- Signup CTA --- */
+    .signup-section {
+      text-align: center;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2.5rem 2rem 3rem;
+    }
+    .signup-section h2 {
+      font-size: 1.5rem;
+      color: var(--coral);
+      margin-bottom: 0.5rem;
+    }
+    .signup-section p {
+      color: #888;
+      font-size: 1rem;
+      max-width: 500px;
+      margin: 0 auto 1.25rem;
+    }
+
+    /* --- Footer --- */
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      color: #555;
+      font-size: 0.8rem;
+      border-top: 1px solid var(--border);
+    }
+    footer a { color: #666; text-decoration: none; }
+    footer a:hover { color: #fff; }
+
+    /* --- Divider --- */
+    .section-divider {
+      max-width: 900px;
+      margin: 0 auto;
+      border: none;
+      border-top: 1px solid var(--border);
+    }
+
+    /* --- Responsive --- */
+    @media (max-width: 700px) {
+      .hero h1 { font-size: 1.8rem; }
+      .hero-details { gap: 0.5rem; }
+      .section-sticky-nav { padding: 0.4rem 1rem; }
+      .sticky-inner { flex-wrap: wrap; justify-content: center; gap: 0.5rem; }
+      .sticky-brand { display: none; }
+      .sticky-links { gap: 0.5rem 0.75rem; justify-content: center; flex-wrap: wrap; }
+      .sticky-links a { font-size: 0.75rem; }
+      .sticky-links .signup-link { font-size: 0.75rem; padding: 0.2rem 0.6rem; }
+      section { padding: 1.75rem 1.25rem; }
+      .disclaimer { padding: 1rem 1.25rem; }
+      .schedule-wrapper { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      .schedule-table { min-width: 500px; font-size: 0.75rem; }
+      .schedule-table th, .schedule-table td { padding: 0.4rem; }
+      .game-container iframe { aspect-ratio: 4/3; height: auto; }
+      .game-controls { flex-direction: column; gap: 0.5rem; }
+      .community-photo .caption { font-size: 0.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Site breadcrumb nav -->
+  <div class="site-nav">
+    <a href="/es/">&larr; inicio</a> / <a href="/projects/" class="section-name">proyectos</a>
+    <div class="siblings">
+      <a href="/es/projects/summer-camp-2026.html" class="current">Campamento de Tio Escott</a>
+      <a href="/projects/mens-dinner-club.html">Club de Cena</a>
+    </div>
+  </div>
+
+  <!-- Sticky section nav -->
+  <nav class="section-sticky-nav" id="stickyNav">
+    <div class="sticky-inner">
+      <span class="sticky-brand">Campamento de Tio Escott</span>
+      <div class="sticky-links">
+        <a href="#about">Acerca</a>
+        <a href="#philosophy">Filosof&iacute;a</a>
+        <a href="#sampler">Muestra</a>
+        <a href="#schedule">Horario</a>
+        <a href="#faq">FAQ</a>
+        <a href="#signup" class="signup-link">Expresar Inter&eacute;s</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header class="hero">
+    <div class="hero-emoji">&#127908; &#127928; &#129311; &#127912; &#129302; &#128131;</div>
+    <h1>Campamento de Verano de Tio Escott 2026</h1>
+    <p class="tagline">Inmersi&oacute;n en espa&ntilde;ol, karaoke en vivo, creaci&oacute;n de videojuegos, arte y fiestas de baile.</p>
+    <div class="hero-details">
+      <span class="hero-detail"><strong>Ago 31 &ndash; Sep 2</strong></span>
+      <span class="hero-detail"><strong>Burien (Shorewood)</strong></span>
+      <span class="hero-detail"><strong>Edades 5&ndash;7</strong></span>
+      <span class="hero-detail"><strong>&iexcl;Inaugural!</strong></span>
+    </div>
+    <a class="cta-btn" href="#signup">Expresar Inter&eacute;s</a>
+  </header>
+
+  <!-- Disclaimer -->
+  <div class="disclaimer">
+    <strong>Nota para padres:</strong> Este es un campamento diurno organizado por un pap&aacute; para amigos y familia &mdash; no es un programa de cuidado infantil con licencia. No hay negocio detr&aacute;s de esto, solo un pap&aacute; haciendo un experimento con un campamento diurno enfocado en IA con cosas que le gusta hacer con ni&ntilde;os. Toda la instrucci&oacute;n es en espa&ntilde;ol (los ni&ntilde;os se ayudan a traducir entre s&iacute;). Necesito conocerte y sentirme c&oacute;modo con la compatibilidad antes de aceptar a tu(s) hijo(s). Si est&aacute;s leyendo esto, probablemente te mand&eacute; el enlace, as&iacute; que si tienes alguna pregunta &iexcl;escr&iacute;beme!
+  </div>
+
+  <!-- About -->
+  <section id="about">
+    <h2>&iquest;Qu&eacute; es esto?</h2>
+    <p class="section-intro">Un campamento diurno inaugural organizado por un pap&aacute; para amigos y familia.</p>
+    <div class="community-photo">
+      <img src="../../images/camp-community.jpg" alt="La comunidad de Tio Escott — familias, ni&ntilde;os y amigos reunidos">
+      <div class="caption">Feliz Cumplea&ntilde;os Scott</div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- Philosophy -->
+  <section id="philosophy">
+    <h2>Filosof&iacute;a</h2>
+    <p style="color: #bbb; line-height: 1.6; margin-bottom: 1rem;">Me inspir&eacute; en <a href="https://www.jordanshapiro.org/thenewchildhood" target="_blank" style="color: var(--blue);">The New Childhood</a> de Jordan Shapiro, que argumenta que en lugar de limitar el tiempo de pantalla de los ni&ntilde;os, deber&iacute;amos ense&ntilde;arles a usar la tecnolog&iacute;a con integridad &mdash; jugando juntos, creando juntos, desarrollando habilidades digitales junto con las del mundo real. As&iacute; que decid&iacute; intentarlo: un campamento donde los ni&ntilde;os construyen videojuegos con IA, hacen karaoke, crean arte y juegan afuera &mdash; todo en el mismo d&iacute;a.</p>
+    <p style="color: #bbb; line-height: 1.6;">Toda la instrucci&oacute;n es en espa&ntilde;ol. Los ni&ntilde;os que saben espa&ntilde;ol ayudan a traducir para los amigos que no. As&iacute; se vuelve divertido, no tarea. La idea es simple: si el espa&ntilde;ol es lo que hablan los ni&ntilde;os cool del campamento, <a href="https://spanishmama.com/motivate-kids-to-speak-spanish/" target="_blank" style="color: var(--blue);">todos quieren hablarlo tambi&eacute;n</a>. No se necesita espa&ntilde;ol previo.</p>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- Sampler -->
+  <section id="sampler">
+    <h2>Una Muestra del Campamento</h2>
+
+    <div class="karaoke-video">
+      <video controls preload="metadata" playsinline>
+        <source src="../../images/camp-video.mp4" type="video/mp4">
+      </video>
+      <div class="caption">Karaoke de ni&ntilde;os en acci&oacute;n.</div>
+    </div>
+
+    <h3 style="color: var(--purple); margin-top: 2rem; margin-bottom: 0.75rem;">&iexcl;Prueba el Juego de Adrian!</h3>
+    <p style="color: #888; margin-bottom: 1rem;">Adrian (6 a&ntilde;os) dise&ntilde;&oacute; este juego de laberinto multijugador usando IA. En el campamento, tus hijos construyen el suyo. &iexcl;Agarra un amigo y compartan el teclado!</p>
+    <div class="game-showcase">
+      <div class="game-controls">
+        <div class="player-controls">
+          <strong>Jugador 1 (Dinosaurio):</strong> Flechas para mover, Arriba para saltar
+        </div>
+        <div class="player-controls">
+          <strong>Jugador 2 (Robot):</strong> A/D para mover, W para saltar
+        </div>
+      </div>
+      <div class="game-container" id="gameContainer">
+        <iframe src="https://scottwofford.github.io/adrian-maze-game/" width="800" height="600" style="border: none; border-radius: 10px; width: 100%; max-width: 800px; aspect-ratio: 4/3;"></iframe>
+        <div class="game-overlay" onclick="document.getElementById('gameContainer').classList.add('active')">
+          <span class="play-icon">&#127918;</span>
+          <span class="play-text">&iexcl;Haz clic para jugar!</span>
+        </div>
+      </div>
+      <p class="game-note">&iexcl;Corre a la puerta verde para ganar! Construido por un ni&ntilde;o de 6 a&ntilde;os con Claude Code. <a href="https://github.com/scottwofford/adrian-maze-game" target="_blank">Ver el proyecto en GitHub &rarr;</a></p>
+      <div class="game-deactivate"><button onclick="document.getElementById('gameContainer').classList.remove('active')">&iquest;Terminaste de jugar? Haz clic para seguir navegando</button></div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- Schedule -->
+  <section id="schedule">
+    <h2>3 D&iacute;as + 1 Noche</h2>
+    <p class="section-intro">Horario tentativo (sujeto a cambios).</p>
+
+    <div class="schedule-wrapper">
+    <table class="schedule-table">
+      <tr>
+        <th style="width: 90px;">Hora</th>
+        <th style="color: var(--coral);">Lun Ago 31</th>
+        <th style="color: var(--purple);">Mar Sep 1</th>
+        <th style="color: var(--teal);">Mi&eacute; Sep 2</th>
+      </tr>
+      <tr>
+        <td><strong>9:00</strong></td>
+        <td>Llegada y bienvenida</td>
+        <td>Llegada</td>
+        <td>Llegada</td>
+      </tr>
+      <tr>
+        <td><strong>9:30</strong></td>
+        <td>Karaoke y m&uacute;sica &#127908;</td>
+        <td>Construir videojuegos con IA &#129302;</td>
+        <td>Proyectos de arte &#127912;</td>
+      </tr>
+      <tr>
+        <td><strong>12:00</strong></td>
+        <td colspan="3" style="text-align: center;">Almuerzo y tiempo libre (nosotros proporcionamos almuerzo &mdash; si tu hijo tiene restricciones alimentarias, por favor traigan almuerzo/snacks o av&iacute;sanos)</td>
+      </tr>
+      <tr>
+        <td><strong>1:00</strong></td>
+        <td>Construir videojuegos con IA &#129302;</td>
+        <td>Tiempo al aire libre &#127754;</td>
+        <td>Karaoke y m&uacute;sica &#127908;</td>
+      </tr>
+      <tr>
+        <td><strong>3:00</strong></td>
+        <td colspan="3" style="text-align: center;">Fiesta de baile &#128131;</td>
+      </tr>
+      <tr style="background: var(--card-bg);">
+        <td><strong>5:30</strong></td>
+        <td><strong style="color: #fff;">Recogida + Noche de Padres</strong><br>Concierto de karaoke de ni&ntilde;os + show &amp; tell + vino/cervezas &#127863;</td>
+        <td style="color: var(--gold);"><strong style="color: #fff;">&iexcl;No hay recogida &mdash; Pijamada!</strong> &#9978;&#65039;<br>S'mores, estrellas, campamento en el jard&iacute;n</td>
+        <td><strong style="color: #fff;">Recogida + Noche de Padres</strong><br>Concierto final + demos de proyectos + vino/cervezas &#127863;</td>
+      </tr>
+    </table>
+    </div>
+
+    <p class="schedule-note">* Toda la instrucci&oacute;n es en espa&ntilde;ol.</p>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- FAQ -->
+  <section id="faq">
+    <h2>Preguntas Frecuentes</h2>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+        <span>&iquest;Cu&aacute;nto cuesta?</span>
+        <span class="faq-arrow">&#9660;</span>
+      </div>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">Donaciones voluntarias para cubrir comida, materiales y log&iacute;stica. Esto no es un negocio.</div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+        <span>&iquest;Cu&aacute;ntos ni&ntilde;os?</span>
+        <span class="faq-arrow">&#9660;</span>
+      </div>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">Peque&ntilde;o por dise&ntilde;o. Depende del inter&eacute;s y cu&aacute;ntos consejeros pueda reclutar.</div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+        <span>&iquest;Qu&eacute; debe traer mi hijo?</span>
+        <span class="faq-arrow">&#9660;</span>
+      </div>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">Botella de agua, protector solar, ropa que se pueda ensuciar. &iexcl;Bolsa de dormir para la noche del martes! Nosotros proporcionamos almuerzo (trae el tuyo si hay restricciones alimentarias).</div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+        <span>Mi hijo nunca ha ido a un campamento. &iquest;Est&aacute; bien?</span>
+        <span class="faq-arrow">&#9660;</span>
+      </div>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">S&iacute;. Grupo peque&ntilde;o y amigable, no un campamento gigante. Una gran primera experiencia sin presi&oacute;n.</div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+        <span>&iquest;Los ni&ntilde;os necesitan saber programar, tocar m&uacute;sica o hablar espa&ntilde;ol?</span>
+        <span class="faq-arrow">&#9660;</span>
+      </div>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">No. No se necesita experiencia previa en nada. Esa es la idea.</div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+        <span>&iquest;Alergias alimentarias o necesidades especiales?</span>
+        <span class="faq-arrow">&#9660;</span>
+      </div>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">D&iacute;melo cuando expreses inter&eacute;s. Nosotros proporcionamos almuerzo, pero si tu hijo tiene restricciones alimentarias por favor traigan su propia comida o av&iacute;sanos. Para otras adaptaciones, escr&iacute;beme.</div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+        <span>&iquest;Y si llueve?</span>
+        <span class="faq-arrow">&#9660;</span>
+      </div>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">Estamos en el noroeste del Pac&iacute;fico. Planeamos para la lluvia. Programaci&oacute;n, arte, m&uacute;sica y karaoke funcionan bajo techo.</div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+        <span>&iexcl;Esto es genial! &iquest;Los padres pueden venir tambi&eacute;n?</span>
+        <span class="faq-arrow">&#9660;</span>
+      </div>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">Por supuesto, nos encantar&iacute;a tu ayuda e ideas. Ven a los eventos de lun/mi&eacute; por la noche como m&iacute;nimo. Bienvenido a quedarte cuando quieras.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Signup CTA -->
+  <div class="signup-section" id="signup">
+    <h2>Expresar Inter&eacute;s</h2>
+    <p>Env&iacute;ame un correo con tu nombre, el nombre y edad de tu(s) hijo(s), y lo que m&aacute;s te emociona del folleto. Te escribir&eacute; para conversar y asegurarme de que sea una buena opci&oacute;n.</p>
+    <a class="cta-btn" href="mailto:scottwofford3@gmail.com?subject=Campamento%20de%20Tio%20Escott%20-%20Inter%C3%A9s&body=Hola%20Scott!%0A%0AMi%20nombre%3A%20%0ANombre(s)%20y%20edad(es)%20de%20mi(s)%20hijo(s)%3A%20%0ALo%20que%20m%C3%A1s%20nos%20emociona%3A%20%0A">Expresar Inter&eacute;s por Email</a>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p><a href="/es/">scottwofford.com</a> &middot; &iquest;Preguntas? <a href="mailto:scottwofford3@gmail.com">scottwofford3@gmail.com</a></p>
+  </footer>
+
+  <!-- Sticky nav shadow on scroll -->
+  <script>
+    const nav = document.getElementById('stickyNav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 100);
+    });
+  </script>
+
+  <!-- GoatCounter analytics -->
+  <script data-goatcounter="https://scwoff.goatcounter.com/count"
+          async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
