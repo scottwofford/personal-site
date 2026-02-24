@@ -94,6 +94,19 @@
       opacity: 0.6;
     }
 
+    /* Language toggle flag */
+    .lang-toggle {
+      position: fixed;
+      top: 1rem;
+      left: 1rem;
+      z-index: 50;
+      font-size: 1.4rem;
+      text-decoration: none;
+      opacity: 0.5;
+      transition: opacity 0.2s;
+    }
+    .lang-toggle:hover { opacity: 1; }
+
     /* Expand toggle button */
     .expand-toggle {
       width: 28px; height: 28px;
@@ -264,12 +277,6 @@
         right: 1.5rem;
         z-index: 201;
       }
-      /* ES link in overlay */
-      body.expanded nav > a[href="/es/"] {
-        grid-column: 1 / -1;
-        text-align: center;
-        margin-top: 0.5rem;
-      }
     }
   </style>
 </head>
@@ -341,9 +348,10 @@
         <a href="https://scwoff.substack.com" target="_blank">Substack <i class="fas fa-external-link-alt"></i></a>
       </div>
     </div>
-    <a href="/es/" style="color:#555;text-decoration:none;font-size:0.9rem;transition:color 0.2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#555'">ES</a>
     <span class="expand-toggle" onclick="document.body.classList.toggle('expanded'); this.textContent = document.body.classList.contains('expanded') ? '−' : '+'">+</span>
   </nav>
+
+  <a href="/es/" class="lang-toggle" title="Español">🇪🇸</a>
 
   <main class="content">
     <div class="card">
