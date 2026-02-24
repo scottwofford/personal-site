@@ -187,9 +187,9 @@
       padding-bottom: 0.4rem;
     }
     #about h2 { color: var(--teal); }
+    #philosophy h2 { color: var(--gold); }
     #sampler h2 { color: var(--coral); }
     #schedule h2 { color: var(--gold); }
-    #details h2 { color: var(--blue); }
     #faq h2 { color: var(--green); }
     section .section-intro {
       color: #888;
@@ -329,35 +329,6 @@
       font-style: italic;
     }
 
-    /* --- Details box --- */
-    .details-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
-    }
-    .detail-item {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      padding: 1rem 1.25rem;
-    }
-    .detail-item .label {
-      font-weight: 600;
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 0.25rem;
-    }
-    .detail-item:nth-child(1) .label { color: var(--teal); }
-    .detail-item:nth-child(2) .label { color: var(--pink); }
-    .detail-item:nth-child(3) .label { color: var(--blue); }
-    .detail-item:nth-child(4) .label { color: var(--gold); }
-    .detail-item:nth-child(5) .label { color: var(--coral); }
-    .detail-item:nth-child(6) .label { color: var(--purple); }
-    .detail-item:nth-child(7) .label { color: var(--green); }
-    .detail-item:nth-child(8) .label { color: var(--teal); }
-    .detail-item .value { color: #bbb; font-size: 0.95rem; }
-
     /* --- FAQ --- */
     .faq-item {
       border: 1px solid var(--border);
@@ -444,12 +415,21 @@
     @media (max-width: 700px) {
       .hero h1 { font-size: 1.8rem; }
       .hero-details { gap: 0.5rem; }
-      .details-grid { grid-template-columns: 1fr; }
       .sticky-brand { font-size: 0.9rem; }
       .sticky-links { gap: 0.75rem; }
       .sticky-links a:not(.signup-link) { display: none; }
       .sticky-links .signup-link { display: inline-block; }
       section { padding: 1.75rem 1.25rem; }
+      .disclaimer { padding: 1rem 1.25rem; }
+      /* Schedule table: horizontal scroll on mobile */
+      .schedule-wrapper { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      .schedule-table { min-width: 500px; font-size: 0.75rem; }
+      .schedule-table th, .schedule-table td { padding: 0.4rem; }
+      /* Game: smaller on mobile */
+      .game-container iframe { aspect-ratio: 4/3; height: auto; }
+      .game-controls { flex-direction: column; gap: 0.5rem; }
+      /* Community photo caption */
+      .community-photo .caption { font-size: 0.8rem; }
     }
   </style>
 </head>
@@ -470,9 +450,9 @@
       <span class="sticky-brand">Tio Escott's Camp</span>
       <div class="sticky-links">
         <a href="#about">About</a>
+        <a href="#philosophy">Philosophy</a>
         <a href="#sampler">Sampler</a>
         <a href="#schedule">Schedule</a>
-        <a href="#details">Details</a>
         <a href="#faq">FAQ</a>
         <a href="#signup" class="signup-link">Express Interest</a>
       </div>
@@ -483,7 +463,7 @@
   <header class="hero">
     <div class="hero-emoji">&#127908; &#127928; &#129311; &#127912; &#129302; &#128131;</div>
     <h1>Tio Escott's Summer Day Camp 2026</h1>
-    <p class="tagline">3 days and 1 night of Spanish immersion, music, karaoke, game-building, art, and dance parties for kids ages 5&ndash;7 in Burien (Shorewood).</p>
+    <p class="tagline">Spanish immersion, kid's live karaoke, game-building, art, &amp; dance parties.</p>
     <div class="hero-details">
       <span class="hero-detail"><strong>Aug 31 &ndash; Sep 2</strong></span>
       <span class="hero-detail"><strong>Burien (Shorewood)</strong></span>
@@ -501,11 +481,20 @@
   <!-- About -->
   <section id="about">
     <h2>What Is This?</h2>
-    <p class="section-intro">An inaugural day camp run by one dad for friends and family. All instruction is in Spanish &mdash; kids who know it help translate for friends who don't. That's <strong style="color: var(--gold);">prestige bilingualism</strong>: speaking Spanish is the superpower at this camp.</p>
+    <p class="section-intro">An inaugural day camp run by one dad for friends and family.</p>
     <div class="community-photo">
       <img src="../images/camp-community.jpg" alt="Tio Escott's community — families, kids, and friends gathered together">
-      <div class="caption">Our community. These are the kind of people (and kids) you'll find at camp.</div>
+      <div class="caption">Happy Birthday Scott</div>
     </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- Philosophy -->
+  <section id="philosophy">
+    <h2>Philosophy</h2>
+    <p style="color: #bbb; line-height: 1.6; margin-bottom: 1rem;">I was inspired by Jordan Shapiro's <a href="https://www.jordanshapiro.org/thenewchildhood" target="_blank" style="color: var(--blue);">The New Childhood</a>, which argues that instead of limiting kids' screen time, we should teach them to use technology with integrity &mdash; playing together, creating together, building digital skills alongside real-world ones. So I decided I'd give it a try: a camp where kids build video games with AI, do karaoke, make art, and play outside &mdash; all in the same day.</p>
+    <p style="color: #bbb; line-height: 1.6;">All instruction is in Spanish. Kids who know Spanish help translate for friends who don't. That's how it becomes fun, not homework. The idea is simple: if Spanish is what the cool kids at camp speak, <a href="https://spanishmama.com/motivate-kids-to-speak-spanish/" target="_blank" style="color: var(--blue);">everyone wants to speak it too</a>. No prior Spanish needed.</p>
   </section>
 
   <hr class="section-divider">
@@ -549,8 +538,9 @@
   <!-- Schedule -->
   <section id="schedule">
     <h2>3 Days + 1 Night</h2>
-    <p class="section-intro">Here's how the whole camp fits together. We'll adapt as we go &mdash; it's year one!</p>
+    <p class="section-intro">Rough tentative schedule (subject to change).</p>
 
+    <div class="schedule-wrapper">
     <table class="schedule-table">
       <tr>
         <th style="width: 90px;">Time</th>
@@ -591,40 +581,46 @@
         <td><strong style="color: #fff;">Pick-up + Parents' Evening</strong><br>Final concert + project demos + wine/beers &#127863;</td>
       </tr>
     </table>
-
-    <p class="schedule-note">* All instruction is in Spanish. Schedule is tentative &mdash; we'll share a finalized version before camp starts.</p>
-  </section>
-
-  <hr class="section-divider">
-
-  <!-- Details -->
-  <section id="details">
-    <h2>The Details</h2>
-    <div class="details-grid">
-      <div class="detail-item">
-        <div class="label">Capacity</div>
-        <div class="value">Small by design. Depends on interest and how many counselors I can recruit.</div>
-      </div>
-      <div class="detail-item">
-        <div class="label">What to Bring</div>
-        <div class="value">Water bottle, sunscreen, clothes that can get messy. Sleeping bag for Tuesday night! Lunch provided (bring your own if dietary restrictions).</div>
-      </div>
-      <div class="detail-item">
-        <div class="label">Cost</div>
-        <div class="value">Voluntary donations to cover food, supplies, and logistics. Not a business.</div>
-      </div>
-      <div class="detail-item">
-        <div class="label">Language</div>
-        <div class="value">All instruction in Spanish. No prior Spanish needed &mdash; kids help each other.</div>
-      </div>
     </div>
+
+    <p class="schedule-note">* All instruction is in Spanish.</p>
   </section>
 
   <hr class="section-divider">
 
-  <!-- FAQ -->
+  <!-- FAQ (merged with Details) -->
   <section id="faq">
     <h2>FAQ</h2>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+        <span>How much does it cost?</span>
+        <span class="faq-arrow">&#9660;</span>
+      </div>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">Voluntary donations to cover food, supplies, and logistics. This isn't a business.</div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+        <span>How many kids?</span>
+        <span class="faq-arrow">&#9660;</span>
+      </div>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">Small by design. Depends on interest and how many counselors I can recruit.</div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+        <span>What should my kid bring?</span>
+        <span class="faq-arrow">&#9660;</span>
+      </div>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">Water bottle, sunscreen, clothes that can get messy. Sleeping bag for Tuesday night! We provide lunch (bring your own if dietary restrictions).</div>
+      </div>
+    </div>
 
     <div class="faq-item">
       <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
@@ -638,21 +634,11 @@
 
     <div class="faq-item">
       <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-        <span>Do kids need to know how to code or play music?</span>
+        <span>Do kids need to know how to code, play music, or speak Spanish?</span>
         <span class="faq-arrow">&#9660;</span>
       </div>
       <div class="faq-answer">
         <div class="faq-answer-inner">No. No prior experience needed for anything. That's the point.</div>
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-        <span>What if it rains?</span>
-        <span class="faq-arrow">&#9660;</span>
-      </div>
-      <div class="faq-answer">
-        <div class="faq-answer-inner">It's the PNW. We plan for rain. Coding, art, music, and karaoke all work indoors.</div>
       </div>
     </div>
 
@@ -663,6 +649,16 @@
       </div>
       <div class="faq-answer">
         <div class="faq-answer-inner">Tell me when you express interest. We provide lunch, but if your kid has dietary restrictions please bring their own or let us know. For other accommodations, reach out.</div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+        <span>What if it rains?</span>
+        <span class="faq-arrow">&#9660;</span>
+      </div>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">It's the PNW. We plan for rain. Coding, art, music, and karaoke all work indoors.</div>
       </div>
     </div>
 
