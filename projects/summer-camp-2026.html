@@ -415,10 +415,12 @@
     @media (max-width: 700px) {
       .hero h1 { font-size: 1.8rem; }
       .hero-details { gap: 0.5rem; }
-      .sticky-brand { font-size: 0.9rem; }
-      .sticky-links { gap: 0.75rem; }
-      .sticky-links a:not(.signup-link) { display: none; }
-      .sticky-links .signup-link { display: inline-block; }
+      .section-sticky-nav { padding: 0.4rem 1rem; }
+      .sticky-inner { flex-wrap: wrap; justify-content: center; gap: 0.5rem; }
+      .sticky-brand { display: none; }
+      .sticky-links { gap: 0.5rem 0.75rem; justify-content: center; flex-wrap: wrap; }
+      .sticky-links a { font-size: 0.75rem; }
+      .sticky-links .signup-link { font-size: 0.75rem; padding: 0.2rem 0.6rem; }
       section { padding: 1.75rem 1.25rem; }
       .disclaimer { padding: 1rem 1.25rem; }
       /* Schedule table: horizontal scroll on mobile */
