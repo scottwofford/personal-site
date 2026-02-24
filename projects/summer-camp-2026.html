@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tio Escott's Summer Day Camp - Scott Wofford</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inconsolata', monospace;
+      background: #1a1a1a;
+      color: #e5e5e5;
+      line-height: 1.6;
+    }
+
+    /* --- Color accents --- */
+    :root {
+      --coral: #ff6b6b;
+      --teal: #4ecdc4;
+      --gold: #fbbf24;
+      --purple: #a78bfa;
+      --blue: #6b9fff;
+      --green: #34d399;
+      --pink: #f472b6;
+      --card-bg: #252525;
+      --border: #333;
+    }
+
+    /* --- Site nav (matches scottwofford.com) --- */
+    .site-nav {
+      padding: 1rem 2rem;
+      font-size: 0.85rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .site-nav a { color: #666; text-decoration: none; }
+    .site-nav a:hover { color: #fff; }
+    .site-nav .section-name { color: #888; }
+    .siblings { margin-top: 0.5rem; }
+    .siblings a { margin-right: 1rem; }
+    .siblings a.current { color: #fff; }
+
+    /* --- Sticky section nav --- */
+    .section-sticky-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(26, 26, 26, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      padding: 0.6rem 2rem;
+      transition: box-shadow 0.3s;
+    }
+    .section-sticky-nav.scrolled {
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    }
+    .sticky-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .sticky-brand {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--gold);
+      white-space: nowrap;
+    }
+    .sticky-links {
+      display: flex;
+      gap: 1.25rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .sticky-links a {
+      color: #888;
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: color 0.2s;
+    }
+    .sticky-links a:hover { color: #fff; }
+    .sticky-links .signup-link {
+      background: var(--coral);
+      color: #fff;
+      padding: 0.3rem 0.9rem;
+      border-radius: 4px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      transition: background 0.2s;
+    }
+    .sticky-links .signup-link:hover {
+      background: #ff8787;
+    }
+
+    /* --- Hero --- */
+    .hero {
+      text-align: center;
+      padding: 3rem 2rem 2.5rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .hero-emoji {
+      font-size: 2.5rem;
+      margin-bottom: 0.75rem;
+    }
+    .hero h1 {
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+    }
+    .hero .tagline {
+      font-size: 1.1rem;
+      color: #999;
+      max-width: 600px;
+      margin: 0 auto 1.25rem;
+    }
+    .hero-details {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+      font-size: 0.9rem;
+    }
+    .hero-detail {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 0.3rem 0.75rem;
+    }
+    .hero-detail strong { color: #fff; }
+    .hero-detail:nth-child(1) strong { color: var(--teal); }
+    .hero-detail:nth-child(2) strong { color: var(--blue); }
+    .hero-detail:nth-child(3) strong { color: var(--pink); }
+    .hero-detail:nth-child(4) strong { color: var(--gold); }
+    .cta-btn {
+      display: inline-block;
+      background: var(--coral);
+      color: #fff;
+      font-family: 'Inconsolata', monospace;
+      font-size: 1.1rem;
+      font-weight: 700;
+      padding: 0.7rem 2rem;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .cta-btn:hover {
+      background: #ff8787;
+      transform: translateY(-1px);
+    }
+    .cta-btn:active { transform: translateY(0); }
+
+    /* --- Disclaimer --- */
+    .disclaimer {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      border-left: 3px solid var(--gold);
+      background: var(--card-bg);
+      color: #bbb;
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+    .disclaimer strong { color: var(--gold); }
+
+    /* --- Sections --- */
+    section {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2.5rem 2rem;
+    }
+    section h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.4rem;
+    }
+    #about h2 { color: var(--teal); }
+    #game h2 { color: var(--purple); }
+    #schedule h2 { color: var(--gold); }
+    #details h2 { color: var(--blue); }
+    #faq h2 { color: var(--green); }
+    section .section-intro {
+      color: #888;
+      margin-bottom: 1.5rem;
+      font-size: 1rem;
+    }
+
+    /* --- Community photo --- */
+    .community-photo {
+      margin-top: 1.5rem;
+      border-radius: 4px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .community-photo img { width: 100%; display: block; }
+    .community-photo .caption {
+      background: var(--card-bg);
+      padding: 0.6rem 1rem;
+      color: #666;
+      font-size: 0.85rem;
+      font-style: italic;
+      text-align: center;
+    }
+
+    /* --- Karaoke video --- */
+    .karaoke-video { margin-bottom: 0.5rem; text-align: center; }
+    .karaoke-video video {
+      width: 100%;
+      max-width: 640px;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+    }
+    .karaoke-video .caption {
+      color: #666;
+      font-size: 0.85rem;
+      font-style: italic;
+      margin-top: 0.5rem;
+    }
+
+    /* --- Game Showcase --- */
+    .game-showcase { text-align: center; }
+    .game-controls {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+    .player-controls {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 0.5rem 1rem;
+      font-size: 0.85rem;
+      color: #bbb;
+    }
+    .player-controls strong { color: var(--purple); }
+    .game-container {
+      background: #111;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 0.5rem;
+      display: inline-block;
+      max-width: 100%;
+      position: relative;
+    }
+    .game-container iframe { display: block; pointer-events: none; }
+    .game-container.active iframe { pointer-events: auto; }
+    .game-overlay {
+      position: absolute;
+      inset: 0.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: rgba(17, 17, 17, 0.8);
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .game-overlay:hover { background: rgba(17, 17, 17, 0.6); }
+    .game-overlay .play-icon { font-size: 3.5rem; margin-bottom: 0.5rem; }
+    .game-overlay .play-text {
+      color: var(--purple);
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+    .game-container.active .game-overlay { display: none; }
+    .game-note {
+      color: #666;
+      font-size: 0.85rem;
+      margin-top: 0.75rem;
+      font-style: italic;
+    }
+    .game-note a { color: var(--blue); text-decoration: none; }
+    .game-note a:hover { text-decoration: underline; }
+    .game-deactivate { display: none; margin-top: 0.5rem; }
+    .game-container.active + .game-note + .game-deactivate { display: block; }
+    .game-deactivate button {
+      background: var(--card-bg);
+      color: #888;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 0.3rem 0.75rem;
+      font-family: 'Inconsolata', monospace;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .game-deactivate button:hover { color: #fff; }
+
+    /* --- Schedule --- */
+    .schedule-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0.75rem 0;
+      font-size: 0.85rem;
+    }
+    .schedule-table th {
+      background: var(--card-bg);
+      color: #fff;
+      font-weight: 600;
+      padding: 0.5rem;
+      text-align: left;
+      border: 1px solid var(--border);
+    }
+    .schedule-table td {
+      padding: 0.5rem;
+      color: #bbb;
+      border: 1px solid var(--border);
+    }
+    .schedule-table tr:hover td { background: var(--card-bg); }
+    .schedule-note {
+      color: #666;
+      font-size: 0.85rem;
+      margin-top: 0.75rem;
+      font-style: italic;
+    }
+
+    /* --- Details box --- */
+    .details-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .detail-item {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1rem 1.25rem;
+    }
+    .detail-item .label {
+      font-weight: 600;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.25rem;
+    }
+    .detail-item:nth-child(1) .label { color: var(--teal); }
+    .detail-item:nth-child(2) .label { color: var(--pink); }
+    .detail-item:nth-child(3) .label { color: var(--blue); }
+    .detail-item:nth-child(4) .label { color: var(--gold); }
+    .detail-item:nth-child(5) .label { color: var(--coral); }
+    .detail-item:nth-child(6) .label { color: var(--purple); }
+    .detail-item:nth-child(7) .label { color: var(--green); }
+    .detail-item:nth-child(8) .label { color: var(--teal); }
+    .detail-item .value { color: #bbb; font-size: 0.95rem; }
+
+    /* --- FAQ --- */
+    .faq-item {
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      margin-bottom: 0.25rem;
+      overflow: hidden;
+    }
+    .faq-question {
+      background: var(--card-bg);
+      padding: 0.5rem 0.75rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.75rem;
+      transition: background 0.2s;
+      user-select: none;
+    }
+    .faq-question:hover { background: #2a2a2a; }
+    .faq-question span {
+      color: #e5e5e5;
+      font-weight: 600;
+      font-size: 0.85rem;
+    }
+    .faq-arrow {
+      color: var(--green);
+      font-size: 0.75rem;
+      transition: transform 0.3s;
+      flex-shrink: 0;
+    }
+    .faq-item.open .faq-arrow { transform: rotate(180deg); }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+    .faq-answer-inner {
+      padding: 0 0.75rem 0.5rem;
+      color: #999;
+      font-size: 0.85rem;
+      line-height: 1.5;
+    }
+    .faq-item.open .faq-answer { max-height: 300px; }
+
+    /* --- Signup CTA --- */
+    .signup-section {
+      text-align: center;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2.5rem 2rem 3rem;
+    }
+    .signup-section h2 {
+      font-size: 1.5rem;
+      color: var(--coral);
+      margin-bottom: 0.5rem;
+    }
+    .signup-section p {
+      color: #888;
+      font-size: 1rem;
+      max-width: 500px;
+      margin: 0 auto 1.25rem;
+    }
+
+    /* --- Footer --- */
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      color: #555;
+      font-size: 0.8rem;
+      border-top: 1px solid var(--border);
+    }
+    footer a { color: #666; text-decoration: none; }
+    footer a:hover { color: #fff; }
+
+    /* --- Divider --- */
+    .section-divider {
+      max-width: 900px;
+      margin: 0 auto;
+      border: none;
+      border-top: 1px solid var(--border);
+    }
+
+    /* --- Responsive --- */
+    @media (max-width: 700px) {
+      .hero h1 { font-size: 1.8rem; }
+      .hero-details { gap: 0.5rem; }
+      .details-grid { grid-template-columns: 1fr; }
+      .sticky-brand { font-size: 0.9rem; }
+      .sticky-links { gap: 0.75rem; }
+      .sticky-links a:not(.signup-link) { display: none; }
+      .sticky-links .signup-link { display: inline-block; }
+      section { padding: 1.75rem 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Site breadcrumb nav -->
+  <div class="site-nav">
+    <a href="/">← home</a> / <a href="/projects/" class="section-name">projects</a>
+    <div class="siblings">
+      <a href="/projects/summer-camp-2026.html" class="current">Tio Escott's Camp</a>
+      <a href="/projects/mens-dinner-club.html">Men's Dinner Club</a>
+    </div>
+  </div>
+
+  <!-- Sticky section nav -->
+  <nav class="section-sticky-nav" id="stickyNav">
+    <div class="sticky-inner">
+      <span class="sticky-brand">Tio Escott's Camp</span>
+      <div class="sticky-links">
+        <a href="#about">About</a>
+        <a href="#schedule">Schedule</a>
+        <a href="#game">Game</a>
+        <a href="#details">Details</a>
+        <a href="#faq">FAQ</a>
+        <a href="#signup" class="signup-link">Express Interest</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header class="hero">
+    <div class="hero-emoji">&#127908; &#127928; &#129311; &#127912; &#129302; &#128131;</div>
+    <h1>Tio Escott's Summer Day Camp</h1>
+    <p class="tagline">3 days and 1 night of Spanish immersion, music, karaoke, game-building, art, and dance parties for kids ages 5&ndash;7 in Burien (Shorewood).</p>
+    <div class="hero-details">
+      <span class="hero-detail"><strong>Aug 31 &ndash; Sep 2</strong></span>
+      <span class="hero-detail"><strong>Burien (Shorewood)</strong></span>
+      <span class="hero-detail"><strong>Ages 5&ndash;7</strong></span>
+      <span class="hero-detail"><strong>Inaugural!</strong></span>
+    </div>
+    <a class="cta-btn" href="#signup">Express Interest</a>
+  </header>
+
+  <!-- Disclaimer -->
+  <div class="disclaimer">
+    <strong>A note for parents:</strong> This is a dad-run day camp for friends and family &mdash; not a licensed childcare program. There's no business behind this, just a dad doing an experiment with an AI-forward day camp with stuff he likes doing with kids. All instruction is in Spanish (kids help each other translate). I need to know you and feel comfortable with the fit before accepting your kid(s). If you're reading this, I probably sent you the link, so if you have any questions just ping me!
+  </div>
+
+  <!-- About -->
+  <section id="about">
+    <h2>What Is This?</h2>
+    <p class="section-intro">An inaugural day camp run by one dad for friends and family. All instruction is in Spanish &mdash; kids who know it help translate for friends who don't. That's <strong style="color: var(--gold);">prestige bilingualism</strong>: speaking Spanish is the superpower at this camp.</p>
+    <div class="karaoke-video">
+      <video controls preload="metadata" playsinline>
+        <source src="../images/camp-video.mp4" type="video/mp4">
+      </video>
+      <div class="caption">Kids karaoke in action.</div>
+    </div>
+    <div class="community-photo">
+      <img src="../images/camp-community.jpg" alt="Tio Escott's community — families, kids, and friends gathered together">
+      <div class="caption">Our community. These are the kind of people (and kids) you'll find at camp.</div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- Game Showcase -->
+  <section id="game">
+    <h2>Try Adrian's Game!</h2>
+    <p class="section-intro">Adrian (age 6) designed this multiplayer maze game using AI. At camp, your kids will build their own games just like this. Give it a try &mdash; grab a friend and share the keyboard!</p>
+    <div class="game-showcase">
+      <div class="game-controls">
+        <div class="player-controls">
+          <strong>Player 1 (Dinosaur):</strong> Arrow keys to move, Up to jump
+        </div>
+        <div class="player-controls">
+          <strong>Player 2 (Robot):</strong> A/D to move, W to jump
+        </div>
+      </div>
+      <div class="game-container" id="gameContainer">
+        <iframe src="https://scottwofford.github.io/adrian-maze-game/" width="800" height="600" style="border: none; border-radius: 10px; width: 100%; max-width: 800px; aspect-ratio: 4/3;"></iframe>
+        <div class="game-overlay" onclick="document.getElementById('gameContainer').classList.add('active')">
+          <span class="play-icon">&#127918;</span>
+          <span class="play-text">Click to Play!</span>
+        </div>
+      </div>
+      <p class="game-note">Race to the green door to win! Built by a 6-year-old game designer with help from Claude Code. <a href="https://github.com/scottwofford/adrian-maze-game" target="_blank">See the full project on GitHub &rarr;</a></p>
+      <div class="game-deactivate"><button onclick="document.getElementById('gameContainer').classList.remove('active')">Done playing? Click to resume scrolling</button></div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- Schedule -->
+  <section id="schedule">
+    <h2>3 Days + 1 Night</h2>
+    <p class="section-intro">Here's how the whole camp fits together. We'll adapt as we go &mdash; it's year one!</p>
+
+    <table class="schedule-table">
+      <tr>
+        <th style="width: 90px;">Time</th>
+        <th style="color: var(--coral);">Mon Aug 31</th>
+        <th style="color: var(--purple);">Tue Sep 1</th>
+        <th style="color: var(--teal);">Wed Sep 2</th>
+      </tr>
+      <tr>
+        <td><strong>9:00</strong></td>
+        <td>Drop-off &amp; welcome</td>
+        <td>Drop-off</td>
+        <td>Drop-off</td>
+      </tr>
+      <tr>
+        <td><strong>9:30</strong></td>
+        <td>Karaoke &amp; music &#127908;</td>
+        <td>Build video games with AI &#129302;</td>
+        <td>Art projects &#127912;</td>
+      </tr>
+      <tr>
+        <td><strong>12:00</strong></td>
+        <td colspan="3" style="text-align: center;">Lunch &amp; free time (we provide lunch &mdash; if your kid has a dietary restriction, please bring lunch/snacks or let us know)</td>
+      </tr>
+      <tr>
+        <td><strong>1:00</strong></td>
+        <td>Build video games with AI &#129302;</td>
+        <td>Outdoor time &#127754;</td>
+        <td>Karaoke &amp; music &#127908;</td>
+      </tr>
+      <tr>
+        <td><strong>3:00</strong></td>
+        <td colspan="3" style="text-align: center;">Dance party &#128131;</td>
+      </tr>
+      <tr style="background: var(--card-bg);">
+        <td><strong>5:30</strong></td>
+        <td><strong style="color: #fff;">Pick-up + Parents' Evening</strong><br>Kids' karaoke concert + show &amp; tell + wine/beers &#127863;</td>
+        <td style="color: var(--gold);"><strong style="color: #fff;">No pick-up &mdash; Pajama Party!</strong> &#9978;&#65039;<br>S'mores, stargazing, backyard camping</td>
+        <td><strong style="color: #fff;">Pick-up + Parents' Evening</strong><br>Final concert + project demos + wine/beers &#127863;</td>
+      </tr>
+    </table>
+
+    <p class="schedule-note">* All instruction is in Spanish. Schedule is tentative &mdash; we'll share a finalized version before camp starts.</p>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- Details -->
+  <section id="details">
+    <h2>The Details</h2>
+    <div class="details-grid">
+      <div class="detail-item">
+        <div class="label">Capacity</div>
+        <div class="value">Small by design. Depends on interest and how many counselors I can recruit.</div>
+      </div>
+      <div class="detail-item">
+        <div class="label">What to Bring</div>
+        <div class="value">Water bottle, sunscreen, clothes that can get messy. Sleeping bag for Tuesday night! Lunch provided (bring your own if dietary restrictions).</div>
+      </div>
+      <div class="detail-item">
+        <div class="label">Cost</div>
+        <div class="value">Voluntary donations to cover food, supplies, and logistics. Not a business.</div>
+      </div>
+      <div class="detail-item">
+        <div class="label">Language</div>
+        <div class="value">All instruction in Spanish. No prior Spanish needed &mdash; kids help each other.</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- FAQ -->
+  <section id="faq">
+    <h2>FAQ</h2>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+        <span>My kid has never been to camp. Is that ok?</span>
+        <span class="faq-arrow">&#9660;</span>
+      </div>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">Yes. Small friendly group, not a giant camp. Great low-pressure first experience.</div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+        <span>Do kids need to know how to code or play music?</span>
+        <span class="faq-arrow">&#9660;</span>
+      </div>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">No. No prior experience needed for anything. That's the point.</div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+        <span>What if it rains?</span>
+        <span class="faq-arrow">&#9660;</span>
+      </div>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">It's the PNW. We plan for rain. Coding, art, music, and karaoke all work indoors.</div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+        <span>Food allergies or special needs?</span>
+        <span class="faq-arrow">&#9660;</span>
+      </div>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">Tell me when you express interest. We provide lunch, but if your kid has dietary restrictions please bring their own or let us know. For other accommodations, reach out.</div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+        <span>Can parents hang out?</span>
+        <span class="faq-arrow">&#9660;</span>
+      </div>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">Yes. Come to the Mon/Wed evening events at minimum. Welcome to stick around anytime.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Signup CTA -->
+  <div class="signup-section" id="signup">
+    <h2>Express Interest</h2>
+    <p>Send me an email with your name, your kid(s)' name(s) and age(s), and what you're most excited about from the flyer. I'll follow up to chat and make sure it's a good fit.</p>
+    <a class="cta-btn" href="mailto:scottwofford3@gmail.com?subject=Tio%20Escott%27s%20Summer%20Day%20Camp%20-%20Interest&body=Hi%20Scott!%0A%0AMy%20name%3A%20%0AMy%20kid(s)%27%20name(s)%20and%20age(s)%3A%20%0AWhat%20we%27re%20most%20excited%20about%3A%20%0A">Express Interest via Email</a>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p><a href="/">scottwofford.com</a> &middot; Questions? <a href="mailto:scottwofford3@gmail.com">scottwofford3@gmail.com</a></p>
+  </footer>
+
+  <!-- Sticky nav shadow on scroll -->
+  <script>
+    const nav = document.getElementById('stickyNav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 100);
+    });
+  </script>
+
+</body>
+</html>
