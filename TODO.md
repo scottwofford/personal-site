@@ -17,6 +17,7 @@
 - [ ] Add HPMOR review to site (see `dev/notes/hpmor-review.md` for options)
 - [ ] Automate Goodreads hover image so it doesn't get stale (ideas: Goodreads API, scheduled screenshot, or embed widget)
 - [ ] Automate Spotify hover image so it doesn't get stale (ideas: Spotify API, scheduled screenshot, or embed widget)
+- [ ] Sustainable i18n solution for EN/ES homepage — currently duplicated HTML with shared CSS (`home.css`). Consider a template system (Jinja, Nunjucks, or simple build script) that generates both pages from one template + two content files to eliminate drift
 
 ## Open Note Network / Community Notes Automation
 
