@@ -231,9 +231,44 @@
         display: none;
       }
 
-      /* On mobile, expanded state shows dropdowns */
+      /* On mobile, expanded = full-screen scrollable overlay */
+      body.expanded nav {
+        position: fixed;
+        inset: 0;
+        z-index: 200;
+        background: #1a1a1a;
+        max-width: 100%;
+        margin: 0;
+        padding: 1rem 1.5rem 2rem;
+        overflow-y: auto;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.25rem 1.5rem;
+        align-items: start;
+        align-content: start;
+      }
+      body.expanded .nav-item { margin-bottom: 0.75rem; }
+      body.expanded .nav-item > a { font-size: 1rem; color: #fff; }
       body.expanded .dropdown {
         display: block;
+        margin-top: 0.25rem;
+      }
+      body.expanded .dropdown a {
+        font-size: 0.8rem;
+        padding: 0.15rem 0;
+      }
+      /* Close button: top-right corner */
+      body.expanded .expand-toggle {
+        position: fixed;
+        top: 1rem;
+        right: 1.5rem;
+        z-index: 201;
+      }
+      /* ES link in overlay */
+      body.expanded nav > a[href="/es/"] {
+        grid-column: 1 / -1;
+        text-align: center;
+        margin-top: 0.5rem;
       }
     }
   </style>
