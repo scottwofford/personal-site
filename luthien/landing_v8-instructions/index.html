@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Luthien QA Trial — User Onboarding Test</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #09090b;
+      color: #d4d4d8;
+      font-family: 'Inter', -apple-system, sans-serif;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+    .container { max-width: 720px; margin: 0 auto; padding: 60px 24px 80px; }
+    h1 { color: #fafafa; font-size: 1.8rem; font-weight: 700; margin-bottom: 8px; }
+    .subtitle { color: #71717a; font-size: 0.95rem; margin-bottom: 40px; }
+    h2 { color: #fafafa; font-size: 1.25rem; font-weight: 600; margin-top: 48px; margin-bottom: 16px; border-bottom: 1px solid #27272a; padding-bottom: 8px; }
+    h3 { color: #e4e4e7; font-size: 1.05rem; font-weight: 600; margin-top: 28px; margin-bottom: 12px; }
+    p { margin-bottom: 14px; }
+    a { color: #6b9fff; text-decoration: none; }
+    a:hover { color: #93b8ff; text-decoration: underline; }
+    ul, ol { margin-bottom: 16px; padding-left: 24px; }
+    li { margin-bottom: 8px; }
+    code { font-family: 'JetBrains Mono', monospace; font-size: 0.85em; background: #1a1a1e; padding: 2px 6px; border-radius: 4px; color: #a1a1aa; }
+    .callout {
+      background: #111113;
+      border: 1px solid #27272a;
+      border-left: 3px solid #6b9fff;
+      border-radius: 6px;
+      padding: 16px 20px;
+      margin: 20px 0;
+      font-size: 0.9rem;
+    }
+    .callout-warn {
+      border-left-color: #f59e0b;
+    }
+    .time-badge {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      color: #22c55e;
+      background: rgba(34,197,94,0.1);
+      border: 1px solid rgba(34,197,94,0.2);
+      padding: 2px 8px;
+      border-radius: 12px;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+    .big-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #111113;
+      border: 1px solid #27272a;
+      border-radius: 8px;
+      padding: 12px 20px;
+      margin: 8px 0;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      color: #6b9fff;
+      transition: border-color 0.2s;
+    }
+    .big-link:hover { border-color: #6b9fff; text-decoration: none; }
+    table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.9rem; }
+    th { text-align: left; color: #a1a1aa; font-weight: 500; padding: 8px 12px; border-bottom: 1px solid #27272a; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; }
+    td { padding: 10px 12px; border-bottom: 1px solid #1a1a1e; vertical-align: top; }
+    hr { border: none; border-top: 1px solid #27272a; margin: 40px 0; }
+    .step-num { color: #6b9fff; font-weight: 700; font-family: 'JetBrains Mono', monospace; }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <h1>Luthien QA Trial</h1>
+    <p class="subtitle">User onboarding test — walk through our product as a new user and report what's broken or confusing.</p>
+
+    <div class="callout">
+      <strong>Goal:</strong> Follow the onboarding flow end-to-end. Don't fix anything — just document issues, confusion, and broken stuff. That's the deliverable.
+    </div>
+
+    <h2>Prerequisites</h2>
+    <ul>
+      <li>Mac or Linux machine</li>
+      <li><a href="https://www.docker.com/products/docker-desktop/">Docker Desktop</a> installed and <strong>running</strong></li>
+      <li><a href="https://console.anthropic.com">Anthropic API key</a> (free tier works)</li>
+      <li>Node.js 18+ and Claude Code: <code>npm install -g @anthropic-ai/claude-code</code></li>
+    </ul>
+
+    <h2>Part 1: Landing Page <span class="time-badge">~10 min</span></h2>
+
+    <a class="big-link" href="https://scottwofford.com/luthien/landing_v8/" target="_blank">scottwofford.com/luthien/landing_v8/</a>
+
+    <p>Open the landing page and answer:</p>
+    <ol>
+      <li><strong>First impression (30 sec):</strong> Without scrolling — what does this product do? Write your answer <em>before</em> scrolling.</li>
+      <li><strong>Carousel:</strong> Do the quotes load and animate? Any broken cards or layout issues?</li>
+      <li><strong>Click "more examples →":</strong> Does the incidents page load? Do filter pills work? Does infinite scroll work?</li>
+      <li><strong>Architecture diagram:</strong> Does it make sense? Could you explain Luthien to a coworker after reading it?</li>
+      <li><strong>CTAs:</strong> "Book a Call" opens Google Calendar? GitHub icon goes to the right repo?</li>
+      <li><strong>Mobile:</strong> Resize browser to phone width. Does everything still work?</li>
+    </ol>
+
+    <h2>Part 2: README Quick Start <span class="time-badge">~45–60 min</span></h2>
+
+    <a class="big-link" href="https://github.com/LuthienResearch/luthien-proxy/blob/feedback/tyler-feb-10/README.md" target="_blank">README.md (PR #179 branch)</a>
+
+    <h3>2a. Read the intro sections <span class="time-badge">~5 min</span></h3>
+    <p>Before installing anything, read from the top:</p>
+    <ol>
+      <li>"What is it?" — Clear?</li>
+      <li>Before/After terminal mockups — Do the SVGs render?</li>
+      <li>"How does it work?" — Does the ASCII diagram make sense?</li>
+      <li>"What can it do?" — Do the expandable code examples expand?</li>
+    </ol>
+
+    <h3>2b. Follow the Quick Start exactly <span class="time-badge">~30–45 min</span></h3>
+
+    <div class="callout callout-warn">
+      Follow <strong>every step exactly as written.</strong> Do NOT skip ahead or improvise. The point is to test whether a new user can follow these instructions cold.
+    </div>
+
+    <p>For each step, note: Did it work as written? If not — exact error + screenshot. Anything confusing? How long did it take?</p>
+
+    <table>
+      <tr><th>Step</th><th>What it says</th><th>Your notes</th></tr>
+      <tr><td><span class="step-num">0</span></td><td>Prerequisites (Docker + uv)</td><td></td></tr>
+      <tr><td><span class="step-num">1</span></td><td>Clone + cd</td><td></td></tr>
+      <tr><td><span class="step-num">2</span></td><td>Add Anthropic API key</td><td></td></tr>
+      <tr><td><span class="step-num">3</span></td><td>Run quick_start.sh</td><td></td></tr>
+      <tr><td><span class="step-num">4</span></td><td>Launch Claude Code through proxy</td><td></td></tr>
+      <tr><td><span class="step-num">5</span></td><td>See conversation history</td><td></td></tr>
+      <tr><td><span class="step-num">6</span></td><td>Set up a DeSlop policy</td><td></td></tr>
+      <tr><td><span class="step-num">7</span></td><td>Set up an LLM-as-judge policy</td><td></td></tr>
+    </table>
+
+    <h3>2c. Verify it works <span class="time-badge">~10 min</span></h3>
+    <p>Once Claude Code is running through the proxy:</p>
+    <ol>
+      <li>Ask Claude Code to do something simple (e.g., "create a hello world python script")</li>
+      <li>Check the conversation history UI — does your conversation show up?</li>
+      <li>If you set up DeSlop: ask Claude to write something with em dashes or "I'd be happy to help" — does it get cleaned?</li>
+      <li>Check the activity monitor — do you see requests flowing?</li>
+    </ol>
+
+    <h2>Part 3: Your Report</h2>
+    <p>Create a Google Doc or markdown file with:</p>
+    <ol>
+      <li><strong>Landing page issues</strong> (Part 1)</li>
+      <li><strong>README issues</strong> (Part 2a + 2b)</li>
+      <li><strong>Functionality issues</strong> (Part 2c)</li>
+      <li><strong>Overall impressions:</strong>
+        <ul>
+          <li>How long did the whole thing take?</li>
+          <li>On a scale of 1–5, how easy was it to get running?</li>
+          <li>What was the most confusing part?</li>
+          <li>What would you change first?</li>
+        </ul>
+      </li>
+    </ol>
+
+    <p>Send the report to <a href="mailto:scott@luthienresearch.org">scott@luthienresearch.org</a>.</p>
+
+    <hr>
+
+    <div class="callout">
+      <strong>Tips:</strong>
+      <ul style="margin-bottom:0;">
+        <li>If something is broken or confusing, that's valuable feedback — not a failure on your part.</li>
+        <li>Don't fix things yourself. Just document what's wrong.</li>
+        <li>If stuck on a step for >10 min, note where you got stuck, skip it, and keep going.</li>
+        <li>Docker builds images locally on first run — can be slow (~5–10 min). That's expected.</li>
+      </ul>
+    </div>
+
+  </div>
+</body>
+</html>
