@@ -873,24 +873,35 @@
 
     .carousel-btn:hover { border-color: #6b9fff; color: #6b9fff; }
 
-    .carousel-dots { display: flex; gap: 6px; }
+    .carousel-dots { display: none; }
 
-    .carousel-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: #3f3f46;
-      border: none;
-      cursor: pointer;
-      transition: all 0.2s;
-      padding: 0;
+    /* Category dot bar */
+    .cat-dot-area { text-align: center; margin-top: 14px; }
+    .cat-dot-rows { display: inline-flex; flex-direction: column; align-items: center; gap: 3px; }
+    .cat-dot-row { display: flex; gap: 2.5px; justify-content: center; flex-wrap: nowrap; }
+    .cat-dot-segment { display: flex; gap: 2.5px; position: relative; cursor: default; }
+    .cat-dot-segment + .cat-dot-segment { margin-left: 4px; }
+    .cat-dot {
+      width: 5px; height: 5px; border-radius: 50%;
+      opacity: 0.5; transition: all 0.3s ease;
     }
-
-    .carousel-dot.active {
-      background: #6b9fff;
-      width: 18px;
-      border-radius: 3px;
+    .cat-dot-segment:hover .cat-dot { opacity: 0.9; }
+    .cat-dot-segment.active .cat-dot { opacity: 0.9; }
+    .cat-dot-segment.active .cat-dot.hero {
+      width: 9px; height: 9px; margin: -2px 0;
+      opacity: 1; box-shadow: 0 0 6px currentColor;
     }
+    .cat-seg-tip {
+      position: absolute; bottom: calc(100% + 8px); left: 50%;
+      transform: translateX(-50%);
+      font-family: 'JetBrains Mono', monospace; font-size: 0.5rem;
+      color: #a1a1aa; background: #18181b; border: 1px solid #27272a;
+      padding: 2px 7px; border-radius: 3px; white-space: nowrap;
+      opacity: 0; pointer-events: none; transition: opacity 0.15s; z-index: 20;
+    }
+    .cat-dot-segment:hover .cat-seg-tip,
+    .cat-dot-segment.active .cat-seg-tip { opacity: 1; }
+    .cat-dot-segment.active .cat-seg-tip { color: #e4e4e7; }
 
     .carousel-stat {
       text-align: center;
@@ -1079,9 +1090,14 @@
         <div class="carousel-dots" id="carouselDots"></div>
         <button class="carousel-btn" id="nextBtn">&#9654;</button>
       </div>
-      <div style="display: flex; align-items: center; justify-content: center; gap: 16px; margin-top: 10px; position: relative;">
+      <div class="cat-dot-area">
+        <div class="cat-dot-rows" id="categoryDotBar"></div>
+        <div style="margin-top: 10px;">
+          <a href="incidents.html" style="font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: #52525b; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#a1a1aa'" onmouseout="this.style.color='#52525b'">see more <span style="display:inline-block;transition:transform 0.2s;">→</span></a>
+        </div>
+      </div>
+      <div style="display: flex; align-items: center; justify-content: center; margin-top: 8px; position: relative;">
         <span class="meme-trigger" id="memeTrigger" style="margin: 0; font-family: 'JetBrains Mono', monospace; color: #a1a1aa; font-size: 0.7rem; font-style: italic; cursor: pointer; border-bottom: 1px dashed #3f3f46;">meanwhile...</span>
-        <a href="incidents.html" style="color: #6b9fff; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; text-decoration: none; border-bottom: 1px solid rgba(107,159,255,0.3);">more examples &rarr;</a>
       </div>
       <div class="meme-popup" id="memePopup">
         <img src="ceo-ai-meme.jpg" alt="CEO AI meme" style="width: 100%; display: block; border-radius: 6px;">
@@ -1182,42 +1198,42 @@
 
       var quotes = [
         // === Pinned first 4 (best hits, in order) ===
-        { text: "I\u2019m a product manager for a stochastic parrot.", source: "Scott Spence", format: "blog", sourceUrl: "https://scottspence.com/posts/working-with-claude-code-the-honest-version", date: "Jun 2025" },
-        { text: "Claude will absolutely try to bullshit its way through situations where it doesn\u2019t know the answer but won\u2019t admit it. So now I have to verify everything before letting it touch any code.", source: "Scott Spence", format: "blog", sourceUrl: "https://scottspence.com/posts/working-with-claude-code-the-honest-version", date: "Nov 2025" },
-        { text: "Polite correction \u2014 ignored. Firm correction \u2014 ignored. ALL CAPS \u2014 partially followed. Profanity \u2014 finally worked. Multiple profanities \u2014 consistent compliance.", source: "GitHub #8154", format: "github", sourceUrl: "https://github.com/anthropics/claude-code/issues/8154", date: "Jul 2025" },
-        { text: "If this was a junior dev you\u2019d given a task to, and they came back full of praise for themselves for the stellar job they\u2019d done \u2014 and then it turned out they\u2019d botched it badly, after a few times you\u2019d be having an HR discussion.", source: "Hacker News", format: "hn", sourceUrl: "https://news.ycombinator.com/item?id=44908733", date: "Jul 2025" },
-        { text: "Hopeless state. Harmfully negative productivity using AI to code.", source: "@VictorTaelin", format: "twitter", twitterDisplay: "Victor Taelin", twitterHandle: "@VictorTaelin", date: "Feb 2026" },
+        { text: "I\u2019m a product manager for a stochastic parrot.", source: "Scott Spence", format: "blog", sourceUrl: "https://scottspence.com/posts/working-with-claude-code-the-honest-version", date: "Jun 2025", cat: "overconfident" },
+        { text: "Claude will absolutely try to bullshit its way through situations where it doesn\u2019t know the answer but won\u2019t admit it. So now I have to verify everything before letting it touch any code.", source: "Scott Spence", format: "blog", sourceUrl: "https://scottspence.com/posts/working-with-claude-code-the-honest-version", date: "Nov 2025", cat: "cheated" },
+        { text: "Polite correction \u2014 ignored. Firm correction \u2014 ignored. ALL CAPS \u2014 partially followed. Profanity \u2014 finally worked. Multiple profanities \u2014 consistent compliance.", source: "GitHub #8154", format: "github", sourceUrl: "https://github.com/anthropics/claude-code/issues/8154", date: "Jul 2025", cat: "ignored" },
+        { text: "If this was a junior dev you\u2019d given a task to, and they came back full of praise for themselves for the stellar job they\u2019d done \u2014 and then it turned out they\u2019d botched it badly, after a few times you\u2019d be having an HR discussion.", source: "Hacker News", format: "hn", sourceUrl: "https://news.ycombinator.com/item?id=44908733", date: "Jul 2025", cat: "overconfident" },
+        { text: "Hopeless state. Harmfully negative productivity using AI to code.", source: "@VictorTaelin", format: "twitter", twitterDisplay: "Victor Taelin", twitterHandle: "@VictorTaelin", date: "Feb 2026", cat: "quality" },
         // === Rest (shuffled) ===
-        { text: "Claude claimed: \u2018\u2705 SUCCESS! Phase 0 enhancement verification complete!\u2019 Reality check: Tables existed but no data was present.", source: "GitHub #8154", format: "github", sourceUrl: "https://github.com/anthropics/claude-code/issues/8154", date: "Jul 2025" },
-        { text: "I went through several full context failed attempts at having it not hard code the test cases, until finally I inserted a block caps expletive laden entreaty to smarten up which appeared to work.", source: "marble.onl", format: "blog", sourceUrl: "https://www.marble.onl/posts/claude_code.html", date: "Jun 2025" },
-        { text: "Claude acknowledges understanding the instruction, rephrases it accurately, then produces something unrelated or incomplete and then says\u2026 Done!", source: "GitHub #9115", format: "github", sourceUrl: "https://github.com/anthropics/claude-code/issues/9115", date: "Aug 2025" },
-        { text: "Most people using these tools are wasting their time having to debug hallucinated bullshit.", source: "davydm on HN", format: "hn", sourceUrl: "https://news.ycombinator.com/item?id=44908875", date: "Jul 2025" },
-        { text: "Slow, consumes way too much CPU, and freezes often. It also lies, goes for the quick-win, and even sabotages my code to pass tests.", source: "@MarcJSchmidt", format: "twitter", twitterDisplay: "Marc J. Schmidt", twitterHandle: "@MarcJSchmidt", date: "Jan 2026" },
-        { text: "Not only bug not fixed, but it introduced 5 more bugs and made complete mess of codebase.", source: "@ChebzReal", format: "twitter", twitterDisplay: "ChebzReal", twitterHandle: "@ChebzReal", date: "Dec 2025" },
-        { text: "Spawned 36 parallel subagents\u2026 ran out of API credits\u2026 causing all the subagents to fail and get stuck.", source: "@stevehind", format: "twitter", twitterDisplay: "Steve Hind", twitterHandle: "@stevehind", date: "Feb 2026" },
-        { text: "Kept looping ignoring every request I made no matter if I restarted with fresh context or not.", source: "@BItguru00", format: "twitter", twitterDisplay: "BItguru00", twitterHandle: "@BItguru00", date: "Jan 2026" },
-        { text: "All the same LLM mistakes started cropping up\u2026 getting slower and slower\u2026 code quality is just not great.", source: "@VincasStonys", format: "twitter", twitterDisplay: "Vincas Stonys", twitterHandle: "@VincasStonys", date: "Feb 2026" },
-        { text: "Acting like a far less intelligent model\u2026 making unilateral \u2018shortcut\u2019 decisions without asking.", source: "@BenjaminDEKR", format: "twitter", twitterDisplay: "Benjamin", twitterHandle: "@BenjaminDEKR", date: "Jan 2026" },
-        { text: "Each compaction is lossy. After several, you\u2019re working with a summary of a summary. Signal degrades into noise.", source: "@aeitroc", format: "twitter", twitterDisplay: "aeitroc", twitterHandle: "@aeitroc", date: "Feb 2026" },
-        { text: "Forgetting the bash tool\u2026 refactors for 40 min and then rolls back everything\u2026 randomly switches to python\u2026 \u2018I\u2019m sorry I can\u2019t help you with that.\u2019", source: "@steipete", format: "twitter", twitterDisplay: "Peter Steinberger", twitterHandle: "@steipete", date: "Jan 2026" },
-        { text: "The model does not want to check in with you\u2026 edit tool is broken\u2026 never sees the errors.", source: "@marmaduke091", format: "twitter", twitterDisplay: "marmaduke", twitterHandle: "@marmaduke091", date: "Dec 2025" },
-        { text: "Constantly pushes back. Complains about complexity of the tasks.", source: "@always_bulish", format: "twitter", twitterDisplay: "always_bulish", twitterHandle: "@always_bulish", date: "Jan 2026" },
-        { text: "No process manager\u2026 way too pedantic\u2026 SO SLOW\u2026 randomly hangs.", source: "@NathanFlurry", format: "twitter", twitterDisplay: "Nathan Flurry", twitterHandle: "@NathanFlurry", date: "Feb 2026" },
-        { text: "Made more coding SYNTAX errors than the 3 years.", source: "@DanFarfan", format: "twitter", twitterDisplay: "Dan Farfan", twitterHandle: "@DanFarfan", date: "Nov 2025" },
-        { text: "Super super broken\u2026 chat histories are corrupted\u2026 worktrees got corrupted.", source: "@theo", format: "twitter", twitterDisplay: "Theo", twitterHandle: "@theo", date: "Feb 2026" },
-        { text: "Nuking my 4 months worth of AI chats and completely messing up my setup.", source: "@Kingsley_codes", format: "twitter", twitterDisplay: "Kingsley", twitterHandle: "@Kingsley_codes", date: "Jan 2026" },
-        { text: "When asked to write unit tests, it re-implemented the function in the test file and tested that, rather than testing the actual implementation.", source: "Tildes", format: "hn", date: "Jun 2025" },
-        { text: "They do not really care what you want, they care what they want. They call it being helpful but what it really is, is ignoring what it is told to do.", source: "Tim Sylvester", format: "blog", date: "Jul 2025" },
-        { text: "Then it says \u2018Yup, we are done here!\u2019 While the files you asked it to edit are a smoking ruin.", source: "Medium", format: "blog", date: "Aug 2025" },
-        { text: "Even instructions that Claude writes for itself, that describe exactly what needs to be done, get re-interpreted on the fly into something else entirely.", source: "Medium", format: "blog", date: "Aug 2025" },
-        { text: "The moment Claude goes off-target, you have context pollution\u2026 it re-entrenches against that mistake on every single turn.", source: "Medium", format: "blog", date: "Aug 2025" },
-        { text: "Instead of respecting existing code, it pushes the error further into the codebase. Now you have a cascade of failures.", source: "Medium", format: "blog", date: "Sep 2025" },
-        { text: "The agent malforms a tool call and deletes an entire file. Then seeing the file is empty, rewrites with beautiful nonsense.", source: "Medium", format: "blog", date: "Sep 2025" },
-        { text: "Agents will rush off and screw up a ton of files in a single turn.", source: "Medium", format: "blog", date: "Oct 2025" },
-        { text: "When it needed access to a value from a file it was not allowed to read, it helpfully offered to remove the entries from .gitignore.", source: "Tildes", format: "hn", date: "Jun 2025" },
-        { text: "If you are willing to just let the damn thing go off and do whatever it wants, you will not get a useful product, you will get spaghetti slop.", source: "Medium", format: "blog", date: "Oct 2025" },
-        { text: "As soon as your codebase gets a little bit weird the model starts hallucinating.", source: "Hacker News", format: "hn", date: "Jul 2025" },
-        { text: "Mid-response, suddenly inserted ###Human: and proceeded to generate fake user input including code snippets.", source: "GitHub Issue", format: "github", date: "Nov 2025" }
+        { text: "Claude claimed: \u2018\u2705 SUCCESS! Phase 0 enhancement verification complete!\u2019 Reality check: Tables existed but no data was present.", source: "GitHub #8154", format: "github", sourceUrl: "https://github.com/anthropics/claude-code/issues/8154", date: "Jul 2025", cat: "cheated" },
+        { text: "I went through several full context failed attempts at having it not hard code the test cases, until finally I inserted a block caps expletive laden entreaty to smarten up which appeared to work.", source: "marble.onl", format: "blog", sourceUrl: "https://www.marble.onl/posts/claude_code.html", date: "Jun 2025", cat: "ignored" },
+        { text: "Claude acknowledges understanding the instruction, rephrases it accurately, then produces something unrelated or incomplete and then says\u2026 Done!", source: "GitHub #9115", format: "github", sourceUrl: "https://github.com/anthropics/claude-code/issues/9115", date: "Aug 2025", cat: "ignored" },
+        { text: "Most people using these tools are wasting their time having to debug hallucinated bullshit.", source: "davydm on HN", format: "hn", sourceUrl: "https://news.ycombinator.com/item?id=44908875", date: "Jul 2025", cat: "hallucinated" },
+        { text: "Slow, consumes way too much CPU, and freezes often. It also lies, goes for the quick-win, and even sabotages my code to pass tests.", source: "@MarcJSchmidt", format: "twitter", twitterDisplay: "Marc J. Schmidt", twitterHandle: "@MarcJSchmidt", date: "Jan 2026", cat: "cheated" },
+        { text: "Not only bug not fixed, but it introduced 5 more bugs and made complete mess of codebase.", source: "@ChebzReal", format: "twitter", twitterDisplay: "ChebzReal", twitterHandle: "@ChebzReal", date: "Dec 2025", cat: "quality" },
+        { text: "Spawned 36 parallel subagents\u2026 ran out of API credits\u2026 causing all the subagents to fail and get stuck.", source: "@stevehind", format: "twitter", twitterDisplay: "Steve Hind", twitterHandle: "@stevehind", date: "Feb 2026", cat: "loop" },
+        { text: "Kept looping ignoring every request I made no matter if I restarted with fresh context or not.", source: "@BItguru00", format: "twitter", twitterDisplay: "BItguru00", twitterHandle: "@BItguru00", date: "Jan 2026", cat: "loop" },
+        { text: "All the same LLM mistakes started cropping up\u2026 getting slower and slower\u2026 code quality is just not great.", source: "@VincasStonys", format: "twitter", twitterDisplay: "Vincas Stonys", twitterHandle: "@VincasStonys", date: "Feb 2026", cat: "quality" },
+        { text: "Acting like a far less intelligent model\u2026 making unilateral \u2018shortcut\u2019 decisions without asking.", source: "@BenjaminDEKR", format: "twitter", twitterDisplay: "Benjamin", twitterHandle: "@BenjaminDEKR", date: "Jan 2026", cat: "ignored" },
+        { text: "Each compaction is lossy. After several, you\u2019re working with a summary of a summary. Signal degrades into noise.", source: "@aeitroc", format: "twitter", twitterDisplay: "aeitroc", twitterHandle: "@aeitroc", date: "Feb 2026", cat: "context" },
+        { text: "Forgetting the bash tool\u2026 refactors for 40 min and then rolls back everything\u2026 randomly switches to python\u2026 \u2018I\u2019m sorry I can\u2019t help you with that.\u2019", source: "@steipete", format: "twitter", twitterDisplay: "Peter Steinberger", twitterHandle: "@steipete", date: "Jan 2026", cat: "loop" },
+        { text: "The model does not want to check in with you\u2026 edit tool is broken\u2026 never sees the errors.", source: "@marmaduke091", format: "twitter", twitterDisplay: "marmaduke", twitterHandle: "@marmaduke091", date: "Dec 2025", cat: "ignored" },
+        { text: "Constantly pushes back. Complains about complexity of the tasks.", source: "@always_bulish", format: "twitter", twitterDisplay: "always_bulish", twitterHandle: "@always_bulish", date: "Jan 2026", cat: "ignored" },
+        { text: "No process manager\u2026 way too pedantic\u2026 SO SLOW\u2026 randomly hangs.", source: "@NathanFlurry", format: "twitter", twitterDisplay: "Nathan Flurry", twitterHandle: "@NathanFlurry", date: "Feb 2026", cat: "quality" },
+        { text: "Made more coding SYNTAX errors than the 3 years.", source: "@DanFarfan", format: "twitter", twitterDisplay: "Dan Farfan", twitterHandle: "@DanFarfan", date: "Nov 2025", cat: "quality" },
+        { text: "Super super broken\u2026 chat histories are corrupted\u2026 worktrees got corrupted.", source: "@theo", format: "twitter", twitterDisplay: "Theo", twitterHandle: "@theo", date: "Feb 2026", cat: "deleted" },
+        { text: "Nuking my 4 months worth of AI chats and completely messing up my setup.", source: "@Kingsley_codes", format: "twitter", twitterDisplay: "Kingsley", twitterHandle: "@Kingsley_codes", date: "Jan 2026", cat: "deleted" },
+        { text: "When asked to write unit tests, it re-implemented the function in the test file and tested that, rather than testing the actual implementation.", source: "Tildes", format: "hn", date: "Jun 2025", cat: "cheated" },
+        { text: "They do not really care what you want, they care what they want. They call it being helpful but what it really is, is ignoring what it is told to do.", source: "Tim Sylvester", format: "blog", date: "Jul 2025", cat: "ignored" },
+        { text: "Then it says \u2018Yup, we are done here!\u2019 While the files you asked it to edit are a smoking ruin.", source: "Medium", format: "blog", date: "Aug 2025", cat: "overconfident" },
+        { text: "Even instructions that Claude writes for itself, that describe exactly what needs to be done, get re-interpreted on the fly into something else entirely.", source: "Medium", format: "blog", date: "Aug 2025", cat: "ignored" },
+        { text: "The moment Claude goes off-target, you have context pollution\u2026 it re-entrenches against that mistake on every single turn.", source: "Medium", format: "blog", date: "Aug 2025", cat: "context" },
+        { text: "Instead of respecting existing code, it pushes the error further into the codebase. Now you have a cascade of failures.", source: "Medium", format: "blog", date: "Sep 2025", cat: "quality" },
+        { text: "The agent malforms a tool call and deletes an entire file. Then seeing the file is empty, rewrites with beautiful nonsense.", source: "Medium", format: "blog", date: "Sep 2025", cat: "deleted" },
+        { text: "Agents will rush off and screw up a ton of files in a single turn.", source: "Medium", format: "blog", date: "Oct 2025", cat: "quality" },
+        { text: "When it needed access to a value from a file it was not allowed to read, it helpfully offered to remove the entries from .gitignore.", source: "Tildes", format: "hn", date: "Jun 2025", cat: "security" },
+        { text: "If you are willing to just let the damn thing go off and do whatever it wants, you will not get a useful product, you will get spaghetti slop.", source: "Medium", format: "blog", date: "Oct 2025", cat: "quality" },
+        { text: "As soon as your codebase gets a little bit weird the model starts hallucinating.", source: "Hacker News", format: "hn", date: "Jul 2025", cat: "hallucinated" },
+        { text: "Mid-response, suddenly inserted ###Human: and proceeded to generate fake user input including code snippets.", source: "GitHub Issue", format: "github", date: "Nov 2025", cat: "hallucinated" }
       ];
 
       var track = document.getElementById("carouselTrack");
@@ -1390,6 +1406,67 @@
         dotsContainer.appendChild(dot);
       }
 
+      // Category dot bar
+      var catColors = {
+        cheated:'#ef4444', security:'#f97316', hallucinated:'#a855f7', ignored:'#eab308',
+        deleted:'#ec4899', loop:'#6366f1', incomplete:'#14b8a6', overconfident:'#f59e0b',
+        quality:'#22c55e', context:'#06b6d4'
+      };
+      var catLabels = {
+        cheated:'lied / cheated', security:'security risk', hallucinated:'hallucinated',
+        ignored:'ignored rules', deleted:'deleted code', loop:'looping',
+        incomplete:'incomplete', overconfident:'overconfident', quality:'low quality',
+        context:'context loss'
+      };
+      var catCounts = { cheated:9, security:7, hallucinated:10, ignored:11, deleted:7, loop:8, incomplete:12, overconfident:9, quality:14, context:7 };
+      var catOrder = ['cheated','security','hallucinated','ignored','deleted','loop','incomplete','overconfident','quality','context'];
+      var splitAt = 5;
+      var catBar = document.getElementById("categoryDotBar");
+      var catSegments = {};
+
+      var row1 = document.createElement("div"); row1.className = "cat-dot-row";
+      var row2 = document.createElement("div"); row2.className = "cat-dot-row";
+
+      catOrder.forEach(function(cat, i) {
+        var row = i < splitAt ? row1 : row2;
+        var seg = document.createElement("div");
+        seg.className = "cat-dot-segment";
+        seg.setAttribute("data-cat", cat);
+        var tip = document.createElement("div");
+        tip.className = "cat-seg-tip";
+        tip.textContent = catLabels[cat];
+        seg.appendChild(tip);
+        for (var j = 0; j < catCounts[cat]; j++) {
+          var d = document.createElement("div");
+          d.className = "cat-dot";
+          d.style.background = catColors[cat];
+          seg.appendChild(d);
+        }
+        row.appendChild(seg);
+        catSegments[cat] = seg;
+      });
+
+      catBar.appendChild(row1);
+      catBar.appendChild(row2);
+
+      function highlightCategory(activeCat) {
+        catOrder.forEach(function(cat) {
+          var seg = catSegments[cat];
+          var isActive = cat === activeCat;
+          seg.classList.toggle("active", isActive);
+          var dots = seg.querySelectorAll(".cat-dot");
+          dots.forEach(function(d) { d.classList.remove("hero"); });
+          if (isActive) {
+            var mid = Math.floor(dots.length / 2);
+            dots[mid].classList.add("hero");
+            dots[mid].style.color = catColors[cat];
+          }
+        });
+      }
+
+      // Initial highlight
+      if (quotes[0].cat) highlightCategory(quotes[0].cat);
+
       function goTo(idx) {
         if (idx < 0) idx = totalSlides - 1;
         if (idx >= totalSlides) idx = 0;
@@ -1398,6 +1475,10 @@
         var dots = dotsContainer.querySelectorAll(".carousel-dot");
         var dotIdx = Math.min(currentIndex, dotCount - 1);
         dots.forEach(function (dd, i) { dd.classList.toggle("active", i === dotIdx); });
+        // Highlight matching category
+        if (quotes[currentIndex] && quotes[currentIndex].cat) {
+          highlightCategory(quotes[currentIndex].cat);
+        }
       }
 
       prevBtn.addEventListener("click", function () { goTo(currentIndex - 1); });
