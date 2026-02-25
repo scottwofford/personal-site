@@ -77,10 +77,10 @@
   <div class="container">
 
     <h1>Luthien QA Trial</h1>
-    <p class="subtitle">User onboarding test — walk through our product as a new user and report what's broken or confusing.</p>
+    <p class="subtitle">User onboarding test — walk through our product as a new user and tell us what's compelling, what's confusing, and what's broken.</p>
 
     <div class="callout">
-      <strong>Goal:</strong> Follow the onboarding flow end-to-end. Don't fix anything — just document issues, confusion, and broken stuff. That's the deliverable.
+      <strong>Goal:</strong> Follow the onboarding flow end-to-end. Note what sounds interesting or exciting, what's confusing, and what's broken. Be brutally honest — we want real reactions, not polished feedback.
     </div>
 
     <h2>Prerequisites</h2>
@@ -101,7 +101,7 @@
       </ul>
     </div>
 
-    <p>Use Loom, Zoom (record to local), QuickTime, OBS, or whatever you have. The recording is as valuable as the written report — we're looking for genuine first reactions.</p>
+    <p>Use Loom, Zoom (record to local), QuickTime, OBS, or whatever you have. The recording is as valuable as the written report — it should ideally be a real-time window into your brain and thought process. Say what grabs your attention, what makes you go "huh?", and what makes you want to click away.</p>
 
     <h2>Part 1: Landing Page <span class="time-badge">~10 min</span></h2>
 
@@ -109,10 +109,10 @@
 
     <p>Open the landing page and answer:</p>
     <ol>
-      <li><strong>First impression (30 sec):</strong> Without scrolling — what does this product do? Write your answer <em>before</em> scrolling.</li>
-      <li><strong>Carousel:</strong> Do the quotes load and animate? Any broken cards or layout issues?</li>
-      <li><strong>Click "more examples →":</strong> Does the incidents page load? Do filter pills work? Does infinite scroll work?</li>
-      <li><strong>Architecture diagram:</strong> Does it make sense? Could you explain Luthien to a coworker after reading it?</li>
+      <li><strong>First impression (30 sec):</strong> Without scrolling — what does this product do? Write your answer <em>before</em> scrolling. What's your gut reaction?</li>
+      <li><strong>Carousel:</strong> Do the quotes load and animate? Any that are particularly compelling or eye-catching? Any broken cards or layout issues?</li>
+      <li><strong>Click "more examples →":</strong> Does the incidents page load? Do filter pills work? Does infinite scroll work? Which incidents are most striking?</li>
+      <li><strong>Architecture diagram:</strong> Does it make sense? Does it make you more or less interested? Could you explain Luthien to a coworker after reading it?</li>
       <li><strong>CTAs:</strong> "Book a Call" opens Google Calendar? GitHub icon goes to the right repo?</li>
       <li><strong>Mobile:</strong> Resize browser to phone width. Does everything still work?</li>
     </ol>
@@ -122,12 +122,12 @@
     <a class="big-link" href="https://github.com/LuthienResearch/luthien-proxy/blob/feedback/tyler-feb-10/README.md" target="_blank">README.md (PR #179 branch)</a>
 
     <h3>2a. Read the intro sections <span class="time-badge">~5 min</span></h3>
-    <p>Before installing anything, read from the top:</p>
+    <p>Before installing anything, read from the top. Note what clicks immediately and what doesn't:</p>
     <ol>
-      <li>"What is it?" — Clear?</li>
-      <li>Before/After terminal mockups — Do the SVGs render?</li>
+      <li>"What is it?" — Clear? Compelling? Would you keep reading?</li>
+      <li>Before/After terminal mockups — Do the SVGs render? Do they make the value obvious?</li>
       <li>"How does it work?" — Does the ASCII diagram make sense?</li>
-      <li>"What can it do?" — Do the expandable code examples expand?</li>
+      <li>"What can it do?" — Do the expandable code examples expand? Do any of the use cases resonate?</li>
     </ol>
 
     <h3>2b. Follow the Quick Start exactly <span class="time-badge">~30–45 min</span></h3>
@@ -136,7 +136,7 @@
       Follow <strong>every step exactly as written.</strong> Do NOT skip ahead or improvise. The point is to test whether a new user can follow these instructions cold.
     </div>
 
-    <p>For each step, note: Did it work as written? If not — exact error + screenshot. Anything confusing? How long did it take?</p>
+    <p>For each step, note: Did it work as written? If not — exact error + screenshot. Anything confusing? Anything that felt satisfying or well-designed? How long did it take?</p>
 
     <table>
       <tr><th>Step</th><th>What it says</th><th>Your notes</th></tr>
@@ -162,13 +162,14 @@
     <h2>Part 3: Your Report</h2>
     <p>Create a Google Doc or markdown file with:</p>
     <ol>
-      <li><strong>Landing page issues</strong> (Part 1)</li>
-      <li><strong>README issues</strong> (Part 2a + 2b)</li>
-      <li><strong>Functionality issues</strong> (Part 2c)</li>
+      <li><strong>Landing page feedback</strong> (Part 1) — what worked, what didn't</li>
+      <li><strong>README feedback</strong> (Part 2a + 2b) — clarity, setup issues</li>
+      <li><strong>Functionality feedback</strong> (Part 2c) — did it actually work?</li>
       <li><strong>Overall impressions:</strong>
         <ul>
           <li>How long did the whole thing take?</li>
           <li>On a scale of 1–5, how easy was it to get running?</li>
+          <li>What was the most compelling part?</li>
           <li>What was the most confusing part?</li>
           <li>What would you change first?</li>
         </ul>
@@ -182,8 +183,8 @@
     <div class="callout">
       <strong>Tips:</strong>
       <ul style="margin-bottom:0;">
-        <li>If something is broken or confusing, that's valuable feedback — not a failure on your part.</li>
-        <li>Don't fix things yourself. Just document what's wrong.</li>
+        <li>We want the good, the bad, and the ugly. If something is broken or confusing, that's valuable feedback — not a failure on your part. Equally, if something clicks or feels well-designed, say so.</li>
+        <li>Don't fix things yourself. Just document what you see.</li>
         <li>If stuck on a step for >10 min, note where you got stuck, skip it, and keep going.</li>
         <li>Docker builds images locally on first run — can be slow (~5–10 min). That's expected.</li>
       </ul>
