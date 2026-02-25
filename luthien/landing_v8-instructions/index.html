@@ -95,7 +95,7 @@
 
     <ol>
       <li><strong>Typical day:</strong> What does a normal coding or DevOps day look like?</li>
-      <li><strong>AI in your flow:</strong> Where do AI tools (Cursor, Claude Code, Copilot, etc.) show up? What makes you reach for them vs. doing it manually?</li>
+      <li><strong>AI in your flow:</strong> Where do AI tools (Cursor, Claude Code, etc.) show up? What makes you reach for them vs. doing it manually?</li>
       <li><strong>Code review:</strong> How do you handle reviews — who signs off?</li>
       <li><strong>Frustrations:</strong> Think of the last time an AI assistant was <em>really</em> frustrating. Give us the play-by-play — what happened, what did you try, how did you troubleshoot? What specifically was the most frustrating part? <strong>On a scale of 0–10, how painful was it?</strong></li>
       <li><strong>Worst case:</strong> What keeps you up at night about AI in your workflow? Any security worries? Spending / token costs? Privacy concerns with third-party servers? <strong>0–10, how worried are you?</strong></li>
@@ -110,40 +110,18 @@
 
     <p>Scroll through the whole thing. React out loud to whatever grabs you or confuses you.</p>
 
-    <h2>Part 4: README Quick Start <span class="time-badge">~45–60 min</span></h2>
+    <h2>Part 4: README Quick Start <span class="time-badge">tell us how long it took</span></h2>
 
     <a class="big-link" href="https://github.com/LuthienResearch/luthien-proxy/blob/feedback/tyler-feb-10/README.md" target="_blank">README.md (PR #179 branch)</a>
 
-    <p>Read the intro sections first — note what clicks and what doesn't. Then follow the Quick Start step by step.</p>
+    <p>Read the intro, then follow the Quick Start. Note what clicks and what doesn't. If you get stuck on any step for more than 10 min, note where, skip it, and keep going.</p>
 
-    <div class="callout callout-warn">
-      Follow <strong>every step exactly as written.</strong> Don't skip ahead or improvise. If stuck on a step for >10 min, note where you got stuck, skip it, and keep going. Docker's first build can be slow (~5–10 min) — that's expected.
-    </div>
+    <p>When something doesn't work: exact error + screenshot. When it does work: try something simple, check the conversation history UI, and test any policies you set up.</p>
 
-    <p>For each step: did it work? If not, exact error + screenshot. How long did it take?</p>
-
-    <table>
-      <tr><th>Step</th><th>What it says</th></tr>
-      <tr><td><span class="step-num">0</span></td><td>Prerequisites (Docker + uv)</td></tr>
-      <tr><td><span class="step-num">1</span></td><td>Clone + cd</td></tr>
-      <tr><td><span class="step-num">2</span></td><td>Add Anthropic API key</td></tr>
-      <tr><td><span class="step-num">3</span></td><td>Run quick_start.sh</td></tr>
-      <tr><td><span class="step-num">4</span></td><td>Launch Claude Code through proxy</td></tr>
-      <tr><td><span class="step-num">5</span></td><td>See conversation history</td></tr>
-      <tr><td><span class="step-num">6</span></td><td>Set up a DeSlop policy</td></tr>
-      <tr><td><span class="step-num">7</span></td><td>Set up an LLM-as-judge policy</td></tr>
-    </table>
-
-    <p>Once it's running, try something simple ("create a hello world python script"), check the conversation history UI, and test any policies you set up.</p>
+    <p>Then try to break it — throw weird prompts at it, stress-test the policies, do things we didn't anticipate. If you find bugs or have ideas, <a href="https://github.com/LuthienResearch/luthien-proxy/issues" target="_blank">open an issue</a> or submit a PR.</p>
 
     <h2>Part 5: Your Report</h2>
-    <p>Send a Google Doc or markdown file to <a href="mailto:scott@luthienresearch.org">scott@luthienresearch.org</a> covering:</p>
-    <ol>
-      <li>Landing page — what worked, what didn't</li>
-      <li>README + setup — clarity, issues, errors</li>
-      <li>Did the product actually work?</li>
-      <li>How long did it take? How easy (1–5)? What would you change first?</li>
-    </ol>
+    <p>Send your recording, transcript, and a Google Doc summarizing your key findings to <a href="mailto:scott@luthienresearch.org">scott@luthienresearch.org</a>.</p>
 
   </div>
 </body>
