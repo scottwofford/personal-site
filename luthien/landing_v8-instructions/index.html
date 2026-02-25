@@ -77,113 +77,71 @@
   <div class="container">
 
     <h1>Luthien QA Trial</h1>
-    <p class="subtitle">User onboarding test — walk through our product as a new user and tell us what's compelling, what's confusing, and what's broken.</p>
+    <p class="subtitle">Walk through our product as a new user. Think aloud the whole time — we want the good, the bad, and the ugly.</p>
 
     <div class="callout">
-      <strong>Goal:</strong> Follow the onboarding flow end-to-end. Note what sounds interesting or exciting, what's confusing, and what's broken. Be brutally honest — we want real reactions, not polished feedback.
-    </div>
-
-    <div class="callout">
-      <strong>This whole trial can be done async.</strong> If you'd prefer to walk through it on a call with us instead, <a href="https://calendar.app.google/zRCnvBnMBRYmrokJA">book a time here</a>.
+      <strong>Do this async, or <a href="https://calendar.app.google/zRCnvBnMBRYmrokJA">book a call</a> to walk through it together.</strong>
     </div>
 
     <h2>Part 1: Start Recording & Warm Up <span class="time-badge">~5 min</span></h2>
 
-    <div class="callout">
-      <strong>Set up two things before you begin:</strong>
-      <ul style="margin-top:8px; margin-bottom:0;">
-        <li><strong>Screen recording</strong> (Loom, Zoom, QuickTime, OBS) — capture your screen, webcam, and audio</li>
-        <li><strong>AI note-taker</strong> (SuperWhisper, Otter.ai, or similar) — so we get a transcript of your think-aloud, not just the video</li>
-      </ul>
-    </div>
+    <p>Start a <strong>screen recording</strong> (Loom, Zoom, QuickTime, OBS) with webcam + audio, and an <strong>AI note-taker</strong> (SuperWhisper, Otter.ai) for a transcript.</p>
 
-    <p>Now get comfortable speaking aloud whatever pops into your head. Give us a 30-second tour of your dock or taskbar — what's open right now, what are your pinned apps, what does your setup say about how you work? There's no wrong answer. This is just to warm up your brain-to-mouth pipeline before the real stuff.</p>
+    <p>Warm up: give us a 30-second tour of your dock or taskbar — what's open, what are your pinned apps? No wrong answers, just get your brain-to-mouth pipeline going.</p>
 
     <h2>Part 2: Your Dev Workflow <span class="time-badge">~10 min</span></h2>
 
-    <p>Walk us through your current setup and pain points. We want to understand your background so we can interpret your feedback better.</p>
+    <p>Share your screen and walk us through:</p>
 
     <ol>
-      <li><strong>Your typical day:</strong> Walk me through a typical coding or ops day for you.</li>
-      <li><strong>Where AI shows up:</strong> Where does AI (Cursor, Claude Code, Copilot, other LLMs) show up in that flow? What motivates you to reach for AI versus doing it manually?</li>
-      <li><strong>Code review:</strong> If you have teammates or AI coding assistants, how do you handle code reviews — who signs off?</li>
-      <li><strong>Frustrations:</strong> Think of the last time an AI assistant was really frustrating. What happened? What specifically was the most frustrating part?</li>
-      <li><strong>Worst case:</strong> What keeps you up at night about AI in your workflow? Any security worries, spending concerns, or privacy risks?</li>
-      <li><strong>Workarounds:</strong> What do you currently do to cope with AI failure modes? If you had a magic wand to prevent one AI failure, what would it do?</li>
+      <li><strong>Typical day:</strong> What does a normal coding or ops day look like?</li>
+      <li><strong>AI in your flow:</strong> Where do AI tools (Cursor, Claude Code, Copilot, etc.) show up? What makes you reach for them?</li>
+      <li><strong>Code review:</strong> How do you handle reviews — who signs off?</li>
+      <li><strong>Frustrations:</strong> Last time an AI assistant was really frustrating — what happened?</li>
+      <li><strong>Worst case:</strong> What keeps you up at night? Security, spending, privacy?</li>
+      <li><strong>Workarounds:</strong> How do you cope today? If you had a magic wand to prevent one AI failure, what would it do?</li>
     </ol>
 
     <h2>Part 3: Landing Page <span class="time-badge">~10 min</span></h2>
 
     <a class="big-link" href="https://scottwofford.com/luthien/landing_v8/" target="_blank">scottwofford.com/luthien/landing_v8/</a>
 
-    <p>Open the landing page. Scroll through the whole thing. Note anything that's compelling, confusing, or broken — first impressions, visuals, interactive elements, links, mobile responsiveness. Say what you're thinking as you go.</p>
+    <p>Scroll through the whole thing. React out loud to whatever grabs you or confuses you.</p>
 
     <h2>Part 4: README Quick Start <span class="time-badge">~45–60 min</span></h2>
 
     <a class="big-link" href="https://github.com/LuthienResearch/luthien-proxy/blob/feedback/tyler-feb-10/README.md" target="_blank">README.md (PR #179 branch)</a>
 
-    <h3>4a. Read the intro sections <span class="time-badge">~5 min</span></h3>
-    <p>Before installing anything, read from the top of the README. Note what clicks immediately, what's confusing, and whether you'd keep reading.</p>
-
-    <h3>4b. Follow the Quick Start exactly <span class="time-badge">~30–45 min</span></h3>
+    <p>Read the intro sections first — note what clicks and what doesn't. Then follow the Quick Start step by step.</p>
 
     <div class="callout callout-warn">
-      Follow <strong>every step exactly as written.</strong> Do NOT skip ahead or improvise. The point is to test whether a new user can follow these instructions cold.
+      Follow <strong>every step exactly as written.</strong> Don't skip ahead or improvise. If stuck on a step for >10 min, note where you got stuck, skip it, and keep going. Docker's first build can be slow (~5–10 min) — that's expected.
     </div>
 
-    <p>For each step, note: Did it work as written? If not — exact error + screenshot. Anything confusing? Anything that felt satisfying or well-designed? How long did it take?</p>
+    <p>For each step: did it work? If not, exact error + screenshot. How long did it take?</p>
 
     <table>
-      <tr><th>Step</th><th>What it says</th><th>Your notes</th></tr>
-      <tr><td><span class="step-num">0</span></td><td>Prerequisites (Docker + uv)</td><td></td></tr>
-      <tr><td><span class="step-num">1</span></td><td>Clone + cd</td><td></td></tr>
-      <tr><td><span class="step-num">2</span></td><td>Add Anthropic API key</td><td></td></tr>
-      <tr><td><span class="step-num">3</span></td><td>Run quick_start.sh</td><td></td></tr>
-      <tr><td><span class="step-num">4</span></td><td>Launch Claude Code through proxy</td><td></td></tr>
-      <tr><td><span class="step-num">5</span></td><td>See conversation history</td><td></td></tr>
-      <tr><td><span class="step-num">6</span></td><td>Set up a DeSlop policy</td><td></td></tr>
-      <tr><td><span class="step-num">7</span></td><td>Set up an LLM-as-judge policy</td><td></td></tr>
+      <tr><th>Step</th><th>What it says</th></tr>
+      <tr><td><span class="step-num">0</span></td><td>Prerequisites (Docker + uv)</td></tr>
+      <tr><td><span class="step-num">1</span></td><td>Clone + cd</td></tr>
+      <tr><td><span class="step-num">2</span></td><td>Add Anthropic API key</td></tr>
+      <tr><td><span class="step-num">3</span></td><td>Run quick_start.sh</td></tr>
+      <tr><td><span class="step-num">4</span></td><td>Launch Claude Code through proxy</td></tr>
+      <tr><td><span class="step-num">5</span></td><td>See conversation history</td></tr>
+      <tr><td><span class="step-num">6</span></td><td>Set up a DeSlop policy</td></tr>
+      <tr><td><span class="step-num">7</span></td><td>Set up an LLM-as-judge policy</td></tr>
     </table>
 
-    <h3>4c. Verify it works <span class="time-badge">~10 min</span></h3>
-    <p>Once Claude Code is running through the proxy:</p>
-    <ol>
-      <li>Ask Claude Code to do something simple (e.g., "create a hello world python script")</li>
-      <li>Check the conversation history UI — does your conversation show up?</li>
-      <li>If you set up DeSlop: ask Claude to write something with em dashes or "I'd be happy to help" — does it get cleaned?</li>
-      <li>Check the activity monitor — do you see requests flowing?</li>
-    </ol>
+    <p>Once it's running, try something simple ("create a hello world python script"), check the conversation history UI, and test any policies you set up.</p>
 
     <h2>Part 5: Your Report</h2>
-    <p>Create a Google Doc or markdown file with:</p>
+    <p>Send a Google Doc or markdown file to <a href="mailto:scott@luthienresearch.org">scott@luthienresearch.org</a> covering:</p>
     <ol>
-      <li><strong>Landing page feedback</strong> (Part 3) — what worked, what didn't</li>
-      <li><strong>README feedback</strong> (Part 4a + 4b) — clarity, setup issues</li>
-      <li><strong>Functionality feedback</strong> (Part 4c) — did it actually work?</li>
-      <li><strong>Overall impressions:</strong>
-        <ul>
-          <li>How long did the whole thing take?</li>
-          <li>On a scale of 1–5, how easy was it to get running?</li>
-          <li>What was the most compelling part?</li>
-          <li>What was the most confusing part?</li>
-          <li>What would you change first?</li>
-        </ul>
-      </li>
+      <li>Landing page — what worked, what didn't</li>
+      <li>README + setup — clarity, issues, errors</li>
+      <li>Did the product actually work?</li>
+      <li>How long did it take? How easy (1–5)? What would you change first?</li>
     </ol>
-
-    <p>Send the report to <a href="mailto:scott@luthienresearch.org">scott@luthienresearch.org</a>.</p>
-
-    <hr>
-
-    <div class="callout">
-      <strong>Tips:</strong>
-      <ul style="margin-bottom:0;">
-        <li>We want the good, the bad, and the ugly. If something is broken or confusing, that's valuable feedback — not a failure on your part. Equally, if something clicks or feels well-designed, say so.</li>
-        <li>Don't fix things yourself. Just document what you see.</li>
-        <li>If stuck on a step for >10 min, note where you got stuck, skip it, and keep going.</li>
-        <li>Docker builds images locally on first run — can be slow (~5–10 min). That's expected.</li>
-      </ul>
-    </div>
 
   </div>
 </body>
