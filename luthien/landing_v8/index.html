@@ -40,6 +40,17 @@
 
     .container { max-width: 960px; margin: 0 auto; padding: 0 24px; }
 
+    .section-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #71717a;
+      margin-bottom: 20px;
+      padding-left: 24px;
+    }
+
     section { padding: 40px 0; }
     @media (max-width: 640px) {
       section { padding: 28px 0; }
@@ -1083,7 +1094,7 @@
 
   <!-- QUOTE CAROUSEL (the lead) -->
   <section class="carousel-section" id="quotes" style="padding-top: 56px; padding-bottom: 24px;">
-    <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: #52525b; margin-bottom: 20px; padding-left: 24px;">the problem</div>
+    <div class="section-label">the problem</div>
     <div class="container" style="max-width: 560px;">
       <h2 style="font-size: clamp(1.1rem, 2.5vw, 1.4rem); font-weight: 600; color: #e4e4e7; margin-bottom: 20px; text-align: left;">Claude Code does weird and suspicious stuff sometimes...</h2>
       <div class="carousel-wrapper" id="carouselWrapper">
@@ -1109,7 +1120,7 @@
 
   <!-- UX: BEFORE / AFTER -->
   <section id="ux" style="padding-top: 32px; padding-bottom: 32px;">
-    <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: #52525b; margin-bottom: 20px; padding-left: 24px;">ux</div>
+    <div class="section-label">ux</div>
     <div class="container">
       <div class="ux-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 900px;">
         <div>
@@ -1128,7 +1139,7 @@
 
   <!-- HOW IT WORKS -->
   <section id="layers" style="padding-top: 32px; padding-bottom: 32px;">
-    <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: #52525b; margin-bottom: 20px; padding-left: 24px;">architecture</div>
+    <div class="section-label">architecture</div>
     <div class="container">
       <style>
         .term-arch { max-width: 680px; margin: 0 auto; font-family: 'JetBrains Mono', monospace; }
