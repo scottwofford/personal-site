@@ -891,8 +891,8 @@
     .cat-dot-segment:hover .cat-dot { opacity: 0.9; }
     .cat-dot-segment.active .cat-dot { opacity: 0.9; }
     .cat-dot-segment.active .cat-dot.hero {
-      width: 7px; height: 7px; margin: -1px 0;
-      opacity: 1; box-shadow: 0 0 4px currentColor;
+      width: 6px; height: 6px;
+      opacity: 1;
     }
     .cat-seg-tip {
       position: absolute; bottom: calc(100% + 8px); left: 50%;
@@ -1493,7 +1493,6 @@
           if (isActive) {
             var mid = Math.floor(dots.length / 2);
             dots[mid].classList.add("hero");
-            dots[mid].style.color = catColors[cat];
           }
         });
       }
