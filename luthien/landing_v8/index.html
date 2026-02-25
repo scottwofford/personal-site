@@ -876,35 +876,24 @@
 
     .carousel-btn:hover { border-color: #6b9fff; color: #6b9fff; }
 
-    .carousel-dots { display: none; }
+    .carousel-dots { display: flex; gap: 6px; }
 
-    /* Category dot bar */
-    .cat-dot-area { text-align: center; margin-top: 14px; }
-    .cat-dot-rows { display: inline-flex; flex-direction: column; align-items: center; gap: 3px; }
-    .cat-dot-row { display: flex; gap: 2.5px; justify-content: center; flex-wrap: nowrap; }
-    .cat-dot-segment { display: flex; gap: 2.5px; position: relative; cursor: default; }
-    .cat-dot-segment + .cat-dot-segment { margin-left: 4px; }
-    .cat-dot {
-      width: 5px; height: 5px; border-radius: 50%;
-      opacity: 0.5; transition: all 0.3s ease;
+    .carousel-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #3f3f46;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+      padding: 0;
     }
-    .cat-dot-segment:hover .cat-dot { opacity: 0.9; }
-    .cat-dot-segment.active .cat-dot { opacity: 0.9; }
-    .cat-dot-segment.active .cat-dot.hero {
-      width: 6px; height: 6px;
-      opacity: 1;
+
+    .carousel-dot.active {
+      background: #6b9fff;
+      width: 18px;
+      border-radius: 3px;
     }
-    .cat-seg-tip {
-      position: absolute; bottom: calc(100% + 8px); left: 50%;
-      transform: translateX(-50%);
-      font-family: 'JetBrains Mono', monospace; font-size: 0.5rem;
-      color: #a1a1aa; background: #18181b; border: 1px solid #27272a;
-      padding: 2px 7px; border-radius: 3px; white-space: nowrap;
-      opacity: 0; pointer-events: none; transition: opacity 0.15s; z-index: 20;
-    }
-    .cat-dot-segment:hover .cat-seg-tip,
-    .cat-dot-segment.active .cat-seg-tip { opacity: 1; }
-    .cat-dot-segment.active .cat-seg-tip { color: #e4e4e7; }
 
     .carousel-stat {
       text-align: center;
@@ -1105,14 +1094,9 @@
         <div class="carousel-dots" id="carouselDots"></div>
         <button class="carousel-btn" id="nextBtn">&#9654;</button>
       </div>
-      <div class="cat-dot-area">
-        <div class="cat-dot-rows" id="categoryDotBar"></div>
-        <div style="margin-top: 10px;">
-          <a href="incidents.html" style="font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: #52525b; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#a1a1aa'" onmouseout="this.style.color='#52525b'">see more <span style="display:inline-block;transition:transform 0.2s;">→</span></a>
-        </div>
-      </div>
-      <div style="display: flex; align-items: center; justify-content: center; margin-top: 8px; position: relative;">
+      <div style="display: flex; align-items: center; justify-content: center; gap: 16px; margin-top: 10px; position: relative;">
         <span class="meme-trigger" id="memeTrigger" style="margin: 0; font-family: 'JetBrains Mono', monospace; color: #a1a1aa; font-size: 0.7rem; font-style: italic; cursor: pointer; border-bottom: 1px dashed #3f3f46;">meanwhile...</span>
+        <a href="incidents.html" style="color: #6b9fff; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; text-decoration: none; border-bottom: 1px solid rgba(107,159,255,0.3);">see more &rarr;</a>
       </div>
       <div class="meme-popup" id="memePopup">
         <img src="ceo-ai-meme.jpg" alt="CEO AI meme" style="width: 100%; display: block; border-radius: 6px;">
@@ -1440,66 +1424,6 @@
         dotsContainer.appendChild(dot);
       }
 
-      // Category dot bar
-      var catColors = {
-        cheated:'#ef4444', security:'#f97316', hallucinated:'#a855f7', ignored:'#eab308',
-        deleted:'#ec4899', loop:'#6366f1', incomplete:'#14b8a6', overconfident:'#f59e0b',
-        quality:'#22c55e', context:'#06b6d4'
-      };
-      var catLabels = {
-        cheated:'lied / cheated', security:'security risk', hallucinated:'hallucinated',
-        ignored:'ignored rules', deleted:'deleted code', loop:'looping',
-        incomplete:'incomplete', overconfident:'overconfident', quality:'low quality',
-        context:'context loss'
-      };
-      var catCounts = { cheated:9, security:7, hallucinated:10, ignored:11, deleted:7, loop:8, incomplete:12, overconfident:9, quality:14, context:7 };
-      var catOrder = ['cheated','security','hallucinated','ignored','deleted','loop','incomplete','overconfident','quality','context'];
-      var splitAt = 5;
-      var catBar = document.getElementById("categoryDotBar");
-      var catSegments = {};
-
-      var row1 = document.createElement("div"); row1.className = "cat-dot-row";
-      var row2 = document.createElement("div"); row2.className = "cat-dot-row";
-
-      catOrder.forEach(function(cat, i) {
-        var row = i < splitAt ? row1 : row2;
-        var seg = document.createElement("div");
-        seg.className = "cat-dot-segment";
-        seg.setAttribute("data-cat", cat);
-        var tip = document.createElement("div");
-        tip.className = "cat-seg-tip";
-        tip.textContent = catLabels[cat];
-        seg.appendChild(tip);
-        for (var j = 0; j < catCounts[cat]; j++) {
-          var d = document.createElement("div");
-          d.className = "cat-dot";
-          d.style.background = catColors[cat];
-          seg.appendChild(d);
-        }
-        row.appendChild(seg);
-        catSegments[cat] = seg;
-      });
-
-      catBar.appendChild(row1);
-      catBar.appendChild(row2);
-
-      function highlightCategory(activeCat) {
-        catOrder.forEach(function(cat) {
-          var seg = catSegments[cat];
-          var isActive = cat === activeCat;
-          seg.classList.toggle("active", isActive);
-          var dots = seg.querySelectorAll(".cat-dot");
-          dots.forEach(function(d) { d.classList.remove("hero"); });
-          if (isActive) {
-            var mid = Math.floor(dots.length / 2);
-            dots[mid].classList.add("hero");
-          }
-        });
-      }
-
-      // Initial highlight
-      if (quotes[0].cat) highlightCategory(quotes[0].cat);
-
       function goTo(idx) {
         if (idx < 0) idx = totalSlides - 1;
         if (idx >= totalSlides) idx = 0;
@@ -1508,10 +1432,6 @@
         var dots = dotsContainer.querySelectorAll(".carousel-dot");
         var dotIdx = Math.min(currentIndex, dotCount - 1);
         dots.forEach(function (dd, i) { dd.classList.toggle("active", i === dotIdx); });
-        // Highlight matching category
-        if (quotes[currentIndex] && quotes[currentIndex].cat) {
-          highlightCategory(quotes[currentIndex].cat);
-        }
       }
 
       prevBtn.addEventListener("click", function () { goTo(currentIndex - 1); });
