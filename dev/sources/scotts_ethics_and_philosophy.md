@@ -4,7 +4,7 @@
 
 # **Core Framework**
 
-I'm a consequentialist with significant modifications. Expected value reasoning is load-bearing for major decisions, but it operates within constraints and thresholds that pure utilitarianism doesn't require.
+I'm a philosophical pragmatist (moral questions are practical problems, judge by what works) with significant modifications. Expected value reasoning is load-bearing for major decisions, but it operates within constraints and thresholds that pure utilitarianism doesn't require.
 
 ## **The Modifications**
 
@@ -44,7 +44,7 @@ I was drawn to Wittgenstein in college philosophy, and his later work maps onto 
 
 # **The Synthesis**
 
-I'm a consequentialist who takes expected value seriously for big decisions, but I operate with: (1) epistemic integrity requirements—don't claim more confidence than you have; (2) agency commitments—individuals get to specify their own values; (3) deontological constraints around honesty—no lying, embellishment is a gray zone; (4) threshold effects—uncertain moral demands don't fully bind; and (5) libertarian paternalist design philosophy—good defaults, user override, transparency.
+I'm a pragmatist who takes expected value seriously for big decisions, but I operate with: (1) epistemic integrity requirements—don't claim more confidence than you have; (2) agency commitments—individuals get to specify their own values; (3) deontological constraints around honesty—no lying, embellishment is a gray zone; (4) threshold effects—uncertain moral demands don't fully bind; and (5) libertarian paternalist design philosophy—good defaults, user override, transparency.
 
 This framework is internally consistent and explains my actual choices. It's not pure anything, but coherent. The Wittgensteinian thread runs underneath: I'm suspicious of false precision, I prefer dissolving problems to solving them, and I accept that some of my commitments are felt constraints I notice rather than conclusions I derived.
 
