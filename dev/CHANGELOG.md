@@ -4,6 +4,10 @@ All notable changes to scottwofford.com. Plans for larger changes live in [`plan
 
 ---
 
+## 2026-05-02 — How I'm thinking about AI right now ([PR #7](https://github.com/scottwofford/personal-site/pull/7))
+
+- **shared/**: Added `openclaw-and-ai-take.md` essay. Public-readable take on the OpenClaw clip making the rounds: real signal vs. hype, what OpenClaw actually is, and how I think about AI safety (deployment-boundary work over model-boundary work, why I work on this at Luthien).
+
 ## 2026-03-05 — Mike Mantell feedback: homepage + philosophy reframe ([PR #6](https://github.com/scottwofford/personal-site/pull/6))
 
 - **Homepage**: Consolidated 3 paragraphs → 2 (personal + site orientation). Added intro text: "This site has my evolving philosophy, some side projects..."
