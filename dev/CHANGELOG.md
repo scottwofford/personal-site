@@ -4,6 +4,10 @@ All notable changes to scottwofford.com. Plans for larger changes live in [`plan
 
 ---
 
+## 2026-05-02 — Should you try OpenClaw? ([PR #9](https://github.com/scottwofford/personal-site/pull/9))
+
+- **shared/**: Added `should-you-try-openclaw.md` — practical-decision companion to the OpenClaw essay. Covers when it makes sense to try, why you don't need a Mac Mini (sandbox isolation works on a spare laptop), the separate-signal Mac Mini compute startup, and a 5-step practical baseline if you do start.
+
 ## 2026-05-02 — How I'm thinking about AI right now ([PR #7](https://github.com/scottwofford/personal-site/pull/7))
 
 - **shared/**: Added `openclaw-and-ai-take.md` essay. Public-readable take on the OpenClaw clip making the rounds: real signal vs. hype, what OpenClaw actually is, and how I think about AI safety (deployment-boundary work over model-boundary work, why I work on this at Luthien).
