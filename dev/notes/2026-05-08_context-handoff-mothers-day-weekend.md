@@ -160,15 +160,7 @@ Ex-Amazon friend. Walking call, talked through the letter strategy. Scott had be
 - Sentence-by-sentence drafting of the sendable letter, against the section anchors above.
 - **Decide between single-letter vs. two-batch strategy** (short letter before May 15 + simmer-on-vacation letter). Tdog conversation surfaced this; not yet decided.
 - **Workshop the partnership-not-employee boundary** so it lands without coming off as harsh. Tdog's caveat-hard rule applies: heavy acknowledgment of Scott's current slack-pickup *first*, then the boundary.
-- Window-of-tolerance check-ins. (Spreadsheet link above.)
 - Bridge plan: what to say if Maria initiates the conversation before letter delivery. Already in repo at commit `3dc0792` ("bridge plan: what to say if Maria initiates before letter delivery"). Pull that file before improvising.
-
-## Open questions for Scott (mobile chat can ask)
-
-- Did pass 1 of the unsent letter get written today? If yes, where?
-- Has Scott reread Maria's letter slowly with the D3 lens? (Step 1 of the printout sequence.)
-- Has emotion-tracker sheet been logged today?
-- Are there other friend calls today not captured here? (Doc only has the Kate call.)
 
 ## Voice constraints for the mobile chat
 
