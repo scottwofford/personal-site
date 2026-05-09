@@ -4,6 +4,14 @@ All notable changes to scottwofford.com. Plans for larger changes live in [`plan
 
 ---
 
+## 2026-05-09 — /substances drug-harm chart (standalone, not linked from main)
+
+- **substances/**: New standalone page hosting an updated 2026 version of the Wikipedia ["Drug danger and dependence" chart](https://en.wikipedia.org/wiki/File:Drug_danger_and_dependence-small.png) (originally Gable 2006 / methodology Gable 2004). Adds fentanyl, carfentanil, methamphetamine, oxycodone, alprazolam, GHB.
+- **`noindex, nofollow`** meta + not linked from main nav — accessible only by direct URL.
+- Includes above-the-fold reader warnings (acute-only, uncertainty, polysubstance, carfentanil-undetermined, author-additions disclaimer).
+- Adversarial pre-publish review (`/devil`) flagged placement issues for 8+ substances and methodology gaps; flagged items are listed transparently on the page as unresolved. Chart shipped as draft / commentary, not authoritative reference.
+- Conservative SVG fixes applied: title prefixed "Acute," subtitle corrected to Gable (2006) + 2004 methodology citation, legend "Narcotic" → "Opioid." Coordinate corrections from devil critique deliberately not yet applied (depend on which sources to trust; Scott to weigh in).
+
 ## 2026-05-02 — Should you try OpenClaw? ([PR #9](https://github.com/scottwofford/personal-site/pull/9))
 
 - **shared/**: Added `should-you-try-openclaw.md` — practical-decision companion to the OpenClaw essay. Covers when it makes sense to try, why you don't need a Mac Mini (sandbox isolation works on a spare laptop), the separate-signal Mac Mini compute startup, and a 5-step practical baseline if you do start.

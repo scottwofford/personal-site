@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Acute Active/Lethal Dose Ratio and Dependence — Scott Wofford</title>
+<link rel="stylesheet" href="/styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<style>
+  body { max-width: 760px; margin: 0 auto; padding: 2rem 1.25rem; line-height: 1.55; }
+  h1 { font-size: 1.5rem; line-height: 1.3; margin-bottom: 0.25rem; }
+  .subtitle { color: #666; font-size: 0.95rem; margin-bottom: 1.5rem; }
+  .chart-wrap { margin: 1.5rem -1rem; text-align: center; }
+  .chart-wrap svg { max-width: 100%; height: auto; }
+  .warnings { background: #fef9e7; border-left: 4px solid #b7950b; padding: 0.9rem 1rem; margin: 1.25rem 0; font-size: 0.92rem; }
+  .warnings ol { margin: 0.4rem 0 0 1.1rem; padding: 0; }
+  .warnings li { margin-bottom: 0.45rem; }
+  .meta { background: #f4f4f0; padding: 0.9rem 1rem; margin: 1.25rem 0; font-size: 0.88rem; color: #444; border-radius: 3px; }
+  .meta p { margin: 0.4rem 0; }
+  .critique { background: #fdebeb; border-left: 4px solid #c0392b; padding: 0.9rem 1rem; margin: 1.25rem 0; font-size: 0.9rem; }
+  .critique ul { margin: 0.4rem 0 0 1.1rem; padding: 0; }
+  .critique li { margin-bottom: 0.4rem; }
+  h2 { font-size: 1.1rem; margin-top: 2rem; }
+  small { color: #666; }
+  a { color: #1F5BAA; }
+</style>
+</head>
+<body>
+
+<p><small><a href="/">scottwofford.com</a></small></p>
+
+<h1>Acute Active/Lethal Dose Ratio and Dependence Potential of Psychoactive Drugs</h1>
+<p class="subtitle">Updated 2026 with fentanyl, carfentanil, methamphetamine, oxycodone, alprazolam, and GHB.</p>
+
+<div class="warnings">
+<strong>Read this before reading the chart.</strong>
+<ol>
+<li><strong>Acute toxicity only.</strong> The chart shows single-dose lethality. It does <em>not</em> measure cancer risk, cardiovascular disease, lung disease, dependence severity, withdrawal danger, social harms, or chronic-use mortality. Alcohol and tobacco kill far more people than the chart suggests because most of those deaths are chronic, not acute.</li>
+<li><strong>Population-level estimates with substantial uncertainty.</strong> Active and lethal doses in real-world use depend on tolerance, purity, route of administration, polypharmacy, and individual physiology. Do not use this chart to estimate a "safe" dose for any substance. There is no safe dose for several substances on this chart.</li>
+<li><strong>Carfentanil's human therapeutic index is undetermined.</strong> The most acutely-dangerous-looking substance on this chart has no characterized human therapeutic index. Position is estimated from animal pharmacology and post-mortem toxicology. Treat as scale-marker, not data point.</li>
+<li><strong>Six substances are author estimates, not Gable's data.</strong> Fentanyl, carfentanil, methamphetamine, oxycodone, alprazolam, and GHB were added to the Gable (2006) format from secondary literature. Treat them as approximate.</li>
+<li><strong>Polysubstance use changes everything.</strong> Most opioid deaths involve a benzodiazepine or alcohol. Most benzodiazepine deaths involve an opioid or alcohol. Single-substance ratios shown here do not capture the dominant real-world risk.</li>
+</ol>
+</div>
+
+<div class="chart-wrap">
+<object data="drug_harm_chart_2026.svg" type="image/svg+xml" width="600" aria-label="Acute active-to-lethal dose ratio and dependence chart, 2026">Drug harm chart (SVG)</object>
+</div>
+
+<div class="meta">
+<p><strong>Inspired by:</strong> <a href="https://en.wikipedia.org/wiki/File:Drug_danger_and_dependence-small.png">Drug danger and dependence chart</a> on Wikipedia, derived from Gable, R. S. (2006), "Acute toxicity of drugs versus regulatory status," in J. M. Fish (ed.), <em>Drugs and Society: U.S. Public Policy</em>, Rowman &amp; Littlefield, pp. 149–162.</p>
+<p><strong>Methodology source:</strong> Gable, R. S. (2004), "Comparison of acute lethal toxicity of commonly abused psychoactive substances," <em>Addiction</em> 99(6): 686–695. <a href="https://onlinelibrary.wiley.com/doi/10.1111/j.1360-0443.2004.00744.x">Wiley</a> · <a href="https://pubmed.ncbi.nlm.nih.gov/15139867/">PubMed</a> · <a href="https://rgable.wordpress.com/drug-toxicity/">Gable's summary page</a>.</p>
+<p><strong>Page status:</strong> Standalone, not linked from the main site. <code>noindex</code>. Drafted 2026-05-09, generated initially by Claude and reviewed adversarially via <code>/devil</code>; placement-correction items below remain unresolved.</p>
+</div>
+
+<h2>Adversarial review (issues flagged before publish, unresolved)</h2>
+
+<div class="critique">
+A pre-publish critique flagged the following placement and methodology issues. They are listed here for transparency; the chart itself has not yet been re-plotted to address them.
+
+<ul>
+<li><strong>Carfentanil:</strong> No published human active or lethal dose. Plotted position is extrapolated from animal pharmacology + post-mortem cases with heavy polysubstance confounding. Should arguably be removed or moved outside the data area as a scale-only annotation.</li>
+<li><strong>Nicotine:</strong> Critic claims plotted position is too safe by ~0.6 decades vs Gable's data (should be near methamphetamine's safety ratio, not caffeine's).</li>
+<li><strong>Alprazolam:</strong> Critic claims single-agent oral alprazolam has a much wider safety margin than plotted; current position overstates acute toxicity.</li>
+<li><strong>Rohypnol (flunitrazepam):</strong> Same issue, smaller magnitude.</li>
+<li><strong>Ketamine, mescaline, GHB, ephedra, oxycodone, pentobarbital:</strong> Critic claims various directional and decade-magnitude errors vs Gable's published numbers.</li>
+<li><strong>Heroin/morphine:</strong> Plotted as separate points, but heroin is a morphine prodrug; visual reading suggests they are independent risk profiles, which is not the underlying pharmacology.</li>
+<li><strong>MDMA classification:</strong> Plotted as stimulant (yellow triangle); pharmacology is closer to entactogen with hallucinogenic properties.</li>
+<li><strong>Cannabis category:</strong> Single data point ("Marijuana") given its own color category despite no clear methodological reason for separation from hallucinogens.</li>
+<li><strong>No uncertainty intervals.</strong> Single-point estimates over a three-decade log scale are misleading; the underlying literature reports ranges.</li>
+<li><strong>Dependence-band placements</strong> for the six added substances are qualitative and unsourced inline.</li>
+</ul>
+</div>
+
+<h2>Why this is here</h2>
+<p>Personal curiosity. The Wikipedia version of this chart is widely cited but predates the fentanyl-era opioid crisis and benzodiazepine prominence. I wanted to see how the format extends with current substances. The chart is published here as a draft commentary on the Gable framework, not as an authoritative reference. If you find a better-sourced version, please tell me and I'll replace this one.</p>
+
+<p><small>Last updated 2026-05-09. <a href="https://github.com/scottwofford/personal-site/blob/main/substances/index.html">View source</a>.</small></p>
+
+</body>
+</html>

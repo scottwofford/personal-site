@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #ffffff;">
+<title>Acute active-to-lethal dose ratio and dependence chart, 2026</title>
+<desc>Recreation of the Gable (2006) chart format with fentanyl, carfentanil, methamphetamine, oxycodone, alprazolam, and GHB added. Acute toxicity only; does not capture chronic harm. Added points are author estimates from secondary literature, not Gable's data.</desc>
+
+<text x="300" y="22" text-anchor="middle" font-size="14" font-weight="600" fill="#222">Acute Active/Lethal Dose Ratio and Dependence Potential of Psychoactive Drugs</text>
+<text x="300" y="40" text-anchor="middle" font-size="11" fill="#666">Gable (2006) format; methodology from Gable (2004) Addiction 99:686-695. Author additions: fentanyl, methamphetamine, oxycodone, alprazolam, GHB, carfentanil.</text>
+
+<!-- Plot area -->
+<rect x="90" y="55" width="490" height="470" fill="#fafaf7" stroke="#888" stroke-width="0.5"/>
+
+<!-- Alternating background bands -->
+<rect x="90" y="125" width="490" height="67" fill="#f0efe8"/>
+<rect x="90" y="259" width="490" height="67" fill="#f0efe8"/>
+<rect x="90" y="393" width="490" height="67" fill="#f0efe8"/>
+
+<!-- Y-axis labels (7 levels) -->
+<text x="85" y="95" text-anchor="end" font-size="11" fill="#444">Very high</text>
+<text x="85" y="162" text-anchor="end" font-size="11" fill="#444">High</text>
+<text x="85" y="229" text-anchor="end" font-size="11" fill="#444">Moderate/high</text>
+<text x="85" y="296" text-anchor="end" font-size="11" fill="#444">Moderate</text>
+<text x="85" y="363" text-anchor="end" font-size="11" fill="#444">Moderate/low</text>
+<text x="85" y="430" text-anchor="end" font-size="11" fill="#444">Low</text>
+<text x="85" y="497" text-anchor="end" font-size="11" fill="#444">Very low</text>
+
+<text transform="translate(25, 290) rotate(-90)" text-anchor="middle" font-size="12" fill="#333">Dependence Potential</text>
+
+<!-- X-axis ticks (log scale: 0.0005 to 0.3) -->
+<!-- log10(0.001)=-3, scaled to plot from x=143 -->
+<!-- Plot maps log10 -3.301 (left edge x=90) to log10 -0.523 (right edge x=580), span 490 -->
+<line x1="143" y1="525" x2="143" y2="530" stroke="#666"/>
+<text x="143" y="543" text-anchor="middle" font-size="11" fill="#444">0.001</text>
+<line x1="195" y1="525" x2="195" y2="528" stroke="#999"/>
+<line x1="225" y1="525" x2="225" y2="528" stroke="#999"/>
+<line x1="246" y1="525" x2="246" y2="528" stroke="#999"/>
+<line x1="263" y1="525" x2="263" y2="528" stroke="#999"/>
+<line x1="277" y1="525" x2="277" y2="528" stroke="#999"/>
+<line x1="289" y1="525" x2="289" y2="528" stroke="#999"/>
+<line x1="299" y1="525" x2="299" y2="528" stroke="#999"/>
+<line x1="318" y1="525" x2="318" y2="528" stroke="#999"/>
+<line x1="319" y1="525" x2="319" y2="530" stroke="#666"/>
+<text x="319" y="543" text-anchor="middle" font-size="11" fill="#444">0.01</text>
+<line x1="495" y1="525" x2="495" y2="530" stroke="#666"/>
+<text x="495" y="543" text-anchor="middle" font-size="11" fill="#444">0.1</text>
+
+<text x="335" y="565" text-anchor="middle" font-size="12" fill="#333">Active Dose / Lethal Dose</text>
+
+<!-- ============ DATA POINTS ============ -->
+<!-- Coordinate calc: x_px = 90 + (log10(val) - log10(0.0005)) / 2.778 * 490 -->
+<!-- y_px by category: very high=88, high=155, mod/high=222, moderate=289, mod/low=356, low=423, very low=490 -->
+
+<!-- VERY HIGH -->
+<rect x="531" y="84" width="9" height="9" fill="#C0392B"/>
+<text x="535" y="78" text-anchor="middle" font-size="11" fill="#C0392B" font-weight="600">Heroin</text>
+
+<rect x="416" y="84" width="9" height="9" fill="#C0392B"/>
+<text x="420" y="78" text-anchor="middle" font-size="11" fill="#C0392B" font-weight="600">Carfentanil</text>
+
+<!-- HIGH -->
+<polygon points="334,150 329,160 339,160" fill="#8B7314"/>
+<text x="334" y="146" text-anchor="middle" font-size="11" fill="#8B7314" font-weight="600">Nicotine</text>
+
+<rect x="416" y="151" width="9" height="9" fill="#C0392B"/>
+<text x="420" y="146" text-anchor="middle" font-size="11" fill="#C0392B" font-weight="600">Fentanyl</text>
+
+<polygon points="450,150 445,160 455,160" fill="#8B7314"/>
+<text x="450" y="178" text-anchor="middle" font-size="11" fill="#8B7314" font-weight="600">Methamphetamine</text>
+
+<rect x="513" y="151" width="9" height="9" fill="#C0392B"/>
+<text x="540" y="146" text-anchor="middle" font-size="11" fill="#C0392B" font-weight="600">Morphine</text>
+
+<!-- MOD/HIGH -->
+<circle cx="436" cy="222" r="4.5" fill="#222"/>
+<text x="436" y="213" text-anchor="middle" font-size="11" fill="#222" font-weight="600">Pentobarbital</text>
+
+<polygon points="461,217 456,227 466,227" fill="#8B7314"/>
+<text x="461" y="240" text-anchor="middle" font-size="11" fill="#8B7314" font-weight="600">Cocaine</text>
+
+<rect x="481" y="218" width="9" height="9" fill="#C0392B"/>
+<text x="515" y="222" text-anchor="middle" font-size="11" fill="#C0392B" font-weight="600">Oxycodone</text>
+
+<!-- MODERATE -->
+<polygon points="259,284 254,294 264,294" fill="#8B7314"/>
+<text x="259" y="280" text-anchor="middle" font-size="11" fill="#8B7314" font-weight="600">Ephedra</text>
+
+<circle cx="358" cy="289" r="4.5" fill="#222"/>
+<text x="345" y="280" text-anchor="middle" font-size="11" fill="#222" font-weight="600">Alprazolam</text>
+
+<circle cx="383" cy="289" r="4.5" fill="#222"/>
+<text x="400" y="306" text-anchor="middle" font-size="11" fill="#222" font-weight="600">Rohypnol</text>
+
+<circle cx="495" cy="289" r="4.5" fill="#222"/>
+<text x="495" y="280" text-anchor="middle" font-size="11" fill="#222" font-weight="600">Alcohol</text>
+
+<!-- MOD/LOW -->
+<polygon points="217,361 212,351 222,351" fill="#5D8B2C"/>
+<text x="217" y="345" text-anchor="middle" font-size="11" fill="#5D8B2C" font-weight="600">Marijuana</text>
+
+<polygon points="270,351 277,358 270,365 263,358" fill="#6B3D8E"/>
+<text x="265" y="378" text-anchor="middle" font-size="11" fill="#6B3D8E" font-weight="600">Nitrous oxide</text>
+
+<polygon points="294,351 289,361 299,361" fill="#8B7314"/>
+<text x="312" y="345" text-anchor="middle" font-size="11" fill="#8B7314" font-weight="600">Caffeine</text>
+
+<polygon points="450,351 445,361 455,361" fill="#8B7314"/>
+<text x="450" y="345" text-anchor="middle" font-size="11" fill="#8B7314" font-weight="600">MDMA</text>
+
+<circle cx="546" cy="356" r="4.5" fill="#222"/>
+<text x="546" y="345" text-anchor="middle" font-size="11" fill="#222" font-weight="600">GHB</text>
+
+<!-- LOW -->
+<polygon points="383,418 390,425 383,432 376,425" fill="#6B3D8E"/>
+<text x="383" y="412" text-anchor="middle" font-size="11" fill="#6B3D8E" font-weight="600">Ketamine</text>
+
+<!-- VERY LOW -->
+<rect x="138" y="489" width="11" height="3" fill="#1F5BAA"/>
+<text x="143" y="484" text-anchor="middle" font-size="11" fill="#1F5BAA" font-weight="600">LSD</text>
+
+<rect x="158" y="489" width="11" height="3" fill="#1F5BAA"/>
+<text x="170" y="505" text-anchor="middle" font-size="11" fill="#1F5BAA" font-weight="600">Psilocybin</text>
+
+<rect x="456" y="489" width="11" height="3" fill="#1F5BAA"/>
+<text x="461" y="484" text-anchor="middle" font-size="11" fill="#1F5BAA" font-weight="600">Mescaline</text>
+
+<!-- ============ LEGEND ============ -->
+<g transform="translate(90, 583)">
+<rect x="0" y="-4" width="8" height="8" fill="#C0392B"/>
+<text x="13" y="3" font-size="10" fill="#444">Opioid</text>
+
+<circle cx="78" cy="0" r="4" fill="#222"/>
+<text x="86" y="3" font-size="10" fill="#444">Depressant</text>
+
+<polygon points="160,-4 154,4 166,4" fill="#8B7314"/>
+<text x="171" y="3" font-size="10" fill="#444">Stimulant</text>
+
+<polygon points="234,-4 240,0 234,4 228,0" fill="#6B3D8E"/>
+<text x="245" y="3" font-size="10" fill="#444">Anesthetic</text>
+
+<rect x="305" y="-1" width="10" height="3" fill="#1F5BAA"/>
+<text x="319" y="3" font-size="10" fill="#444">Hallucinogen</text>
+
+<polygon points="395,4 389,-4 401,-4" fill="#5D8B2C"/>
+<text x="406" y="3" font-size="10" fill="#444">Cannabis</text>
+</g>
+
+</svg>
