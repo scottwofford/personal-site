@@ -17,11 +17,28 @@ The Moral Ambition fellowships flagged on the card by Matt have no AI-safety tra
 
 ## Fit assessment
 
-The card framing was "bridge starting in September if needed." Three things worth pressure-testing before applying:
+Scott's profile is stronger than a "generalist PM" framing suggests. From the resume:
 
-- **Most of these are research fellowships.** Anthropic Fellows, MATS Empirical / Theory / Interpretability tracks all expect the fellow to ship research output. Scott's strengths are PM, user empathy, BD instincts, not ML research authorship. The best fits within MATS are probably **Strategy & Forecasting**, **Policy & Governance**, or **Founding & Field-Building**. The last is essentially "what Scott is already doing at Luthien."
-- **A fellowship is a counter-bet against Luthien.** Doing a 4-month Anthropic Fellows or 10-week MATS forks Scott's identity from "Luthien CEO" to "fellow." Worth being explicit that this is a bridge IF Luthien doesn't close the round, not a parallel option.
-- **The Anthropic Fellows program does not preclude returning to Luthien.** Anthropic explicitly markets it as a path *into* their research org (the linked BusinessToday piece notes "$15,000 funding, duration & hiring chances"). For Scott, that framing is wrong: if he does it, the goal is the research credential + the network, not a hiring funnel.
+- **UK AISI / SPAR Research Fellow (Feb-June 2025)**, selected from 900+ applicants. Co-author on "Language Model Capability Assessments Should Consider Ensembles."
+- **Active working relationship with Anthropic's control team** (Fabien Roger). Luthien's roadmap is informed by Anthropic alignment research (Constitutional Classifiers, SHADE-Arena).
+- **Blue Dot AI Governance Course** (Q1 2025); **AISafety.com PM** (Nov 2024 - Aug 2025).
+- **Python proficiency from shipping**: 105 merged PRs to Claude Code, 46 PRs to luthien-proxy. Not Anthropic-research-level fluency but past the "fluent in Python" gate.
+- **2 paid pilots** (Redwood $330k-500k, Trajectory Labs $60k ARR), 14 active trials, 93 user interviews. Concrete AI-safety product traction.
+
+Cross-referenced against the eligibility text:
+
+| Program | Stated bar | Scott's standing |
+|---|---|---|
+| **Anthropic Fellows** | "Fluent in Python." "Strong technical background in CS, math, or physics." "Excited to transition into empirical AI research." | Python: yes (gate-clearing). CS/math/physics: gap (BSc Public Relations + MBA). The SPAR paper + 46 luthien-proxy PRs partly substitute. Verdict: **plausible candidate, not slam-dunk.** The bigger question is whether transitioning from "AI safety founder with $330k-500k pilot" to "4-month empirical research fellow" is the right move. |
+| **MATS Founding & Field-Building track** | "Diverse academic and professional backgrounds... policy, economics... cognitive science." "Strong motivation to contribute to AI safety and evidence of technical aptitude or research potential. Prior AI safety experience is helpful but not required." | **Very strong fit.** This track is designed for AI safety founders. Scott is literally one. The SPAR co-authored paper + the Luthien traction + Anthropic relationship clear the bar with margin. |
+| **MATS Policy & Governance** | Same broad eligibility. | Strong fit. Blue Dot governance course + AISafety.com PM both relevant. |
+| **MATS Strategy & Forecasting** | Same broad eligibility. | Plausible. Less obvious slot than Founding & Field-Building. |
+
+Strategic questions worth pressure-testing before applying anywhere:
+
+- **Is this a counter-bet against Luthien or a complement?** A 4-month Anthropic Fellows or 10-week MATS forks Scott's identity from "Luthien CEO" to "fellow." Worth being explicit: bridge IF the round doesn't close, not parallel to it.
+- **For MATS, does it actively help Luthien?** The Founding & Field-Building track has a "build the AI safety ecosystem" focus. Scott doing it WHILE Luthien runs (if Jai keeps the boat moving) is more plausible than the Anthropic Fellows full-time-research counter-bet. The network and field-building credential plausibly accelerate Luthien.
+- **Application timing.** MATS Autumn 2026 closes **June 7**. That's 3 weeks out. If Scott applies, the application work (statement of intent, references) is itself a 2-4 hour commitment. Decide whether to apply before the round outcome is clear, or only if the round stalls.
 
 ## Currently open
 
