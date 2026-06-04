@@ -69,7 +69,7 @@
     <textarea id="top3" rows="3" placeholder="tus palabras"></textarea>
   </div>
 
-  <p class="hint">Objetivo de palabras para el marco (estrella polar + criterios + top 3): 150&ndash;400. Las cajas de justificación por ítem son tu espacio de borrador; úsalas al escribir tu respuesta final.</p>
+  <p class="hint">Objetivo de palabras para el marco (estrella polar + criterios + top 3): 150&ndash;400.</p>
 </div>
 
 <script>
@@ -129,7 +129,7 @@ function render() {
       </div>
       <div>
         <div class="otext">${OUTCOMES[idx]}</div>
-        <textarea class="rat" rows="2" data-idx="${idx}" placeholder="¿por qué este puesto? (borrador)">${(rationale[idx]||'').replace(/</g,'&lt;')}</textarea>
+        <textarea class="rat" rows="2" data-idx="${idx}" placeholder="¿por qué este puesto?">${(rationale[idx]||'').replace(/</g,'&lt;')}</textarea>
       </div>`;
     ol.appendChild(li);
   });

@@ -70,7 +70,7 @@
     <textarea id="top3" rows="3" placeholder="your words"></textarea>
   </div>
 
-  <p class="hint">Word target for the framework (north star + criteria + top-3): 150&ndash;400. The per-item rationale boxes are your scratch space; pull from them when you write your final answer.</p>
+  <p class="hint">Word target for the framework (north star + criteria + top-3): 150&ndash;400.</p>
 
 </div>
 
@@ -133,7 +133,7 @@ function render() {
       </div>
       <div>
         <div class="otext">${OUTCOMES[idx]}</div>
-        <textarea class="rat" rows="2" data-idx="${idx}" placeholder="why this rank? (scratch)">${(rationale[idx]||'').replace(/</g,'&lt;')}</textarea>
+        <textarea class="rat" rows="2" data-idx="${idx}" placeholder="why this rank?">${(rationale[idx]||'').replace(/</g,'&lt;')}</textarea>
       </div>`;
     ol.appendChild(li);
   });
