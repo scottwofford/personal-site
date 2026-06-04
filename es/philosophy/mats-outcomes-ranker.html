@@ -18,11 +18,11 @@
   .frame label { display: block; color: #fff; font-size: 0.85rem; margin-bottom: 0.3rem; }
   textarea { width: 100%; font-family: 'Inconsolata', monospace; font-size: 0.85rem; background: #1a1a1a; color: #e5e5e5; border: 1px solid #333; border-radius: 4px; padding: 0.4rem; resize: vertical; }
   ol#list { list-style: none; margin: 0.75rem 0; padding: 0; }
-  li.row { background: #222; border: 1px solid #333; border-radius: 6px; padding: 0.6rem 0.8rem; margin: 0.5rem 0; display: grid; grid-template-columns: 42px 1fr; gap: 0.6rem; align-items: start; }
+  li.row { background: #222; border: 1px solid #333; border-radius: 6px; padding: 0.6rem 0.8rem; margin: 0.5rem 0; display: grid; grid-template-columns: 52px 1fr; gap: 0.6rem; align-items: start; }
   li.row.dragover { border-color: #6b9fff; }
   li.row.dragging { opacity: .5; }
-  .left { display: flex; flex-direction: column; align-items: center; gap: 0.25rem; }
-  .rank { font-weight: 600; font-size: 1.1rem; color: #6b9fff; }
+  .left { display: flex; flex-direction: column; align-items: flex-start; gap: 0.25rem; }
+  .rank { font-weight: 600; font-size: 1.9rem; color: #6b9fff; }
   .handle { cursor: grab; color: #666; font-size: 1rem; user-select: none; }
   .arrows { display: flex; flex-direction: column; gap: 2px; }
   .arrows button { padding: 0 0.4rem; font-size: 0.7rem; line-height: 1.3; }
@@ -44,6 +44,7 @@
 <div class="wrap">
   <h1>Clasificador de Resultados (MATS)</h1>
   <p>Una herramienta gratuita para el ejercicio de clasificación de la Respuesta Corta #1 de MATS: arrastra para clasificar los 10 resultados, escribe tu justificación junto a cada uno, y captura tu estrella polar, criterios y top 3. Se guarda automáticamente en tu navegador; usa Descargar o Copiar para conservarlo. Tú escribes cada palabra (política de uso de IA de MATS).</p>
+  <p class="hint">Fuente: solicitud de MATS Otoño 2026 (<a href="https://forms.matsprogram.org/apply-a26" target="_blank">solicitud</a>, <a href="https://matsprogram.notion.site/MATS-Autumn-2026-General-Application-35da0e14b0ad803e99daf0dbd7124971" target="_blank">versión Notion</a>).</p>
   <p class="hint">Arrastra el controlador (&#9776;) o usa &#9650;/&#9660; para reordenar.</p>
 
   <div class="bar">
