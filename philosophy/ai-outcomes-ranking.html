@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ranking AI Outcomes by Benefit to Humanity - Scott Wofford</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <style>
+    table.ranktable { border-collapse: collapse; width: 100%; margin: 1em 0; font-size: 0.95em; }
+    table.ranktable th, table.ranktable td { border: 1px solid #ccc; padding: 6px 10px; text-align: left; vertical-align: top; }
+    table.ranktable th { background: #f3f3f0; }
+  </style>
+</head>
+<body>
+  <div class="section-nav">
+    <a href="/">← home</a> / <a href="/philosophy/" class="section-name">philosophy & epistemics</a>
+    <div class="siblings">
+      <a href="/philosophy/personal-philosophy.html">Philosophy</a>
+      <a href="/philosophy/ai-outcomes-ranking.html" class="current">Ranking AI Outcomes</a>
+      <a href="/philosophy/wrong-on-internet.html">Wrong on Internet</a>
+    </div>
+  </div>
+
+  <h1>Ranking AI Outcomes by Benefit to Humanity</h1>
+  <p>This started as my answer to a ranking question in the MATS Autumn 2026 application (<a href="https://forms.matsprogram.org/apply-a26" target="_blank">application</a>, <a href="https://matsprogram.notion.site/MATS-Autumn-2026-General-Application-35da0e14b0ad803e99daf0dbd7124971" target="_blank">Notion version</a>): rank ten AI-related outcomes by how much each would help humanity's long-term flourishing. Here's my ranking, my reasoning, and the sources I leaned on. WIP and subject to change, like the rest of this page.</p>
+
+  <hr>
+
+  <h2>My North Star</h2>
+  <p>In priority order:</p>
+  <ol>
+    <li>Don't go extinct as a species (a one-way door).</li>
+    <li>Don't descend into chaos, anarchy, or authoritarianism (don't significantly reduce quality of life).</li>
+    <li>Increase the upside: health, wealth, agency/autonomy. I'm unsure of the order here since it depends on your starting point.</li>
+  </ol>
+  <p>My test for each option: how it changes the life outlook of two people, my daughter, and Luciana (a low/mid-income Colombian child) or a street kid in India.</p>
+
+  <hr>
+
+  <h2>The Ranking</h2>
+
+  <p><strong>1. Building defenses against AI-enabled biological threats.</strong> Top of the list because it's a one-way door: don't go extinct as a species via an AI-accelerated pandemic. That isn't hard to imagine given humanity's incompetence dealing with COVID. In Toby Ord's <a href="https://en.wikipedia.org/wiki/The_Precipice:_Existential_Risk_and_the_Future_of_Humanity" target="_blank">Precipice</a> estimates, engineered pandemics are roughly 1 in 30 this century, second only to unaligned AI.</p>
+
+  <p><strong>2. Building oversight mechanisms that detect when AI systems pursue unintended goals.</strong> I've spent 30+ hours a week with Claude, ChatGPT, or Gemini since May 2024, outside my Amazon job, and about as much on vacations. From that lived experience with these models and harnesses like Claude Code, today's systems already often pursue unintended goals, the prosaic misalignment <a href="https://luthienresearch.org" target="_blank">Luthien</a> was built to catch. With scaling laws and the economic incentive to deploy AI across the economy, that gets more common, not less. Looking five or even fifty years out, the risk without robust real-time oversight is high and likely, and the strength of our current oversight relative to how fast capabilities advance is humblingly terrible. Ord puts <a href="https://en.wikipedia.org/wiki/The_Precipice:_Existential_Risk_and_the_Future_of_Humanity" target="_blank">unaligned AI at about 1 in 10</a>, his highest single existential estimate.</p>
+
+  <p><strong>3. Detecting and labeling AI-generated misinformation and synthetic media.</strong> The scenarios I worry about most are where AI amplifies misinformation or sycophancy, or creates chaos through bad design or prosaic misalignment. Misinformation was already a huge deal during COVID. In an AI-accelerated pandemic where AI adds more misinformation and fake news, the death toll could plausibly run an order of magnitude higher.</p>
+
+  <p><strong>4. Minimizing unrestricted access to state-of-the-art AI chips.</strong> I value having the option to pause. The option takes time to build, and we could find ourselves heading toward catastrophic loss of control where we'd be sad not to have it. But actually using the option carries very high cost from second-order effects and my libertarian bias. So I want the lever far more than I want to pull it.</p>
+
+  <p><strong>5. Accelerating AI applications in scientific research.</strong> I'm a huge proponent. Getting closer to epistemic truth seems about 99% good with less risk.</p>
+
+  <p><strong>6. Building AI-powered robotic systems that learn from physical interaction with their environment.</strong> Broadly useful. The main downside is military applications, and the cat is already out of the bag there with drones, so the marginal contribution relative to the upside seems favorable.</p>
+
+  <p><strong>7. Reducing the environmental impact of AI data centers.</strong> Important, but in my view not existential. In Ord's framing, climate is about 1 in 1,000 this century versus unaligned AI at about 1 in 10, and he thinks <a href="https://www.tobyord.com/writing/the-precipice-revisited" target="_blank">climate risk has fallen since 2020</a>. The energy growth is real but bounded. Data centers were about <a href="https://www.datacenterdynamics.com/en/news/iea-data-center-energy-consumption-set-to-double-by-2030-to-945twh/" target="_blank">415 TWh in 2024, roughly 1.5% of global electricity</a>. How much that multiplies:</p>
+
+  <table class="ranktable">
+    <thead>
+      <tr><th>Multiple vs. today</th><th>Approx. TWh</th><th>% of global electricity</th><th>Scenario / horizon</th><th>Likelihood</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>~1.5x</td><td>~600–700</td><td>under 2%</td><td><a href="https://www.iea.org/reports/energy-and-ai/executive-summary" target="_blank">IEA "Headwinds," 2035</a></td><td>If supply bottlenecks bite</td></tr>
+      <tr><td>~2x</td><td>~830–950</td><td>~3%</td><td><a href="https://www.iea.org/reports/energy-and-ai/executive-summary" target="_blank">IEA base case, 2030</a></td><td>High, on current trend</td></tr>
+      <tr><td>~3x</td><td>~1,200</td><td>~3.5%</td><td><a href="https://about.bnef.com/insights/commodities/power-for-ai-easier-said-than-built/" target="_blank">IEA / BNEF base, 2035</a></td><td>Plausible</td></tr>
+      <tr><td>~4x</td><td>~1,700</td><td>~4.4%</td><td><a href="https://www.iea.org/reports/energy-and-ai/executive-summary" target="_blank">IEA "Lift-Off," 2035</a></td><td>Upper case</td></tr>
+      <tr><td>~9–10x</td><td>~3,700</td><td>~7–8% of a larger 2050 grid</td><td><a href="https://about.bnef.com/insights/commodities/power-for-ai-easier-said-than-built/" target="_blank">BNEF, 2050</a></td><td>Long-term, depends on AI scaling continuing</td></tr>
+    </tbody>
+  </table>
+
+  <p>For context, frontier training power is doubling roughly every year; single runs are projected to draw <a href="https://epoch.ai/blog/power-demands-of-frontier-ai-training" target="_blank">4 to 16 GW by 2030</a>. What would change my mind isn't raw energy, it's emissions (energy times grid carbon intensity) and local effects. Even at 10x, data centers stay a small single-digit share of global emissions, and AI demand is itself pulling clean energy onto the grid, so the <a href="https://www.carbonbrief.org/ai-five-charts-that-put-data-centre-energy-use-and-emissions-into-context/" target="_blank">climate-existential case stays weak</a>. The realistic way this rises for me is through <a href="https://arxiv.org/pdf/2604.06198" target="_blank">regional grid stress, electricity-price spikes, and water use</a>, which hit ordinary people's bills.</p>
+
+  <p><strong>8. Ensuring fair compensation for workers displaced by AI automation.</strong> I'm more optimistic about economic paradigms where creativity and agency are the dominant sources of purpose than about UBI-like systems. A basic safety net that helps people feel safe and meet basic needs is a great investment, given that <a href="https://blogs.worldbank.org/en/opendata/september-2025-global-poverty-update-from-the-world-bank--new-da" target="_blank">about 8.5% of the world lives on less than $2.15 a day</a> (about 10.3% under the newer <a href="https://ourworldindata.org/new-international-poverty-line-3-dollars-per-day" target="_blank">$3-a-day line</a>). But "displaced" is hard to measure, so I'd lean on needs-based redistribution over justice-based redistribution.</p>
+
+  <p><strong>9. Protecting creators' work from unauthorized use in AI training data.</strong> This affects a smaller share of people, somewhere between about <a href="https://www.bls.gov/oes/current/oes270000.htm" target="_blank">2% (professional creative occupations)</a> and about <a href="https://www.demandsage.com/creator-economy-statistics/" target="_blank">6% (the broad creator economy of ~200 to 300 million people)</a>, and it isn't clear to me how severely it harms their well-being.</p>
+
+  <p><strong>10. Reducing the computational cost of training frontier AI models.</strong> I think the market largely handles this, but it's worth separating two things: cost per unit of capability is <a href="https://epoch.ai/blog/how-much-does-it-cost-to-train-frontier-ai-models" target="_blank">falling fast</a> thanks to algorithmic and hardware efficiency, while <a href="https://epoch.ai/data-insights/cost-trend-large-scale" target="_blank">absolute frontier training cost is rising about 2.4x a year</a>. So the market takes care of efficiency, not total spend or energy.</p>
+
+  <!-- GoatCounter analytics -->
+  <script data-goatcounter="https://scwoff.goatcounter.com/count"
+          async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
