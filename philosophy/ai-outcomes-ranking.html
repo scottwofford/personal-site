@@ -54,8 +54,20 @@
 
   <p><strong>6. Building AI-powered robotic systems that can learn from physical interaction with their environment.</strong> Broadly useful, with the main downsides being military applications, and it seems like the cat's already out of the bag on that with drones, so the marginal contribution of this relative to the upside seems favorable.</p>
 
-  <p><strong>7. Reducing the environmental impact of AI data centers.</strong> Climate change is important, but not existential. In Ord's framing, climate is about 1 in 1,000 this century versus unaligned AI at about 1 in 10, and he thinks <a href="https://www.tobyord.com/writing/the-precipice-revisited" target="_blank">climate risk has fallen since 2020</a>. Data centers were about <a href="https://www.datacenterdynamics.com/en/news/iea-data-center-energy-consumption-set-to-double-by-2030-to-945twh/" target="_blank">415 TWh in 2024, roughly 1.5% of global electricity</a>. How much that multiplies:</p>
+  <p><strong>7. Reducing the environmental impact of AI data centers.</strong> Climate change is important, but not existential. In Ord's framing, climate is about 1 in 1,000 this century versus unaligned AI at about 1 in 10, and he thinks <a href="https://www.tobyord.com/writing/the-precipice-revisited" target="_blank">climate risk has fallen since 2020</a>. Data centers were about <a href="https://www.datacenterdynamics.com/en/news/iea-data-center-energy-consumption-set-to-double-by-2030-to-945twh/" target="_blank">415 TWh in 2024, roughly 1.5% of global electricity</a>. Scenarios for how much that multiplies are in the <a href="#energy-appendix">appendix</a>.</p>
 
+  <p>Frontier training power is doubling roughly every year; single runs are projected to draw <a href="https://epoch.ai/blog/power-demands-of-frontier-ai-training" target="_blank">4 to 16 GW by 2030</a>. What matters here isn't raw energy, it's emissions and local effects. Even at 10x, data centers stay a small single-digit share of <a href="https://www.carbonbrief.org/ai-five-charts-that-put-data-centre-energy-use-and-emissions-into-context/" target="_blank">global emissions</a>; the bigger lever is <a href="https://arxiv.org/pdf/2604.06198" target="_blank">regional grid stress, electricity-price spikes, and water use</a>.</p>
+
+  <p><strong>8. Ensuring fair compensation for workers displaced by AI automation.</strong> I'm more optimistic on economic paradigms where creativity and agency are the dominating source of purpose compared to UBI-like systems. I do think a basic safety net of helping people feel safe and meet basic needs is a great investment, given that <a href="https://ourworldindata.org/new-international-poverty-line-3-dollars-per-day" target="_blank">about 10.3% of the population makes less than $3/day</a>. The literature on well-being up to a certain point of income is robust, but I think it's hard to measure who was "displaced," so better to use needs-based economic redistribution vs. social justice-based economic redistribution.</p>
+
+  <p><strong>9. Protecting creators' work from unauthorized use in AI training data.</strong> Only <a href="https://www.bls.gov/oes/current/oes270000.htm" target="_blank">~2%</a> to <a href="https://www.demandsage.com/creator-economy-statistics/" target="_blank">~6%</a> of humans, and it's not clear how severely this negatively affects their well-being.</p>
+
+  <p><strong>10. Reducing the computational cost of training frontier AI models.</strong> I think the market is taking care of this. Worth separating two things: cost per unit of capability is <a href="https://epoch.ai/blog/how-much-does-it-cost-to-train-frontier-ai-models" target="_blank">falling fast</a> (algorithmic and hardware efficiency), while <a href="https://epoch.ai/data-insights/cost-trend-large-scale" target="_blank">absolute frontier training cost is rising about 2.4x a year</a>. So the market takes care of efficiency, not total spend or energy.</p>
+
+  <hr>
+
+  <h2 id="energy-appendix">Appendix: AI data-center energy scenarios</h2>
+  <p>Scenarios for how much AI data-center electricity demand multiplies from the 2024 baseline (~415 TWh, ~1.5% of global electricity).</p>
   <table class="ranktable">
     <thead>
       <tr><th>Multiple vs. today</th><th>Approx. TWh</th><th>% of global electricity</th><th>Scenario / horizon</th><th>Likelihood</th></tr>
@@ -68,14 +80,6 @@
       <tr><td>~9–10x</td><td>~3,700</td><td>~7–8% of a larger 2050 grid</td><td><a href="https://about.bnef.com/insights/commodities/power-for-ai-easier-said-than-built/" target="_blank">BNEF, 2050</a></td><td>Long-term, depends on AI scaling continuing</td></tr>
     </tbody>
   </table>
-
-  <p>Frontier training power is doubling roughly every year; single runs are projected to draw <a href="https://epoch.ai/blog/power-demands-of-frontier-ai-training" target="_blank">4 to 16 GW by 2030</a>. What matters here isn't raw energy, it's emissions and local effects. Even at 10x, data centers stay a small single-digit share of <a href="https://www.carbonbrief.org/ai-five-charts-that-put-data-centre-energy-use-and-emissions-into-context/" target="_blank">global emissions</a>; the bigger lever is <a href="https://arxiv.org/pdf/2604.06198" target="_blank">regional grid stress, electricity-price spikes, and water use</a>.</p>
-
-  <p><strong>8. Ensuring fair compensation for workers displaced by AI automation.</strong> I'm more optimistic on economic paradigms where creativity and agency are the dominating source of purpose compared to UBI-like systems. I do think a basic safety net of helping people feel safe and meet basic needs is a great investment, given that <a href="https://blogs.worldbank.org/en/opendata/september-2025-global-poverty-update-from-the-world-bank--new-da" target="_blank">about 8.5% of the population makes less than $2.15/day</a> (about 10.3% under the newer <a href="https://ourworldindata.org/new-international-poverty-line-3-dollars-per-day" target="_blank">$3/day line</a>). The literature on well-being up to a certain point of income is robust, but I think it's hard to measure who was "displaced," so better to use needs-based economic redistribution vs. social justice-based economic redistribution.</p>
-
-  <p><strong>9. Protecting creators' work from unauthorized use in AI training data.</strong> Only <a href="https://www.bls.gov/oes/current/oes270000.htm" target="_blank">~2%</a> to <a href="https://www.demandsage.com/creator-economy-statistics/" target="_blank">~6%</a> of humans, and it's not clear how severely this negatively affects their well-being.</p>
-
-  <p><strong>10. Reducing the computational cost of training frontier AI models.</strong> I think the market is taking care of this. Worth separating two things: cost per unit of capability is <a href="https://epoch.ai/blog/how-much-does-it-cost-to-train-frontier-ai-models" target="_blank">falling fast</a> (algorithmic and hardware efficiency), while <a href="https://epoch.ai/data-insights/cost-trend-large-scale" target="_blank">absolute frontier training cost is rising about 2.4x a year</a>. So the market takes care of efficiency, not total spend or energy.</p>
 
   <!-- GoatCounter analytics -->
   <script data-goatcounter="https://scwoff.goatcounter.com/count"
