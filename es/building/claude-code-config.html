@@ -168,6 +168,21 @@
 
   <hr>
 
+  <h2>Como ha evolucionado mi configuracion (2026)</h2>
+  <p>Desde que publique esto por primera vez, la configuracion paso de una lista de recordatorios a un pequeno marco. Algunos principios que se ganaron su lugar:</p>
+
+  <ul>
+    <li><strong>Requisitos de comportamiento, no una lista de deseos.</strong> Mantengo un conjunto numerado de "requisitos de respuesta" que describen como quiero que se comporte un asistente. Son independientes de la superficie: las mismas reglas aplican en el CLI, la app web o el movil. Cada uno empieza con el comportamiento que quiero y nombra un mecanismo concreto, asi que otra herramienta puede cumplir la misma regla.</li>
+    <li><strong>Verificar antes de afirmar; citar fuentes primarias.</strong> Los datos especificos (fechas, estados, numeros) vienen de una llamada a una herramienta, no de la memoria. Cada afirmacion deberia poder rastrearse a una fuente primaria en uno o dos pasos, o se descarta.</li>
+    <li><strong>Pesar la evidencia como un bayesiano.</strong> El resultado de una herramienta es evidencia ponderada por que tan confiable es esa herramienta. Un "sin resultados" de una herramienta con puntos ciegos conocidos es evidencia debil de ausencia, no una prueba.</li>
+    <li><strong>Someter a prueba con un critico separado, no con autocritica.</strong> Para decisiones importantes hago que un agente "abogado del diablo" separado argumente lo contrario en un contexto nuevo. La investigacion es bastante clara en que un modelo que critica su propia salida tiende a sobre-corregir y aporta poca informacion nueva; un critico nuevo y separado es la version que de verdad ayuda.</li>
+    <li><strong>Las instrucciones positivas superan a las prohibiciones.</strong> "Haz Y" funciona mas confiablemente que "no hagas X": la negacion es un punto debil conocido de los modelos de lenguaje (el problema del "elefante rosa"). Asi que convierto los "no hagas" vagos en sustitutos positivos concretos y conservo solo las prohibiciones precisas y verificables.</li>
+    <li><strong>Mostrar la conclusion, no la deliberacion.</strong> Prefiero ver la respuesta mas la unica compensacion que me haria cambiar de opinion, en vez de una transcripcion del modelo discutiendo consigo mismo.</li>
+    <li><strong>Mas corto supera a mas largo.</strong> El seguimiento de instrucciones empeora a medida que crece el numero de reglas, asi que podo la configuracion periodicamente en lugar de solo agregarle.</li>
+  </ul>
+
+  <hr>
+
   <h2>Por que funciona esto</h2>
 
   <p>Al documentar explicitamente mis debilidades y dar permiso a la IA para senalarlas, obtengo un colaborador que me ayuda a mantener el rumbo, no solo un asistente que hace lo que digo.</p>
@@ -176,7 +191,7 @@
 
   <hr>
 
-  <p><em>Adaptado de mi archivo de configuracion <code>CLAUDE.md</code>. Ultima actualizacion: enero 2026.</em></p>
+  <p><em>Adaptado de mi archivo de configuracion <code>CLAUDE.md</code>. Ultima actualizacion: junio 2026.</em></p>
   <!-- GoatCounter analytics -->
   <script data-goatcounter="https://scwoff.goatcounter.com/count"
           async src="//gc.zgo.at/count.js"></script>
