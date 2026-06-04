@@ -4,6 +4,13 @@ All notable changes to scottwofford.com. Plans for larger changes live in [`plan
 
 ---
 
+## 2026-06-04 — Faithful republish of the Claude config + system-prompt pages ([PR #11](https://github.com/scottwofford/personal-site/pull/11))
+
+- The pages had drifted into a thin synthesis that omitted the real framework. Republished both as faithful, near-complete adaptations of the current artifacts; default flipped to include-everything, redact-with-reason.
+- **building/claude-code-config.html**: real CLAUDE.md (identity + documented weaknesses, all always-on conventions, the three highest-emphasis rules, cross-surface behavior, the R1-R14 one-line index, when-helping-me-code, full push-back table). Evolution notes moved to a labeled appendix ("notes, not part of the file"); "Why This Works" removed.
+- **productivity/claude-system-prompt.html**: real claude.ai "Instructions for Claude" (communication, human-compatible philosophy, working-with-me, technical problem-solving + action hierarchy, full in-all-replies meta-bracket).
+- Redacted only names, money, internal specifics, private paths, and Drive/Trello/Dropbox IDs; dropped operational plumbing. Spanish mirrors rewritten. Sensitive-token + em-dash scan clean. Stale Context bio left as-is (separately backlogged).
+
 ## 2026-06-03 — Evolved Claude config pages ([PR #10](https://github.com/scottwofford/personal-site/pull/10))
 
 - **building/claude-code-config.html**: added "How my setup has evolved (2026)" section showcasing the current framework (surface-agnostic behavioral requirements, verify-before-asserting + cite-primary-sources, Bayesian evidence weighting, separate-critic pressure-testing, positives-over-prohibitions / "pink elephant", show-conclusions-not-deliberation, prune-for-length). "Show don't tell" signal for collaborators / MATS advisors.
