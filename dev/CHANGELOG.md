@@ -4,6 +4,11 @@ All notable changes to scottwofford.com. Plans for larger changes live in [`plan
 
 ---
 
+## 2026-06-04 — New philosophy page: Ranking AI outcomes by benefit to humanity ([PR #14](https://github.com/scottwofford/personal-site/pull/14))
+
+- New page `philosophy/ai-outcomes-ranking.html`: Scott's ranking of the 10 MATS outcomes by benefit to humanity, with north star (one-way-door first), persona criteria, verbatim reasoning, and a sourced energy-scenario table (Ord's Precipice, IEA/BNEF/Epoch, World Bank, creator-economy range).
+- Content is Scott's verbatim words; AI-smoothing filler stripped, the vacation aside dropped. Wired into the philosophy section nav + index. Spanish mirror still TODO.
+
 ## 2026-06-04 — Faithful republish of the Claude config + system-prompt pages ([PR #11](https://github.com/scottwofford/personal-site/pull/11))
 
 - The pages had drifted into a thin synthesis that omitted the real framework. Republished both as faithful, near-complete adaptations of the current artifacts; default flipped to include-everything, redact-with-reason.
