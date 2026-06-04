@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Claude Code Config - Scott Wofford</title>
+  <title>My CLAUDE.md - Scott Wofford</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;600&display=swap" rel="stylesheet">
@@ -21,11 +21,10 @@
       <a href="/building/claude-code-config.html" class="current">CLAUDE.md</a>
     </div>
   </div>
-  <h1>Claude Code Config (CLAUDE.md)</h1>
-  <p class="subtitle">How I configure Claude Code to work with my brain and weaknesses.</p>
+  <h1>My CLAUDE.md</h1>
 
   <div class="callout">
-    <p>This is an adapted version of my <code>CLAUDE.md</code> file, the project-level config that shapes how Claude Code (the CLI) helps me build software. Sharing because others might find the framework useful.</p>
+    <p><a href="https://code.claude.com/docs/en/best-practices#write-an-effective-claude-md"><code>CLAUDE.md</code></a> is a special file Claude Code reads at the start of every conversation.<br>This is an adapted, shareable version of mine.</p>
   </div>
 
   <hr>
@@ -168,6 +167,21 @@
 
   <hr>
 
+  <h2>How my setup has evolved (2026)</h2>
+  <p>Since I first published this, the config has grown from a list of reminders into a small framework. A few principles that earned their place:</p>
+
+  <ul>
+    <li><strong>Behavioral requirements, not a wish list.</strong> I keep a numbered set of "response requirements" describing how I want an assistant to behave. They're surface-agnostic: the same rules apply whether I'm in the CLI, the web app, or mobile. Each one leads with the behavior I want and names one concrete mechanism, so a different tool can satisfy the same rule.</li>
+    <li><strong>Verify before asserting; cite primary sources.</strong> Specific facts (dates, statuses, numbers) come from a tool call, not memory. Every claim should trace back to a primary source in a hop or two, or it gets dropped.</li>
+    <li><strong>Weight evidence like a Bayesian.</strong> A tool's result is evidence weighted by how reliable that tool is. A "no results" from a tool with known blind spots is weak evidence of absence, not proof.</li>
+    <li><strong>Pressure-test with a separate critic, not self-critique.</strong> For consequential calls I have a separate "devil's advocate" agent argue the opposite in a fresh context. The research is fairly clear that a model critiquing its own output tends to over-correct and adds little new information; a fresh, separate critic is the version that actually helps.</li>
+    <li><strong>Positive instructions beat prohibitions.</strong> "Do Y" lands more reliably than "don't do X": negation is a known weak spot for language models (the "pink elephant" problem). So I convert vague "don'ts" into concrete positive substitutes and keep only the crisp, checkable prohibitions.</li>
+    <li><strong>Show the conclusion, not the deliberation.</strong> I'd rather see the answer plus the one tradeoff that would change my mind than a transcript of the model arguing with itself.</li>
+    <li><strong>Shorter beats longer.</strong> Instruction-following degrades as the rule count climbs, so I periodically prune the config back down instead of only adding to it.</li>
+  </ul>
+
+  <hr>
+
   <h2>Why This Works</h2>
 
   <p>By explicitly documenting my weaknesses and giving AI permission to call me out, I get a collaborator that helps me stay on track, not just an assistant that does what I say.</p>
@@ -176,7 +190,7 @@
 
   <hr>
 
-  <p><em>Adapted from my <code>CLAUDE.md</code> configuration file. Last updated: January 2026.</em></p>
+  <p><em>Adapted from my <code>CLAUDE.md</code> configuration file. Last updated: June 2026.</em></p>
   <!-- GoatCounter analytics -->
   <script data-goatcounter="https://scwoff.goatcounter.com/count"
           async src="//gc.zgo.at/count.js"></script>

@@ -4,6 +4,13 @@ All notable changes to scottwofford.com. Plans for larger changes live in [`plan
 
 ---
 
+## 2026-06-03 — Evolved Claude config pages ([PR #10](https://github.com/scottwofford/personal-site/pull/10))
+
+- **building/claude-code-config.html**: added "How my setup has evolved (2026)" section showcasing the current framework (surface-agnostic behavioral requirements, verify-before-asserting + cite-primary-sources, Bayesian evidence weighting, separate-critic pressure-testing, positives-over-prohibitions / "pink elephant", show-conclusions-not-deliberation, prune-for-length). "Show don't tell" signal for collaborators / MATS advisors.
+- **productivity/claude-system-prompt.html**: replaced the abandoned context-window-% line with the current context-rot self-check.
+- Spanish mirrors updated for both; dates refreshed to June 2026.
+- Curated + scrubbed to the existing public bar (no names, money, fundraising, internal strategy, paths, or IDs); sensitive-token scan clean.
+
 ## 2026-05-09 — /substances drug-harm chart (standalone, not linked from main)
 
 - **substances/**: New standalone page hosting an updated 2026 version of the Wikipedia ["Drug danger and dependence" chart](https://en.wikipedia.org/wiki/File:Drug_danger_and_dependence-small.png) (originally Gable 2006 / methodology Gable 2004). Adds fentanyl, carfentanil, methamphetamine, oxycodone, alprazolam, GHB.
