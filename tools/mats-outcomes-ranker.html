@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MATS Q1 — Rank + Rationale</title>
+<style>
+  :root { --bg:#f7f7f4; --card:#fff; --ink:#1a1a1a; --muted:#666; --line:#e2e2dc; --accent:#2f6f4f; }
+  * { box-sizing: border-box; }
+  body { font-family: -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; background: var(--bg); color: var(--ink); margin: 0; padding: 24px; line-height: 1.4; }
+  .wrap { max-width: 920px; margin: 0 auto; }
+  h1 { font-size: 20px; margin: 0 0 2px; }
+  .sub { color: var(--muted); font-size: 13px; margin: 0 0 16px; }
+  .bar { position: sticky; top: 0; background: var(--bg); padding: 10px 0; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; border-bottom: 1px solid var(--line); z-index: 5; }
+  button { font: inherit; font-size: 13px; padding: 7px 12px; border: 1px solid var(--line); background: var(--card); border-radius: 8px; cursor: pointer; }
+  button.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  button:hover { filter: brightness(0.97); }
+  #status { color: var(--muted); font-size: 12px; margin-left: auto; }
+  .frame { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; margin: 14px 0; }
+  .frame label { font-weight: 600; font-size: 13px; display: block; margin-bottom: 4px; }
+  textarea { width: 100%; font: inherit; font-size: 13px; border: 1px solid var(--line); border-radius: 8px; padding: 8px; resize: vertical; background: #fff; }
+  ol#list { list-style: none; margin: 8px 0; padding: 0; }
+  li.row { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; margin: 8px 0; display: grid; grid-template-columns: 40px 1fr; gap: 10px; align-items: start; }
+  li.row.dragover { border-color: var(--accent); box-shadow: 0 0 0 2px rgba(47,111,79,.15); }
+  li.row.dragging { opacity: .5; }
+  .left { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .rank { font-weight: 700; font-size: 18px; color: var(--accent); }
+  .handle { cursor: grab; color: #aaa; font-size: 16px; user-select: none; }
+  .arrows { display: flex; flex-direction: column; gap: 2px; }
+  .arrows button { padding: 1px 6px; font-size: 11px; line-height: 1.2; border-radius: 5px; }
+  .otext { font-size: 14px; font-weight: 600; margin: 2px 0 6px; }
+  .rat { min-height: 46px; }
+  details.ref { background: #eef3ef; border: 1px solid #d3e0d6; border-radius: 10px; padding: 10px 14px; margin: 16px 0; font-size: 13px; }
+  details.ref summary { cursor: pointer; font-weight: 600; }
+  details.ref blockquote { margin: 6px 0; padding-left: 10px; border-left: 3px solid #b9cdbf; color: #333; }
+  .hint { color: var(--muted); font-size: 12px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>MATS Q1 &mdash; Rank the 10 outcomes + rationale</h1>
+  <p class="sub">Drag the handle (&#9776;) or use &#9650;/&#9660; to reorder. Type rationale beside each. Autosaves in this browser; use Download to keep a copy. You write every word (MATS AI-use policy).</p>
+
+  <div class="bar">
+    <button class="primary" onclick="download()">Download .md</button>
+    <button onclick="copyMd()">Copy to clipboard</button>
+    <button onclick="resetAll()">Reset</button>
+    <span id="status">loading&hellip;</span>
+  </div>
+
+  <div class="frame">
+    <label for="northstar">North star (the single concern most load-bearing in how you think about AI's effects on humanity)</label>
+    <textarea id="northstar" rows="2" placeholder="your words"></textarea>
+  </div>
+  <div class="frame">
+    <label for="criteria">Criteria (the tests / filters you ran on each option)</label>
+    <textarea id="criteria" rows="2" placeholder="your words"></textarea>
+  </div>
+
+  <ol id="list"></ol>
+
+  <div class="frame">
+    <label for="top3">Walk through your top 3 through those criteria</label>
+    <textarea id="top3" rows="3" placeholder="your words"></textarea>
+  </div>
+
+  <p class="hint">Word target for the framework (north star + criteria + top-3): 150&ndash;400. The per-item rationale boxes are your scratch space; pull from them when you write your final answer.</p>
+
+</div>
+
+<script>
+const KEY = 'mats-q1-v1';
+const OUTCOMES = [
+  "Accelerating AI applications in scientific research",
+  "Building AI-powered robotic systems that can learn from physical interaction with their environment",
+  "Building defenses against AI-enabled biological threats",
+  "Building oversight mechanisms that detect when AI systems pursue unintended goals",
+  "Detecting and labeling AI-generated misinformation and synthetic media",
+  "Ensuring fair compensation for workers displaced by AI automation",
+  "Minimizing unrestricted access to state-of-the-art AI chips",
+  "Protecting creators' work from unauthorized use in AI training data",
+  "Reducing the computational cost of training frontier AI models",
+  "Reducing the environmental impact of AI data centers"
+];
+// state: order = array of indices into OUTCOMES; rationale keyed by index; framework fields
+let order = OUTCOMES.map((_, i) => i);
+let rationale = {};
+let frame = { northstar:'', criteria:'', top3:'' };
+
+function load() {
+  try {
+    const s = JSON.parse(localStorage.getItem(KEY));
+    if (s) {
+      if (Array.isArray(s.order) && s.order.length === OUTCOMES.length) order = s.order;
+      rationale = s.rationale || {};
+      frame = Object.assign(frame, s.frame || {});
+    }
+  } catch(e){}
+  document.getElementById('northstar').value = frame.northstar || '';
+  document.getElementById('criteria').value = frame.criteria || '';
+  document.getElementById('top3').value = frame.top3 || '';
+}
+function save() {
+  frame.northstar = document.getElementById('northstar').value;
+  frame.criteria = document.getElementById('criteria').value;
+  frame.top3 = document.getElementById('top3').value;
+  localStorage.setItem(KEY, JSON.stringify({order, rationale, frame, saved: new Date().toISOString()}));
+  const st = document.getElementById('status');
+  st.textContent = 'saved ' + new Date().toLocaleTimeString();
+}
+function render() {
+  const ol = document.getElementById('list');
+  ol.innerHTML = '';
+  order.forEach((idx, pos) => {
+    const li = document.createElement('li');
+    li.className = 'row';
+    li.draggable = false;
+    li.dataset.pos = pos;
+    li.innerHTML = `
+      <div class="left">
+        <span class="handle" draggable="true" title="drag to reorder">&#9776;</span>
+        <span class="rank">${pos+1}</span>
+        <span class="arrows">
+          <button title="up" ${pos===0?'disabled':''} data-up="${pos}">&#9650;</button>
+          <button title="down" ${pos===order.length-1?'disabled':''} data-down="${pos}">&#9660;</button>
+        </span>
+      </div>
+      <div>
+        <div class="otext">${OUTCOMES[idx]}</div>
+        <textarea class="rat" rows="2" data-idx="${idx}" placeholder="why this rank? (scratch)">${(rationale[idx]||'').replace(/</g,'&lt;')}</textarea>
+      </div>`;
+    ol.appendChild(li);
+  });
+  wire();
+}
+function wire() {
+  document.querySelectorAll('[data-up]').forEach(b => b.onclick = () => { const p=+b.dataset.up; [order[p-1],order[p]]=[order[p],order[p-1]]; save(); render(); });
+  document.querySelectorAll('[data-down]').forEach(b => b.onclick = () => { const p=+b.dataset.down; [order[p+1],order[p]]=[order[p],order[p+1]]; save(); render(); });
+  document.querySelectorAll('textarea.rat').forEach(t => t.oninput = () => { rationale[t.dataset.idx] = t.value; save(); });
+  // drag and drop via handle
+  let dragPos = null;
+  document.querySelectorAll('.handle').forEach(h => {
+    h.addEventListener('dragstart', e => { dragPos = +h.closest('.row').dataset.pos; h.closest('.row').classList.add('dragging'); e.dataTransfer.effectAllowed='move'; });
+    h.addEventListener('dragend', () => { document.querySelectorAll('.row').forEach(r=>r.classList.remove('dragging','dragover')); });
+  });
+  document.querySelectorAll('.row').forEach(row => {
+    row.addEventListener('dragover', e => { e.preventDefault(); row.classList.add('dragover'); });
+    row.addEventListener('dragleave', () => row.classList.remove('dragover'));
+    row.addEventListener('drop', e => {
+      e.preventDefault();
+      const to = +row.dataset.pos;
+      if (dragPos===null || dragPos===to) return;
+      const [m] = order.splice(dragPos,1);
+      order.splice(to,0,m);
+      dragPos=null; save(); render();
+    });
+  });
+}
+function buildMd() {
+  const ns=document.getElementById('northstar').value, cr=document.getElementById('criteria').value, t3=document.getElementById('top3').value;
+  let md = `# MATS Q1 — ranking + rationale\n\nSaved ${new Date().toLocaleString()}\n\n## Ranking\n\n`;
+  order.forEach((idx,pos)=>{ md += `${pos+1}. ${OUTCOMES[idx]}\n`; const r=(rationale[idx]||'').trim(); if(r) md += `   - rationale: ${r}\n`; });
+  md += `\n## North star\n${ns||''}\n\n## Criteria\n${cr||''}\n\n## Top 3 walkthrough\n${t3||''}\n`;
+  return md;
+}
+function download() {
+  const blob = new Blob([buildMd()], {type:'text/markdown'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'mats-q1-ranking.md';
+  a.click();
+}
+function copyMd(){ navigator.clipboard.writeText(buildMd()).then(()=>{ document.getElementById('status').textContent='copied to clipboard'; }); }
+function resetAll(){ if(confirm('Clear your ranking and rationale?')){ localStorage.removeItem(KEY); order=OUTCOMES.map((_,i)=>i); rationale={}; frame={northstar:'',criteria:'',top3:''}; load(); render(); save(); } }
+
+['northstar','criteria','top3'].forEach(id => document.getElementById(id).addEventListener('input', save));
+load(); render(); document.getElementById('status').textContent = 'autosaving on';
+</script>
+  <p class="hint" style="text-align:center;margin-top:2em">A free tool by <a href="https://scottwofford.com">Scott Wofford</a>. Your data stays in your browser. Not affiliated with MATS.</p>
+  <!-- GoatCounter analytics -->
+  <script data-goatcounter="https://scwoff.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
