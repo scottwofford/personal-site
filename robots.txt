@@ -3,3 +3,5 @@ Allow: /
 
 # Don't index unlisted Luthien docs
 Disallow: /luthien/
+
+Sitemap: https://scottwofford.com/sitemap.xml

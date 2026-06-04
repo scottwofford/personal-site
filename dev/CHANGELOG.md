@@ -6,7 +6,10 @@ All notable changes to scottwofford.com. Plans for larger changes live in [`plan
 
 ## 2026-06-04 — Publish MATS outcomes-ranker web tool ([PR #15](https://github.com/scottwofford/personal-site/pull/15))
 
-- New standalone tool `tools/mats-outcomes-ranker.html`: drag-to-rank the 10 MATS Short Response #1 outcomes, a rationale box each, plus north star / criteria / top-3 fields. Autosaves to localStorage; Download .md + Copy. No backend; data stays in the browser. Generic (personal stances/values stripped). Spanish mirror + a link-in from the site are TODO.
+- New tool `philosophy/mats-outcomes-ranker.html` (+ Spanish mirror `es/philosophy/mats-outcomes-ranker.html`): drag-to-rank the 10 MATS Short Response #1 outcomes, a rationale box each, plus north star / criteria / top-3 fields. Autosaves to localStorage; Download .md + Copy. No backend; data stays in the browser. Generic (personal stances/values stripped).
+- Restyled to the site style guide (dark Inconsolata theme, `styles.css`, section-nav under philosophy & epistemics).
+- SEO: added `sitemap.xml` (65 URLs) and a `Sitemap:` line in `robots.txt` so the site can finally be indexed.
+- TODO (post-merge): wire the tool + the ai-outcomes-ranking page into the philosophy section navs (EN + ES) once both PRs land; submit the sitemap in Google Search Console.
 
 ## 2026-06-04 — Faithful republish of the Claude config + system-prompt pages ([PR #11](https://github.com/scottwofford/personal-site/pull/11))
 

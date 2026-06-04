@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clasificador de Resultados (MATS) - Scott Wofford</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+<style>
+  .bar { position: sticky; top: 0; background: #1a1a1a; padding: 0.6rem 0; display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; border-bottom: 1px solid #333; z-index: 5; }
+  button { font-family: 'Inconsolata', monospace; font-size: 0.85rem; padding: 0.4rem 0.75rem; border: 1px solid #333; background: #252525; color: #ccc; border-radius: 4px; cursor: pointer; }
+  button.primary { background: #6b9fff; color: #1a1a1a; border-color: #6b9fff; }
+  button:hover { border-color: #666; color: #fff; }
+  #status { color: #666; font-size: 0.8rem; margin-left: auto; }
+  .frame { background: #222; border: 1px solid #333; border-radius: 6px; padding: 0.6rem 0.8rem; margin: 0.75rem 0; }
+  .frame label { display: block; color: #fff; font-size: 0.85rem; margin-bottom: 0.3rem; }
+  textarea { width: 100%; font-family: 'Inconsolata', monospace; font-size: 0.85rem; background: #1a1a1a; color: #e5e5e5; border: 1px solid #333; border-radius: 4px; padding: 0.4rem; resize: vertical; }
+  ol#list { list-style: none; margin: 0.75rem 0; padding: 0; }
+  li.row { background: #222; border: 1px solid #333; border-radius: 6px; padding: 0.6rem 0.8rem; margin: 0.5rem 0; display: grid; grid-template-columns: 42px 1fr; gap: 0.6rem; align-items: start; }
+  li.row.dragover { border-color: #6b9fff; }
+  li.row.dragging { opacity: .5; }
+  .left { display: flex; flex-direction: column; align-items: center; gap: 0.25rem; }
+  .rank { font-weight: 600; font-size: 1.1rem; color: #6b9fff; }
+  .handle { cursor: grab; color: #666; font-size: 1rem; user-select: none; }
+  .arrows { display: flex; flex-direction: column; gap: 2px; }
+  .arrows button { padding: 0 0.4rem; font-size: 0.7rem; line-height: 1.3; }
+  .otext { color: #fff; font-size: 0.9rem; margin-bottom: 0.3rem; }
+  .rat { min-height: 2.5rem; }
+  .hint { color: #666; font-size: 0.8rem; }
+</style>
+</head>
+<body>
+<div class="section-nav">
+  <a href="/es/">← inicio</a> / <a href="/es/philosophy/" class="section-name">filosofía y epistémica</a>
+  <div class="siblings">
+    <a href="/es/philosophy/personal-philosophy.html">Filosofía Personal</a>
+    <a href="/es/philosophy/mats-outcomes-ranker.html" class="current">Clasificador</a>
+    <a href="/es/philosophy/wrong-on-internet.html">Error en Internet</a>
+  </div>
+</div>
+
+<div class="wrap">
+  <h1>Clasificador de Resultados (MATS)</h1>
+  <p>Una herramienta gratuita para el ejercicio de clasificación de la Respuesta Corta #1 de MATS: arrastra para clasificar los 10 resultados, escribe tu justificación junto a cada uno, y captura tu estrella polar, criterios y top 3. Se guarda automáticamente en tu navegador; usa Descargar o Copiar para conservarlo. Tú escribes cada palabra (política de uso de IA de MATS).</p>
+  <p class="hint">Arrastra el controlador (&#9776;) o usa &#9650;/&#9660; para reordenar.</p>
+
+  <div class="bar">
+    <button class="primary" onclick="download()">Descargar .md</button>
+    <button onclick="copyMd()">Copiar al portapapeles</button>
+    <button onclick="resetAll()">Reiniciar</button>
+    <span id="status">cargando&hellip;</span>
+  </div>
+
+  <div class="frame">
+    <label for="northstar">Estrella polar (la preocupación más determinante en cómo piensas sobre los efectos de la IA en la humanidad)</label>
+    <textarea id="northstar" rows="2" placeholder="tus palabras"></textarea>
+  </div>
+  <div class="frame">
+    <label for="criteria">Criterios (las pruebas / filtros que aplicaste a cada opción)</label>
+    <textarea id="criteria" rows="2" placeholder="tus palabras"></textarea>
+  </div>
+
+  <ol id="list"></ol>
+
+  <div class="frame">
+    <label for="top3">Explica tu top 3 a través de esos criterios</label>
+    <textarea id="top3" rows="3" placeholder="tus palabras"></textarea>
+  </div>
+
+  <p class="hint">Objetivo de palabras para el marco (estrella polar + criterios + top 3): 150&ndash;400. Las cajas de justificación por ítem son tu espacio de borrador; úsalas al escribir tu respuesta final.</p>
+</div>
+
+<script>
+const KEY = 'mats-ranker-es-v1';
+const OUTCOMES = [
+  "Acelerar las aplicaciones de IA en la investigación científica",
+  "Construir sistemas robóticos con IA que aprendan de la interacción física con su entorno",
+  "Construir defensas contra amenazas biológicas potenciadas por IA",
+  "Construir mecanismos de supervisión que detecten cuando los sistemas de IA persiguen objetivos no deseados",
+  "Detectar y etiquetar desinformación y medios sintéticos generados por IA",
+  "Garantizar una compensación justa para los trabajadores desplazados por la automatización con IA",
+  "Minimizar el acceso sin restricciones a los chips de IA de última generación",
+  "Proteger el trabajo de los creadores del uso no autorizado en datos de entrenamiento de IA",
+  "Reducir el costo computacional de entrenar modelos de IA de frontera",
+  "Reducir el impacto ambiental de los centros de datos de IA"
+];
+let order = OUTCOMES.map((_, i) => i);
+let rationale = {};
+let frame = { northstar:'', criteria:'', top3:'' };
+
+function load() {
+  try {
+    const s = JSON.parse(localStorage.getItem(KEY));
+    if (s) {
+      if (Array.isArray(s.order) && s.order.length === OUTCOMES.length) order = s.order;
+      rationale = s.rationale || {};
+      frame = Object.assign(frame, s.frame || {});
+    }
+  } catch(e){}
+  document.getElementById('northstar').value = frame.northstar || '';
+  document.getElementById('criteria').value = frame.criteria || '';
+  document.getElementById('top3').value = frame.top3 || '';
+}
+function save() {
+  frame.northstar = document.getElementById('northstar').value;
+  frame.criteria = document.getElementById('criteria').value;
+  frame.top3 = document.getElementById('top3').value;
+  localStorage.setItem(KEY, JSON.stringify({order, rationale, frame, saved: new Date().toISOString()}));
+  document.getElementById('status').textContent = 'guardado ' + new Date().toLocaleTimeString();
+}
+function render() {
+  const ol = document.getElementById('list');
+  ol.innerHTML = '';
+  order.forEach((idx, pos) => {
+    const li = document.createElement('li');
+    li.className = 'row';
+    li.draggable = false;
+    li.dataset.pos = pos;
+    li.innerHTML = `
+      <div class="left">
+        <span class="handle" draggable="true" title="arrastra para reordenar">&#9776;</span>
+        <span class="rank">${pos+1}</span>
+        <span class="arrows">
+          <button title="subir" ${pos===0?'disabled':''} data-up="${pos}">&#9650;</button>
+          <button title="bajar" ${pos===order.length-1?'disabled':''} data-down="${pos}">&#9660;</button>
+        </span>
+      </div>
+      <div>
+        <div class="otext">${OUTCOMES[idx]}</div>
+        <textarea class="rat" rows="2" data-idx="${idx}" placeholder="¿por qué este puesto? (borrador)">${(rationale[idx]||'').replace(/</g,'&lt;')}</textarea>
+      </div>`;
+    ol.appendChild(li);
+  });
+  wire();
+}
+function wire() {
+  document.querySelectorAll('[data-up]').forEach(b => b.onclick = () => { const p=+b.dataset.up; [order[p-1],order[p]]=[order[p],order[p-1]]; save(); render(); });
+  document.querySelectorAll('[data-down]').forEach(b => b.onclick = () => { const p=+b.dataset.down; [order[p+1],order[p]]=[order[p],order[p+1]]; save(); render(); });
+  document.querySelectorAll('textarea.rat').forEach(t => t.oninput = () => { rationale[t.dataset.idx] = t.value; save(); });
+  let dragPos = null;
+  document.querySelectorAll('.handle').forEach(h => {
+    h.addEventListener('dragstart', e => { dragPos = +h.closest('.row').dataset.pos; h.closest('.row').classList.add('dragging'); e.dataTransfer.effectAllowed='move'; });
+    h.addEventListener('dragend', () => { document.querySelectorAll('.row').forEach(r=>r.classList.remove('dragging','dragover')); });
+  });
+  document.querySelectorAll('.row').forEach(row => {
+    row.addEventListener('dragover', e => { e.preventDefault(); row.classList.add('dragover'); });
+    row.addEventListener('dragleave', () => row.classList.remove('dragover'));
+    row.addEventListener('drop', e => {
+      e.preventDefault();
+      const to = +row.dataset.pos;
+      if (dragPos===null || dragPos===to) return;
+      const [m] = order.splice(dragPos,1);
+      order.splice(to,0,m);
+      dragPos=null; save(); render();
+    });
+  });
+}
+function buildMd() {
+  const ns=document.getElementById('northstar').value, cr=document.getElementById('criteria').value, t3=document.getElementById('top3').value;
+  let md = `# Clasificación + justificación (MATS)\n\nGuardado ${new Date().toLocaleString()}\n\n## Clasificación\n\n`;
+  order.forEach((idx,pos)=>{ md += `${pos+1}. ${OUTCOMES[idx]}\n`; const r=(rationale[idx]||'').trim(); if(r) md += `   - justificación: ${r}\n`; });
+  md += `\n## Estrella polar\n${ns||''}\n\n## Criterios\n${cr||''}\n\n## Top 3\n${t3||''}\n`;
+  return md;
+}
+function download() {
+  const blob = new Blob([buildMd()], {type:'text/markdown'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'clasificacion-mats.md';
+  a.click();
+}
+function copyMd(){ navigator.clipboard.writeText(buildMd()).then(()=>{ document.getElementById('status').textContent='copiado al portapapeles'; }); }
+function resetAll(){ if(confirm('¿Borrar tu clasificación y justificación?')){ localStorage.removeItem(KEY); order=OUTCOMES.map((_,i)=>i); rationale={}; frame={northstar:'',criteria:'',top3:''}; load(); render(); save(); } }
+
+['northstar','criteria','top3'].forEach(id => document.getElementById(id).addEventListener('input', save));
+load(); render(); document.getElementById('status').textContent = 'guardado automático activado';
+</script>
+  <p class="hint" style="text-align:center;margin-top:2em">Una herramienta gratuita de <a href="https://scottwofford.com">Scott Wofford</a>. Tus datos permanecen en tu navegador. No afiliado con MATS.</p>
+  <!-- GoatCounter analytics -->
+  <script data-goatcounter="https://scwoff.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
