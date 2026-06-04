@@ -4,6 +4,10 @@ All notable changes to scottwofford.com. Plans for larger changes live in [`plan
 
 ---
 
+## 2026-06-04 — Publish MATS outcomes-ranker web tool ([PR #15](https://github.com/scottwofford/personal-site/pull/15))
+
+- New standalone tool `tools/mats-outcomes-ranker.html`: drag-to-rank the 10 MATS Short Response #1 outcomes, a rationale box each, plus north star / criteria / top-3 fields. Autosaves to localStorage; Download .md + Copy. No backend; data stays in the browser. Generic (personal stances/values stripped). Spanish mirror + a link-in from the site are TODO.
+
 ## 2026-06-04 — Faithful republish of the Claude config + system-prompt pages ([PR #11](https://github.com/scottwofford/personal-site/pull/11))
 
 - The pages had drifted into a thin synthesis that omitted the real framework. Republished both as faithful, near-complete adaptations of the current artifacts; default flipped to include-everything, redact-with-reason.
