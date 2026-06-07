@@ -4,6 +4,13 @@ All notable changes to scottwofford.com. Plans for larger changes live in [`plan
 
 ---
 
+## 2026-06-07 — Mobile responsiveness for content pages ([PR #3](https://github.com/scottwofford/personal-site/pull/3))
+
+- **styles.css**: added 768px and 480px breakpoints (reduced padding, scaled headings/tables/pre, flex-wrap siblings) plus a `.table-wrap` horizontal-scroll utility. Covers every content page that links the shared stylesheet (EN + ES).
+- **blog/index.html**: added a 600px breakpoint (padding, heading, post-title, subscribe-box scaling).
+- **luthien/shipping-log.html**, **luthien/customer-discovery.html** and their **es/** mirrors: added inline 768px + 480px breakpoints (these pages are self-contained and don't link `styles.css`).
+- Rebuilt on current `main`: dropped the original branch's `index.html` edit, which was obsolete once the homepage moved to `home.css` (it carries its own breakpoints).
+
 ## 2026-06-04 — Faithful republish of the Claude config + system-prompt pages ([PR #11](https://github.com/scottwofford/personal-site/pull/11))
 
 - The pages had drifted into a thin synthesis that omitted the real framework. Republished both as faithful, near-complete adaptations of the current artifacts; default flipped to include-everything, redact-with-reason.
