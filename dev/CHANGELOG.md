@@ -4,12 +4,6 @@ All notable changes to scottwofford.com. Plans for larger changes live in [`plan
 
 ---
 
-## 2026-06-08 — Writing guide: feeder-layer section for strategy/first-principles writing
-
-- **writing/writing-guide.html** + **es/writing/writing-guide.html**: added a "For Strategy or First-Principles Writing: Use a Feeder Layer" section between "Writing Workflow" and "Time Management." Names the failure mode of drafting strategic prose from memory (smuggled universal claims, structurally-non-comparable analogs, prose that survives self-review but fails a fresh reader) and prescribes three feeder moves: canvas evidence as data with primary-source citation per cell, pressure-test the strongest opposite claim, sweep for self-contradiction.
-- Date refreshed to June 2026 on both EN + ES.
-- Triggered by 2026-06-08 retrospective on a Luthien strategy doc; companion (private) rules for Claude-authored canvases at `private-claude-code-docs/requirements/personal/claude-writes-for-scott.md`.
-
 ## 2026-06-07 — Mobile responsiveness for content pages ([PR #3](https://github.com/scottwofford/personal-site/pull/3))
 
 - **styles.css**: added 768px and 480px breakpoints (reduced padding, scaled headings/tables/pre, flex-wrap siblings) plus a `.table-wrap` horizontal-scroll utility. Covers every content page that links the shared stylesheet (EN + ES).
