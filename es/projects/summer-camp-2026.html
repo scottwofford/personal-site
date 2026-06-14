@@ -86,6 +86,16 @@
       transition: color 0.2s;
     }
     .sticky-links a:hover { color: #fff; }
+    .sticky-links a.active:not(.signup-link) {
+      color: var(--gold);
+      font-weight: 700;
+    }
+    .sticky-links .lang-flag {
+      font-size: 1.05rem;
+      opacity: 0.6;
+      line-height: 1;
+    }
+    .sticky-links .lang-flag:hover { opacity: 1; }
     .sticky-links .signup-link {
       background: var(--coral);
       color: #fff;
@@ -454,6 +464,7 @@
         <a href="#schedule">Horario</a>
         <a href="#faq">FAQ</a>
         <a href="#signup" class="signup-link">Expresar Inter&eacute;s</a>
+        <a href="/projects/summer-camp-2026.html" class="lang-flag" title="English" aria-label="View in English">🇬🇧</a>
       </div>
     </div>
   </nav>
@@ -509,15 +520,12 @@
       <div class="caption">Karaoke de ni&ntilde;os en acci&oacute;n.</div>
     </div>
 
-    <h3 style="color: var(--purple); margin-top: 2rem; margin-bottom: 0.75rem;">&iexcl;Prueba el Juego de Adrian!</h3>
-    <p style="color: #888; margin-bottom: 1rem;">Adrian (6 a&ntilde;os) dise&ntilde;&oacute; este juego de laberinto multijugador usando IA. En el campamento, tus hijos construyen el suyo. &iexcl;Agarra un amigo y compartan el teclado!</p>
+    <h3 style="color: var(--purple); margin-top: 2rem; margin-bottom: 0.75rem;">&iexcl;Juega los Juegos de los Ni&ntilde;os!</h3>
+    <p style="color: #888; margin-bottom: 1rem;">Los ni&ntilde;os dise&ntilde;an sus propios videojuegos con IA. Estos son algunos que hicieron: el laberinto de Adrian, el juego de plataformas estilo Mario de Rafa, y el unicornio m&aacute;gico de Victoria. Elige un juego para jugar. En el campamento, tus hijos construyen el suyo.</p>
     <div class="game-showcase">
       <div class="game-controls">
         <div class="player-controls">
-          <strong>Jugador 1 (Dinosaurio):</strong> Flechas para mover, Arriba para saltar
-        </div>
-        <div class="player-controls">
-          <strong>Jugador 2 (Robot):</strong> A/D para mover, W para saltar
+          <strong>C&oacute;mo jugar:</strong> Haz clic en un juego del men&uacute;. Cada uno muestra sus propios controles arriba. &iexcl;Agarra un amigo y compartan el teclado!
         </div>
       </div>
       <div class="game-container" id="gameContainer">
@@ -527,7 +535,7 @@
           <span class="play-text">&iexcl;Haz clic para jugar!</span>
         </div>
       </div>
-      <p class="game-note">&iexcl;Corre a la puerta verde para ganar! Construido por un ni&ntilde;o de 6 a&ntilde;os con Claude Code. <a href="https://github.com/scottwofford/adrian-maze-game" target="_blank">Ver el proyecto en GitHub &rarr;</a></p>
+      <p class="game-note">Construido por ni&ntilde;os con Claude Code. <a href="https://github.com/scottwofford/adrian-maze-game" target="_blank">Ver los juegos en GitHub &rarr;</a></p>
       <div class="game-deactivate"><button onclick="document.getElementById('gameContainer').classList.remove('active')">&iquest;Terminaste de jugar? Haz clic para seguir navegando</button></div>
     </div>
   </section>
@@ -684,12 +692,26 @@
     <p><a href="/es/">scottwofford.com</a> &middot; &iquest;Preguntas? <a href="mailto:scottwofford3@gmail.com">scottwofford3@gmail.com</a></p>
   </footer>
 
-  <!-- Sticky nav shadow on scroll -->
+  <!-- Sticky nav: sombra al hacer scroll + resaltar la sección actual / shadow on scroll + highlight current section -->
   <script>
     const nav = document.getElementById('stickyNav');
-    window.addEventListener('scroll', () => {
+    const navLinks = [...document.querySelectorAll('.sticky-links a[href^="#"]')];
+    const sections = navLinks
+      .map(a => document.getElementById(a.getAttribute('href').slice(1)))
+      .filter(Boolean);
+
+    function onScroll() {
       nav.classList.toggle('scrolled', window.scrollY > 100);
-    });
+      // Sección actual = la última cuyo borde superior pasó una línea ~40% del viewport.
+      const line = Math.max(nav.offsetHeight + 20, window.innerHeight * 0.4);
+      let currentId = sections.length ? sections[0].id : null;
+      for (const sec of sections) {
+        if (sec.getBoundingClientRect().top <= line) currentId = sec.id;
+      }
+      navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + currentId));
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
   </script>
 
   <!-- GoatCounter analytics -->

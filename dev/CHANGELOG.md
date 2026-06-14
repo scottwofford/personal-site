@@ -4,6 +4,13 @@ All notable changes to scottwofford.com. Plans for larger changes live in [`plan
 
 ---
 
+## 2026-06-14 — Camp page: multi-game menu copy, language flag, section highlight ([PR #16](https://github.com/scottwofford/personal-site/pull/16))
+
+- The embedded camp game now loads the kids' games menu (Adrian, Rafa, Victoria) instead of just Adrian's maze, so the Sampler copy was updated to match: heading "Try Adrian's Game" → "Play the Kids' Games", intro names all three games, the fixed Dinosaur/Robot controls became a generic "pick a game, each shows its own controls" line, and the Adrian-only "race to the green door" note generalized to "Built by kids with Claude Code."
+- Added the site language flag to the sticky nav (EN → 🇪🇸, ES → 🇬🇧), matching the homepage `.lang-toggle` convention; placed in the nav so it doesn't collide with the breadcrumb.
+- Sticky section nav now highlights the section currently in view (scroll-position based).
+- Mirrored on the ES page. Verified with Playwright: no console errors, correct flag hrefs, scroll-spy tracks all five sections.
+
 ## 2026-06-07 — Mobile responsiveness for content pages ([PR #3](https://github.com/scottwofford/personal-site/pull/3))
 
 - **styles.css**: added 768px and 480px breakpoints (reduced padding, scaled headings/tables/pre, flex-wrap siblings) plus a `.table-wrap` horizontal-scroll utility. Covers every content page that links the shared stylesheet (EN + ES).
