@@ -86,6 +86,16 @@
       transition: color 0.2s;
     }
     .sticky-links a:hover { color: #fff; }
+    .sticky-links a.active:not(.signup-link) {
+      color: var(--gold);
+      font-weight: 700;
+    }
+    .sticky-links .lang-flag {
+      font-size: 1.05rem;
+      opacity: 0.6;
+      line-height: 1;
+    }
+    .sticky-links .lang-flag:hover { opacity: 1; }
     .sticky-links .signup-link {
       background: var(--coral);
       color: #fff;
@@ -457,6 +467,7 @@
         <a href="#schedule">Schedule</a>
         <a href="#faq">FAQ</a>
         <a href="#signup" class="signup-link">Express Interest</a>
+        <a href="/es/projects/summer-camp-2026.html" class="lang-flag" title="Español" aria-label="Ver en español">🇪🇸</a>
       </div>
     </div>
   </nav>
@@ -512,15 +523,12 @@
       <div class="caption">Kids karaoke in action.</div>
     </div>
 
-    <h3 style="color: var(--purple); margin-top: 2rem; margin-bottom: 0.75rem;">Try Adrian's Game!</h3>
-    <p style="color: #888; margin-bottom: 1rem;">Adrian (age 6) designed this multiplayer maze game using AI. At camp, your kids build their own. Grab a friend and share the keyboard!</p>
+    <h3 style="color: var(--purple); margin-top: 2rem; margin-bottom: 0.75rem;">Play the Kids' Games!</h3>
+    <p style="color: #888; margin-bottom: 1rem;">Kids design their own video games with AI. These are real ones they made: Adrian's maze, Rafa's Mario-style platformer, and Victoria's magical unicorn. Pick a game to play. At camp, your kids build their own.</p>
     <div class="game-showcase">
       <div class="game-controls">
         <div class="player-controls">
-          <strong>Player 1 (Dinosaur):</strong> Arrow keys to move, Up to jump
-        </div>
-        <div class="player-controls">
-          <strong>Player 2 (Robot):</strong> A/D to move, W to jump
+          <strong>How to play:</strong> Click a game from the menu. Each one shows its own controls up top. Grab a friend and share the keyboard!
         </div>
       </div>
       <div class="game-container" id="gameContainer">
@@ -530,7 +538,7 @@
           <span class="play-text">Click to Play!</span>
         </div>
       </div>
-      <p class="game-note">Race to the green door to win! Built by a 6-year-old with Claude Code. <a href="https://github.com/scottwofford/adrian-maze-game" target="_blank">See the project on GitHub &rarr;</a></p>
+      <p class="game-note">Built by kids with Claude Code. <a href="https://github.com/scottwofford/adrian-maze-game" target="_blank">See the games on GitHub &rarr;</a></p>
       <div class="game-deactivate"><button onclick="document.getElementById('gameContainer').classList.remove('active')">Done playing? Click to resume scrolling</button></div>
     </div>
   </section>
@@ -687,12 +695,26 @@
     <p><a href="/">scottwofford.com</a> &middot; Questions? <a href="mailto:scottwofford3@gmail.com">scottwofford3@gmail.com</a></p>
   </footer>
 
-  <!-- Sticky nav shadow on scroll -->
+  <!-- Sticky nav: shadow on scroll + highlight the current section -->
   <script>
     const nav = document.getElementById('stickyNav');
-    window.addEventListener('scroll', () => {
+    const navLinks = [...document.querySelectorAll('.sticky-links a[href^="#"]')];
+    const sections = navLinks
+      .map(a => document.getElementById(a.getAttribute('href').slice(1)))
+      .filter(Boolean);
+
+    function onScroll() {
       nav.classList.toggle('scrolled', window.scrollY > 100);
-    });
+      // Current section = the last one whose top has scrolled above a line ~40% down the viewport.
+      const line = Math.max(nav.offsetHeight + 20, window.innerHeight * 0.4);
+      let currentId = sections.length ? sections[0].id : null;
+      for (const sec of sections) {
+        if (sec.getBoundingClientRect().top <= line) currentId = sec.id;
+      }
+      navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + currentId));
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
   </script>
 
   <!-- GoatCounter analytics -->
