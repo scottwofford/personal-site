@@ -4,6 +4,13 @@ All notable changes to scottwofford.com. Plans for larger changes live in [`plan
 
 ---
 
+## 2026-06-17 - Writing Resources: source the writing principles ([PR #17](https://github.com/scottwofford/personal-site/pull/17))
+
+- Principle 1 (weasel words) now quotes Wikipedia's definition verbatim, links the [Weasel word](https://en.wikipedia.org/wiki/Weasel_word) page, and gives three examples ("some people say," "it is believed," "research shows").
+- Added inline source citations to the jargon and passive-voice principles ([Orwell](https://www.orwellfoundation.com/the-orwell-foundation/orwell/essays-and-other-works/politics-and-the-english-language/), [Strunk & White](https://www.gutenberg.org/ebooks/37134), [plainlanguage.gov](https://www.plainlanguage.gov/)).
+- Rebuilt the Resources list with real links + one-line descriptors: Minto, Orwell, Elements of Style, On Writing Well, Wikipedia Weasel word / Words to watch / Signs of AI writing, plainlanguage.gov.
+- Mirrored on the ES page. No em dashes; uses the site's existing " - " hyphen style.
+
 ## 2026-06-14 — Camp page: multi-game menu copy, language flag, section highlight ([PR #16](https://github.com/scottwofford/personal-site/pull/16))
 
 - The embedded camp game now loads the kids' games menu (Adrian, Rafa, Victoria) instead of just Adrian's maze, so the Sampler copy was updated to match: heading "Try Adrian's Game" → "Play the Kids' Games", intro names all three games, the fixed Dinosaur/Robot controls became a generic "pick a game, each shows its own controls" line, and the Adrian-only "race to the green door" note generalized to "Built by kids with Claude Code."
