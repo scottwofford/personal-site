@@ -4,6 +4,13 @@ All notable changes to scottwofford.com. Plans for larger changes live in [`plan
 
 ---
 
+## 2026-07-06 - Victoria's questions hub at /victoria/ ([PR #19](https://github.com/scottwofford/personal-site/pull/19))
+
+- New `/victoria/` hub page (Spanish, kid design language matching `shared/victoria-*.html`): 17 of Victoria's questions with collapsible short answers, captured from the local claude.ai conversation mirror. Newest first; the two questions with interactive seed pages link to them.
+- Adding a question is one copy-paste: documented `<article class="pregunta">` template in an HTML comment at the top of the question list (color rotation, slug, meta chip, privacy checklist).
+- Nav links added on EN homepage ("Victoria's Questions") and ES homepage ("Las Preguntas de Victoria"); sitemap entry under Projects.
+- ChatGPT/Gemini capture: nothing existed locally to capture; workflow decision stays open on the [Trello card](https://trello.com/c/u2NMeSSQ). Seed pages `shared/victoria-*.html` were still untracked at PR time; hub buttons 404 until they're committed.
+
 ## 2026-06-17 - Writing Resources: source the writing principles ([PR #17](https://github.com/scottwofford/personal-site/pull/17))
 
 - Principle 1 (weasel words) now quotes Wikipedia's definition verbatim, links the [Weasel word](https://en.wikipedia.org/wiki/Weasel_word) page, and gives three examples ("some people say," "it is believed," "research shows").
