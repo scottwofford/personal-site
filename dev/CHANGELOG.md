@@ -4,6 +4,14 @@ All notable changes to scottwofford.com. Plans for larger changes live in [`plan
 
 ---
 
+## 2026-07-06 - Design system: tokens.css + reference page ([PR #18](https://github.com/scottwofford/personal-site/pull/18))
+
+- Codified the site's existing design language; no visual changes. Plan + inconsistency report: [`plans/2026-07-06_design-system.md`](plans/2026-07-06_design-system.md).
+- **tokens.css**: CSS custom properties (colors, type scale, spacing, radii, layout) copied verbatim from `styles.css` / `home.css`.
+- **design-system/index.html**: human-readable reference (palette swatches, type specimens, components in use). Not yet in sitemap/nav, no ES mirror; deferred to Scott.
+- **blog/index.html**: wired to tokens as the single demo page (no ES twin); every `var()` verified to resolve to the exact previous value.
+- Verified via local http.server + curl 200s and tinycss2 parse checks; cleanup of deviating pages deliberately not applied.
+
 ## 2026-06-17 - Writing Resources: source the writing principles ([PR #17](https://github.com/scottwofford/personal-site/pull/17))
 
 - Principle 1 (weasel words) now quotes Wikipedia's definition verbatim, links the [Weasel word](https://en.wikipedia.org/wiki/Weasel_word) page, and gives three examples ("some people say," "it is believed," "research shows").
