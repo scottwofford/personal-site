@@ -4,6 +4,14 @@ All notable changes to scottwofford.com. Plans for larger changes live in [`plan
 
 ---
 
+## 2026-07-06 - Add money section, draft pending voice pass ([PR #20](https://github.com/scottwofford/personal-site/pull/20))
+
+- New `/money/` single-page section (same pattern as `/substances/`): anti-consumerism + optimization-as-a-game philosophy anchored on Lil Dicky's $ave Dat Money and Earth, generic mechanisms (credit-card points game rules, high-yield savings, asset allocation, low-fee index funds, tax-advantaged accounts), and canonical resources (Bogleheads, JL Collins, Mr. Money Mustache, Doctor of Credit).
+- Homepage nav gets a "money" item (no dropdown); sitemap gets a Money section.
+- All prose is Claude-drafted from Scott's own notes and needs his voice pass before merge. No private financial data on the page (no balances, accounts, card names, targets, or family specifics).
+- Spanish mirror deferred until after the voice pass (translating draft prose would be rework).
+- Verified: local server 200s on `/`, `/money/`, `/sitemap.html`; HTML tag balance clean; zero em dashes; YouTube links title-verified via oEmbed.
+
 ## 2026-06-17 - Writing Resources: source the writing principles ([PR #17](https://github.com/scottwofford/personal-site/pull/17))
 
 - Principle 1 (weasel words) now quotes Wikipedia's definition verbatim, links the [Weasel word](https://en.wikipedia.org/wiki/Weasel_word) page, and gives three examples ("some people say," "it is believed," "research shows").
