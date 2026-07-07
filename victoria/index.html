@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Las Preguntas de Victoria 🌟</title>
+<meta name="description" content="Un archivo de las preguntas de Victoria y las respuestas que le dan ChatGPT, Gemini y Claude.">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Comic Sans MS', 'Chalkboard SE', system-ui, sans-serif;
+    background: linear-gradient(135deg, #FFF4E5 0%, #FFE5E5 50%, #E5F4FF 100%);
+    min-height: 100vh;
+    padding: 20px;
+    color: #2D2D2D;
+  }
+  .container { max-width: 900px; margin: 0 auto; }
+  .site-link {
+    display: inline-block;
+    margin-bottom: 15px;
+    color: #6B7FFF;
+    text-decoration: none;
+    font-size: 1rem;
+    background: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+  }
+  .site-link:hover { text-decoration: underline; }
+  header {
+    text-align: center;
+    background: white;
+    border-radius: 30px;
+    padding: 30px 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    margin-bottom: 25px;
+  }
+  h1 {
+    font-size: 2.4rem;
+    color: #FF8C42;
+    margin-bottom: 10px;
+    line-height: 1.2;
+  }
+  .subtitle { font-size: 1.2rem; color: #6B7FFF; }
+  .big-emoji { font-size: 4rem; display: block; margin: 10px 0; }
+  .intro {
+    background: white;
+    border-radius: 25px;
+    padding: 25px 30px;
+    margin-bottom: 25px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    border: 4px solid #FFD93D;
+    font-size: 1.15rem;
+    line-height: 1.7;
+  }
+  .intro p { margin-bottom: 10px; }
+  .intro p:last-child { margin-bottom: 0; }
+
+  .pregunta {
+    background: white;
+    border-radius: 25px;
+    padding: 25px 30px;
+    margin-bottom: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    border: 4px solid;
+  }
+  .pregunta.orange { border-color: #FF8C42; }
+  .pregunta.blue   { border-color: #6B7FFF; }
+  .pregunta.red    { border-color: #FF6B6B; }
+  .pregunta.green  { border-color: #6BCB77; }
+  .pregunta.purple { border-color: #C77DFF; }
+  .pregunta.yellow { border-color: #FFD93D; }
+
+  .pregunta h2 { font-size: 1.5rem; line-height: 1.3; margin-bottom: 10px; }
+  .pregunta.orange h2 { color: #FF8C42; }
+  .pregunta.blue h2   { color: #6B7FFF; }
+  .pregunta.red h2    { color: #FF6B6B; }
+  .pregunta.green h2  { color: #4CAA5A; }
+  .pregunta.purple h2 { color: #A855F7; }
+  .pregunta.yellow h2 { color: #E8A800; }
+
+  .meta { font-size: 0.95rem; color: #888; margin-bottom: 12px; }
+  .meta .chip {
+    display: inline-block;
+    background: #F0F4FF;
+    color: #6B7FFF;
+    border-radius: 12px;
+    padding: 2px 12px;
+    margin-left: 6px;
+    font-weight: bold;
+  }
+
+  details summary {
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #4CAA5A;
+    padding: 10px 15px;
+    background: #F0FFF4;
+    border-radius: 15px;
+    border: 2px dashed #6BCB77;
+  }
+  details summary:hover { background: #E0FFE8; }
+  details[open] summary { border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
+  .respuesta {
+    padding: 18px 20px;
+    background: #FAFFF5;
+    border: 2px dashed #6BCB77;
+    border-top: none;
+    border-radius: 0 0 15px 15px;
+    font-size: 1.1rem;
+    line-height: 1.7;
+  }
+  .respuesta p { margin-bottom: 10px; }
+  .respuesta p:last-child { margin-bottom: 0; }
+  .respuesta ul { margin: 0 0 10px 25px; }
+  .respuesta li { margin-bottom: 6px; }
+
+  .boton-pagina {
+    display: inline-block;
+    background: #FF8C42;
+    color: white;
+    text-decoration: none;
+    padding: 12px 25px;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-top: 12px;
+    box-shadow: 0 4px 0 #D16A20;
+  }
+  .boton-pagina:hover { transform: translateY(-2px); }
+
+  footer {
+    text-align: center;
+    padding: 30px 20px;
+    color: #6B7FFF;
+    font-size: 1.1rem;
+  }
+  @media (max-width: 480px) {
+    h1 { font-size: 1.8rem; }
+    .pregunta { padding: 20px; }
+    .pregunta h2 { font-size: 1.3rem; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <a class="site-link" href="/">← scottwofford.com</a>
+
+  <header>
+    <span class="big-emoji">🌟🔍🧠</span>
+    <h1>Las Preguntas de Victoria</h1>
+    <p class="subtitle">Un archivo de curiosidad: las preguntas de Victoria (6 años) y las respuestas que le dan ChatGPT, Gemini y Claude 🤖</p>
+  </header>
+
+  <div class="intro">
+    <p>Victoria pregunta. La inteligencia artificial contesta (en español, con dibujos y juegos). Y aquí guardamos todo para volver a leerlo cuando quiera. 💛</p>
+    <p>Algunas preguntas tienen su propia <strong>página especial interactiva</strong>: ¡busca el botón naranja! 🟠</p>
+  </div>
+
+  <!-- ============================================================
+    HOW TO ADD A NEW QUESTION (for future sessions):
+    1. Copy one <article class="pregunta COLOR"> block below.
+    2. Paste it directly under this comment (newest first).
+    3. Rotate COLOR through: orange, blue, red, green, purple, yellow.
+    4. Fill in: id (kebab-case slug), <h2> question (in Victoria's
+       Spanish), .meta date + which AI answered (chip), and the
+       kid-friendly answer summary inside .respuesta.
+    5. If the question got its own interactive page, add:
+       <a class="boton-pagina" href="/shared/victoria-SLUG.html">🚀 ¡Abre la página especial!</a>
+    6. Privacy: questions + answers only. No birthdays, school names,
+       locations, photos, health info, or names beyond "Victoria".
+  ============================================================ -->
+
+  <article class="pregunta orange" id="que-es-la-ia">
+    <h2>🤖 ¿Qué es la Inteligencia Artificial? ¿Por qué los robots no caminan ni hablan bien?</h2>
+    <p class="meta">6 de mayo, 2026 · contestó <span class="chip">Claude</span></p>
+    <details>
+      <summary>👀 Ver la respuesta corta</summary>
+      <div class="respuesta">
+        <p>La IA es como un <strong>cerebro hecho de computadora</strong> 🧠💻. No es una persona de verdad, pero puede aprender mirando muchas, muchas cosas, pensar y contestar preguntas, y ayudarte a hacer dibujos, cuentos y juegos.</p>
+        <p>¿Te acuerdas cómo aprendiste qué era un perrito? 🐶 Te enseñaron muchos perritos hasta que tu cerebrito aprendió. ¡La IA aprende igual!</p>
+        <p><strong>¡Importante!</strong> La IA es como un <strong>lápiz mágico</strong> 🪄: una herramienta súper útil, pero no una persona.</p>
+      </div>
+    </details>
+    <a class="boton-pagina" href="/shared/victoria-inteligencia-artificial.html">🚀 ¡Abre la página especial!</a>
+  </article>
+
+  <article class="pregunta blue" id="microondas-plato">
+    <h2>🍚 ¿Por qué el plato se calienta más que la comida en el microondas?</h2>
+    <p class="meta">6 de mayo, 2026 · contestó <span class="chip">Claude</span></p>
+    <details>
+      <summary>👀 Ver la respuesta corta</summary>
+      <div class="respuesta">
+        <p>El microondas tiene <strong>ondas invisibles</strong> que buscan <strong>gotitas de agua</strong> 💧 en la comida y las hacen vibrar rapidísimo. Vibrar rapidísimo = calor 🔥.</p>
+        <p>El arroz y las lentejas tienen <strong>poquita agua</strong>, así que se calientan poquito. Pero la comida le pasa su calor al plato, y el plato es <strong>grueso y pesado</strong>: guarda el calor como una manta 🧣. ¡Por eso el plato te quema y la comida no!</p>
+      </div>
+    </details>
+    <a class="boton-pagina" href="/shared/victoria-microondas.html">🚀 ¡Abre la página especial!</a>
+  </article>
+
+  <article class="pregunta red" id="cuantas-empresas-mundo">
+    <h2>🌍 ¿Cuántas empresas hay en todo el mundo? ¿Y qué ciudad tiene más?</h2>
+    <p class="meta">2 de mayo, 2026 · contestó <span class="chip">Claude</span></p>
+    <details>
+      <summary>👀 Ver la respuesta corta</summary>
+      <div class="respuesta">
+        <p>¡Aproximadamente <strong>360 millones de empresas</strong>! 🤯 Es como si cada 22 personas del mundo tuvieran una empresa. La mayoría son muy pequeñas, como una panadería del barrio 🥖.</p>
+        <p>La ciudad con más empresas de cualquier tamaño probablemente es <strong>Tokio</strong> 🇯🇵, con más de <strong>660,000 empresas</strong>. Pero es muy difícil contar exactamente: ciudades gigantes como Delhi, Ciudad de México o São Paulo también tienen muchísimos negocios pequeños que no están en ninguna lista.</p>
+      </div>
+    </details>
+  </article>
+
+  <article class="pregunta green" id="sedes-nueva-york">
+    <h2>🗽 ¿Cuántas sedes mundiales de empresas hay en Nueva York? ¿Qué ciudad tiene más?</h2>
+    <p class="meta">2 de mayo, 2026 · contestó <span class="chip">Claude</span></p>
+    <details>
+      <summary>👀 Ver la respuesta corta</summary>
+      <div class="respuesta">
+        <p>Una "sede" es la <strong>casa principal</strong> de una empresa, donde están los jefes. Nueva York tiene <strong>14 sedes</strong> de las empresas más grandes del mundo (lista Fortune Global 500).</p>
+        <p>Pero la campeona mundial es <strong>Pekín</strong> 🇨🇳 con <strong>47</strong>: ¡más que Tokio (26) y Nueva York (14) juntas! Y si miras solo Estados Unidos, ahí sí <strong>Nueva York es la #1</strong> 🥇.</p>
+      </div>
+    </details>
+  </article>
+
+  <article class="pregunta purple" id="bolitas-sueteres">
+    <h2>🧶 ¿Qué son las bolitas que salen en los suéteres?</h2>
+    <p class="meta">1 de mayo, 2026 · contestó <span class="chip">Claude</span></p>
+    <details>
+      <summary>👀 Ver la respuesta corta</summary>
+      <div class="respuesta">
+        <p>Tu ropa está hecha de <strong>hilitos</strong> chiquitos. Cuando se frotan, los hilitos se sueltan, se <strong>enredan</strong> unos con otros y forman pelotitas pequeñas: ¡las bolitas! 🟣</p>
+        <p>Es como cuando enredas plastilina con los dedos y se hace una bolita. <strong>Tarea divertida:</strong> busca un suéter viejo y mira si tiene bolitas debajo de los brazos. ¡Seguro que sí! 🔍</p>
+      </div>
+    </details>
+  </article>
+
+  <article class="pregunta yellow" id="pelusa-secadora">
+    <h2>🌬️ ¿Por qué la pelusa solo sale de la secadora y no de la lavadora?</h2>
+    <p class="meta">1 de mayo, 2026 · contestó <span class="chip">Claude</span></p>
+    <details>
+      <summary>👀 Ver la respuesta corta</summary>
+      <div class="respuesta">
+        <p>¡Sorpresa! <strong>La lavadora TAMBIÉN hace pelusa</strong> 😱, pero no la puedes ver: el agua se la lleva por el tubo del desagüe 💧.</p>
+        <p>En la secadora no hay agua, solo aire calientito dando vueltas. La pelusa queda <strong>atrapada en el filtro</strong>, y por eso sí la ves. Además la secadora hace MÁS pelusa, porque la ropa rebota y rebota con calorcito.</p>
+      </div>
+    </details>
+  </article>
+
+  <article class="pregunta orange" id="familia-patas-largas">
+    <h2>🌳 ¿A qué familia pertenece el papá patas largas?</h2>
+    <p class="meta">1 de mayo, 2026 · contestó <span class="chip">Claude</span></p>
+    <details>
+      <summary>👀 Ver la respuesta corta</summary>
+      <div class="respuesta">
+        <p>A la familia grande de los <strong>ARÁCNIDOS</strong> 🕸️ (igual que las arañas, ¡por eso se confunden!). Su grupito propio se llama <strong>Opiliones</strong>. Sus primos son las arañas, los escorpiones, las garrapatas y los ácaros.</p>
+        <p>🐑 <strong>Dato chistoso:</strong> "Opiliones" significa "pastor de ovejas" en latín, porque sus paticas larguísimas se parecen a los palos altos que usaban los pastores.</p>
+      </div>
+    </details>
+  </article>
+
+  <article class="pregunta blue" id="patas-largas-arana">
+    <h2>🕷️ ¿El papá patas largas es una araña?</h2>
+    <p class="meta">1 de mayo, 2026 · contestó <span class="chip">Claude</span></p>
+    <details>
+      <summary>👀 Ver la respuesta corta</summary>
+      <div class="respuesta">
+        <p>¡<strong>NO</strong>! ❌ Se llama <strong>opilión</strong> y hay tres pistas para saberlo:</p>
+        <ul>
+          <li>🔍 La araña tiene el cuerpo en <strong>dos partes</strong>; el opilión es <strong>una sola bolita</strong> con patas (¡como un chícharo con 8 patas!).</li>
+          <li>🕸️ Las arañas hacen telarañas; el opilión <strong>no sabe</strong>.</li>
+          <li>👀 Las arañas tienen 8 ojitos; el opilión solo 2.</li>
+        </ul>
+        <p>Los dos son arácnidos con 8 paticas: son <strong>primos, no hermanos</strong> 👯. Y no, el opilión NO es venenoso, ¡eso es un cuento! 💚</p>
+      </div>
+    </details>
+  </article>
+
+  <article class="pregunta red" id="meses-y-dias">
+    <h2>📅 ¿De dónde vienen los nombres de los meses y los días de la semana?</h2>
+    <p class="meta">30 de abril, 2026 · contestó <span class="chip">Claude</span></p>
+    <details>
+      <summary>👀 Ver la respuesta corta</summary>
+      <div class="respuesta">
+        <p><strong>Los días</strong> vienen casi todos de planetas y dioses antiguos 🪐: 🌙 Lunes = Luna · 🔴 Martes = Marte · ⚡ Miércoles = Mercurio · 👑 Jueves = Júpiter · 💖 Viernes = Venus · 😴 Sábado = "descansar" · ☀️ Domingo = "Día del Señor".</p>
+        <p><strong>Los meses</strong> vienen de dioses, emperadores y números 🔢: enero a junio son dioses (Jano, Marte, Maia, Juno...), julio y agosto son emperadores (Julio César y Augusto), y septiembre a diciembre son los números 7, 8, 9 y 10 en latín antiguo 🐙.</p>
+      </div>
+    </details>
+  </article>
+
+  <article class="pregunta green" id="palabras-diferentes-paises">
+    <h2>🍿 ¿Qué palabra se dice diferente en todos los países?</h2>
+    <p class="meta">1 de febrero, 2026 · contestó <span class="chip">Claude</span></p>
+    <details>
+      <summary>👀 Ver la respuesta corta</summary>
+      <div class="respuesta">
+        <p>¡Las <strong>palomitas de maíz</strong>! 🍿 Cada país le puso su nombre: <strong>pororó</strong> en Paraguay (¡suena como el maíz explotando!), <strong>rositas</strong> en Cuba, <strong>cabritas</strong> en Chile, <strong>poporopo</strong> en Guatemala, <strong>crispetas</strong> en Colombia... ¡26 nombres en total!</p>
+        <p>Y la palabra <strong>mariposa</strong> 🦋 es diferente en CADA idioma: "Schmetterling" en alemán, "cho-cho" en japonés, "papalotl" en náhuatl (¡de ahí viene "papalote"!).</p>
+      </div>
+    </details>
+  </article>
+
+  <article class="pregunta purple" id="branquias-pulmones">
+    <h2>🐟 ¿En qué son diferentes las branquias y los pulmones?</h2>
+    <p class="meta">20 de enero, 2026 · contestó <span class="chip">Claude</span></p>
+    <details>
+      <summary>👀 Ver la respuesta corta</summary>
+      <div class="respuesta">
+        <p>Los dos hacen el mismo trabajo, ¡pero en lugares diferentes! Los <strong>pulmones</strong> sacan oxígeno del <strong>AIRE</strong> 💨 y las <strong>branquias</strong> sacan oxígeno del <strong>AGUA</strong> 💧.</p>
+        <p>Por eso tú no puedes respirar bajo el agua (tus pulmones no saben sacar oxígeno del agua) y el pez no puede salir del agua (sus branquias se secan). <strong>Dato divertido:</strong> ¡el agua TIENE oxígeno adentro! Es como magia invisible ✨.</p>
+      </div>
+    </details>
+  </article>
+
+  <article class="pregunta yellow" id="ventosas-pulmones">
+    <h2>🫁 ¿Las ventosas se parecen a los pulmones?</h2>
+    <p class="meta">20 de enero, 2026 · contestó <span class="chip">Claude</span></p>
+    <details>
+      <summary>👀 Ver la respuesta corta</summary>
+      <div class="respuesta">
+        <p>¡Sí, un poquito! Los dos usan el <strong>truco del aire</strong>: la ventosa <strong>saca</strong> el aire para pegarse, y tus pulmones se hacen grandes para que el aire <strong>entre</strong> corriendo. ¡Es como una ventosa al revés! 🔄</p>
+        <p>Eso que descubriste los científicos lo llaman <strong>"presión de aire"</strong> 🎉.</p>
+      </div>
+    </details>
+  </article>
+
+  <article class="pregunta orange" id="como-funcionan-ventosas">
+    <h2>🛁 ¿Cómo funcionan las ventosas?</h2>
+    <p class="meta">20 de enero, 2026 · contestó <span class="chip">Claude</span></p>
+    <details>
+      <summary>👀 Ver la respuesta corta</summary>
+      <div class="respuesta">
+        <p>El aire es como un montón de <strong>bolitas invisibles</strong> que empujan todo el tiempo. Cuando pegas una ventosa contra el espejo, el aire de adentro <strong>se escapa</strong> 💨. Ahora las bolitas de AFUERA empujan y empujan la ventosa... ¡y no la dejan ir!</p>
+        <p>Es como un <strong>abrazo invisible</strong> 🤗 del aire.</p>
+      </div>
+    </details>
+  </article>
+
+  <article class="pregunta blue" id="pulpos-brazos-pegajosos">
+    <h2>🐙 ¿Por qué los pulpos tienen los brazos pegajosos?</h2>
+    <p class="meta">20 de enero, 2026 · contestó <span class="chip">Claude</span></p>
+    <details>
+      <summary>👀 Ver la respuesta corta</summary>
+      <div class="respuesta">
+        <p>Los pulpos tienen <strong>"ventositas"</strong>: circulitos en sus brazos que funcionan como ventosas de baño. Las usan para agarrar su comida, caminar sobre las rocas sin resbalarse y abrir conchas muy fuertes.</p>
+        <p><strong>Dato divertido:</strong> ¡un pulpo tiene más de <strong>2,000 ventositas</strong>! Es como tener 2,000 deditos pegajosos 😮.</p>
+      </div>
+    </details>
+  </article>
+
+  <article class="pregunta red" id="libro-de-fosforos">
+    <h2>📚 ¿Por qué un "libro de fósforos" se llama libro?</h2>
+    <p class="meta">16 de enero, 2026 · contestó <span class="chip">Claude</span></p>
+    <details>
+      <summary>👀 Ver la respuesta corta</summary>
+      <div class="respuesta">
+        <p>Porque los fósforos pequeños están pegados <strong>en fila, como las páginas de un libro</strong> 📖. Los dos tienen una cubierta que se abre, cosas adentro en fila, y se cierran igualito. ¡Es un librito chiquito de fósforos! 🔥</p>
+        <p>⚠️ <strong>¡IMPORTANTE!</strong> Los fósforos son peligrosos. ¡Nunca los toques sin un adulto!</p>
+      </div>
+    </details>
+  </article>
+
+  <article class="pregunta green" id="foco-en-todos-los-paises">
+    <h2>💡 ¿Cómo se dice "foco" en todos los países donde hablan español?</h2>
+    <p class="meta">16 de enero, 2026 · contestó <span class="chip">Claude</span></p>
+    <details>
+      <summary>👀 Ver la respuesta corta</summary>
+      <div class="respuesta">
+        <p>¡La palabra cambia según el país! Son 5 palabras principales:</p>
+        <ul>
+          <li><strong>FOCO</strong> 💡 México, Perú, Ecuador, Bolivia</li>
+          <li><strong>BOMBILLO</strong> — Colombia, Venezuela, Cuba</li>
+          <li><strong>BOMBILLA</strong> — España</li>
+          <li><strong>AMPOLLETA</strong> — Chile</li>
+          <li><strong>LAMPARITA</strong> — Argentina, Uruguay, Paraguay</li>
+        </ul>
+        <p>¡Todas significan lo mismo! Es como decir "perrito" o "cachorro": diferentes palabras para la misma cosa.</p>
+      </div>
+    </details>
+  </article>
+
+  <article class="pregunta purple" id="como-funciona-un-foco">
+    <h2>💡 ¿Cómo funciona un foco de luz?</h2>
+    <p class="meta">16 de enero, 2026 · contestó <span class="chip">Claude</span></p>
+    <details>
+      <summary>👀 Ver la respuesta corta</summary>
+      <div class="respuesta">
+        <p>Un foco es como una <strong>casita pequeña para la luz</strong>. La electricidad (como agua invisible que corre por los cables) entra al foco. Adentro hay un <strong>cablecito muy delgado</strong> que se llama filamento. Cuando la electricidad pasa, ¡se calienta MUCHÍSIMO y brilla! Esa es la luz que vemos ✨.</p>
+        <p>(Pero ¡nunca toques cosas calientes! ⚠️)</p>
+      </div>
+    </details>
+  </article>
+
+  <footer>
+    Hecho con amor para Victoria 💕 · <a href="/" style="color:#6B7FFF;">scottwofford.com</a>
+  </footer>
+</div>
+
+<!-- GoatCounter analytics -->
+<script data-goatcounter="https://scwoff.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
