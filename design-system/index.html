@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Design System - Scott Wofford</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/tokens.css">
+  <link rel="stylesheet" href="/styles.css">
+  <style>
+    /* Page-specific: swatch and specimen layout only. All values come from tokens.css. */
+    .swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 0.75rem; margin: 0.75rem 0; }
+    .swatch { border: 1px solid var(--color-border); border-radius: var(--radius-md); overflow: hidden; }
+    .swatch-chip { height: 56px; }
+    .swatch-info { padding: 0.4rem 0.6rem; font-size: 0.8rem; }
+    .swatch-info code { display: block; margin-bottom: 0.2rem; }
+    .swatch-info span { color: var(--color-text-faint); }
+    .type-specimen { margin: 0.75rem 0; }
+    .type-specimen div { margin-bottom: 0.5rem; }
+    .type-specimen .label { color: var(--color-text-faint); font-size: 0.8rem; margin-left: 0.75rem; }
+    .spec-display { font-size: var(--text-display); color: var(--color-text-bright); font-weight: var(--font-weight-bold); }
+    .spec-h1 { font-size: var(--text-h1); color: var(--color-text-bright); }
+    .spec-h2 { font-size: var(--text-h2); color: var(--color-text-bright); }
+    .spec-h3 { font-size: var(--text-h3); color: var(--color-text-h3); }
+    .spec-body { font-size: var(--text-body); color: var(--color-text-body); }
+    .spec-small { font-size: var(--text-small); color: var(--color-text-secondary); }
+    .spec-table { font-size: var(--text-table); color: var(--color-text-muted); }
+    .demo-subscribe { display: inline-block; background: var(--color-accent); color: var(--color-bg); padding: 0.6rem 1.2rem; border-radius: var(--radius-md); text-decoration: none; font-size: 0.9rem; font-weight: 600; }
+    .demo-subscribe:hover { background: var(--color-accent-hover); }
+  </style>
+</head>
+<body>
+  <div class="section-nav">
+    <a href="/">&larr; home</a> / <span class="section-name">design system</span>
+  </div>
+
+  <h1>Design System</h1>
+  <p class="subtitle">The site's existing look, written down. Codified from <code>styles.css</code> and <code>home.css</code>, not a redesign.</p>
+
+  <p>Everything below is what the site already renders. The machine-readable version lives in <a href="/tokens.css"><code>/tokens.css</code></a> as CSS custom properties.</p>
+
+  <h2>Palette</h2>
+  <p>One dark canvas, one raised surface, a gray text ramp from bright to faint, and a single blue accent.</p>
+  <div class="swatches">
+    <div class="swatch"><div class="swatch-chip" style="background: var(--color-bg); border-bottom: 1px solid var(--color-border);"></div><div class="swatch-info"><code>#1a1a1a</code><span>bg: page background</span></div></div>
+    <div class="swatch"><div class="swatch-chip" style="background: var(--color-surface);"></div><div class="swatch-info"><code>#252525</code><span>surface: code, callouts, table headers</span></div></div>
+    <div class="swatch"><div class="swatch-chip" style="background: var(--color-border);"></div><div class="swatch-info"><code>#333</code><span>border: rules, tables, h2 underline</span></div></div>
+    <div class="swatch"><div class="swatch-chip" style="background: var(--color-border-strong);"></div><div class="swatch-info"><code>#444</code><span>border-strong: blockquote edge</span></div></div>
+    <div class="swatch"><div class="swatch-chip" style="background: var(--color-text-bright);"></div><div class="swatch-info"><code>#fff</code><span>text-bright: h1, h2, strong, hover</span></div></div>
+    <div class="swatch"><div class="swatch-chip" style="background: var(--color-text);"></div><div class="swatch-info"><code>#e5e5e5</code><span>text: body default</span></div></div>
+    <div class="swatch"><div class="swatch-chip" style="background: var(--color-text-h3);"></div><div class="swatch-info"><code>#ccc</code><span>text-h3</span></div></div>
+    <div class="swatch"><div class="swatch-chip" style="background: var(--color-text-body);"></div><div class="swatch-info"><code>#bbb</code><span>text-body: paragraphs, lists, cells</span></div></div>
+    <div class="swatch"><div class="swatch-chip" style="background: var(--color-text-secondary);"></div><div class="swatch-info"><code>#999</code><span>text-secondary: em, quotes</span></div></div>
+    <div class="swatch"><div class="swatch-chip" style="background: var(--color-text-muted);"></div><div class="swatch-info"><code>#888</code><span>text-muted: section names, nav</span></div></div>
+    <div class="swatch"><div class="swatch-chip" style="background: var(--color-text-faint);"></div><div class="swatch-info"><code>#666</code><span>text-faint: subtitles, dates, subtle links</span></div></div>
+    <div class="swatch"><div class="swatch-chip" style="background: var(--color-accent);"></div><div class="swatch-info"><code>#6b9fff</code><span>accent: links</span></div></div>
+    <div class="swatch"><div class="swatch-chip" style="background: var(--color-accent-hover);"></div><div class="swatch-info"><code>#8bb4ff</code><span>accent-hover: button hover</span></div></div>
+  </div>
+
+  <h2>Typography</h2>
+  <p>One font: <strong>Inconsolata</strong> (Google Fonts), weights 400 and 600, monospace fallback. Content pages use line-height 1.35; the homepage tagline uses 1.7.</p>
+  <div class="type-specimen">
+    <div><span class="spec-display">Display</span><span class="label">2.6rem, 600 - homepage h1</span></div>
+    <div><span class="spec-h1">Heading 1</span><span class="label">1.8rem - content page title</span></div>
+    <div><span class="spec-h2">Heading 2</span><span class="label">1.3rem - section, with #333 underline</span></div>
+    <div><span class="spec-h3">Heading 3</span><span class="label">1.1rem - subsection</span></div>
+    <div><span class="spec-body">Body text</span><span class="label">1rem</span></div>
+    <div><span class="spec-small">Small</span><span class="label">0.9rem - code, quote attributions</span></div>
+    <div><span class="spec-table">Table / meta</span><span class="label">0.85rem - tables, sibling nav, dates</span></div>
+  </div>
+
+  <h2>Spacing, radii, layout</h2>
+  <ul>
+    <li>Spacing rhythm: 0.25 / 0.5 / 0.75 / 1 / 1.5 / 2 rem</li>
+    <li>Radii: 3px inline code, 4px blocks and cards, 8px images</li>
+    <li>Content column: max-width 900px, centered, 2rem padding (1.25rem under 768px, 1rem under 480px)</li>
+    <li>Hover transitions: 0.2s (0.15s on dropdown links)</li>
+  </ul>
+
+  <h2>Components in use</h2>
+
+  <h3>Section nav</h3>
+  <p>Every content page opens with <code>&larr; home / section</code> in faint gray, plus a sibling row at 0.85rem when the section has more pages. The current page shows white.</p>
+
+  <h3>Subtitle</h3>
+  <p class="subtitle">Italic, faint gray, directly under the h1. This line is one.</p>
+
+  <h3>Blockquote</h3>
+  <blockquote>3px #444 left border, indented, italic, secondary gray.</blockquote>
+  <p class="quote-attr">- attribution in .quote-attr, 0.9rem faint</p>
+
+  <h3>Table</h3>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Header</th><th>#252525 background, white, 600</th></tr>
+      <tr><td>Cell</td><td>#bbb on #1a1a1a, #333 borders, 0.85rem</td></tr>
+    </table>
+  </div>
+
+  <h3>Code</h3>
+  <p>Inline <code>code</code> on the #252525 surface, 3px radius. Blocks:</p>
+  <pre>pre { background: #252525; border-radius: 4px; }</pre>
+
+  <h3>Callout</h3>
+  <div class="callout"><p>.callout: surface background, 4px radius, 1rem padding.</p></div>
+
+  <h3>Button</h3>
+  <p>The one button on the site (blog subscribe): accent background, page-background text, 4px radius.</p>
+  <p><a class="demo-subscribe" href="/blog/">Subscribe on Substack</a></p>
+
+  <h3>Homepage-only patterns</h3>
+  <ul>
+    <li>Top nav: right-aligned, muted gray links, hover dropdowns on a #252525 panel</li>
+    <li>Expand toggle: 28px square button revealing all dropdowns inline</li>
+    <li>Language flag: fixed top-left, half opacity until hover</li>
+    <li>Hover previews: images that appear beside links, 8px radius, soft shadow</li>
+  </ul>
+
+  <hr>
+  <p><em>Deliberately different pages: the Luthien landing mockups (<code>luthien/landing_v8/</code>, Inter + JetBrains Mono on near-black) and the kids' pages in <code>shared/</code> (Comic Sans on pastel gradients). Everything else should converge on the system above.</em></p>
+
+  <!-- GoatCounter analytics -->
+  <script data-goatcounter="https://scwoff.goatcounter.com/count"
+          async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

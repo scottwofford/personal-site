@@ -7,20 +7,22 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/tokens.css">
   <link rel="stylesheet" href="/styles.css">
   <style>
+    /* Wired to /tokens.css (design-token demo page); values identical to the previous hardcoded ones. */
     .posts { margin-top: 1.5rem; }
-    .post { margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid #333; }
+    .post { margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--color-border); }
     .post:last-child { border-bottom: none; }
-    .post a { color: #fff; text-decoration: none; font-weight: 600; font-size: 1.1rem; }
-    .post a:hover { color: #6b9fff; }
-    .post-date { color: #666; font-size: 0.85rem; margin-top: 0.25rem; }
-    .post-excerpt { color: #999; font-size: 0.95rem; margin-top: 0.5rem; }
-    .loading, .error { color: #666; font-style: italic; }
-    .subscribe { margin-top: 2rem; padding: 1.5rem; background: #252525; border-radius: 4px; text-align: center; }
-    .subscribe p { margin-bottom: 1rem; color: #888; }
-    .subscribe a { display: inline-block; background: #6b9fff; color: #1a1a1a; padding: 0.6rem 1.2rem; border-radius: 4px; text-decoration: none; font-size: 0.9rem; font-weight: 600; }
-    .subscribe a:hover { background: #8bb4ff; }
+    .post a { color: var(--color-text-bright); text-decoration: none; font-weight: var(--font-weight-bold); font-size: 1.1rem; }
+    .post a:hover { color: var(--color-accent); }
+    .post-date { color: var(--color-text-faint); font-size: 0.85rem; margin-top: 0.25rem; }
+    .post-excerpt { color: var(--color-text-secondary); font-size: 0.95rem; margin-top: 0.5rem; }
+    .loading, .error { color: var(--color-text-faint); font-style: italic; }
+    .subscribe { margin-top: 2rem; padding: 1.5rem; background: var(--color-surface); border-radius: var(--radius-md); text-align: center; }
+    .subscribe p { margin-bottom: 1rem; color: var(--color-text-muted); }
+    .subscribe a { display: inline-block; background: var(--color-accent); color: var(--color-bg); padding: 0.6rem 1.2rem; border-radius: var(--radius-md); text-decoration: none; font-size: 0.9rem; font-weight: var(--font-weight-bold); }
+    .subscribe a:hover { background: var(--color-accent-hover); }
 
     @media (max-width: 600px) {
       body { padding: 1rem; }

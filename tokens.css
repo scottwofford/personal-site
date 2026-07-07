@@ -1,0 +1,60 @@
+/* Design tokens for scottwofford.com
+   Codified from the site's dominant existing style (styles.css + home.css).
+   Every value here matches what the site already renders; this file changes nothing visually.
+   Human-readable reference: /design-system/ */
+
+:root {
+  /* Color: canvas and surfaces */
+  --color-bg: #1a1a1a;            /* page background (all pages) */
+  --color-surface: #252525;       /* code blocks, table headers, callouts, dropdowns */
+  --color-border: #333;           /* h2 underline, table borders, hr, dropdown border */
+  --color-border-strong: #444;    /* blockquote left border */
+
+  /* Color: text, brightest to faintest */
+  --color-text-bright: #fff;      /* h1, h2, strong, hover states */
+  --color-text: #e5e5e5;          /* body default */
+  --color-text-h3: #ccc;          /* h3 */
+  --color-text-body: #bbb;        /* paragraphs, list items, table cells */
+  --color-text-secondary: #999;   /* em, blockquotes, excerpts */
+  --color-text-muted: #888;       /* section names, homepage nav links */
+  --color-text-faint: #666;       /* subtle links, subtitles, dates, attributions */
+
+  /* Color: accent */
+  --color-accent: #6b9fff;        /* links */
+  --color-accent-hover: #8bb4ff;  /* accent-background hover (blog subscribe button) */
+  --color-selection: rgba(107, 159, 255, 0.3); /* ::selection background */
+
+  /* Typography */
+  --font-mono: 'Inconsolata', monospace;  /* the only site font; weights 400 and 600 */
+  --font-weight-normal: 400;
+  --font-weight-bold: 600;
+  --leading-content: 1.35;        /* content-page body line-height */
+  --leading-relaxed: 1.7;         /* homepage tagline */
+
+  /* Type scale (rem) */
+  --text-display: 2.6rem;         /* homepage h1 */
+  --text-h1: 1.8rem;              /* content-page h1 */
+  --text-h2: 1.3rem;
+  --text-h3: 1.1rem;
+  --text-body: 1rem;
+  --text-small: 0.9rem;           /* code, quote attributions */
+  --text-table: 0.85rem;          /* tables, sibling nav, dates */
+
+  /* Spacing rhythm (rem): the site's recurring steps */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 0.75rem;
+  --space-lg: 1rem;
+  --space-xl: 1.5rem;
+  --space-2xl: 2rem;
+
+  /* Radii */
+  --radius-sm: 3px;               /* inline code */
+  --radius-md: 4px;               /* pre, callouts, cards, dropdowns */
+  --radius-lg: 8px;               /* images */
+
+  /* Layout and motion */
+  --max-width-content: 900px;     /* content-page column */
+  --transition-fast: 0.15s;       /* dropdown link hover */
+  --transition-base: 0.2s;        /* most hover transitions */
+}
