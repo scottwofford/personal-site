@@ -14,6 +14,7 @@ All notable changes to scottwofford.com. Plans for larger changes live in [`plan
 - Added a 10:30 morning snack before the playground block.
 - Uses cars for the arrival icon.
 - Gives Monday's morning snack the same color as the walk/playground block to mark Scott's meeting window.
+- Adds musical-instrument emojis to the 5:30 parent show-and-tell / concert.
 - Mirrored on the Spanish camp page.
 
 ## 2026-06-17 - Writing Resources: source the writing principles ([PR #17](https://github.com/scottwofford/personal-site/pull/17))
