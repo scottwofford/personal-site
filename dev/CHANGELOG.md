@@ -4,6 +4,13 @@ All notable changes to scottwofford.com. Plans for larger changes live in [`plan
 
 ---
 
+## 2026-08-31 - Camp visual schedule ([PR #21](https://github.com/scottwofford/personal-site/pull/21))
+
+- Replaced the placeholder three-column schedule table with three kid-readable daily timelines: large emojis, color-coded calm/focused versus physical blocks, and the concrete activity sequence for each day.
+- The Monday playground block explicitly assigns Danna and Elizabeth to lead while Scott attends his 10:30–11:15 meeting.
+- Adds the 15-minute walk each way to Shorewood Elementary, with Scott biking over after his Monday meeting.
+- Mirrored on the Spanish camp page.
+
 ## 2026-06-17 - Writing Resources: source the writing principles ([PR #17](https://github.com/scottwofford/personal-site/pull/17))
 
 - Principle 1 (weasel words) now quotes Wikipedia's definition verbatim, links the [Weasel word](https://en.wikipedia.org/wiki/Weasel_word) page, and gives three examples ("some people say," "it is believed," "research shows").
