@@ -312,71 +312,35 @@
     .game-deactivate button:hover { color: #fff; }
 
     /* --- Schedule --- */
-    .schedule-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 1rem;
-      margin: 1.25rem 0;
+    .schedule-wrapper { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .schedule-table {
+      width: 100%;
+      min-width: 760px;
+      border-collapse: collapse;
+      margin: 0.75rem 0;
+      font-size: 0.85rem;
     }
-    .day-schedule {
-      border: 1px solid var(--border);
-      border-top: 4px solid var(--gold);
-      border-radius: 6px;
-      overflow: hidden;
+    .schedule-table th {
       background: var(--card-bg);
-    }
-    .day-schedule.tuesday { border-top-color: var(--purple); }
-    .day-schedule.wednesday { border-top-color: var(--teal); }
-    .day-schedule h3 {
       color: #fff;
-      font-size: 1rem;
-      padding: 0.75rem 0.85rem;
-      text-align: center;
+      font-weight: 600;
+      padding: 0.6rem;
+      text-align: left;
+      border: 1px solid var(--border);
     }
-    .schedule-item {
-      display: grid;
-      grid-template-columns: 3.5rem 2.25rem minmax(0, 1fr);
-      gap: 0.35rem;
-      align-items: center;
-      min-height: 4.6rem;
-      padding: 0.55rem 0.6rem;
-      border-top: 1px solid var(--border);
-      background: #202020;
+    .schedule-table td {
+      padding: 0.6rem;
+      color: #bbb;
+      border: 1px solid var(--border);
+      vertical-align: top;
     }
-    .schedule-item.chill { background: rgba(107, 159, 255, 0.12); }
-    .schedule-item.physical { background: rgba(52, 211, 153, 0.12); }
-    .schedule-item.meal { background: rgba(251, 191, 36, 0.12); }
-    .schedule-item.finale { background: rgba(244, 114, 182, 0.13); }
-    .schedule-time {
-      color: #aaa;
-      font-size: 0.72rem;
+    .schedule-table td:first-child {
+      color: #fff;
       font-weight: 700;
-      line-height: 1.25;
+      white-space: nowrap;
     }
-    .schedule-emoji {
-      font-size: 1.55rem;
-      line-height: 1;
-      text-align: center;
-    }
-    .schedule-title {
-      color: #f4f4f4;
-      font-size: 0.88rem;
-      font-weight: 700;
-      line-height: 1.2;
-    }
-    .schedule-detail {
-      color: #aaa;
-      font-size: 0.72rem;
-      line-height: 1.3;
-      margin-top: 0.2rem;
-    }
-    .schedule-helper {
-      color: var(--gold);
-      font-size: 0.68rem;
-      font-weight: 700;
-      line-height: 1.3;
-      margin-top: 0.25rem;
-    }
+    .schedule-slot { line-height: 1.45; }
+    .schedule-slot + .schedule-slot { margin-top: 0.35rem; }
     .schedule-note {
       color: #666;
       font-size: 0.85rem;
@@ -478,7 +442,7 @@
       .sticky-links .signup-link { font-size: 0.75rem; padding: 0.2rem 0.6rem; }
       section { padding: 1.75rem 1.25rem; }
       .disclaimer { padding: 1rem 1.25rem; }
-      .schedule-grid { grid-template-columns: 1fr; }
+      .schedule-table { font-size: 0.78rem; }
       /* Game: smaller on mobile */
       .game-container iframe { aspect-ratio: 4/3; height: auto; }
       .game-controls { flex-direction: column; gap: 0.5rem; }
@@ -589,45 +553,72 @@
 
   <!-- Schedule -->
   <section id="schedule">
-    <h2>3 Days + 1 Night</h2>
-    <p class="section-intro">The big picture for each day. Blue is calm and focused; green is outside and moving.</p>
+    <h2>3 Days</h2>
+    <p class="section-intro">The big picture for each day.</p>
 
-    <div class="schedule-grid">
-      <div class="day-schedule monday">
-        <h3>Monday · Aug 31</h3>
-        <div class="schedule-item"><span class="schedule-time">9:00</span><span class="schedule-emoji">👋</span><div><div class="schedule-title">Welcome + free play</div></div></div>
-        <div class="schedule-item chill"><span class="schedule-time">9:30<br>10:20</span><span class="schedule-emoji">🎮</span><div><div class="schedule-title">Build a game</div><div class="schedule-detail">Scott + 2 kids build. Everyone else does karaoke, music, and character art.</div><div class="schedule-helper">Helpers: Danna + Elizabeth lead the other kids.</div></div></div>
-        <div class="schedule-item physical"><span class="schedule-time">10:20<br>11:35</span><span class="schedule-emoji">🛝</span><div><div class="schedule-title">Walk + playground adventure</div><div class="schedule-detail">15-minute walk each way to Shorewood Elementary, plus playground time.</div><div class="schedule-helper">Danna + Elizabeth lead while Scott is in a meeting. Scott bikes over afterward.</div></div></div>
-        <div class="schedule-item chill"><span class="schedule-time">11:35<br>12:00</span><span class="schedule-emoji">🎤</span><div><div class="schedule-title">Karaoke + game share</div></div></div>
-        <div class="schedule-item meal"><span class="schedule-time">12:00<br>1:30</span><span class="schedule-emoji">🍝</span><div><div class="schedule-title">Lunch + quiet time</div><div class="schedule-detail">Spaghetti bolognese, then stories, drawing, or calm free play.</div></div></div>
-        <div class="schedule-item physical"><span class="schedule-time">1:30<br>2:30</span><span class="schedule-emoji">🕺</span><div><div class="schedule-title">Dance + outdoor play</div></div></div>
-        <div class="schedule-item chill"><span class="schedule-time">2:30<br>4:00</span><span class="schedule-emoji">🎮</span><div><div class="schedule-title">Snack + playtest</div><div class="schedule-detail">Try the game, make one change, and rehearse a song.</div></div></div>
-        <div class="schedule-item finale"><span class="schedule-time">4:00<br>5:30</span><span class="schedule-emoji">🌈</span><div><div class="schedule-title">Free play + concert</div><div class="schedule-detail">5:30: karaoke and game show-and-tell with parents.</div></div></div>
-      </div>
-
-      <div class="day-schedule tuesday">
-        <h3>Tuesday · Sep 1</h3>
-        <div class="schedule-item"><span class="schedule-time">9:00</span><span class="schedule-emoji">👋</span><div><div class="schedule-title">Welcome + free play</div></div></div>
-        <div class="schedule-item chill"><span class="schedule-time">9:30<br>10:20</span><span class="schedule-emoji">🎮</span><div><div class="schedule-title">Build a game</div><div class="schedule-detail">Scott + 2 kids build. Everyone else draws characters, levels, and a game map.</div></div></div>
-        <div class="schedule-item physical"><span class="schedule-time">10:20<br>11:20</span><span class="schedule-emoji">🛝</span><div><div class="schedule-title">Walk + playground adventure</div><div class="schedule-detail">15-minute walk each way to Shorewood Elementary, plus playground time.</div></div></div>
-        <div class="schedule-item chill"><span class="schedule-time">11:20<br>12:00</span><span class="schedule-emoji">🎨</span><div><div class="schedule-title">Make the game real</div><div class="schedule-detail">Character art, level maps, and game signs.</div></div></div>
-        <div class="schedule-item meal"><span class="schedule-time">12:00<br>1:30</span><span class="schedule-emoji">🍗</span><div><div class="schedule-title">Lunch + quiet time</div><div class="schedule-detail">Chicken, rice, veggies, then stories, drawing, or calm free play.</div></div></div>
-        <div class="schedule-item physical"><span class="schedule-time">1:30<br>2:30</span><span class="schedule-emoji">🌳</span><div><div class="schedule-title">Outdoor games</div><div class="schedule-detail">Playground and outside games.</div></div></div>
-        <div class="schedule-item chill"><span class="schedule-time">2:30<br>4:00</span><span class="schedule-emoji">🧪</span><div><div class="schedule-title">Snack + playtest</div><div class="schedule-detail">Try the game, add one small feature, and prepare show-and-tell.</div></div></div>
-        <div class="schedule-item finale"><span class="schedule-time">4:00<br>bedtime</span><span class="schedule-emoji">⛺</span><div><div class="schedule-title">Free play + pajama party</div><div class="schedule-detail">S'mores, stargazing, and backyard camping for the sleepover group.</div></div></div>
-      </div>
-
-      <div class="day-schedule wednesday">
-        <h3>Wednesday · Sep 2</h3>
-        <div class="schedule-item"><span class="schedule-time">9:00</span><span class="schedule-emoji">👋</span><div><div class="schedule-title">Welcome + free play</div></div></div>
-        <div class="schedule-item chill"><span class="schedule-time">9:30<br>10:20</span><span class="schedule-emoji">🎮</span><div><div class="schedule-title">Finish the game</div><div class="schedule-detail">Scott + 2 kids build. Everyone else makes posters, props, and artwork.</div></div></div>
-        <div class="schedule-item physical"><span class="schedule-time">10:20<br>11:20</span><span class="schedule-emoji">🛝</span><div><div class="schedule-title">Walk + playground adventure</div><div class="schedule-detail">15-minute walk each way to Shorewood Elementary, plus playground time.</div></div></div>
-        <div class="schedule-item chill"><span class="schedule-time">11:20<br>12:00</span><span class="schedule-emoji">🎨</span><div><div class="schedule-title">Props + game pictures</div><div class="schedule-detail">Finish artwork and take screenshots for show-and-tell.</div></div></div>
-        <div class="schedule-item meal"><span class="schedule-time">12:00<br>1:30</span><span class="schedule-emoji">🍛</span><div><div class="schedule-title">Lunch + quiet time</div><div class="schedule-detail">Carne desmechada, beans, rice, veggies, then calm free play.</div></div></div>
-        <div class="schedule-item physical"><span class="schedule-time">1:30<br>2:30</span><span class="schedule-emoji">💃</span><div><div class="schedule-title">Dance + karaoke staging</div></div></div>
-        <div class="schedule-item chill"><span class="schedule-time">2:30<br>4:00</span><span class="schedule-emoji">🎤</span><div><div class="schedule-title">Snack + final rehearsal</div><div class="schedule-detail">Game demos, karaoke rehearsal, and show setup.</div></div></div>
-        <div class="schedule-item finale"><span class="schedule-time">4:00<br>5:30</span><span class="schedule-emoji">🎉</span><div><div class="schedule-title">Free play + final concert</div><div class="schedule-detail">5:30: final concert and game demos with parents.</div></div></div>
-      </div>
+    <div class="schedule-wrapper">
+      <table class="schedule-table">
+        <tr>
+          <th style="width: 105px;">Time</th>
+          <th>Monday · Aug 31</th>
+          <th>Tuesday · Sep 1</th>
+          <th>Wednesday · Sep 2</th>
+        </tr>
+        <tr>
+          <td>9:00–9:30</td>
+          <td>👋 Arrival + free play</td>
+          <td>👋 Arrival + free play</td>
+          <td>👋 Arrival + free play</td>
+        </tr>
+        <tr>
+          <td>9:30–10:30<br>A</td>
+          <td><div class="schedule-slot">🎮 Office: Scott + 2 kids build the game.</div><div class="schedule-slot">🎨 Garage art studio: other kids make characters and game art with a helper.</div></td>
+          <td><div class="schedule-slot">🎮 Office: Scott + 2 kids add to the game.</div><div class="schedule-slot">🎨 Garage art studio: other kids make levels, maps, and game signs with a helper.</div></td>
+          <td><div class="schedule-slot">🎮 Office: Scott + 2 kids finish the game.</div><div class="schedule-slot">🎨 Garage art studio: other kids make posters, props, and artwork with a helper.</div></td>
+        </tr>
+        <tr>
+          <td>10:30–12:00<br>B</td>
+          <td>🛝 Walk to Shorewood Elementary, playground, walk home.<br><strong>Danna + Elizabeth lead</strong> while Scott attends his meeting and bikes over afterward.</td>
+          <td>🛝 Walk to Shorewood Elementary, playground, walk home.</td>
+          <td>🛝 Walk to Shorewood Elementary, playground, walk home.</td>
+        </tr>
+        <tr>
+          <td>12:00–12:45</td>
+          <td>🍝 Lunch</td>
+          <td>🍗 Lunch</td>
+          <td>🍛 Lunch</td>
+        </tr>
+        <tr>
+          <td>12:45–2:30<br>C</td>
+          <td><div class="schedule-slot">🎤 Karaoke</div><div class="schedule-slot">💃 Dance party + outdoor play</div></td>
+          <td><div class="schedule-slot">🎤 Karaoke</div><div class="schedule-slot">💃 Dance party + outdoor play</div></td>
+          <td><div class="schedule-slot">🎤 Karaoke</div><div class="schedule-slot">💃 Dance party + outdoor play</div></td>
+        </tr>
+        <tr>
+          <td>2:30–3:00</td>
+          <td>🍎 Snack + regroup</td>
+          <td>🍎 Snack + regroup</td>
+          <td>🍎 Snack + regroup</td>
+        </tr>
+        <tr>
+          <td>3:00–4:00<br>D</td>
+          <td>🎮 Playtest the game, make one kid-requested change, and rehearse a song.</td>
+          <td>🎮 Playtest the game, add one small feature, and prepare show-and-tell.</td>
+          <td>🎮 Game demos, final karaoke rehearsal, and show setup.</td>
+        </tr>
+        <tr>
+          <td>4:00–5:15</td>
+          <td>🌈 Free play + wind-down</td>
+          <td>🌈 Free play + wind-down</td>
+          <td>🌈 Free play + wind-down</td>
+        </tr>
+        <tr>
+          <td>5:30</td>
+          <td>🎉 Parent concert + game show-and-tell</td>
+          <td>👋 Pickup</td>
+          <td>🎉 Final concert + game demos</td>
+        </tr>
+      </table>
     </div>
 
     <p class="schedule-note">* All instruction is in Spanish.</p>
