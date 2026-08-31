@@ -4,7 +4,7 @@ All notable changes to scottwofford.com. Plans for larger changes live in [`plan
 
 ---
 
-## 2026-08-31 - Camp visual schedule (PR pending)
+## 2026-08-31 - Camp visual schedule ([PR #21](https://github.com/scottwofford/personal-site/pull/21))
 
 - Replaced the placeholder three-column schedule table with three kid-readable daily timelines: large emojis, color-coded calm/focused versus physical blocks, and the concrete activity sequence for each day.
 - The Monday playground block explicitly assigns Danna and Elizabeth to lead while Scott attends his 10:30–11:15 meeting.
