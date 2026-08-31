@@ -6,10 +6,11 @@ All notable changes to scottwofford.com. Plans for larger changes live in [`plan
 
 ## 2026-08-31 - Camp visual schedule ([PR #21](https://github.com/scottwofford/personal-site/pull/21))
 
-- Replaced the placeholder with a kid-readable horizontal schedule: times appear only in the leftmost column, color bands distinguish calm, physical, and meal blocks, and each day aligns to the same A–D blocks.
+- Replaced the placeholder with a kid-readable horizontal schedule: times appear only in the leftmost column, color bands distinguish the blocks, and each day aligns to the same A–D blocks.
 - Block A makes the office game-building and garage art-studio split explicit. Block B is the Shorewood Elementary walk and playground through lunch. Block C is karaoke and a dance party. Block D is outdoor play with the trampoline and soccer.
 - The Monday playground block explicitly assigns Danna and Elizabeth to lead while Scott attends his 10:30–11:15 meeting and bikes over afterward.
 - Removed the cancelled Tuesday sleepover.
+- Simplified the schedule labels, removed the Spanish-instruction footnote, and made the 5:30 entry the same parent show-and-tell / concert across all three days.
 - Mirrored on the Spanish camp page.
 
 ## 2026-06-17 - Writing Resources: source the writing principles ([PR #17](https://github.com/scottwofford/personal-site/pull/17))
