@@ -31,8 +31,57 @@ const game = new Phaser.Game(config);
 //  con tres en el tercer nivel y con una en el cuarto nivel."
 // ============================================
 const LIVES_BY_LEVEL = [10, 5, 3, 1]; // Level 1, 2, 3, 4
-const CURRENT_LEVEL = 1;               // Only Level 1 is built so far
-const STARTING_LIVES = LIVES_BY_LEVEL[CURRENT_LEVEL - 1];
+
+// ============================================
+// 🗺️ THE LEVELS
+// platforms: [x, y, width, height]   lava/water/rock: [x, y, width, height]
+// exit: [x, y]                       starts: where each player begins
+// ============================================
+const LEVELS = [
+    {
+        platforms: [
+            [400, 580, 800, 40],   // ground
+            [200, 500, 300, 20],
+            [600, 420, 300, 20],
+            [300, 340, 200, 20],
+            [650, 260, 250, 20],
+            [200, 180, 150, 20]
+        ],
+        // "no pongas demasiado, como solo cuatro" and "por todo el tablero"
+        lava:  [[450, 550, 60, 20], [280, 480, 50, 20], [600, 400, 50, 20], [650, 240, 50, 20]],
+        water: [[150, 550, 60, 20], [330, 320, 50, 20], [710, 400, 50, 20]],
+        rock:  [[560, 238, 54, 24]],
+        exit:  [750, 140],
+        starts: [{ x: 100, y: 450 }, { x: 150, y: 450 }]
+    },
+    {
+        // Level 2 is harder: skinnier platforms, more traps, and only 5 lives.
+        platforms: [
+            [400, 580, 800, 40],   // ground
+            [120, 500, 180, 20],
+            [380, 470, 140, 20],
+            [640, 430, 180, 20],
+            [400, 350, 160, 20],
+            [150, 290, 160, 20],
+            [520, 290, 120, 20],   // stepping stone up to the exit platform
+            [600, 220, 200, 20]
+        ],
+        lava:  [
+            [250, 550, 60, 20],
+            [420, 450, 50, 20],
+            [660, 410, 50, 20],
+            [430, 330, 50, 20],
+            [545, 200, 50, 20]
+        ],
+        water: [[600, 550, 60, 20], [175, 480, 50, 20], [190, 270, 50, 20]],
+        rock:  [],
+        exit:  [670, 165],
+        starts: [{ x: 60, y: 430 }, { x: 105, y: 430 }]
+    }
+];
+
+let currentLevel = 0;   // 0 = level 1
+let levelsWon = [0, 0]; // how many levels each player has won
 
 // Game Variables
 let player1;
@@ -43,12 +92,13 @@ let waterTraps;
 let rockTraps;
 let cursors;
 let wasd;
-let player1Lives = STARTING_LIVES;
-let player2Lives = STARTING_LIVES;
+let player1Lives = LIVES_BY_LEVEL[0];
+let player2Lives = LIVES_BY_LEVEL[0];
 let p1LivesText;
 let p2LivesText;
 let gameOver = false;
 let winnerText;
+let levelText;
 let scene; // Reference to scene for use in functions
 
 // Constants
@@ -62,9 +112,9 @@ const ROCK_TRAP_LEVEL = 3;   // where Adrian wants it. Level 3 is not built yet,
                              // the one rock trap lives in the level we can actually play.
 const DAMAGE_COOLDOWN = 1500; // after any trap, every trap leaves you alone this long
 
-// Where each player starts, so the water can send them back there
-const P1_START = { x: 100, y: 450 };
-const P2_START = { x: 150, y: 450 };
+// Where each player starts on this level, so the water can send them back there
+let P1_START = LEVELS[0].starts[0];
+let P2_START = LEVELS[0].starts[1];
 
 // One timer per player: after any trap hits you, every trap leaves you alone
 // for DAMAGE_COOLDOWN. Separate timers let traps chain into each other.
@@ -78,6 +128,8 @@ function preload() {
 }
 
 function create() {
+    gameOver = false;
+
     // Background
     this.add.rectangle(400, 300, 800, 600, 0x2d3436);
 
@@ -92,27 +144,31 @@ function create() {
     }).setOrigin(0.5);
 
     // Subtitle
-    this.add.text(400, 65, `Level ${CURRENT_LEVEL}: Race to the Exit! / ¡Corre a la salida!`, {
+    this.add.text(400, 65, `Level ${currentLevel + 1} / Nivel ${currentLevel + 1}: ¡Corre a la salida! / Race to the Exit!`, {
         fontSize: '18px',
         fill: '#00ff00'
     }).setOrigin(0.5);
 
+    // Who has won how many levels
+    levelText = this.add.text(400, 88, levelScoreLabel(), {
+        fontSize: '15px',
+        fill: '#ffd54f'
+    }).setOrigin(0.5);
+
+    const level = LEVELS[currentLevel];
+    P1_START = level.starts[0];
+    P2_START = level.starts[1];
+
     // Create platforms (simple maze)
     platforms = this.physics.add.staticGroup();
 
-    // Ground
-    platforms.create(400, 580, null).setDisplaySize(800, 40).setTint(0x8B4513).refreshBody();
-
-    // Simple maze walls for testing
-    platforms.create(200, 500, null).setDisplaySize(300, 20).setTint(0x8B4513).refreshBody();
-    platforms.create(600, 420, null).setDisplaySize(300, 20).setTint(0x8B4513).refreshBody();
-    platforms.create(300, 340, null).setDisplaySize(200, 20).setTint(0x8B4513).refreshBody();
-    platforms.create(650, 260, null).setDisplaySize(250, 20).setTint(0x8B4513).refreshBody();
-    platforms.create(200, 180, null).setDisplaySize(150, 20).setTint(0x8B4513).refreshBody();
+    level.platforms.forEach(([x, y, w, h]) => {
+        platforms.create(x, y, null).setDisplaySize(w, h).setTint(0x8B4513).refreshBody();
+    });
 
     // Exit (goal)
-    this.add.rectangle(750, 140, 40, 40, 0x00ff00);
-    this.add.text(750, 140, '🚪', {
+    this.add.rectangle(level.exit[0], level.exit[1], 40, 40, 0x00ff00);
+    this.add.text(level.exit[0], level.exit[1], '🚪', {
         fontSize: '32px'
     }).setOrigin(0.5);
 
@@ -122,12 +178,7 @@ function create() {
     // ============================================
     lavaTraps = this.physics.add.staticGroup();
 
-    // Adrian (2026-08-31): "no pongas demasiado, como solo cuatro" and
-    // "por todo el tablero" - four lava traps, spread across the whole board.
-    createLavaTrap(this, 450, 550, 60, 20);  // bottom - on the ground
-    createLavaTrap(this, 280, 480, 50, 20);  // left - low platform
-    createLavaTrap(this, 600, 400, 50, 20);  // right - middle platform
-    createLavaTrap(this, 650, 240, 50, 20);  // top - high platform near the exit
+    level.lava.forEach(([x, y, w, h]) => createLavaTrap(this, x, y, w, h));
 
     // ============================================
     // 💧 WATER TRAPS - Adrian's rule (2026-08-31):
@@ -136,18 +187,16 @@ function create() {
     // ============================================
     waterTraps = this.physics.add.staticGroup();
 
-    createWaterTrap(this, 150, 550, 60, 20);  // bottom left - on the ground
-    createWaterTrap(this, 330, 320, 50, 20);  // middle platform
-    createWaterTrap(this, 710, 400, 50, 20);  // right platform
+    level.water.forEach(([x, y, w, h]) => createWaterTrap(this, x, y, w, h));
 
     // ============================================
     // 🪨 ROCK TRAP - just ONE, and it takes FIVE lives
     // ============================================
     rockTraps = this.physics.add.staticGroup();
-    createRockTrap(this, 560, 238, 54, 24);   // high platform, right before the exit
+    level.rock.forEach(([x, y, w, h]) => createRockTrap(this, x, y, w, h));
 
     // Player 1 (Dinosaur 🦖)
-    player1 = this.add.text(100, 450, '🦖', {
+    player1 = this.add.text(P1_START.x, P1_START.y, '🦖', {
         fontSize: '60px'
     }).setOrigin(0.5);
     this.physics.add.existing(player1);
@@ -156,7 +205,7 @@ function create() {
     player1.body.setCollideWorldBounds(true);
 
     // Player 2 (Robot 🤖)
-    player2 = this.add.text(150, 450, '🤖', {
+    player2 = this.add.text(P2_START.x, P2_START.y, '🤖', {
         fontSize: '60px'
     }).setOrigin(0.5);
     this.physics.add.existing(player2);
@@ -211,7 +260,7 @@ function create() {
     });
 
     console.log('✅ Game created! Player 1: Arrow Keys | Player 2: WASD');
-    console.log(`❤️ Level ${CURRENT_LEVEL}: everybody starts with ${STARTING_LIVES} lives`);
+    console.log(`❤️ Level ${currentLevel + 1}: everybody starts with ${LIVES_BY_LEVEL[currentLevel]} lives`);
 }
 
 function update() {
@@ -244,13 +293,14 @@ function update() {
         player2.body.setVelocityY(-250);
     }
 
-    // Check if player reached exit
-    if (player1.x > 730 && player1.y < 160) {
-        endGame('🦖 Player 1');
+    // Check if a player reached the exit
+    const exit = LEVELS[currentLevel].exit;
+    if (Phaser.Math.Distance.Between(player1.x, player1.y, exit[0], exit[1]) < 45) {
+        reachedExit(0, '🦖 Player 1');
     }
 
-    if (player2.x > 730 && player2.y < 160) {
-        endGame('🤖 Player 2');
+    if (Phaser.Math.Distance.Between(player2.x, player2.y, exit[0], exit[1]) < 45) {
+        reachedExit(1, '🤖 Player 2');
     }
 }
 
@@ -529,6 +579,58 @@ function showTrapMessage(playerName) {
         duration: 1200,
         onComplete: () => message.destroy()
     });
+}
+
+function levelScoreLabel() {
+    return `Niveles ganados / Levels won:  🦖 ${levelsWon[0]}  -  🤖 ${levelsWon[1]}`;
+}
+
+// A player got to the door. Next level, or win the whole game.
+function reachedExit(playerIndex, playerName) {
+    if (gameOver) return;
+    gameOver = true;
+    levelsWon[playerIndex] += 1;
+    levelText.setText(levelScoreLabel());
+
+    player1.body.setVelocity(0, 0);
+    player2.body.setVelocity(0, 0);
+
+    // Was that the last level? / ¿Era el último nivel?
+    if (currentLevel >= LEVELS.length - 1) {
+        showBigMessage(`${playerName} WINS! ¡GANA!`, 'Refresh page to play again! / ¡Recarga la página!');
+        console.log('🎮 Game Over!');
+        return;
+    }
+
+    showBigMessage(
+        `${playerName} ganó el Nivel ${currentLevel + 1}!`,
+        `¡NIVEL ${currentLevel + 2}! Menos vidas... / Fewer lives...`
+    );
+
+    scene.time.delayedCall(2200, () => {
+        currentLevel += 1;
+        player1Lives = LIVES_BY_LEVEL[currentLevel];
+        player2Lives = LIVES_BY_LEVEL[currentLevel];
+        player1LastDamage = 0;
+        player2LastDamage = 0;
+        gameOver = false;
+        scene.scene.restart();
+    });
+}
+
+function showBigMessage(big, small) {
+    winnerText = scene.add.text(400, 300, big, {
+        fontSize: '40px',
+        fill: '#ffff00',
+        fontStyle: 'bold',
+        stroke: '#000000',
+        strokeThickness: 6
+    }).setOrigin(0.5);
+
+    scene.add.text(400, 360, small, {
+        fontSize: '20px',
+        fill: '#ffffff'
+    }).setOrigin(0.5);
 }
 
 // End the game with a winner
