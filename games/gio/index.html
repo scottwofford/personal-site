@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gio's Lava Game 🌋</title>
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.70.0/dist/phaser.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #b71c1c 0%, #ff6f00 100%);
+            font-family: 'Arial', sans-serif;
+        }
+        #game-container {
+            box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        #info {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: white;
+            background: rgba(0,0,0,0.7);
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 14px;
+            max-width: 300px;
+        }
+        h1 { margin: 0 0 10px 0; font-size: 20px; }
+        .controls { margin-top: 10px; font-size: 12px; line-height: 1.6; }
+    </style>
+</head>
+<body>
+    <div id="info">
+        <h1>🌋 Gio's Lava Game</h1>
+        <div class="controls">
+            <strong>Move / Mover:</strong> ← →<br>
+            <strong>Jump / Saltar:</strong> ↑<br>
+            <strong>Goal / Meta:</strong> get through the lava to the flag 🏁<br>
+            <strong>Watch out / Cuidado:</strong> 🔥 lava burns, and the cracks drop you!<br>
+            <strong>Levels / Niveles:</strong> 1, 2 (harder), 3 (🥊 boxing!)<br>
+            <strong>Punch / Puñetazo:</strong> SPACE / ESPACIO (level 3)
+        </div>
+    </div>
+    <div id="game-container"></div>
+    <script src="game.js"></script>
+</body>
+</html>

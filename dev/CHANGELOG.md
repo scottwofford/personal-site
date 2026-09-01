@@ -4,6 +4,14 @@ All notable changes to scottwofford.com. Plans for larger changes live in [`plan
 
 ---
 
+## 2026-08-31 - Kids' games published at /games/ (PR link below)
+
+- The kids' games now live on the site at `scottwofford.com/games/`, with each kid at their own URL: [/games/adrian/](/games/adrian/), [/games/rafa/](/games/rafa/), [/games/gio/](/games/gio/), [/games/gabriel/](/games/gabriel/), [/games/victoria/](/games/victoria/). Previously they were only reachable at `scottwofford.github.io/adrian-maze-game/`.
+- `games/` holds only the playable files (index.html, game.js, Rafa's drawing). The source of truth stays in [scottwofford/adrian-maze-game](https://github.com/scottwofford/adrian-maze-game); the dev notes, tests and learning folders are not copied.
+- Added `.github/workflows/sync-kids-games.yml`: every 30 minutes (and on demand) it pulls the games repo and commits any change into `games/`, so a kid's change reaches the site without a manual copy. It uses the repo's own `GITHUB_TOKEN`, no extra secret.
+- The camp page's embedded game now loads `/games/` instead of the github.io URL, so the games are served from this domain. Mirrored on the ES camp page.
+- Verified with Playwright: all five games load from `/games/` with no console errors, the menu's five cards resolve, and the camp iframe points at `/games/`.
+
 ## 2026-08-31 - Camp visual schedule ([PR #21](https://github.com/scottwofford/personal-site/pull/21))
 
 - Replaced the placeholder with a kid-readable horizontal schedule: times appear only in the leftmost column, color bands distinguish the blocks, and each day aligns to the same A–D blocks.

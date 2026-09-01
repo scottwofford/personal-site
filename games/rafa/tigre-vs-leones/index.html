@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Tigre Contra Los Leones 🐅🦁</title>
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.70.0/dist/phaser.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f59e0b 0%, #b45309 100%);
+            font-family: 'Arial', sans-serif;
+            color: white;
+        }
+        #info {
+            text-align: center;
+            margin-bottom: 12px;
+            padding: 14px 22px;
+            background: rgba(0,0,0,0.55);
+            border-radius: 8px;
+            max-width: 760px;
+        }
+        #info h1 { margin: 0 0 8px 0; font-size: 22px; }
+        #info p { margin: 4px 0; font-size: 16px; line-height: 1.5; }
+        #info .rule { font-weight: bold; color: #fde68a; }
+        #game-container {
+            box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <div id="info">
+        <h1>🐅 El Tigre Contra Los Leones 🦁</h1>
+        <p class="rule">¡MUEVE el tigre con las flechas para atacar!</p>
+        <p class="rule">Si te quedas QUIETO, los leones te atacan a ti 💔</p>
+        <p>MOVE = pounce 💥 · STILL = lions hurt you 💔 · 3 hearts ❤️❤️❤️</p>
+    </div>
+    <div id="game-container"></div>
+    <script src="game.js"></script>
+</body>
+</html>
