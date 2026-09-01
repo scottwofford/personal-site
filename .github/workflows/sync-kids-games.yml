@@ -1,0 +1,47 @@
+# Keeps scottwofford.com/games/ in step with the kids' game repo.
+# The games live in scottwofford/adrian-maze-game; this copies the playable files
+# (index.html, game.js, drawings) into games/ and commits when anything changed.
+name: Sync kids games
+
+on:
+  schedule:
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch the games repo
+        run: git clone --depth 1 https://github.com/scottwofford/adrian-maze-game.git /tmp/kids-games
+
+      - name: Copy the playable files into games/
+        run: |
+          rsync -a --delete \
+            --exclude='.git/' \
+            --exclude='.github/' \
+            --exclude='.claude/' \
+            --exclude='dev/' \
+            --exclude='tests/' \
+            --exclude='learning/' \
+            --exclude='*.md' \
+            --exclude='.gitignore' \
+            --exclude='.DS_Store' \
+            /tmp/kids-games/ games/
+
+      - name: Commit if anything changed
+        run: |
+          if [ -n "$(git status --porcelain games)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add games
+            git commit -m "chore(games): sync kids games from adrian-maze-game"
+            git push
+          else
+            echo "Nothing changed."
+          fi

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adrian's Maze Game 🎮</title>
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.70.0/dist/phaser.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Arial', sans-serif;
+        }
+        #game-container {
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        #info {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: white;
+            background: rgba(0,0,0,0.7);
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 14px;
+            max-width: 300px;
+        }
+        h1 {
+            margin: 0 0 10px 0;
+            font-size: 20px;
+        }
+        .controls {
+            margin-top: 10px;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <div id="info">
+        <h1>🎮 Adrian's Maze Game</h1>
+        <div class="controls">
+            <strong>Player 1:</strong> Arrow Keys<br>
+            <strong>Player 2:</strong> WASD Keys<br>
+            <strong>Goal:</strong> First to exit wins! 🏆<br>
+            <strong>🔥 Lava (4):</strong> takes 1 life / te quita una vida ❤️<br>
+            <strong>💧 Agua (3):</strong> back to the start / te regresa al principio<br>
+            <strong>🪨 Roca (1):</strong> takes 5 lives! / ¡te quita 5 vidas!<br>
+            <strong>Level 1 / Nivel 1:</strong> 10 lives each
+        </div>
+    </div>
+    <div id="game-container"></div>
+    <script src="game.js"></script>
+</body>
+</html>

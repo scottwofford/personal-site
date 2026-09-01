@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Videojuego de Rafa 🎮</title>
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.70.0/dist/phaser.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #5b9bd5 0%, #70ad47 100%);
+            font-family: 'Arial', sans-serif;
+            color: white;
+        }
+        #info {
+            text-align: center;
+            margin-bottom: 12px;
+            padding: 14px 20px;
+            background: rgba(0,0,0,0.5);
+            border-radius: 8px;
+        }
+        #info h1 { margin: 0 0 6px 0; font-size: 22px; }
+        #info p { margin: 4px 0; font-size: 14px; line-height: 1.5; }
+        #game-container {
+            box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <div id="info">
+        <h1>🎮 El Videojuego de Rafa</h1>
+        <p><strong>← →</strong> mover · <strong>↑</strong> o <strong>ESPACIO</strong> saltar</p>
+        <p>Recoge 🦄 · Salta sobre 🦖 · Evita 🐉 · Llega a 🚩</p>
+    </div>
+    <div id="game-container"></div>
+    <script src="game.js"></script>
+</body>
+</html>

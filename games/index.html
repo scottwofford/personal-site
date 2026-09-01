@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎮 Juegos de los Niños / Kids' Games</title>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            padding: 24px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #5b9bd5 0%, #a18cd1 50%, #70ad47 100%);
+            font-family: 'Arial', sans-serif;
+            color: white;
+        }
+        h1 { margin: 0 0 4px 0; font-size: 32px; text-shadow: 0 2px 6px rgba(0,0,0,0.3); }
+        .subtitle { margin: 0 0 28px 0; font-size: 16px; opacity: 0.95; }
+        .games {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            max-width: 900px;
+        }
+        .game-card {
+            display: block;
+            width: 240px;
+            padding: 24px 20px;
+            background: rgba(0,0,0,0.45);
+            border-radius: 16px;
+            text-decoration: none;
+            color: white;
+            text-align: center;
+            transition: transform 0.15s ease, background 0.15s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        .game-card:hover {
+            transform: translateY(-6px) scale(1.03);
+            background: rgba(0,0,0,0.6);
+        }
+        .game-card .emoji { font-size: 64px; line-height: 1; }
+        .game-card h2 { margin: 12px 0 6px 0; font-size: 22px; }
+        .game-card p { margin: 0; font-size: 13px; line-height: 1.5; opacity: 0.92; }
+        footer { margin-top: 32px; font-size: 12px; opacity: 0.8; text-align: center; }
+    </style>
+</head>
+<body>
+    <h1>🎮 Los Juegos de los Niños</h1>
+    <p class="subtitle">Kids' Games · Cada niño diseña su propio juego / Each kid designs their own game</p>
+
+    <div class="games">
+        <a class="game-card" href="adrian/">
+            <div class="emoji">🌀</div>
+            <h2>Adrian</h2>
+            <p>Laberinto y combate para 2 jugadores<br>2-player maze &amp; combat</p>
+        </a>
+        <a class="game-card" href="rafa/">
+            <div class="emoji">🦖</div>
+            <h2>Rafa</h2>
+            <p>Plataformas estilo Mario<br>Mario-style platformer</p>
+        </a>
+        <a class="game-card" href="gio/">
+            <div class="emoji">🌋</div>
+            <h2>Gio</h2>
+            <p>Volcanes y lava, con grietas<br>Volcanoes, lava &amp; cracks</p>
+        </a>
+        <a class="game-card" href="gabriel/">
+            <div class="emoji">⚔️</div>
+            <h2>Gabriel</h2>
+            <p>Star Wars: nave y sable láser<br>Star Wars: ship &amp; lightsaber</p>
+        </a>
+        <a class="game-card" href="victoria/">
+            <div class="emoji">🦄</div>
+            <h2>Victoria</h2>
+            <p>Unicornio mágico vs. dragón<br>Magical unicorn vs. dragon</p>
+        </a>
+    </div>
+
+    <footer>
+        Hecho con / Made with 💜 · Phaser 3 · diseñado por los niños / designed by the kids
+    </footer>
+</body>
+</html>
