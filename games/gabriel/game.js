@@ -37,6 +37,7 @@ let packages;   // 📦 the bad guys throw these at your ship
 let rockTraps;  // 🪨 five rock traps floating in space - do not touch them
 let cursors;
 let spaceKey;
+let aKey;
 let livesText;
 let scoreText;
 let messageText;
@@ -147,7 +148,9 @@ function create() {
 
     // Controls
     cursors = this.input.keyboard.createCursorKeys();
+    // The lightsaber swings with SPACE or with the letter A
     spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+    aKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
 
     // Enemies keep coming
     this.time.addEvent({ delay: 1600, callback: spawnBadGuy, callbackScope: this, loop: true });
@@ -170,7 +173,7 @@ function update() {
     ship.body.setVelocity(vx, vy);
 
     // Swing the lightsaber
-    if (Phaser.Input.Keyboard.JustDown(spaceKey)) {
+    if (Phaser.Input.Keyboard.JustDown(spaceKey) || Phaser.Input.Keyboard.JustDown(aKey)) {
         swingSaber();
     }
 
