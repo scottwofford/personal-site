@@ -4,7 +4,7 @@ All notable changes to scottwofford.com. Plans for larger changes live in [`plan
 
 ---
 
-## 2026-08-31 - Kids' games published at /games/ (PR link below)
+## 2026-08-31 - Kids' games published at /games/ ([PR #22](https://github.com/scottwofford/personal-site/pull/22))
 
 - The kids' games now live on the site at `scottwofford.com/games/`, with each kid at their own URL: [/games/adrian/](/games/adrian/), [/games/rafa/](/games/rafa/), [/games/gio/](/games/gio/), [/games/gabriel/](/games/gabriel/), [/games/victoria/](/games/victoria/). Previously they were only reachable at `scottwofford.github.io/adrian-maze-game/`.
 - `games/` holds only the playable files (index.html, game.js, Rafa's drawing). The source of truth stays in [scottwofford/adrian-maze-game](https://github.com/scottwofford/adrian-maze-game); the dev notes, tests and learning folders are not copied.
