@@ -4,6 +4,12 @@ All notable changes to scottwofford.com. Plans for larger changes live in [`plan
 
 ---
 
+## 2026-10-11 - Seattle AI Safety Slack growth chart at /seattleaisafetygrowth/
+
+- New page at `scottwofford.com/seattleaisafetygrowth/`: a line graph of Seattle AI Safety Slack membership from February 2025 to October 11, 2026 (11 members through August 2026, 48 today), plus a six-week zoom on the September and October surge, a joins-by-month table, and a link to the [Slack invite page](https://luthien.cc/slack/) that the [invite refresh automation](https://github.com/scottwofford/automation/tree/main/slack-invite-refresh) keeps current.
+- Public page shows counts only, no member names. 31 join dates come from Slack channel-join events; 17 are estimated from Slack user ID order, and the page says so.
+- English only: a dated data snapshot, not a content page with a Spanish counterpart.
+
 ## 2026-08-31 - Kids' games published at /games/ ([PR #22](https://github.com/scottwofford/personal-site/pull/22))
 
 - The kids' games now live on the site at `scottwofford.com/games/`, with each kid at their own URL: [/games/adrian/](/games/adrian/), [/games/rafa/](/games/rafa/), [/games/gio/](/games/gio/), [/games/gabriel/](/games/gabriel/), [/games/victoria/](/games/victoria/). Previously they were only reachable at `scottwofford.github.io/adrian-maze-game/`.
