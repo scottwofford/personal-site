@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="How the Seattle AI Safety Slack grew from February 2025 to October 2026.">
+<title>Seattle AI Safety Slack Growth</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one narrow reading column; headline number, full-history chart, six-week zoom, member table. */
+:root {
+  --bg: #fbfbfa;
+  --surface: #ffffff;
+  --ink: #141413;
+  --ink-2: #55544f;
+  --ink-3: #8a8983;
+  --rule: #e6e5e0;
+  --grid: #efeee9;
+  --series: #2a78d6;
+  --series-fill: rgba(42,120,214,0.10);
+  --note: #8a8983;
+  --font-body: "Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-data: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #141413; --surface: #1a1a19; --ink: #f0efec; --ink-2: #c3c2b7; --ink-3: #8f8e86;
+    --rule: #2c2c2a; --grid: #252523; --series: #3987e5; --series-fill: rgba(57,135,229,0.16); --note: #8f8e86;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #141413; --surface: #1a1a19; --ink: #f0efec; --ink-2: #c3c2b7; --ink-3: #8f8e86;
+  --rule: #2c2c2a; --grid: #252523; --series: #3987e5; --series-fill: rgba(57,135,229,0.16); --note: #8f8e86;
+  color-scheme: dark;
+}
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 15px; line-height: 1.5; }
+.wrap { max-width: 860px; margin: 0 auto; padding-inline: 20px; padding-block: 36px 56px; display: grid; gap: 28px; }
+header { display: grid; gap: 6px; }
+.eyebrow { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); }
+h1 { font-size: clamp(24px, 4vw, 32px); font-weight: 600; margin: 0; text-wrap: balance; letter-spacing: -.01em; }
+.lede { color: var(--ink-2); margin: 0; max-width: 65ch; }
+.stats { display: flex; flex-wrap: wrap; gap: 12px 40px; }
+.stat { display: grid; gap: 2px; }
+.stat b { font-family: var(--font-data); font-weight: 500; font-size: 28px; font-variant-numeric: tabular-nums; }
+.stat span { color: var(--ink-3); font-size: 13px; }
+section.chart { background: var(--surface); border: 1px solid var(--rule); border-radius: 10px; padding: 18px 18px 10px; display: grid; gap: 8px; min-width: 0; }
+section.chart h2 { font-size: 15px; font-weight: 600; margin: 0; }
+section.chart p { margin: 0; color: var(--ink-3); font-size: 13px; }
+.plot { position: relative; min-width: 0; }
+.plot svg { display: block; width: 100%; height: auto; overflow: visible; touch-action: pan-y; }
+.axis text { font-family: var(--font-data); font-size: 11px; fill: var(--ink-3); }
+.gridline { stroke: var(--grid); stroke-width: 1; }
+.baseline { stroke: var(--rule); stroke-width: 1; }
+.line { fill: none; stroke: var(--series); stroke-width: 2; stroke-linejoin: round; }
+.area { fill: var(--series-fill); }
+.dot-obs { fill: var(--series); stroke: var(--surface); stroke-width: 2; }
+.dot-est { fill: var(--surface); stroke: var(--series); stroke-width: 2; }
+.event line { stroke: var(--note); stroke-width: 1; stroke-dasharray: 3 3; }
+.event text { font-size: 11px; fill: var(--ink-2); font-family: var(--font-body); }
+.end-label { font-family: var(--font-data); font-size: 12px; fill: var(--ink); font-weight: 500; }
+.cross { stroke: var(--ink-3); stroke-width: 1; }
+.tip { position: absolute; pointer-events: none; background: var(--surface); border: 1px solid var(--rule); border-radius: 8px; padding: 8px 10px; font-size: 12px; box-shadow: 0 4px 14px rgba(0,0,0,.08); max-width: 240px; display: grid; gap: 4px; z-index: 2; }
+.tip[hidden] { display: none; }
+.tip .v { font-family: var(--font-data); font-size: 15px; font-weight: 500; color: var(--ink); }
+.tip .d { color: var(--ink-3); }
+.tip ul { margin: 0; padding: 0; list-style: none; color: var(--ink-2); }
+.tip li.est { font-style: italic; }
+.key { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 12px; color: var(--ink-2); padding-top: 4px; }
+.key span { display: inline-flex; align-items: center; gap: 6px; }
+.key svg { width: 12px; height: 12px; }
+details { border-top: 1px solid var(--rule); padding-top: 14px; }
+summary { cursor: pointer; font-weight: 600; }
+summary:focus-visible { outline: 2px solid var(--series); outline-offset: 3px; border-radius: 4px; }
+.tablewrap { overflow-x: auto; margin-top: 12px; }
+table { border-collapse: collapse; width: 100%; font-size: 13px; }
+th, td { text-align: left; padding: 6px 10px; border-bottom: 1px solid var(--rule); white-space: nowrap; }
+th { color: var(--ink-3); font-weight: 500; font-size: 12px; letter-spacing: .04em; text-transform: uppercase; }
+td.num { font-family: var(--font-data); font-variant-numeric: tabular-nums; }
+td.est { color: var(--ink-3); font-style: italic; }
+.method { color: var(--ink-2); font-size: 13px; max-width: 70ch; display: grid; gap: 8px; }
+.method p { margin: 0; }
+a { color: var(--series); }
+.join { margin: 0; }
+.back a { color: var(--ink-3); text-decoration: none; font-size: 13px; }
+.back a:hover { color: var(--ink); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="back"><a href="/">← scottwofford.com</a></div>
+  <header>
+    <div class="eyebrow">seattleaisafety.slack.com · as of Oct 11, 2026</div>
+    <h1>Seattle AI Safety Slack members over time</h1>
+    <p class="lede">The workspace grew slowly for 18 months after it started in February 2025, then more than quadrupled between September 1 and October 11, 2026.</p>
+  </header>
+
+  <p class="join">Based in or near Seattle and working on AI safety? <a href="https://luthien.cc/slack/">Join the Slack</a>.</p>
+
+  <div class="stats">
+    <div class="stat"><b>48</b><span>members today (people, not bots)</span></div>
+    <div class="stat"><b>11</b><span>joined Feb 2025 – Aug 2026</span></div>
+    <div class="stat"><b>37</b><span>joined since Sep 1, 2026</span></div>
+  </div>
+
+  <section class="chart">
+    <h2>Total members, full history</h2>
+    <p>Cumulative count, one step per join</p>
+    <div class="plot" id="full"></div>
+  </section>
+
+  <section class="chart">
+    <h2>Last six weeks</h2>
+    <p>Sep 1 – Oct 11, 2026 · each dot is a day with at least one join</p>
+    <div class="plot" id="zoom"></div>
+    <div class="key">
+      <span><svg viewBox="0 0 12 12"><circle cx="6" cy="6" r="4.5" class="dot-obs"/></svg>all joins that day seen in Slack</span>
+      <span><svg viewBox="0 0 12 12"><circle cx="6" cy="6" r="4" class="dot-est"/></svg>includes an estimated date</span>
+    </div>
+  </section>
+
+  <div class="method">
+    <p><strong>How the dates were found.</strong> 31 of the 48 members have a "has joined the channel" event in #general or #random (auto-joined on signup), or in #intros or #events for people who joined after mid-September. The other 17 have no visible join event, so their join dates are estimated from their Slack user IDs, which Slack hands out in time order: each one is placed between the nearest known dates. Estimates are probably within a few days. Dates are in UTC.</p>
+    <p>The two marked events come from Slack messages: the invite was shared with Seattle-based SPAR fellows on Sep 13, and the #intros channel started on Sep 15.</p>
+  </div>
+
+  <details>
+    <summary>New members by month (table)</summary>
+    <div class="tablewrap"><table id="tbl"><thead><tr><th>Month</th><th>New</th><th>Total</th></tr></thead><tbody></tbody></table></div>
+  </details>
+</div>
+
+<script>
+const MEMBERS = [{"t": "2025-02-24", "how": "observed"}, {"t": "2025-02-24", "how": "observed"}, {"t": "2025-02-26", "how": "observed"}, {"t": "2025-03-17", "how": "observed"}, {"t": "2025-05-16", "how": "observed"}, {"t": "2025-10-14", "how": "observed"}, {"t": "2026-02-27", "how": "observed"}, {"t": "2026-03-01", "how": "observed"}, {"t": "2026-03-04", "how": "observed"}, {"t": "2026-03-30", "how": "observed"}, {"t": "2026-03-30", "how": "observed"}, {"t": "2026-09-01", "how": "observed"}, {"t": "2026-09-02", "how": "observed"}, {"t": "2026-09-04", "how": "observed"}, {"t": "2026-09-07", "how": "observed"}, {"t": "2026-09-08", "how": "observed"}, {"t": "2026-09-09", "how": "observed"}, {"t": "2026-09-10", "how": "observed"}, {"t": "2026-09-13", "how": "observed"}, {"t": "2026-09-13", "how": "observed"}, {"t": "2026-09-13", "how": "estimated"}, {"t": "2026-09-15", "how": "observed"}, {"t": "2026-09-15", "how": "observed"}, {"t": "2026-09-15", "how": "estimated"}, {"t": "2026-09-15", "how": "estimated"}, {"t": "2026-09-16", "how": "estimated"}, {"t": "2026-09-16", "how": "estimated"}, {"t": "2026-09-19", "how": "observed"}, {"t": "2026-09-23", "how": "estimated"}, {"t": "2026-09-23", "how": "estimated"}, {"t": "2026-09-24", "how": "estimated"}, {"t": "2026-09-26", "how": "estimated"}, {"t": "2026-09-26", "how": "estimated"}, {"t": "2026-09-26", "how": "estimated"}, {"t": "2026-09-29", "how": "observed"}, {"t": "2026-09-30", "how": "estimated"}, {"t": "2026-10-01", "how": "estimated"}, {"t": "2026-10-04", "how": "estimated"}, {"t": "2026-10-05", "how": "estimated"}, {"t": "2026-10-08", "how": "observed"}, {"t": "2026-10-08", "how": "observed"}, {"t": "2026-10-08", "how": "observed"}, {"t": "2026-10-08", "how": "estimated"}, {"t": "2026-10-08", "how": "estimated"}, {"t": "2026-10-09", "how": "observed"}, {"t": "2026-10-09", "how": "observed"}, {"t": "2026-10-09", "how": "estimated"}, {"t": "2026-10-11", "how": "observed"}];
+
+// Group joins by day: one point per day with the running total after that day.
+const DAY = 86400000;
+const toMs = s => Date.parse(s + "T00:00:00Z");
+const days = [];
+let total = 0;
+for (const m of MEMBERS) {
+  total++;
+  const last = days[days.length - 1];
+  if (last && last.t === toMs(m.t)) { last.total = total; last.people.push(m); }
+  else days.push({ t: toMs(m.t), total, people: [m] });
+}
+const fmt = (ms, opts) => new Date(ms).toLocaleDateString("en-US", Object.assign({ timeZone: "UTC" }, opts));
+const NS = "http://www.w3.org/2000/svg";
+const el = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); if (parent) parent.appendChild(n); return n; };
+
+function drawChart(host, { start, end, ticks, tickFmt, dots, events, yMax, startTotal }) {
+  const W = Math.max(300, host.clientWidth || 800), narrow = W < 560, H = narrow ? 240 : 300, m = { l: 30, r: 34, t: 16, b: 28 };
+  const iw = W - m.l - m.r, ih = H - m.t - m.b;
+  const x = t => m.l + (t - start) / (end - start) * iw;
+  const y = v => m.t + ih - v / yMax * ih;
+  const svg = el("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": host.dataset.label || "Member count over time" }, host);
+
+  // Horizontal gridlines every 10 members.
+  const ax = el("g", { class: "axis" }, svg);
+  for (let v = 0; v <= yMax; v += 10) {
+    el("line", { class: v === 0 ? "baseline" : "gridline", x1: m.l, x2: W - m.r, y1: y(v), y2: y(v) }, ax);
+    el("text", { x: m.l - 8, y: y(v) + 4, "text-anchor": "end" }, ax).textContent = v;
+  }
+  for (const t of ticks.filter((_, i) => !narrow || i % 2 === 1)) {
+    el("text", { x: x(t), y: H - 8, "text-anchor": "middle" }, ax).textContent = tickFmt(t);
+  }
+
+  // Step path: flat until a join day, then up.
+  const pts = days.filter(d => d.t >= start && d.t <= end);
+  let prev = startTotal;
+  let d = `M${x(start)},${y(prev)}`;
+  for (const p of pts) { d += ` H${x(p.t)} V${y(p.total)}`; prev = p.total; }
+  d += ` H${x(end)}`;
+  el("path", { class: "area", d: d + ` V${y(0)} H${x(start)} Z` }, svg);
+  el("path", { class: "line", d }, svg);
+
+  for (const ev of events || []) {
+    const g = el("g", { class: "event" }, svg);
+    el("line", { x1: x(ev.t), x2: x(ev.t), y1: m.t, y2: y(0) }, g);
+    el("text", { x: x(ev.t) + 5, y: m.t + 10 + (ev.row || 0) * 14 }, g).textContent = narrow ? ev.short : ev.label;
+  }
+
+  if (dots) for (const p of pts) {
+    const est = p.people.some(q => q.how === "estimated");
+    el("circle", { class: est ? "dot-est" : "dot-obs", cx: x(p.t), cy: y(p.total), r: est ? 4 : 4.5 }, svg);
+  }
+  const lastP = pts[pts.length - 1];
+  el("circle", { class: "dot-obs", cx: x(lastP.t), cy: y(lastP.total), r: 4.5 }, svg);
+  el("text", { class: "end-label", x: x(lastP.t) + 9, y: y(lastP.total) + 4 }, svg).textContent = lastP.total;
+
+  // Hover: crosshair snaps to the nearest join day; tooltip lists who joined.
+  const cross = el("line", { class: "cross", y1: m.t, y2: y(0), visibility: "hidden" }, svg);
+  const tip = document.createElement("div"); tip.className = "tip"; tip.hidden = true; host.appendChild(tip);
+  function show(evt) {
+    const r = svg.getBoundingClientRect();
+    const sx = (evt.clientX - r.left) / r.width * W;
+    let best = pts[0];
+    for (const p of pts) if (Math.abs(x(p.t) - sx) < Math.abs(x(best.t) - sx)) best = p;
+    cross.setAttribute("x1", x(best.t)); cross.setAttribute("x2", x(best.t)); cross.setAttribute("visibility", "visible");
+    tip.replaceChildren();
+    const v = document.createElement("div"); v.className = "v"; v.textContent = best.total + " members"; tip.appendChild(v);
+    const dd = document.createElement("div"); dd.className = "d";
+    dd.textContent = fmt(best.t, { month: "short", day: "numeric", year: "numeric" }) + " · +" + best.people.length + " joined"; tip.appendChild(dd);
+    const nEst = best.people.filter(q => q.how === "estimated").length;
+    if (nEst) { const e = document.createElement("div"); e.className = "d"; e.textContent = nEst + " of these dates estimated"; tip.appendChild(e); }
+    tip.hidden = false;
+    const px = x(best.t) / W * r.width, py = y(best.total) / H * r.height;
+    const tw = tip.offsetWidth;
+    tip.style.left = Math.max(0, Math.min(r.width - tw, px + (px > r.width / 2 ? -tw - 12 : 12))) + "px";
+    tip.style.top = Math.max(0, py - 20) + "px";
+  }
+  svg.addEventListener("pointermove", show);
+  svg.addEventListener("pointerdown", show);
+  svg.addEventListener("pointerleave", () => { tip.hidden = true; cross.setAttribute("visibility", "hidden"); });
+}
+
+const monthTicks = [];
+for (let y = 2025, mo = 2; y < 2026 || mo <= 10; mo += 2) { if (mo > 12) { mo -= 12; y++; } monthTicks.push(Date.UTC(y, mo - 1, 1)); }
+function drawAll() {
+  for (const id of ["full", "zoom"]) document.getElementById(id).replaceChildren();
+drawChart(document.getElementById("full"), {
+  start: Date.UTC(2025, 1, 15), end: Date.UTC(2026, 9, 14), yMax: 50, startTotal: 0,
+  ticks: monthTicks.filter(t => t >= Date.UTC(2025, 1, 15)),
+  tickFmt: t => fmt(t, { month: "short" }) + (new Date(t).getUTCMonth() === 1 ?" ’" + String(new Date(t).getUTCFullYear()).slice(2) : ""),
+});
+drawChart(document.getElementById("zoom"), {
+  start: Date.UTC(2026, 8, 1), end: Date.UTC(2026, 9, 12), yMax: 50, startTotal: 11, dots: true,
+  ticks: [Date.UTC(2026,8,1), Date.UTC(2026,8,8), Date.UTC(2026,8,15), Date.UTC(2026,8,22), Date.UTC(2026,8,29), Date.UTC(2026,9,6)],
+  tickFmt: t => fmt(t, { month: "short", day: "numeric" }),
+  events: [
+    { t: Date.UTC(2026, 8, 13), label: "Sep 13 · invite shared with SPAR fellows", short: "SPAR invite", row: 0 },
+    { t: Date.UTC(2026, 8, 15), label: "Sep 15 · #intros starts", short: "#intros", row: 1 },
+  ],
+});
+}
+drawAll();
+let lastW = window.innerWidth;
+window.addEventListener("resize", () => { if (window.innerWidth !== lastW) { lastW = window.innerWidth; drawAll(); } });
+
+const byMonth = new Map();
+for (const mm of MEMBERS) { const k = mm.t.slice(0, 7); byMonth.set(k, (byMonth.get(k) || 0) + 1); }
+const tb = document.querySelector("#tbl tbody");
+let run = 0;
+for (const [k, n] of byMonth) {
+  run += n;
+  const tr = document.createElement("tr");
+  [fmt(toMs(k + "-01"), { month: "short", year: "numeric" }), "+" + n, String(run)].forEach((c, j) => { const td = document.createElement("td"); td.textContent = c; if (j) td.className = "num"; tr.appendChild(td); });
+  tb.appendChild(tr);
+}
+</script>
+<!-- GoatCounter analytics -->
+<script data-goatcounter="https://scwoff.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
