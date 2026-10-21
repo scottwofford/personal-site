@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Control Tower Constraints</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:light;--bg:#fafaf8;--panel:#ffffff;--text:#1a1a1a;--text2:#444;--muted:#6b6b6b;--line:#c8c8c4;--box:#f1f1ee;--accent:#2a5fc4;--flow:#2a78d6;--crit:#d03b3b;--critbg:#fbeaea;--loop:#6b6b6b}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#1a1a1a;--panel:#202020;--text:#e5e5e5;--text2:#bbb;--muted:#888;--line:#444;--box:#252525;--accent:#6b9fff;--flow:#3987e5;--crit:#e66767;--critbg:#3a2424;--loop:#999}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#1a1a1a;--panel:#202020;--text:#e5e5e5;--text2:#bbb;--muted:#888;--line:#444;--box:#252525;--accent:#6b9fff;--flow:#3987e5;--crit:#e66767;--critbg:#3a2424;--loop:#999}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inconsolata',monospace;background:var(--bg);color:var(--text);line-height:1.4;max-width:1000px;margin:0 auto;padding:2rem 16px}
+h1{font-size:1.7rem;margin-bottom:.4rem}
+h2{font-size:1.2rem;margin:1.6rem 0 .5rem;border-bottom:1px solid var(--line);padding-bottom:.35rem}
+p,li{color:var(--text2);margin-bottom:.5rem}
+ul{margin:.4rem 0 .6rem 1.4rem}
+a{color:var(--accent)}
+.draft{border:1px solid var(--crit);background:var(--critbg);color:var(--text);padding:.5rem .75rem;border-radius:4px;font-size:.85rem;margin-bottom:1.25rem}
+.sub{color:var(--muted);margin-bottom:1rem}
+.fig-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:.5rem;margin:.75rem 0}
+.fig-wrap svg{display:block;width:100%;min-width:720px;height:auto}
+svg text{font-family:'Inconsolata',monospace;fill:var(--text)}
+svg .t2{fill:var(--text2)} svg .tm{fill:var(--muted)} svg .tc{fill:var(--crit);font-weight:600}
+svg .box{fill:var(--box);stroke:var(--line);stroke-width:1}
+svg .crit{fill:var(--critbg);stroke:var(--crit);stroke-width:2}
+svg .arrow{stroke:var(--flow);stroke-width:2;fill:none}
+svg .ah{fill:var(--flow)} svg .ahl{fill:var(--loop)} svg .ahc{fill:var(--crit)}
+svg .loop{stroke:var(--loop);stroke-width:1.5;fill:none}
+svg .link{stroke:var(--crit);stroke-width:1.5;fill:none;stroke-dasharray:4 4}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin:.75rem 0}
+.tile{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:.7rem .8rem}
+.tile .v{font-size:1.6rem;font-weight:600;color:var(--text)}
+.tile .l{font-size:.85rem;color:var(--text2)}
+.tile .s{font-size:.75rem;color:var(--muted);margin-top:.25rem}
+.tile.crit{border-color:var(--crit)}
+.tile .flag{color:var(--crit);font-size:.75rem;font-weight:600}
+.tile.tbd .v{color:var(--muted);font-size:1.1rem}
+table{width:100%;border-collapse:collapse;font-size:.85rem;margin:.5rem 0}
+th,td{border:1px solid var(--line);padding:.4rem .5rem;text-align:left;vertical-align:top;color:var(--text2)}
+th{color:var(--text);background:var(--box)}
+.table-wrap{overflow-x:auto}
+details{margin:.75rem 0}
+summary{cursor:pointer;color:var(--accent)}
+.foot{color:var(--muted);font-size:.8rem;margin-top:2rem;border-top:1px solid var(--line);padding-top:.6rem}
+.bars .row{display:grid;grid-template-columns:150px 1fr 48px;align-items:center;gap:8px;margin:6px 0;font-size:.85rem;color:var(--text2)}
+.bars .track{height:14px;position:relative}
+.bars .bar{height:14px;background:var(--flow);border-radius:0 4px 4px 0}
+.bars .row:hover .bar{filter:brightness(1.15)}
+.bars .row .n{text-align:right;color:var(--text)}
+.split{display:flex;height:22px;gap:2px;margin:.4rem 0}
+.split div{height:22px}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:.8rem;color:var(--text2);margin:.3rem 0}
+.sw{display:inline-block;width:12px;height:12px;border-radius:2px;vertical-align:-1px;margin-right:5px}
+.hint{display:none;font-size:.75rem;color:var(--muted)}@media (max-width:760px){.hint{display:block}}
+@media (max-width:480px){h1{font-size:1.35rem}.bars .row{grid-template-columns:110px 1fr 40px}}
+
+</style>
+</head>
+<body>
+<p class="sub">Working draft, Oct 21, 2026. Data: Control Tower GitHub, last 30 days. <a href="talent.html">Where security talent gets stuck &rarr;</a></p>
+
+<h1>Where Control Tower gets stuck</h1>
+<p class="sub">Control Tower is open-source software for AI control researchers. Work goes around a loop: researchers use it, tell the maintainers what broke, maintainers build and release fixes. Two places hold the whole loop back.</p>
+
+<div class="fig-wrap">
+<svg viewBox="0 0 1000 600" role="img" aria-labelledby="pt pd">
+<title id="pt">Control Tower pipeline with two constraints and a reinforcing docs loop</title>
+<desc id="pd">Top row, the researcher flow: docs and setup, environment, attack or protocol, run eval, monitor, trustworthy result. Right: feedback from real users, constraint 2. Bottom row, the build flow: prioritize, pull request opened, human review (constraint 1), merged, release, which feeds back to docs and setup. In the middle, a reinforcing loop: docs stay poor, fewer new users succeed, less good feedback, maintainers guess and carry support load, less time for docs and review.</desc>
+<defs>
+<marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="ah" d="M0,0 L10,5 L0,10 z"/></marker>
+<marker id="ahl" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="ahl" d="M0,0 L10,5 L0,10 z"/></marker>
+</defs>
+
+<!-- Row labels -->
+<text x="30" y="34" class="tm" font-size="12">LEARN: what a researcher does with Control Tower &rarr;</text>
+<text x="970" y="590" class="tm" font-size="12" text-anchor="end">&larr; BUILD: what maintainers do with what they learn</text>
+
+<!-- Top row: researcher flow -->
+<g font-size="13" text-anchor="middle">
+<rect class="box" x="30" y="50" width="130" height="56" rx="4"/><text x="95" y="83">Docs &amp; setup</text>
+<rect class="box" x="190" y="50" width="130" height="56" rx="4"/><text x="255" y="83">Environment</text>
+<rect class="box" x="350" y="50" width="130" height="56" rx="4"/><text x="415" y="83">Attack / protocol</text>
+<rect class="box" x="510" y="50" width="130" height="56" rx="4"/><text x="575" y="83">Run eval</text>
+<rect class="box" x="670" y="50" width="130" height="56" rx="4"/><text x="735" y="83">Monitor</text>
+<rect class="box" x="830" y="50" width="140" height="56" rx="4"/><text x="900" y="76">Trustworthy</text><text x="900" y="92">result</text>
+</g>
+<g class="arrow" marker-end="url(#ah)"><path d="M160,78 H188"/><path d="M320,78 H348"/><path d="M480,78 H508"/><path d="M640,78 H668"/><path d="M800,78 H828"/></g>
+<text x="56" y="124" font-size="11" class="t2">2 of 6 issues: docs gaps</text>
+<text x="890" y="124" font-size="11" class="tm" text-anchor="end">first runs: to measure</text>
+
+<!-- Constraint 2: feedback -->
+<path class="arrow" d="M900,106 V238" marker-end="url(#ah)"/>
+<rect class="crit" x="800" y="240" width="190" height="92" rx="4"/>
+<text x="895" y="260" font-size="11" class="tc" text-anchor="middle">&#9888; CONSTRAINT 2</text>
+<text x="895" y="282" font-size="14" text-anchor="middle" font-weight="600">Feedback from</text>
+<text x="895" y="299" font-size="14" text-anchor="middle" font-weight="600">real users</text>
+<text x="895" y="320" font-size="11" class="t2" text-anchor="middle">6 human issues, 4 people</text>
+<path class="arrow" d="M900,332 V468" marker-end="url(#ah)"/>
+
+<!-- Bottom row: build flow, right to left -->
+<g font-size="13" text-anchor="middle">
+<rect class="box" x="820" y="470" width="150" height="56" rx="4"/><text x="895" y="503">Prioritize</text>
+<rect class="box" x="640" y="470" width="150" height="56" rx="4"/><text x="715" y="503">PR opened</text>
+<rect class="crit" x="460" y="470" width="150" height="56" rx="4"/><text x="535" y="493" font-size="11" class="tc">&#9888; CONSTRAINT 1</text><text x="535" y="512" font-weight="600" font-size="14">Human review</text>
+<rect class="box" x="280" y="470" width="150" height="56" rx="4"/><text x="355" y="503">Merged</text>
+<rect class="box" x="30" y="470" width="150" height="56" rx="4"/><text x="105" y="503">Release</text>
+</g>
+<g class="arrow" marker-end="url(#ah)"><path d="M820,498 H792"/><path d="M640,498 H612"/><path d="M460,498 H432"/><path d="M280,498 H182"/></g>
+<g font-size="11" class="t2" text-anchor="middle">
+<text x="895" y="544">guesses without feedback</text>
+<text x="715" y="544">535 opened</text>
+<text x="535" y="544">186 reviewed &middot; median wait 18.6 h</text>
+<text x="355" y="544">362 merged &middot; 55% unreviewed</text>
+<text x="105" y="544">~84 merges / week</text>
+</g>
+
+<!-- Release back to users -->
+<path class="arrow" d="M45,470 V108" marker-end="url(#ah)"/>
+<text x="36" y="300" font-size="11" class="tm" text-anchor="middle" transform="rotate(-90 36 300)">new version reaches users</text>
+
+<!-- Reinforcing loop -->
+<g font-size="12" text-anchor="middle">
+<text x="470" y="186" font-weight="600">Docs stay poor</text>
+<text x="660" y="250">Fewer new users</text><text x="660" y="265">succeed</text>
+<text x="610" y="385">Less good feedback</text>
+<text x="320" y="385">Maintainers guess,</text><text x="320" y="400">more support load</text>
+<text x="270" y="250">Less time for</text><text x="270" y="265">docs &amp; review</text>
+</g>
+<g class="loop" marker-end="url(#ahl)">
+<path d="M540,190 Q620,200 650,232"/>
+<path d="M672,276 Q680,330 640,368"/>
+<path d="M540,382 H410"/>
+<path d="M290,374 Q245,330 258,282"/>
+<path d="M290,236 Q320,198 400,190"/>
+</g>
+<text x="470" y="300" font-size="40" text-anchor="middle" class="t2" font-weight="600">R</text>
+<text x="470" y="322" font-size="11" text-anchor="middle" class="tm">reinforcing loop</text>
+<!-- Loop touches the constraints -->
+<path class="link" d="M690,390 Q760,380 798,330"/>
+<path class="link" d="M300,410 Q420,440 480,468"/>
+</svg>
+</div>
+<p class="hint">Scroll the diagram sideways &rarr;</p>
+<div class="legend">
+<span><span class="sw" style="background:var(--critbg);border:2px solid var(--crit)"></span>&#9888; constraint</span>
+<span><span class="sw" style="background:var(--flow)"></span>flow of work</span>
+<span><span class="sw" style="background:var(--loop)"></span>reinforcing loop (each step makes the next worse)</span>
+<span>dashed red: where the loop feeds a constraint</span>
+</div>
+
+<h2>The two constraints</h2>
+<div class="tiles">
+<div class="tile crit"><div class="flag">&#9888; CONSTRAINT 1</div><div class="v">18.6 h</div><div class="l">median wait, PR opened to first human review</div><div class="s">75th percentile 56 h. Bots review in 0.3 h, but bots don't merge.</div></div>
+<div class="tile crit"><div class="flag">&#9888; CONSTRAINT 2</div><div class="v">6</div><div class="l">issues filed by humans, from 4 people</div><div class="s">vs 362 merged PRs in the same 30 days</div></div>
+<div class="tile tbd"><div class="flag">&#9888; CONSTRAINT 2</div><div class="v">to measure</div><div class="l">outside users who complete a first eval run</div><div class="s">no telemetry or survey yet</div></div>
+</div>
+
+<h2>Review capacity in numbers</h2>
+<p>Of 362 merged pull requests, how many had a human other than the author review them:</p>
+<div class="split" role="img" aria-label="162 human-reviewed, 200 not human-reviewed">
+<div style="flex:162;background:var(--flow);border-radius:4px 0 0 4px" title="Human-reviewed: 162"></div>
+<div style="flex:200;background:var(--line);border-radius:0 4px 4px 0" title="No human review: 200"></div>
+</div>
+<div class="legend"><span><span class="sw" style="background:var(--flow)"></span>human-reviewed 162 (45%)</span><span><span class="sw" style="background:var(--line)"></span>no human review 200 (55%)</span></div>
+
+
+<h2>What would loosen each constraint</h2>
+<ul>
+<li><strong>Review capacity:</strong> more people who can review PRs that end up merged. Faster bots don't help; human review is the wait.</li>
+<li><strong>User feedback:</strong> docs good enough that a new researcher finishes a first eval run alone, then reports what broke.</li>
+<li><strong>The loop:</strong> improving any one link (better docs, or protected review time) turns the vicious cycle into a virtuous one.</li>
+</ul>
+
+<details><summary>Text version and sources</summary>
+<div class="table-wrap"><table>
+<tr><th>Stage</th><th>Measure</th><th>Value</th></tr>
+<tr><td>PR opened</td><td>PRs created 2026-09-21 to 2026-10-21</td><td>535 (54 still open, 32 drafts)</td></tr>
+<tr><td>Human review (constraint 1)</td><td>PRs with a review from a human other than the author</td><td>186</td></tr>
+<tr><td>Human review</td><td>Median hours, opened to first human review</td><td>18.6 (75th percentile 56)</td></tr>
+<tr><td>Merged</td><td>Merged PRs; with no human review</td><td>362; 200</td></tr>
+<tr><td>Merged</td><td>Median hours, opened to merged</td><td>6.1</td></tr>
+<tr><td>Release</td><td>Merged per week (Sep 21, 28, Oct 5, 12, partial 19)</td><td>77, 71, 87, 94, 33</td></tr>
+<tr><td>Feedback (constraint 2)</td><td>Issues filed by humans (github-actions excluded)</td><td>6 from 4 people</td></tr>
+<tr><td>Docs &amp; setup</td><td>Of those, docs gaps (judged from titles)</td><td>2</td></tr>
+<tr><td>Trustworthy result</td><td>Outside users completing a first eval run</td><td>to measure</td></tr>
+</table></div>
+<p>Source: <code>gh pr list -R linuxarena/control-tower --state all --search "created:&gt;=2026-09-21"</code> and <code>gh issue list</code>, pulled 2026-10-21. Bots (cursor, claude, copilot) counted separately. Constraint 1 is the view of a Control Tower engineer, relayed by Scott.</p>
+</details>
+
+<p class="foot">Working draft. As of 2026-10-21, last 30 days.</p>
+<script data-goatcounter="https://scwoff.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
