@@ -10,10 +10,52 @@
   <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/styles.css">
   <style>
-    /* Page-specific: diagrams and stat callouts only. Colors come from styles.css
-       (#1a1a1a page, #252525 panel, #333 rule, #bbb body, #6b9fff link) plus one
-       constraint red. */
+    /* Page-specific: contents nav, expandable sections, diagrams and stat callouts.
+       Colors come from styles.css (#1a1a1a page, #252525 panel, #333 rule,
+       #bbb body, #6b9fff link) plus one constraint red. */
     :root { --panel: #222; --line: #333; --line2: #444; --flow: #6b9fff; --crit: #e66767; --critbg: #2e2121; }
+    html { scroll-behavior: smooth; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+    [id] { scroll-margin-top: 1.25rem; }
+
+    /* ---- Contents nav ----
+       Phones and tablets: a compact "Contents" disclosure above the page.
+       Desktop (>= 1000px): a sticky left column; the page keeps its reading width. */
+    .toc { margin: 0 0 1.25rem; }
+    .toc > details { border: 1px solid var(--line); border-radius: 4px; padding: 0.5rem 0.75rem; }
+    .toc > details > summary { color: #bbb; font-size: 0.95rem; }
+    .toc ol { list-style: none; margin: 0.5rem 0 0.25rem; padding: 0; }
+    .toc ol ol { margin: 0.15rem 0 0.4rem 0.9rem; }
+    .toc li { margin: 0; }
+    .toc a { display: block; color: #888; text-decoration: none; padding: 0.2rem 0 0.2rem 0.6rem; border-left: 2px solid transparent; font-size: 0.95rem; }
+    .toc ol ol a { font-size: 0.85rem; color: #777; }
+    .toc a:hover { color: #fff; }
+    .toc a.active { color: #fff; border-left-color: var(--flow); }
+    .toc a.in-section { color: #ccc; }
+
+    @media (min-width: 1000px) {
+      body { max-width: 1160px; display: grid; grid-template-columns: 200px minmax(0, 836px); column-gap: 3rem; justify-content: center; }
+      .toc { grid-column: 1; grid-row: 1; margin: 0; }
+      .toc > details { position: sticky; top: 2rem; border: none; padding: 0; max-height: calc(100vh - 4rem); overflow-y: auto; }
+      .toc > details > summary { display: none; }
+      .toc .toc-head { color: #666; font-size: 0.85rem; margin-bottom: 0.25rem; padding-left: 0.6rem; }
+      main { grid-column: 2; grid-row: 1; min-width: 0; }
+    }
+    @media (max-width: 999px) { .toc .toc-head { display: none; } }
+
+    /* ---- Expandable subsections ---- */
+    details.sub { border-top: 1px solid var(--line); }
+    details.sub:last-of-type { border-bottom: 1px solid var(--line); }
+    summary { cursor: pointer; list-style: none; }
+    summary::-webkit-details-marker { display: none; }
+    summary::before { content: "\25B8"; display: inline-block; width: 1.1em; color: #666; }
+    details[open] > summary::before { content: "\25BE"; }
+    details.sub > summary { color: #e5e5e5; font-size: 1.1rem; font-weight: 600; padding: 0.7rem 0; }
+    details.sub > summary:hover, .toc > details > summary:hover { color: #fff; }
+    details.sub > summary:hover::before { color: var(--flow); }
+    details.sub > .body { padding: 0 0 1rem; }
+    details#data { margin-top: 2rem; border-bottom: 1px solid var(--line); }
+    summary .hint { color: #666; font-weight: 400; font-size: 0.85rem; }
 
     .tldr { list-style: none; margin: 0.75rem 0 0; }
     .tldr li { padding: 0.6rem 0 0.6rem 1rem; border-left: 2px solid var(--line2); margin-bottom: 0.6rem; }
@@ -21,15 +63,15 @@
     .tldr li a.jump:hover { color: var(--flow); }
     .c { color: var(--crit); }
 
-    figure.toc { margin: 1rem 0 1.25rem; }
-    figure.toc > a { display: block; border: 1px solid var(--line); border-radius: 4px; overflow: hidden; background: #fff; }
-    figure.toc img { display: block; width: 100%; height: auto; }
-    figure.toc > a:hover { border-color: var(--flow); }
+    figure.toc-img { margin: 0.25rem 0 0.5rem; }
+    figure.toc-img > a { display: block; border: 1px solid var(--line); border-radius: 4px; overflow: hidden; background: #fff; }
+    figure.toc-img img { display: block; width: 100%; height: auto; }
+    figure.toc-img > a:hover { border-color: var(--flow); }
     figcaption { color: #888; font-size: 0.85rem; margin-top: 0.4rem; font-style: italic; }
 
     /* Flow diagram: boxes joined by labelled connectors.
        Desktop is a horizontal row; phones stack it vertically. */
-    .diagram { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 1.25rem 1rem 1rem; margin: 1rem 0 0.5rem; }
+    .diagram { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 1.25rem 1rem 1rem; margin: 0.25rem 0 0.5rem; }
     .diagram-title { color: #888; font-size: 0.85rem; margin-bottom: 1rem; }
     .flow { display: flex; align-items: stretch; }
     .node { flex: 1 1 0; min-width: 0; border: 1px solid var(--line2); border-radius: 4px; padding: 0.6rem 0.65rem; background: #1a1a1a; color: #e5e5e5; font-size: 0.95rem; line-height: 1.3; display: flex; flex-direction: column; justify-content: center; }
@@ -53,21 +95,16 @@
     .rloop .r { flex: 0 0 2.4rem; height: 2.4rem; border-radius: 50%; border: 2px solid #888; color: #fff; font-weight: 600; font-size: 1.15rem; display: flex; align-items: center; justify-content: center; }
     .rloop p { margin: 0; font-size: 0.9rem; }
 
-    .legend { display: flex; flex-wrap: wrap; gap: 0.4rem 1.1rem; font-size: 0.8rem; color: #888; margin: 0.25rem 0 1rem; }
+    .legend { display: flex; flex-wrap: wrap; gap: 0.4rem 1.1rem; font-size: 0.8rem; color: #888; margin: 0.25rem 0 0.25rem; }
     .sw { display: inline-block; width: 0.75rem; height: 0.75rem; border-radius: 2px; vertical-align: -1px; margin-right: 0.35rem; border: 1px solid var(--line2); }
 
-    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; margin: 1rem 0; }
+    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; margin: 0.25rem 0 1rem; }
     .stat { border-top: 2px solid var(--crit); padding-top: 0.5rem; }
     .stat .v { font-size: 1.9rem; font-weight: 600; color: #fff; line-height: 1.1; }
     .stat .l { font-size: 0.9rem; color: #bbb; margin-top: 0.25rem; }
 
-    .pain { margin: 1rem 0; }
-
     blockquote .quote-attr { display: block; font-style: normal; margin-top: 0.4rem; }
 
-    details { margin: 1.5rem 0 0.5rem; }
-    summary { cursor: pointer; color: var(--flow); }
-    details[open] summary { margin-bottom: 0.5rem; }
     .src { font-size: 0.85rem; color: #888; }
     .src code { overflow-wrap: anywhere; }
 
@@ -86,13 +123,36 @@
   </style>
 </head>
 <body>
+  <!-- Contents: a disclosure on small screens, a sticky sidebar on desktop (script keeps it open there) -->
+  <nav class="toc" aria-label="Contents">
+    <details id="toc-details">
+      <summary>Contents</summary>
+      <div class="toc-head">Contents</div>
+      <ol>
+        <li><a href="#tldr">TL;DR</a></li>
+        <li><a href="#control-tower">Control Tower</a>
+          <ol>
+            <li><a href="#ct-theory">Theory of change</a></li>
+            <li><a href="#ct-loop">The loop</a></li>
+            <li><a href="#ct-numbers">Numbers</a></li>
+            <li><a href="#ct-loosen">What would loosen it</a></li>
+          </ol>
+        </li>
+        <li><a href="#talent">Talent</a>
+          <ol>
+            <li><a href="#talent-theory">Theory of change</a></li>
+            <li><a href="#talent-flow">Stock and flow</a></li>
+            <li><a href="#talent-heard">What I heard</a></li>
+          </ol>
+        </li>
+        <li><a href="#data">Data and sources</a></li>
+      </ol>
+    </details>
+  </nav>
+
+  <main>
   <div class="section-nav">
     <a href="/">← home</a> / <span class="section-name">bottlenecks</span>
-    <div class="siblings">
-      <a href="#control-tower">Control Tower</a>
-      <a href="#talent">Talent</a>
-      <a href="#data">Data and sources</a>
-    </div>
   </div>
 
   <h1>Bottlenecks</h1>
@@ -100,7 +160,7 @@
 
   <hr>
 
-  <h2>TL;DR</h2>
+  <h2 id="tldr">TL;DR</h2>
   <ul class="tldr">
     <li><a class="jump" href="#control-tower">Control Tower</a> (open-source software for AI control researchers): constraints are <span class="c">human PR review</span> and <span class="c">high-quality user feedback</span>; poor docs are a reverse flywheel. Goal: accelerate high-quality control and security research.</li>
     <li><a class="jump" href="#talent">Talent</a>: constrained by <span class="c">well-scoped roles</span> for security engineers, plus <span class="c">senior maintainers</span> (Senior Principal and Principal engineers) to keep software working.</li>
@@ -109,96 +169,199 @@
 
   <h2 id="control-tower">Control Tower</h2>
 
-  <figure class="toc">
-    <a href="control-tower-toc.png" title="Open full size"><img src="control-tower-toc.png" alt="Theory of change for Redwood's Control Tower and control tooling: activities, outputs, outcomes, impact" loading="lazy"></a>
-    <figcaption>My interpretation of Redwood's Control Tower and control tooling theory of change, Oct 2026. Click to enlarge.</figcaption>
-  </figure>
-
-  <div class="diagram" role="img" aria-label="Control Tower loop: researchers use Control Tower, send feedback (constraint), maintainers review and merge (constraint), release, and the release goes back to researchers. Poor docs form a reinforcing loop.">
-    <div class="diagram-title">The loop, and where it gets stuck</div>
-    <div class="flow">
-      <div class="node">Researchers use Control Tower<small>docs, setup, run evals</small></div>
-      <div class="link"><span class="arrow"></span></div>
-      <div class="node crit"><div class="tag">⚠ constraint</div>Feedback<small>bugs and gaps reported back</small></div>
-      <div class="link"><span class="arrow"></span></div>
-      <div class="node crit"><div class="tag">⚠ constraint</div>Maintainers review and merge<small>human PR review</small></div>
-      <div class="link"><span class="arrow"></span></div>
-      <div class="node">Release<small>new version reaches users</small></div>
+  <details class="sub" id="ct-theory">
+    <summary>Theory of change <span class="hint">(image)</span></summary>
+    <div class="body">
+      <figure class="toc-img">
+        <a href="control-tower-toc.png" title="Open full size"><img src="control-tower-toc.png" alt="Theory of change for Redwood's Control Tower and control tooling: activities, outputs, outcomes, impact" loading="lazy"></a>
+        <figcaption>My interpretation of Redwood's Control Tower and control tooling theory of change, Oct 2026. Click to enlarge.</figcaption>
+      </figure>
     </div>
-    <div class="returns"><span>↺</span> each release goes back to researchers, and the loop repeats</div>
-    <div class="rloop">
-      <div class="r" aria-hidden="true">R</div>
-      <p>Docs stay poor → fewer new users succeed → less good feedback → maintainers guess, more support load → less time for docs and review → docs stay poor.</p>
+  </details>
+
+  <details class="sub" id="ct-loop" open>
+    <summary>The loop</summary>
+    <div class="body">
+      <div class="diagram" role="img" aria-label="Control Tower loop: researchers use Control Tower, send feedback (constraint), maintainers review and merge (constraint), release, and the release goes back to researchers. Poor docs form a reinforcing loop.">
+        <div class="diagram-title">The loop, and where it gets stuck</div>
+        <div class="flow">
+          <div class="node">Researchers use Control Tower<small>docs, setup, run evals</small></div>
+          <div class="link"><span class="arrow"></span></div>
+          <div class="node crit"><div class="tag">⚠ constraint</div>Feedback<small>bugs and gaps reported back</small></div>
+          <div class="link"><span class="arrow"></span></div>
+          <div class="node crit"><div class="tag">⚠ constraint</div>Maintainers review and merge<small>human PR review</small></div>
+          <div class="link"><span class="arrow"></span></div>
+          <div class="node">Release<small>new version reaches users</small></div>
+        </div>
+        <div class="returns"><span>↺</span> each release goes back to researchers, and the loop repeats</div>
+        <div class="rloop">
+          <div class="r" aria-hidden="true">R</div>
+          <p>Docs stay poor → fewer new users succeed → less good feedback → maintainers guess, more support load → less time for docs and review → docs stay poor.</p>
+        </div>
+      </div>
+      <div class="legend">
+        <span><span class="sw" style="background:var(--critbg);border:2px solid var(--crit)"></span>constraint</span>
+        <span><span class="sw" style="background:none;border-radius:50%;border:2px solid #888"></span>R = reinforcing loop (each step makes the next worse)</span>
+      </div>
     </div>
-  </div>
-  <div class="legend">
-    <span><span class="sw" style="background:var(--critbg);border:2px solid var(--crit)"></span>constraint</span>
-    <span><span class="sw" style="background:none;border-radius:50%;border:2px solid #888"></span>R = reinforcing loop (each step makes the next worse)</span>
-  </div>
+  </details>
 
-  <div class="stats">
-    <div class="stat"><div class="v">55%</div><div class="l">of 362 merges had no human review</div></div>
-    <div class="stat"><div class="v">18.6 h</div><div class="l">median wait for first human review</div></div>
-    <div class="stat"><div class="v">6</div><div class="l">issues filed by humans in 30 days</div></div>
-  </div>
+  <details class="sub" id="ct-numbers" open>
+    <summary>Numbers</summary>
+    <div class="body">
+      <div class="stats">
+        <div class="stat"><div class="v">55%</div><div class="l">of 362 merges had no human review</div></div>
+        <div class="stat"><div class="v">18.6 h</div><div class="l">median wait for first human review</div></div>
+        <div class="stat"><div class="v">6</div><div class="l">issues filed by humans in 30 days</div></div>
+      </div>
+      <p>"People get upset because using CT is painful," for example each migration from v5 to v6 to v7.</p>
+    </div>
+  </details>
 
-  <p class="pain">"People get upset because using CT is painful," for example each migration from v5 to v6 to v7.</p>
-
-  <h3>What would loosen it</h3>
-  <ul>
-    <li><strong>Review capacity:</strong> more people who can review PRs that end up merged. Faster bots don't help; human review is the wait.</li>
-    <li><strong>User feedback:</strong> docs good enough that a new researcher finishes a first eval run alone, then reports what broke.</li>
-    <li><strong>The loop:</strong> improving any one link (better docs, or protected review time) turns the vicious cycle into a virtuous one.</li>
-  </ul>
+  <details class="sub" id="ct-loosen">
+    <summary>What would loosen it</summary>
+    <div class="body">
+      <ul>
+        <li><strong>Review capacity:</strong> more people who can review PRs that end up merged. Faster bots don't help; human review is the wait.</li>
+        <li><strong>User feedback:</strong> docs good enough that a new researcher finishes a first eval run alone, then reports what broke.</li>
+        <li><strong>The loop:</strong> improving any one link (better docs, or protected review time) turns the vicious cycle into a virtuous one.</li>
+      </ul>
+    </div>
+  </details>
 
   <h2 id="talent">Talent</h2>
 
-  <figure class="toc">
-    <a href="https://theoryofchangebuilder.com/chart/e-XAqDg7" title="Open the interactive chart"><img src="luthien-toc.png" alt="Luthien theory of change v15.4: inputs and activities, outputs, intermediate outcomes, impact" loading="lazy"></a>
-    <figcaption><a href="https://theoryofchangebuilder.com/chart/e-XAqDg7">Luthien's theory of change (v15.4)</a></figcaption>
-  </figure>
-
-  <div class="diagram" role="img" aria-label="Stock and flow: capable security engineers flow into a stock of people interested with no scoped role, some leak away. The scoped-roles valve and a roughly three-month ramp move them to contributing. The senior maintainer review valve turns their work into working software.">
-    <div class="diagram-title">How security engineers become working software</div>
-    <div class="flow">
-      <div class="node cloud">Capable security engineers</div>
-      <div class="link"><span class="lbl">inflow</span><span class="arrow"></span></div>
-      <div class="node stock">Interested, no scoped role<div class="leak">↓ leaks away to other work</div></div>
-      <div class="link wide"><span class="lbl c">⚠ valve: scoped roles</span><span class="lbl">~3-month ramp</span><span class="arrow"></span></div>
-      <div class="node stock">Contributing</div>
-      <div class="link wide"><span class="lbl c">⚠ valve: senior maintainer review</span><span class="arrow"></span></div>
-      <div class="node out">Working software</div>
+  <details class="sub" id="talent-theory">
+    <summary>Theory of change <span class="hint">(image)</span></summary>
+    <div class="body">
+      <figure class="toc-img">
+        <a href="https://theoryofchangebuilder.com/chart/e-XAqDg7" title="Open the interactive chart"><img src="luthien-toc.png" alt="Luthien theory of change v15.4: inputs and activities, outputs, intermediate outcomes, impact" loading="lazy"></a>
+        <figcaption><a href="https://theoryofchangebuilder.com/chart/e-XAqDg7">Luthien's theory of change (v15.4)</a></figcaption>
+      </figure>
     </div>
-    <div class="returns">The second valve is the same human-review constraint as Control Tower.</div>
-  </div>
-  <div class="legend">
-    <span><span class="sw" style="border:2px solid #888"></span>stock (people waiting or working)</span>
-    <span><span class="sw" style="border:1px dashed #888"></span>outside the system</span>
-    <span style="color:var(--crit)">⚠ valve that limits the flow</span>
-  </div>
+  </details>
 
-  <h3>What I heard at EAG NYC (October 2026)</h3>
-  <blockquote>They have only "a handful" of people who have "built and run decent offensive cyber evals" or done "incident investigation, but where the model, or the system of agents, are the threat actor." They want to "build a bunch of capacity there, and I would want to bring partners in to do it."<span class="quote-attr">A leader of a frontier AI embedded-evaluation team</span></blockquote>
-  <blockquote>"Bounty Bench, no model will ever score above twenty percent. ... It's broken. CVE Bench is saturated. Exploit Bench is also saturated ... because the grader is inside of the sandbox. ... I feel like all of the good cyber evals are probably internal, closed source ... There are no good open source cyber evals, I think."<span class="quote-attr">An evaluator who audits AI evals</span></blockquote>
+  <details class="sub" id="talent-flow" open>
+    <summary>Stock and flow</summary>
+    <div class="body">
+      <div class="diagram" role="img" aria-label="Stock and flow: capable security engineers flow into a stock of people interested with no scoped role, some leak away. The scoped-roles valve and a roughly three-month ramp move them to contributing. The senior maintainer review valve turns their work into working software.">
+        <div class="diagram-title">How security engineers become working software</div>
+        <div class="flow">
+          <div class="node cloud">Capable security engineers</div>
+          <div class="link"><span class="lbl">inflow</span><span class="arrow"></span></div>
+          <div class="node stock">Interested, no scoped role<div class="leak">↓ leaks away to other work</div></div>
+          <div class="link wide"><span class="lbl c">⚠ valve: scoped roles</span><span class="lbl">~3-month ramp</span><span class="arrow"></span></div>
+          <div class="node stock">Contributing</div>
+          <div class="link wide"><span class="lbl c">⚠ valve: senior maintainer review</span><span class="arrow"></span></div>
+          <div class="node out">Working software</div>
+        </div>
+        <div class="returns">The second valve is the same human-review constraint as Control Tower.</div>
+      </div>
+      <div class="legend">
+        <span><span class="sw" style="border:2px solid #888"></span>stock (people waiting or working)</span>
+        <span><span class="sw" style="border:1px dashed #888"></span>outside the system</span>
+        <span style="color:var(--crit)">⚠ valve that limits the flow</span>
+      </div>
+    </div>
+  </details>
 
-  <details id="data">
+  <details class="sub" id="talent-heard">
+    <summary>What I heard at EAG NYC (October 2026)</summary>
+    <div class="body">
+      <blockquote>They have only "a handful" of people who have "built and run decent offensive cyber evals" or done "incident investigation, but where the model, or the system of agents, are the threat actor." They want to "build a bunch of capacity there, and I would want to bring partners in to do it."<span class="quote-attr">A leader of a frontier AI embedded-evaluation team</span></blockquote>
+      <blockquote>"Bounty Bench, no model will ever score above twenty percent. ... It's broken. CVE Bench is saturated. Exploit Bench is also saturated ... because the grader is inside of the sandbox. ... I feel like all of the good cyber evals are probably internal, closed source ... There are no good open source cyber evals, I think."<span class="quote-attr">An evaluator who audits AI evals</span></blockquote>
+    </div>
+  </details>
+
+  <details class="sub" id="data">
     <summary>Data and sources</summary>
-    <div class="table-wrap"><table>
-      <tr><th>Stage</th><th>Measure</th><th>Value</th></tr>
-      <tr><td>PR opened</td><td>PRs created 2026-09-21 to 2026-10-21</td><td>535 (54 still open, 32 drafts)</td></tr>
-      <tr><td>Human review (constraint 1)</td><td>PRs with a review from a human other than the author</td><td>186</td></tr>
-      <tr><td>Human review</td><td>Median hours, opened to first human review</td><td>18.6 (75th percentile 56)</td></tr>
-      <tr><td>Merged</td><td>Merged PRs; with no human review</td><td>362; 200</td></tr>
-      <tr><td>Merged</td><td>Median hours, opened to merged</td><td>6.1</td></tr>
-      <tr><td>Release</td><td>Merged per week (Sep 21, 28, Oct 5, 12, partial 19)</td><td>77, 71, 87, 94, 33</td></tr>
-      <tr><td>Feedback (constraint 2)</td><td>Issues filed by humans (github-actions excluded)</td><td>6 from 4 people</td></tr>
-      <tr><td>Docs &amp; setup</td><td>Of those, docs gaps (judged from titles)</td><td>2</td></tr>
-      <tr><td>Trustworthy result</td><td>Outside users completing a first eval run</td><td>to measure</td></tr>
-    </table></div>
-    <p class="src">Data as of 2026-10-21, last 30 days, public Control Tower GitHub. Source: <code>gh pr list -R linuxarena/control-tower --state all --search "created:&gt;=2026-09-21"</code> and <code>gh issue list</code>. Bots (cursor, claude, copilot) counted separately. Constraint 1 is the view of a Control Tower engineer, relayed by Scott.</p>
+    <div class="body">
+      <div class="table-wrap"><table>
+        <tr><th>Stage</th><th>Measure</th><th>Value</th></tr>
+        <tr><td>PR opened</td><td>PRs created 2026-09-21 to 2026-10-21</td><td>535 (54 still open, 32 drafts)</td></tr>
+        <tr><td>Human review (constraint 1)</td><td>PRs with a review from a human other than the author</td><td>186</td></tr>
+        <tr><td>Human review</td><td>Median hours, opened to first human review</td><td>18.6 (75th percentile 56)</td></tr>
+        <tr><td>Merged</td><td>Merged PRs; with no human review</td><td>362; 200</td></tr>
+        <tr><td>Merged</td><td>Median hours, opened to merged</td><td>6.1</td></tr>
+        <tr><td>Release</td><td>Merged per week (Sep 21, 28, Oct 5, 12, partial 19)</td><td>77, 71, 87, 94, 33</td></tr>
+        <tr><td>Feedback (constraint 2)</td><td>Issues filed by humans (github-actions excluded)</td><td>6 from 4 people</td></tr>
+        <tr><td>Docs &amp; setup</td><td>Of those, docs gaps (judged from titles)</td><td>2</td></tr>
+        <tr><td>Trustworthy result</td><td>Outside users completing a first eval run</td><td>to measure</td></tr>
+      </table></div>
+      <p class="src">Data as of 2026-10-21, last 30 days, public Control Tower GitHub. Source: <code>gh pr list -R linuxarena/control-tower --state all --search "created:&gt;=2026-09-21"</code> and <code>gh issue list</code>. Bots (cursor, claude, copilot) counted separately. Constraint 1 is the view of a Control Tower engineer, relayed by Scott.</p>
+    </div>
   </details>
 
   <p class="foot">Working draft, Oct 21, 2026.</p>
+  </main>
+
+  <script>
+  (function () {
+    var tocDetails = document.getElementById('toc-details');
+    var lastClick = null; // the link just chosen wins while the page scrolls to it
+    var desktop = window.matchMedia('(min-width: 1000px)');
+
+    // Desktop: the contents list is always visible as a sidebar. Small screens: collapsed by default.
+    function syncToc() { tocDetails.open = desktop.matches; }
+    syncToc();
+    desktop.addEventListener('change', syncToc);
+
+    // Open a collapsed subsection (and any collapsed parent) when it is linked to.
+    function openTarget(id) {
+      var el = id && document.getElementById(id);
+      for (var n = el; n; n = n.parentElement) {
+        if (n.tagName === 'DETAILS' && n !== tocDetails) n.open = true;
+      }
+    }
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest('a[href^="#"]');
+      if (!a) return;
+      openTarget(a.getAttribute('href').slice(1));
+      // On small screens, fold the contents list away after a choice.
+      if (!desktop.matches && tocDetails.contains(a)) tocDetails.open = false;
+      lastClick = { id: a.getAttribute('href').slice(1), t: Date.now() };
+    });
+    window.addEventListener('hashchange', function () { openTarget(location.hash.slice(1)); });
+    if (location.hash) {
+      openTarget(location.hash.slice(1));
+      var t = document.getElementById(location.hash.slice(1));
+      if (t) t.scrollIntoView();
+    }
+
+    // Highlight the section currently on screen in the contents list.
+    if (!('IntersectionObserver' in window)) return;
+    var links = {};
+    document.querySelectorAll('.toc a').forEach(function (a) { links[a.getAttribute('href').slice(1)] = a; });
+    var targets = Object.keys(links).map(function (id) { return document.getElementById(id); }).filter(Boolean);
+    var visible = new Set();
+    function paint() {
+      // The topmost visible target wins; fall back to the last one scrolled past.
+      var current = null;
+      targets.forEach(function (t) {
+        if (t.getBoundingClientRect().top < window.innerHeight * 0.35) current = t;
+      });
+      if (!current) current = targets[0];
+      // Right after a click, or when the page bottoms out before the target reaches the top,
+      // highlight the link that was chosen if it is on screen.
+      if (lastClick) {
+        var el = document.getElementById(lastClick.id), r = el && el.getBoundingClientRect();
+        var atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+        var onScreen = r && r.top >= 0 && r.top < window.innerHeight;
+        if (onScreen && (atBottom || Date.now() - lastClick.t < 1500)) current = el;
+        else if (!onScreen && Date.now() - lastClick.t > 1500) lastClick = null;
+      }
+      Object.keys(links).forEach(function (id) { links[id].classList.remove('active', 'in-section'); });
+      var a = links[current.id];
+      a.classList.add('active');
+      var parent = a.parentElement.parentElement.closest('li');
+      if (parent) parent.firstElementChild.classList.add('in-section');
+    }
+    var io = new IntersectionObserver(function () { paint(); }, { rootMargin: '0px 0px -60% 0px', threshold: [0, 1] });
+    targets.forEach(function (t) { io.observe(t); });
+    window.addEventListener('scroll', function () { window.requestAnimationFrame(paint); }, { passive: true });
+    paint();
+  })();
+  </script>
 
   <!-- GoatCounter analytics -->
   <script data-goatcounter="https://scwoff.goatcounter.com/count"
