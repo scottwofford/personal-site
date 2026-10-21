@@ -1,173 +1,24 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Talent Stock and Flow</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;600&display=swap" rel="stylesheet">
-<style>
-:root{color-scheme:light;--bg:#fafaf8;--panel:#ffffff;--text:#1a1a1a;--text2:#444;--muted:#6b6b6b;--line:#c8c8c4;--box:#f1f1ee;--accent:#2a5fc4;--flow:#2a78d6;--crit:#d03b3b;--critbg:#fbeaea;--loop:#6b6b6b}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#1a1a1a;--panel:#202020;--text:#e5e5e5;--text2:#bbb;--muted:#888;--line:#444;--box:#252525;--accent:#6b9fff;--flow:#3987e5;--crit:#e66767;--critbg:#3a2424;--loop:#999}}
-:root[data-theme="dark"]{color-scheme:dark;--bg:#1a1a1a;--panel:#202020;--text:#e5e5e5;--text2:#bbb;--muted:#888;--line:#444;--box:#252525;--accent:#6b9fff;--flow:#3987e5;--crit:#e66767;--critbg:#3a2424;--loop:#999}
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Inconsolata',monospace;background:var(--bg);color:var(--text);line-height:1.4;max-width:1000px;margin:0 auto;padding:2rem 16px}
-h1{font-size:1.7rem;margin-bottom:.4rem}
-h2{font-size:1.2rem;margin:1.6rem 0 .5rem;border-bottom:1px solid var(--line);padding-bottom:.35rem}
-p,li{color:var(--text2);margin-bottom:.5rem}
-ul{margin:.4rem 0 .6rem 1.4rem}
-a{color:var(--accent)}
-.draft{border:1px solid var(--crit);background:var(--critbg);color:var(--text);padding:.5rem .75rem;border-radius:4px;font-size:.85rem;margin-bottom:1.25rem}
-.sub{color:var(--muted);margin-bottom:1rem}
-.fig-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:.5rem;margin:.75rem 0}
-.fig-wrap svg{display:block;width:100%;min-width:720px;height:auto}
-svg text{font-family:'Inconsolata',monospace;fill:var(--text)}
-svg .t2{fill:var(--text2)} svg .tm{fill:var(--muted)} svg .tc{fill:var(--crit);font-weight:600}
-svg .box{fill:var(--box);stroke:var(--line);stroke-width:1}
-svg .crit{fill:var(--critbg);stroke:var(--crit);stroke-width:2}
-svg .arrow{stroke:var(--flow);stroke-width:2;fill:none}
-svg .ah{fill:var(--flow)} svg .ahl{fill:var(--loop)} svg .ahc{fill:var(--crit)}
-svg .loop{stroke:var(--loop);stroke-width:1.5;fill:none}
-svg .link{stroke:var(--crit);stroke-width:1.5;fill:none;stroke-dasharray:4 4}
-.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin:.75rem 0}
-.tile{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:.7rem .8rem}
-.tile .v{font-size:1.6rem;font-weight:600;color:var(--text)}
-.tile .l{font-size:.85rem;color:var(--text2)}
-.tile .s{font-size:.75rem;color:var(--muted);margin-top:.25rem}
-.tile.crit{border-color:var(--crit)}
-.tile .flag{color:var(--crit);font-size:.75rem;font-weight:600}
-.tile.tbd .v{color:var(--muted);font-size:1.1rem}
-table{width:100%;border-collapse:collapse;font-size:.85rem;margin:.5rem 0}
-th,td{border:1px solid var(--line);padding:.4rem .5rem;text-align:left;vertical-align:top;color:var(--text2)}
-th{color:var(--text);background:var(--box)}
-.table-wrap{overflow-x:auto}
-details{margin:.75rem 0}
-summary{cursor:pointer;color:var(--accent)}
-.foot{color:var(--muted);font-size:.8rem;margin-top:2rem;border-top:1px solid var(--line);padding-top:.6rem}
-.bars .row{display:grid;grid-template-columns:150px 1fr 48px;align-items:center;gap:8px;margin:6px 0;font-size:.85rem;color:var(--text2)}
-.bars .track{height:14px;position:relative}
-.bars .bar{height:14px;background:var(--flow);border-radius:0 4px 4px 0}
-.bars .row:hover .bar{filter:brightness(1.15)}
-.bars .row .n{text-align:right;color:var(--text)}
-.split{display:flex;height:22px;gap:2px;margin:.4rem 0}
-.split div{height:22px}
-.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:.8rem;color:var(--text2);margin:.3rem 0}
-.sw{display:inline-block;width:12px;height:12px;border-radius:2px;vertical-align:-1px;margin-right:5px}
-.hint{display:none;font-size:.75rem;color:var(--muted)}@media (max-width:760px){.hint{display:block}}
-@media (max-width:480px){h1{font-size:1.35rem}.bars .row{grid-template-columns:110px 1fr 40px}}
-
-svg .pipe{stroke:var(--flow);stroke-width:10;fill:none;opacity:.35}
-svg .stock{fill:var(--box);stroke:var(--text2);stroke-width:2}
-svg .cloud{fill:none;stroke:var(--muted);stroke-width:1.5}
-svg .valve{fill:var(--crit)}
-svg .delay{stroke:var(--text2);stroke-width:2}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bottlenecks: Talent - Scott Wofford</title>
+  <meta http-equiv="refresh" content="0; url=/bottlenecks/#talent">
+  <link rel="canonical" href="https://scottwofford.com/bottlenecks/#talent">
+  <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-<p class="sub">Working draft, Oct 21, 2026. Data: Control Tower GitHub, last 30 days. <a href="index.html">&larr; Where Control Tower gets stuck</a></p>
+  <div class="section-nav">
+    <a href="/">← home</a> / <a href="/bottlenecks/">bottlenecks</a>
+  </div>
+  <h1>Talent</h1>
+  <p class="subtitle">This section now lives on the main page.</p>
+  <p><a href="/bottlenecks/#talent">Go to Bottlenecks: Talent</a></p>
 
-<h1>Where security talent gets stuck</h1>
-<p class="sub">There are capable security engineers who want to work on AI agent tooling. Two valves decide how many of them end up producing working software.</p>
-
-<figure style="margin:1rem 0 1.5rem"><a href="https://theoryofchangebuilder.com/chart/e-XAqDg7"><img src="luthien-toc.png" alt="Luthien theory of change v15.4: inputs and activities, outputs, intermediate outcomes, impact" style="width:100%;height:auto;border:1px solid var(--line);border-radius:4px"></a><figcaption class="sub" style="margin-top:.4rem">Theory of change first: <a href="https://theoryofchangebuilder.com/chart/e-XAqDg7">Luthien's theory of change (v15.4)</a>, with frontier AI auditors as users. The talent constraints below slow every box on the left.</figcaption></figure>
-<h2>What I heard at EAG NYC (October 2026)</h2>
-<blockquote style="border-left:3px solid var(--line);margin:0 0 1rem;padding:.25rem 1rem;color:var(--text2)">They have only "a handful" of people who have "built and run decent offensive cyber evals" or done "incident investigation, but where the model, or the system of agents, are the threat actor." They want to "build a bunch of capacity there, and I would want to bring partners in to do it."<br><span class="sub">A leader of a frontier AI embedded-evaluation team</span></blockquote>
-<blockquote style="border-left:3px solid var(--line);margin:0 0 1rem;padding:.25rem 1rem;color:var(--text2)">"Bounty Bench, no model will ever score above twenty percent. ... It's broken. CVE Bench is saturated. Exploit Bench is also saturated ... because the grader is inside of the sandbox. ... I feel like all of the good cyber evals are probably internal, closed source ... There are no good open source cyber evals, I think."<br><span class="sub">An evaluator who audits AI evals</span></blockquote>
-<div class="fig-wrap">
-<svg viewBox="0 110 1000 315" role="img" aria-labelledby="st sd">
-<title id="st">Stock-and-flow of security engineers into working AI safety software</title>
-<desc id="sd">Capable security engineers flow into a stock of people interested but without a scoped role. Some leak away. A valve limited by the number of scoped roles converts them into a stock of contributors, after a ramp-up delay of about three months. Their output passes through a second valve, senior maintainer review by Senior Principal and Principal engineers, to become working software. The second valve is the same review constraint shown in the Control Tower view.</desc>
-
-<!-- Source cloud -->
-<path class="cloud" d="M40,190 q-18,-22 8,-34 q6,-26 36,-16 q22,-20 44,4 q30,-2 26,26 q20,16 -2,34 q4,26 -30,20 q-20,20 -46,2 q-34,6 -36,-36 z"/>
-<text x="92" y="186" font-size="12" text-anchor="middle">Capable</text>
-<text x="92" y="200" font-size="12" text-anchor="middle">security</text>
-<text x="92" y="214" font-size="12" text-anchor="middle">engineers</text>
-<text x="92" y="262" font-size="11" class="tm" text-anchor="middle">conferences, PhDs,</text>
-<text x="92" y="276" font-size="11" class="tm" text-anchor="middle">career switchers</text>
-
-<!-- Inflow -->
-<path class="pipe" d="M150,200 H250"/>
-<text x="200" y="182" font-size="11" class="t2" text-anchor="middle">inflow</text>
-
-<!-- Stock 1 -->
-<rect class="stock" x="250" y="150" width="190" height="100" rx="3"/>
-<text x="345" y="185" font-size="14" text-anchor="middle" font-weight="600">Interested,</text>
-<text x="345" y="203" font-size="14" text-anchor="middle" font-weight="600">no scoped role</text>
-<text x="345" y="230" font-size="11" class="tm" text-anchor="middle">size: to measure</text>
-<text x="345" y="135" font-size="11" class="t2" text-anchor="middle">~50 EAG 1:1s, heavy inbound</text>
-
-<!-- Leak -->
-<path class="pipe" d="M345,250 V340"/>
-<path class="cloud" d="M305,370 q-10,-16 10,-22 q10,-16 30,-6 q20,-12 34,6 q18,6 4,22 q-8,16 -30,10 q-24,12 -40,-2 q-16,0 -8,-8 z"/>
-<text x="345" y="372" font-size="11" text-anchor="middle">drift away</text>
-<text x="345" y="405" font-size="11" class="tm" text-anchor="middle">leak rate: to measure</text>
-
-<!-- Valve 1 -->
-<path class="pipe" d="M440,200 H600"/>
-<path class="valve" d="M505,184 L535,200 L505,216 z M565,184 L535,200 L565,216 z"/>
-<text x="535" y="164" font-size="11" class="tc" text-anchor="middle">&#9888; VALVE 1</text>
-<text x="535" y="240" font-size="13" text-anchor="middle" font-weight="600">Scoped roles</text>
-<text x="535" y="256" font-size="11" class="t2" text-anchor="middle">well-scoped work a</text>
-<text x="535" y="270" font-size="11" class="t2" text-anchor="middle">security engineer can</text>
-<text x="535" y="284" font-size="11" class="t2" text-anchor="middle">plug into</text>
-<!-- Delay mark -->
-<line class="delay" x1="580" y1="188" x2="574" y2="212"/><line class="delay" x1="588" y1="188" x2="582" y2="212"/>
-<text x="580" y="304" font-size="11" class="tm" text-anchor="middle">ramp-up ~3 months</text>
-<text x="580" y="318" font-size="11" class="tm" text-anchor="middle">(estimate, to measure)</text>
-
-<!-- Stock 2 -->
-<rect class="stock" x="600" y="150" width="160" height="100" rx="3"/>
-<text x="680" y="192" font-size="14" text-anchor="middle" font-weight="600">Contributing</text>
-<text x="680" y="216" font-size="11" class="t2" text-anchor="middle">Control Tower: 11 people</text>
-<text x="680" y="230" font-size="11" class="t2" text-anchor="middle">merged 1+ PR, 5 merged 10+</text>
-
-<!-- Valve 2 -->
-<path class="pipe" d="M760,200 H880"/>
-<path class="valve" d="M790,184 L820,200 L790,216 z M850,184 L820,200 L850,216 z"/>
-<text x="820" y="164" font-size="11" class="tc" text-anchor="middle">&#9888; VALVE 2</text>
-<text x="820" y="240" font-size="13" text-anchor="middle" font-weight="600">Senior maintainer</text>
-<text x="820" y="256" font-size="13" text-anchor="middle" font-weight="600">review</text>
-<text x="820" y="274" font-size="11" class="t2" text-anchor="middle">Senior Principal +</text>
-<text x="820" y="288" font-size="11" class="t2" text-anchor="middle">Principal engineers</text>
-
-<!-- Output -->
-<rect class="box" x="880" y="165" width="105" height="70" rx="4"/>
-<text x="932" y="196" font-size="13" text-anchor="middle">Working</text>
-<text x="932" y="212" font-size="13" text-anchor="middle">software</text>
-
-<!-- Link to Control Tower constraint -->
-<path class="link" d="M820,300 V370 H700"/>
-<text x="690" y="366" font-size="11" class="tc" text-anchor="end">same constraint as Control Tower</text>
-<text x="690" y="380" font-size="11" class="t2" text-anchor="end">human review: 55% of merges had none</text>
-</svg>
-</div>
-<p class="hint">Scroll the diagram sideways &rarr;</p>
-<div class="legend">
-<span><span class="sw" style="background:var(--box);border:2px solid var(--text2)"></span>stock (people waiting or working)</span>
-<span><span class="sw" style="background:var(--flow);opacity:.35"></span>flow</span>
-<span><span class="sw" style="background:var(--crit)"></span>&#9888; valve that limits the flow</span>
-<span>|| delay &nbsp; cloud = outside the system</span>
-</div>
-
-<h2>How to read it</h2>
-<ul>
-<li><strong>Inflow is not the problem.</strong> Capable people show up. Without a scoped role they sit in the first stock, and over time they drift to other work.</li>
-<li><strong>Valve 1, scoped roles:</strong> well-defined work a security engineer can pick up, such as finding and fixing security bugs in open-source agent tooling.</li>
-<li><strong>Valve 2, senior maintainers:</strong> contributors' work only becomes working software when a Senior Principal or Principal engineer reviews and keeps the software running. Adding contributors without adding this capacity makes the review queue longer.</li>
-</ul>
-
-<h2>Measures</h2>
-<div class="tiles">
-<div class="tile tbd"><div class="v">to measure</div><div class="l">interested security engineers without a scoped role</div></div>
-<div class="tile tbd"><div class="v">to measure</div><div class="l">open scoped roles</div><div class="s">valve 1</div></div>
-<div class="tile"><div class="v">11 / 5</div><div class="l">people who merged 1+ / 10+ Control Tower PRs</div><div class="s">GitHub, last 30 days</div></div>
-<div class="tile tbd"><div class="v">to measure</div><div class="l">senior maintainer review hours per week</div><div class="s">valve 2</div></div>
-<div class="tile tbd"><div class="v">~3 months</div><div class="l">ramp-up to productive</div><div class="s">estimate, to measure</div></div>
-</div>
-
-<p class="foot">Working draft. Control Tower figures as of 2026-10-21, last 30 days. EAG figure is my own count of my 1:1s.</p>
-<script data-goatcounter="https://scwoff.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+  <!-- GoatCounter analytics -->
+  <script data-goatcounter="https://scwoff.goatcounter.com/count"
+          async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
