@@ -4,6 +4,10 @@ All notable changes to scottwofford.com. Plans for larger changes live in [`plan
 
 ---
 
+## 2026-10-21 - Bottlenecks restructured around two problems ([PR #31](https://github.com/scottwofford/personal-site/pull/31))
+
+- `/bottlenecks/` now has two sections that open with problem statements: "Problem 1: Control Tower" (shared control tooling carried by a small team) and "Problem 2: Auditors" (investigation and testing, from Luthien's mission and theory of change). The talent stock-and-flow moves under Problem 2 as "Who can build the tools: cyber eval talent", next to the EAG NYC quotes. `/bottlenecks/talent.html` now redirects to that subsection. English only.
+
 ## 2026-10-21 - Bottlenecks TL;DR rewrite ([PR #30](https://github.com/scottwofford/personal-site/pull/30))
 
 - New TL;DR on `/bottlenecks/`: one lead sentence (AI safety tooling moves at the speed of its scarcest people, not its code) and three numbered points covering shared software, its two constraints, and the talent valves. Replaces the earlier three items. English only.

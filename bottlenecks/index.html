@@ -57,6 +57,10 @@
     details#data { margin-top: 2rem; border-bottom: 1px solid var(--line); }
     summary .hint { color: #666; font-weight: 400; font-size: 0.85rem; }
 
+    .problem { border-left: 2px solid var(--crit); padding: 0.1rem 0 0.1rem 1rem; margin: 0.75rem 0 0.75rem; }
+    .problem p { color: #e5e5e5; margin-bottom: 0.6rem; }
+    .problem p:last-child { margin-bottom: 0; }
+    h2 + .problem + .src { margin: -0.25rem 0 0.75rem; }
     .lead { color: #e5e5e5; font-size: 1.1rem; line-height: 1.45; margin: 0.75rem 0 1rem; }
     .tldr { margin: 0 0 0.5rem 1.75rem; }
     .tldr li { padding-left: 0.35rem; margin-bottom: 0.6rem; }
@@ -130,7 +134,7 @@
       <div class="toc-head">Contents</div>
       <ol>
         <li><a href="#tldr">TL;DR</a></li>
-        <li><a href="#control-tower">Control Tower</a>
+        <li><a href="#control-tower">Problem 1: Control Tower</a>
           <ol>
             <li><a href="#ct-theory">Theory of change</a></li>
             <li><a href="#ct-loop">The loop</a></li>
@@ -138,11 +142,11 @@
             <li><a href="#ct-loosen">What would loosen it</a></li>
           </ol>
         </li>
-        <li><a href="#talent">Talent</a>
+        <li><a href="#auditors">Problem 2: Auditors</a>
           <ol>
-            <li><a href="#talent-theory">Theory of change</a></li>
-            <li><a href="#talent-flow">Stock and flow</a></li>
-            <li><a href="#talent-heard">What I heard</a></li>
+            <li><a href="#auditors-theory">Theory of change</a></li>
+            <li><a href="#cyber-eval-talent">Cyber eval talent</a></li>
+            <li><a href="#auditors-heard">What I heard</a></li>
           </ol>
         </li>
         <li><a href="#data">Data and sources</a></li>
@@ -168,7 +172,10 @@
     <li>Plenty of capable people want in, but they can't get started without <span class="c">well-scoped roles</span> and <span class="c">senior maintainers</span> who can absorb their work.</li>
   </ol>
 
-  <h2 id="control-tower">Control Tower</h2>
+  <h2 id="control-tower">Problem 1: Control Tower</h2>
+  <div class="problem">
+    <p>AI control researchers, and increasingly their agents, need shared, well-maintained tooling: arenas, a leaderboard, docs and data. Almost no one else maintains it, so a small team carries it. When reviews wait and docs lag, using Control Tower is painful, new users stall, and the feedback that shows what to fix next never arrives.</p>
+  </div>
 
   <details class="sub" id="ct-theory">
     <summary>Theory of change <span class="hint">(image)</span></summary>
@@ -230,9 +237,14 @@
     </div>
   </details>
 
-  <h2 id="talent">Talent</h2>
+  <h2 id="auditors">Problem 2: Auditors</h2>
+  <div class="problem">
+    <p><strong>Investigation:</strong> it is difficult to reliably work out what agents did. The evidence is too large, split across coordinating swarms of agents, sometimes deliberately obscured, and possibly incomplete or altered. So when misalignment or an incident is suspected, an auditor can't confidently say within the time they have to investigate whether an incident happened or how serious it was.</p>
+    <p><strong>Testing:</strong> control evaluations don't reflect how agents are deployed inside the labs. They run outside a realistic deployment/harness environment. Additionally, sabotage examples are either too obvious or too harmless. These limitations cannot show the auditor whether the controls would catch a real attack/incident, and controls appear stronger than they actually are.</p>
+  </div>
+  <p class="src">From Luthien's mission and theory of change.</p>
 
-  <details class="sub" id="talent-theory">
+  <details class="sub" id="auditors-theory">
     <summary>Theory of change <span class="hint">(image)</span></summary>
     <div class="body">
       <figure class="toc-img">
@@ -242,8 +254,8 @@
     </div>
   </details>
 
-  <details class="sub" id="talent-flow" open>
-    <summary>Stock and flow</summary>
+  <details class="sub" id="cyber-eval-talent" open>
+    <summary><span id="talent"></span>Who can build the tools: cyber eval talent</summary>
     <div class="body">
       <div class="diagram" role="img" aria-label="Stock and flow: capable security engineers flow into a stock of people interested with no scoped role, some leak away. The scoped-roles valve and a roughly three-month ramp move them to contributing. The senior maintainer review valve turns their work into working software.">
         <div class="diagram-title">How security engineers become working software</div>
@@ -266,7 +278,7 @@
     </div>
   </details>
 
-  <details class="sub" id="talent-heard">
+  <details class="sub" id="auditors-heard">
     <summary>What I heard at EAG NYC (October 2026)</summary>
     <div class="body">
       <blockquote>They have only "a handful" of people who have "built and run decent offensive cyber evals" or done "incident investigation, but where the model, or the system of agents, are the threat actor." They want to "build a bunch of capacity there, and I would want to bring partners in to do it."<span class="quote-attr">A leader of a frontier AI embedded-evaluation team</span></blockquote>
