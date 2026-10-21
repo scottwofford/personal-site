@@ -4,6 +4,10 @@ All notable changes to scottwofford.com. Plans for larger changes live in [`plan
 
 ---
 
+## 2026-10-21 - Bottlenecks TL;DR rewrite ([PR #30](https://github.com/scottwofford/personal-site/pull/30))
+
+- New TL;DR on `/bottlenecks/`: one lead sentence (AI safety tooling moves at the speed of its scarcest people, not its code) and three numbered points covering shared software, its two constraints, and the talent valves. Replaces the earlier three items. English only.
+
 ## 2026-10-21 - Bottlenecks contents nav and expandable sections ([PR #29](https://github.com/scottwofford/personal-site/pull/29))
 
 - `/bottlenecks/` now has a sticky left-hand contents list on desktop that highlights the section you are reading; on phones it folds into a "Contents" disclosure at the top. Each subsection expands and collapses. The loop, Numbers, and Stock and flow are open by default, and links from the contents list open the section they point to. Content unchanged. English only.
