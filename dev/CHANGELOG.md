@@ -4,6 +4,10 @@ All notable changes to scottwofford.com. Plans for larger changes live in [`plan
 
 ---
 
+## 2026-10-21 - Bottlenecks contents nav and expandable sections ([PR #29](https://github.com/scottwofford/personal-site/pull/29))
+
+- `/bottlenecks/` now has a sticky left-hand contents list on desktop that highlights the section you are reading; on phones it folds into a "Contents" disclosure at the top. Each subsection expands and collapses. The loop, Numbers, and Stock and flow are open by default, and links from the contents list open the section they point to. Content unchanged. English only.
+
 ## 2026-10-21 - Bottlenecks page redesign ([PR #28](https://github.com/scottwofford/personal-site/pull/28))
 
 - `/bottlenecks/` is now one page in the site's shared dark, monospace style (breadcrumb nav, `styles.css`) instead of two pages with their own light themes.
