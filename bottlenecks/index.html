@@ -57,10 +57,10 @@
     details#data { margin-top: 2rem; border-bottom: 1px solid var(--line); }
     summary .hint { color: #666; font-weight: 400; font-size: 0.85rem; }
 
-    .tldr { list-style: none; margin: 0.75rem 0 0; }
-    .tldr li { padding: 0.6rem 0 0.6rem 1rem; border-left: 2px solid var(--line2); margin-bottom: 0.6rem; }
-    .tldr li a.jump { color: #fff; font-weight: 600; text-decoration: none; }
-    .tldr li a.jump:hover { color: var(--flow); }
+    .lead { color: #e5e5e5; font-size: 1.1rem; line-height: 1.45; margin: 0.75rem 0 1rem; }
+    .tldr { margin: 0 0 0.5rem 1.75rem; }
+    .tldr li { padding-left: 0.35rem; margin-bottom: 0.6rem; }
+    .tldr li::marker { color: #888; }
     .c { color: var(--crit); }
 
     figure.toc-img { margin: 0.25rem 0 0.5rem; }
@@ -161,11 +161,12 @@
   <hr>
 
   <h2 id="tldr">TL;DR</h2>
-  <ul class="tldr">
-    <li><a class="jump" href="#control-tower">Control Tower</a> (open-source software for AI control researchers): constraints are <span class="c">human PR review</span> and <span class="c">high-quality user feedback</span>; poor docs are a reverse flywheel. Goal: accelerate high-quality control and security research.</li>
-    <li><a class="jump" href="#talent">Talent</a>: constrained by <span class="c">well-scoped roles</span> for security engineers, plus <span class="c">senior maintainers</span> (Senior Principal and Principal engineers) to keep software working.</li>
-    <li><strong>Luthien</strong>: same lens with frontier AI auditors as users; goal: accelerate the steps in Luthien's theory of change.</li>
-  </ul>
+  <p class="lead">AI safety tooling moves at the speed of its scarcest people, not its code: the researchers who set direction, the maintainers who review, and the engineers who keep it working.</p>
+  <ol class="tldr">
+    <li>Control research and audits run on shared open-source software such as <a href="#control-tower">Control Tower</a>.</li>
+    <li>That software is held back by two things: <span class="c">human review</span>, and <span class="c">feedback from real users</span>. Poor docs keep both scarce.</li>
+    <li>Plenty of capable people want in, but they can't get started without <span class="c">well-scoped roles</span> and <span class="c">senior maintainers</span> who can absorb their work.</li>
+  </ol>
 
   <h2 id="control-tower">Control Tower</h2>
 
