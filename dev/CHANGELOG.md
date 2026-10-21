@@ -4,6 +4,12 @@ All notable changes to scottwofford.com. Plans for larger changes live in [`plan
 
 ---
 
+## 2026-10-21 - AI safety tooling bottlenecks at /bottlenecks/
+
+- New page at `scottwofford.com/bottlenecks/`: a Theory of Constraints view of Control Tower (open-source software for AI control researchers) with two constraints, human PR review and high-quality user feedback, and poor docs as a reinforcing loop. Second page `/bottlenecks/talent.html`: a stock-and-flow of security engineers, constrained by well-scoped roles and senior maintainer review.
+- Data: public Control Tower GitHub pull requests, last 30 days as of 2026-10-21, shown as aggregates only (no per-person counts or names). Requirements and prototypes live privately in luthien-org `ui-fb-dev`.
+- English only: a dated data snapshot, not a content page with a Spanish counterpart.
+
 ## 2026-10-11 - Seattle AI Safety Slack growth chart at /seattleaisafetygrowth/
 
 - New page at `scottwofford.com/seattleaisafetygrowth/`: a line graph of Seattle AI Safety Slack membership from February 2025 to October 11, 2026 (11 members through August 2026, 48 today), plus a six-week zoom on the September and October surge, a joins-by-month table, and a link to the [Slack invite page](https://luthien.cc/slack/) that the [invite refresh automation](https://github.com/scottwofford/automation/tree/main/slack-invite-refresh) keeps current.
