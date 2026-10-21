@@ -4,6 +4,14 @@ All notable changes to scottwofford.com. Plans for larger changes live in [`plan
 
 ---
 
+## 2026-10-21 - Bottlenecks page redesign ([PR #28](https://github.com/scottwofford/personal-site/pull/28))
+
+- `/bottlenecks/` is now one page in the site's shared dark, monospace style (breadcrumb nav, `styles.css`) instead of two pages with their own light themes.
+- Order: TL;DR (Control Tower, Talent, Luthien), then Control Tower (theory of change, a simplified loop diagram with the two constraints and the docs reinforcing loop, three stat callouts, what would loosen it), then Talent (Luthien theory of change, a simplified stock-and-flow, the two EAG quotes), then a collapsed Data and sources table with the same numbers.
+- Diagrams are HTML and CSS rather than wide SVG, so they stack vertically on phones with readable text and no sideways scrolling.
+- `/bottlenecks/talent.html` now redirects to `/bottlenecks/#talent`.
+- English only.
+
 ## 2026-10-21 - AI safety tooling bottlenecks at /bottlenecks/
 
 - New page at `scottwofford.com/bottlenecks/`: a Theory of Constraints view of Control Tower (open-source software for AI control researchers) with two constraints, human PR review and high-quality user feedback, and poor docs as a reinforcing loop. Second page `/bottlenecks/talent.html`: a stock-and-flow of security engineers, constrained by well-scoped roles and senior maintainer review.
