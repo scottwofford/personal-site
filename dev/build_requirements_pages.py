@@ -56,7 +56,7 @@ TEMPLATE = """<!DOCTYPE html>
   <h1>{title}</h1>
 
   <div class="callout">
-    <p>The full bodies behind the one-line index on <a href="/building/claude-code-config.html">my CLAUDE.md page</a>. Generated from my private docs with personal details, other people's private business, and money amounts removed (<a href="{public_copy}">source copy</a>).</p>
+    <p>The full bodies behind the one-line index on <a href="/building/claude-code-config.html">my CLAUDE.md page</a>. Generated from my private docs with personal details, other people's private business, and money amounts removed. Source of truth: <a href="{private_src}">my private copy</a>; this page is a redacted mirror and may lag behind it.</p>
   </div>
 
   <hr>
@@ -102,6 +102,7 @@ for src, out, title in PAGES:
         body=body,
         date=date,
         public_copy=PUBLIC_COPY,
+        private_src=PRIVATE_BASE[src] + src,
         cur_resp=' class="current"' if "response" in out else "",
         cur_cross=' class="current"' if "cross-surface" in out else "",
     )
