@@ -7,6 +7,7 @@ applies the redactions; this script only renders them as site pages.
 Run from the repo root:
   uv run --with markdown python dev/build_requirements_pages.py [path/to/luthien-contributors]
 """
+import hashlib
 import posixpath
 import re
 import sys
@@ -15,7 +16,9 @@ from pathlib import Path
 import markdown
 
 # Where the public copy lives (default: a sibling checkout of luthien-contributors).
-CONTRIB = Path(sys.argv[1] if len(sys.argv) > 1 else Path.home() / "build/luthien-contributors")
+# First argument that is not a flag (like --stamp) is the luthien-contributors checkout.
+ARGS = [a for a in sys.argv[1:] if not a.startswith("--")]
+CONTRIB = Path(ARGS[0] if ARGS else Path.home() / "build/luthien-contributors")
 PROCESS = CONTRIB / "process"
 
 # Links in the docs are relative to their home in Scott's private repo.
@@ -44,15 +47,18 @@ PAGES = [
     ("scott-claude-md.md", "building/claude-code-config.html", "My CLAUDE.md", INTRO_CLAUDE),
 ]
 
-# Interface text per language. Spanish pages render hand-checked translations
-# kept in dev/sources/es/ (each says the English version is the source).
+# Interface text per language. Spanish pages render Claude-made translations
+# (not reviewed by a person) kept in dev/sources/es/. Each translation's first
+# line records the hash of the English text it was made from; when English
+# changes, the build warns and the Spanish page says it is out of date.
 LANG = {
     "en": dict(lang="en", p="/", home="home", section="building", day1="Day 1", decisions="Decisions",
                trackers="Trackers", req="Requirements", cross="Cross-surface", updated="Last updated",
                sot='Source of truth: <a href="{src}">my private {name}</a>; this page is a redacted mirror and may lag behind it.'),
     "es": dict(lang="es", p="/es/", home="inicio", section="construir", day1="Día 1", decisions="Decisiones",
                trackers="Seguimiento", req="Requisitos", cross="Entre superficies", updated="Última actualización",
-               sot='Fuente de verdad: <a href="{src}">mi {name} privado</a>, en inglés; esta página es una traducción de una copia redactada y puede quedar atrasada.'),
+               sot='Versión en inglés: <a href="{en_url}">{en_title}</a>. Fuente de verdad: <a href="{src}">mi {name} privado</a>. Esta página es una traducción automática, hecha por Claude y sin revisión humana, de una copia con partes omitidas.',
+               stale='<strong>Esta traducción está atrasada respecto de la <a href="{en_url}">versión en inglés</a>.</strong> '),
 }
 INTRO_REQ_ES = ('Los cuerpos completos detrás del índice de una línea en <a href="/es/building/claude-code-config.html">mi página de CLAUDE.md</a>. '
                 "Generados a partir de mis documentos privados, sin detalles personales, asuntos privados de otras personas ni montos de dinero.")
@@ -126,12 +132,36 @@ def absolutize(text, base):
     return re.sub(r"(\[[^\]]*\])\(([^)\s]+)\)", fix, text)
 
 
+def en_hash(src):
+    """Hash of the English copy without its first line (the export banner, whose date changes every run)."""
+    body = (PROCESS / src).read_text().split("\n", 1)[1]
+    return hashlib.sha256(body.encode()).hexdigest()[:12]
+
+
+# --stamp: after updating a translation, record the English hash it now matches.
+if "--stamp" in sys.argv:
+    for src, _out, _title, _intro in ES_PAGES:
+        f = ES_SOURCES / Path(src).name
+        first, rest = f.read_text().split("\n", 1)
+        first = re.sub(r"en-sha256: [0-9a-f]+", f"en-sha256: {en_hash(src)}", first)
+        f.write_text(first + "\n" + rest)
+        print(f"stamped {f}")
+    sys.exit(0)
+
+EN_BY_SRC = {src: (out, title) for src, out, title, _ in PAGES}
 JOBS = [("en", src, out, title, intro, PROCESS / src) for src, out, title, intro in PAGES]
 JOBS += [("es", src, out, title, intro, ES_SOURCES / Path(src).name) for src, out, title, intro in ES_PAGES]
 
 for lang, src, out, title, intro, path in JOBS:
     text = path.read_text()
     L = LANG[lang]
+    en_out, en_title = EN_BY_SRC[src]
+    stale = ""
+    if lang == "es":
+        m = re.search(r"en-sha256: ([0-9a-f]+)", text.splitlines()[0])
+        if not m or m.group(1) != en_hash(src):
+            print(f"WARNING: {path} is out of date with the English copy; re-translate, then run with --stamp")
+            stale = L["stale"].format(en_url="/" + en_out)
     # Drop the generated-copy header (first line, a blockquote) and the doc's own H1; the page supplies both.
     date = re.search(r"(\d{4}-\d{2}-\d{2})", text.splitlines()[0]).group(1)
     lines = text.splitlines()
@@ -148,9 +178,10 @@ for lang, src, out, title, intro, path in JOBS:
         body=body,
         date=date,
         public_copy=PUBLIC_COPY,
-        sot=L["sot"].format(src=PRIVATE_BASE[src] + PRIVATE_NAME[src], name=PRIVATE_NAME[src]),
+        sot=stale + L["sot"].format(src=PRIVATE_BASE[src] + PRIVATE_NAME[src], name=PRIVATE_NAME[src],
+                                    en_url="/" + en_out, en_title=en_title),
         intro=intro,
-        **{k: v for k, v in L.items() if k != "sot"},
+        **{k: v for k, v in L.items() if k not in ("sot", "stale")},
         cur_claude=' class="current"' if "claude-code" in out else "",
         cur_resp=' class="current"' if "response" in out else "",
         cur_cross=' class="current"' if "cross-surface" in out else "",
