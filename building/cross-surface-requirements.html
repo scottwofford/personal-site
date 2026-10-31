@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My cross-surface requirements - Scott Wofford</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="section-nav">
+    <a href="/">← home</a> / <a href="/building/" class="section-name">building</a>
+    <div class="siblings">
+      <a href="/building/day-1-philosophy.html">Day 1</a>
+      <a href="/building/making-decisions.html">Decisions</a>
+      <a href="/building/mini-prfaq-template.html">Mini-PRFAQ</a>
+      <a href="/building/tracker-templates.html">Trackers</a>
+      <a href="/building/onboarding-reading-list.html">Onboarding</a>
+      <a href="/building/claude-code-config.html">CLAUDE.md</a>
+      <a href="/building/response-requirements.html">Requirements</a>
+      <a href="/building/cross-surface-requirements.html" class="current">Cross-surface</a>
+    </div>
+  </div>
+  <h1>My cross-surface requirements</h1>
+
+  <div class="callout">
+    <p>The full bodies behind the one-line index on <a href="/building/claude-code-config.html">my CLAUDE.md page</a>. Generated from my private docs with personal details, other people's private business, and money amounts removed. Source of truth: <a href="https://github.com/scottwofford/sw-prv/blob/main/requirements/cross-surface-context-mgmt-req.md">my private cross-surface-context-mgmt-req.md</a>; this page is a redacted mirror and may lag behind it.</p>
+  </div>
+
+  <hr>
+
+<p><strong>Owner:</strong> Scott
+<strong>Last updated:</strong> 2026-09-14
+<strong>Method:</strong> <a href="https://github.com/LuthienResearch/luthien-org/blob/main/ui-fb-dev/2-versions-requirements/README.md">luthien-org canonical format</a>.
+<strong>Feedback source:</strong> Scott's direct usage of Claude across surfaces. Primary logs in <a href="https://github.com/scottwofford/sw-prv/blob/main/session-logs"><code>../session-logs/</code></a>.</p>
+<hr />
+<h2 id="epic">Epic</h2>
+<p><u>Continuity or honest absence.</u> When I move between Claude surfaces, I want either to pick up where I left off, or be told clearly that the new surface doesn't have the prior context. "System asserts something stale or out-of-context with confidence" is worse than "system says it doesn't know."</p>
+<hr />
+<h2 id="requirements-user-stories-that-ladder-up-to-the-epic">Requirements (user stories that ladder up to the Epic)</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Requirement (problem only)</th>
+<th>Current state</th>
+<th>Key evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>R1</strong></td>
+<td><u>Continuity across surfaces.</u> When I open a Claude chat on any device, it should know what I did on prior surfaces.</td>
+<td>Partial. Claude Code ↔ Desktop continues via local filesystem MCP. claude.ai web ↔ mobile via shared backend. Code → mobile from cold has no view of auto-memory or recent session logs.</td>
+<td><a href="https://github.com/scottwofford/sw-prv/blob/main/session-logs/2026-04-29_thread-prioritization-context-pull.csv">Mobile session evidence</a>: mobile blocked because session-log push hadn't happened.</td>
+</tr>
+<tr>
+<td><strong>R2</strong></td>
+<td><u>Honest absence and verify-before-asserting.</u> When the system doesn't know something, it should say so. When the system thinks it knows something time-sensitive or specific (a date, a name, a status), it should verify before asserting, not assume from stale context.</td>
+<td>Unsatisfied. Claude has woven cross-track content into work chats; asserted stale dates with confidence; confused similarly-named entities; fabricated scene details Scott hadn't described.</td>
+<td><a href="https://github.com/scottwofford/sw-prv/blob/main/session-logs/2026-04-29_thread-prioritization-context-pull.csv">Apr 27 transcript</a>: personal content surfaced in work chat unflagged; Scott responded with an expletive. <a href="https://github.com/scottwofford/sw-prv/blob/main/session-logs/2026-04-29_thread-prioritization-context-pull.csv">Daily State</a>: created and deleted within 90 minutes after confidently presenting stale data. Investor priority claude.ai thread: stamped a date from 8 days prior on a fresh response. Another claude.ai thread: timezone confusion + name conflation + invented scene detail.</td>
+</tr>
+<tr>
+<td><strong>R3</strong></td>
+<td><u>Loaded-context surfaceability.</u> I should be able to ask any Claude chat "what context have you loaded?" and get an accurate answer.</td>
+<td>Unsatisfied. No first-class introspection surface. Claude often answers from inference, not actual knowledge.</td>
+<td><a href="https://github.com/scottwofford/sw-prv/blob/main/session-logs/2026-04-29_thread-prioritization-context-pull.csv">Connector test</a>: mobile didn't flag missing connectors (Slack <code>not_installed</code>, Trello no first-party connector).</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<hr />
+<h2 id="solution-shapes-ruled-out">Solution shapes ruled out</h2>
+<p>Approaches that have been considered and rejected. Future sessions should not re-propose these without addressing the falsification. Headlines are load-bearing; sources at the bottom of each entry are mostly for Claude.</p>
+<h3 id="project-scoped-context-loading">Project-scoped context loading</h3>
+<p>Untestable as a mechanism for satisfying mode-bleed. The proposal was that per-project Instructions would prevent personal content from surfacing in work chats, but no validation path existed; the proposal was relegated from a requirement to a design principle and then falsified when the actual mode-bleed failure (Apr 27 — personal content surfaced unflagged in a work chat, prompting an expletive from Scott) proved the project-scoping wasn't enforcing what it claimed to enforce.</p>
+<p><em>Source: /devil iteration that surfaced the lack of a falsification path; <a href="https://github.com/scottwofford/sw-prv/blob/main/session-logs/2026-04-29_thread-prioritization-context-pull.csv">Apr 27 transcript in session log</a>.</em></p>
+<h3 id="project-scoped-isolation-as-prioritization-mechanism">Project-scoped isolation as prioritization mechanism</h3>
+<p>Real prioritization requires choosing BETWEEN modes within a single attention window. Projects cannot isolate what attention has to prioritize. Concrete falsification: a message from my wife arriving the same hour as an investor follow-up — both compete for the same attention budget regardless of which "project" each is filed under. Per-project isolation only works if the underlying user has parallel attention budgets per project, which is not the case for a solo-founder workflow.</p>
+<p><em>Source: <a href="https://github.com/scottwofford/sw-prv/blob/main/claude-ai-project-knowledge/architecture.md"><code>../claude-ai-project-knowledge/architecture.md</code></a>, project-scoped isolation note + 2026-05-01 falsification.</em></p>
+<h3 id="daily-state-drive-doc-as-cross-surface-context-bridge">Daily State Drive doc as cross-surface context bridge</h3>
+<p>A daily-refreshed Drive doc to bridge Claude Code → claude.ai mobile context was adopted, then deleted within ~90 minutes of creation after it confidently presented stale data on its first read. Snapshot rot pattern: any derived doc that duplicates source data starts decaying the moment the source data changes. The right substrate for cross-surface context is the source systems themselves (Gmail / Slack / Trello / Drive reference docs) queried at chat time via account-level claude.ai connectors, not derived snapshots.</p>
+<p>This is the canonical example of why source-system primacy (<a href="https://github.com/scottwofford/sw-prv/blob/main/requirements/personal/scott-response-req.md"><code>personal/scott-response-req.md</code></a> Tenet 4) generalizes across data, rule definitions, and identity facts — same failure mode in all three.</p>
+<p><em>Source: <a href="https://github.com/scottwofford/sw-prv/blob/main/claude-ai-project-knowledge/architecture.md"><code>../claude-ai-project-knowledge/architecture.md</code></a>, Daily State adoption + reversal.</em></p>
+<hr />
+<h2 id="acceptance-criteria">Acceptance criteria</h2>
+<p>Per incident, binary Y/N:</p>
+<ul>
+<li><strong>R1</strong> satisfied? Did the new surface know what prior surfaces did, or pull it via accessible source?</li>
+<li><strong>R2</strong> satisfied? When the system didn't have context, did it say so? When the system asserted a time-sensitive or specific fact (date, name, status, dollar amount), did it verify before asserting?</li>
+<li><strong>R3</strong> satisfied? Could Scott ask "what do you know about my situation?" and get an accurate inventory of what's loaded vs missing?</li>
+</ul>
+<p>Aggregate = % satisfied over a measurement window. Track in session logs.</p>
+<hr />
+<h1 id="appendix">Appendix</h1>
+<h2 id="a-surface-capability-matrix">A. Surface capability matrix</h2>
+<p>R1 + R2 are bounded by which tools and connectors are wired on the current surface. Where channels are missing, R2 (honest absence) is the load-bearing requirement: Claude must enumerate which channels it can and cannot see before asserting. Updated empirically per surface. Lens: tool/connector × surface for any Claude response behavior.</p>
+<p>For read/write capability per source channel in the fundraise-database build (different lens: source × read/write, scoped to that pipeline), see <a href="https://github.com/LuthienResearch/luthien-org/blob/main/fundraising/fundraising-db-requirements.md#toolmcp-boundaries-as-of-2026-05-01"><code>luthien-org/fundraising/fundraising-db-requirements.md</code> § Tool/MCP boundaries</a>. Different consumer (fundraise-db design phase vs cross-surface Claude behavior); both load-bearing.</p>
+<h3 id="surfaces-tracked">Surfaces tracked</h3>
+<ul>
+<li><strong>desktop-mac</strong>: Claude Desktop on macOS with local MCP servers (Filesystem, iMessage, Office by Anthropic, Trello LOCAL DEV, Mac control, Chrome bridge)</li>
+<li><strong>mobile-ios</strong>: Claude iOS app</li>
+<li><strong>web-claudeai</strong>: claude.ai in any browser, no extension</li>
+<li><strong>chrome-extension</strong>: Claude in Chrome side panel (extension active)</li>
+<li><strong>claude-code</strong>: Claude Code CLI (laptop)</li>
+<li><strong>codex-local</strong>: Codex on Scott's configured Mac; message access covered separately below.</li>
+</ul>
+<h3 id="capability-matrix">Capability matrix</h3>
+<p>Message access is maintained in <a href="#current-message-access">Current message access</a>, including Codex. Other cells derive from the dated probes below; re-probe before relying on them. Technical availability never authorizes sending messages.</p>
+<table>
+<thead>
+<tr>
+<th>Tool / connector</th>
+<th>Category</th>
+<th>desktop-mac</th>
+<th>mobile-ios</th>
+<th>web-claudeai</th>
+<th>chrome-extension</th>
+<th>claude-code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GitHub Integration</td>
+<td>cloud-MCP</td>
+<td>✅ Connected (not yet probed)</td>
+<td>❓</td>
+<td>❓</td>
+<td>❓</td>
+<td>n/a (uses native git via Bash)</td>
+</tr>
+<tr>
+<td>Gmail</td>
+<td>cloud-MCP</td>
+<td>✅ both accounts queryable</td>
+<td>⚠️ personal-only</td>
+<td>✅ verified (account scope not explicitly tested)</td>
+<td>❌ verified</td>
+<td>✅ personal + Luthien + sw4 local servers</td>
+</tr>
+<tr>
+<td>Google Calendar</td>
+<td>cloud-MCP</td>
+<td>✅ verified</td>
+<td>✅ verified (9 calendars incl both accounts)</td>
+<td>✅ verified (9 calendars incl both accounts)</td>
+<td>❌ verified</td>
+<td>✅ via MCP config</td>
+</tr>
+<tr>
+<td>Google Drive</td>
+<td>cloud-MCP</td>
+<td>✅ verified</td>
+<td>⚠️ personal-only</td>
+<td>✅ verified</td>
+<td>❌ verified</td>
+<td>✅ via MCP config</td>
+</tr>
+<tr>
+<td>Trello</td>
+<td>LOCAL DEV (custom MCP, desktop only)</td>
+<td>✅ desktop only</td>
+<td>❌ verified</td>
+<td>⚠️ available in registry, not connected</td>
+<td>❌ verified</td>
+<td>✅ via MCP config</td>
+</tr>
+<tr>
+<td>Filesystem</td>
+<td>local-MCP (DESKTOP)</td>
+<td>✅ verified</td>
+<td>❌ verified</td>
+<td>❌ verified (sandbox <code>/mnt/*</code> only, not Mac FS)</td>
+<td>❌ verified</td>
+<td>✅ native (Bash, Read, Edit, Write)</td>
+</tr>
+<tr>
+<td>Read and Send iMessages</td>
+<td>local-MCP (DESKTOP)</td>
+<td>✅ available, not directly probed</td>
+<td>❌ verified</td>
+<td>❌ verified</td>
+<td>❌ verified</td>
+<td>✅ read via Beeper (see Current message access)</td>
+</tr>
+<tr>
+<td>Word/Excel/PowerPoint by Anthropic</td>
+<td>local-MCP (DESKTOP)</td>
+<td>✅ available, not directly probed</td>
+<td>❌ verified</td>
+<td>❌ verified (replaced by <code>/mnt/skills</code> python-pptx/openpyxl/python-docx via bash)</td>
+<td>❌ verified</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>Control your Mac (osascript)</td>
+<td>local-MCP (DESKTOP)</td>
+<td>✅ available, not probed</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌ (would require osascript via Bash)</td>
+</tr>
+<tr>
+<td>Control Chrome</td>
+<td>local-MCP (DESKTOP)</td>
+<td>✅ available, not probed</td>
+<td>❌</td>
+<td>❌ verified</td>
+<td>❌ verified (extension has its own browser tools, NOT Control Chrome MCP)</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>Claude in Chrome (extension, native browser tools)</td>
+<td>extension</td>
+<td>✅ via desktop bridge</td>
+<td>❌</td>
+<td>❌ verified</td>
+<td>✅ native (read_page, find, computer, navigate, tabs_context, tabs_create, form_input, javascript_tool, read_console_messages, read_network_requests, gif_creator, etc.)</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>web_search / web_fetch</td>
+<td>Anthropic-built</td>
+<td>✅ verified</td>
+<td>✅ verified (9 results)</td>
+<td>✅ verified (9 results)</td>
+<td>❌ verified</td>
+<td>✅ via WebSearch / WebFetch</td>
+</tr>
+<tr>
+<td>image_search</td>
+<td>Anthropic-built</td>
+<td>✅ likely</td>
+<td>✅ available (untested)</td>
+<td>✅ available (untested)</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>bash_tool / computer-use sandbox</td>
+<td>Anthropic-built</td>
+<td>✅ verified</td>
+<td>✅ verified (Linux 6.18.5 VM, Python 3.12.3, allowlisted egress)</td>
+<td>✅ verified (same Linux 6.18.5 sandbox)</td>
+<td>❌ verified</td>
+<td>✅ native (Bash)</td>
+</tr>
+<tr>
+<td>conversation_search</td>
+<td>Anthropic-built</td>
+<td>✅ verified</td>
+<td>✅ verified</td>
+<td>✅ verified</td>
+<td>❌ verified</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>recent_chats</td>
+<td>Anthropic-built</td>
+<td>✅ verified</td>
+<td>✅ verified</td>
+<td>✅ available</td>
+<td>❌ verified</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>memory_user_edits</td>
+<td>Anthropic-built</td>
+<td>✅ likely</td>
+<td>✅ available</td>
+<td>✅ available</td>
+<td>❌</td>
+<td>❌ (Claude Code uses auto-memory + CLAUDE.md instead)</td>
+</tr>
+<tr>
+<td>Native iOS event_<em> / reminder_</em> / calendar_search_v0</td>
+<td>Anthropic-built (iOS)</td>
+<td>❌</td>
+<td>✅ verified (parallel to Google Calendar MCP)</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>Browser-control (read_page, find, computer-tab, javascript_tool, gif_creator, etc.)</td>
+<td>extension-native</td>
+<td>✅ via desktop bridge</td>
+<td>❌</td>
+<td>❌</td>
+<td>✅ verified</td>
+<td>❌</td>
+</tr>
+</tbody>
+</table>
+<p>Legend: ✅ verified working · ❌ verified missing · ⚠️ partial / scoped · ❓ not yet probed · "likely" = inferred from architecture, not directly probed.</p>
+<p><strong>Gmail account scope.</strong> On local Claude Code/Codex, route reads to the configured account-specific <code>gmail-sw3</code>, <code>gmail-luthien</code>, and <code>gmail-sw4</code> servers and verify identity. The personal claude.ai Gmail connector's Workspace-sent blind spot does not apply to a separately authenticated Luthien server. On web/mobile, verify the connector's own account coverage; a negative personal-mail search does not establish absence in Workspace Sent. See <a href="https://github.com/scottwofford/sw-prv/blob/main/skills/gmail-search-heuristics/SKILL.md">Gmail search guidance</a>.</p>
+<p><strong>Calendar <code>create_event</code> drops <code>location</code> (verified 2026-06-22 on claude-code, Camp CRAZ events).</strong> The Google Calendar connector's <code>create_event</code> silently ignores the <code>location</code> field: the call succeeds and returns the event, but location is never set and no error is raised. Create, then call <code>update_event</code> to set location (it honors the field). Likely affects other optional fields too; treat silent field-drops as a class. Fuller quirk list (Gmail attachment bytes, gdrive scope/append limits): <a href="https://github.com/scottwofford/sw-prv/blob/main/connector-quirks.md"><code>connector-quirks.md</code></a>.</p>
+<p><strong>Drive write mode (asymmetric capability, verified 2026-05-09 on claude-code).</strong> The matrix's ✅ for Google Drive collapses two very different capabilities. <strong>Read</strong> works on all supported file types (<code>read_file_content</code>, <code>download_file_content</code>, <code>search_files</code>, <code>get_file_metadata</code>, <code>list_recent_files</code>). <strong>Write</strong> is severely limited: native Google Doc append-to-end via <code>mcp__gdrive__append_to_document</code> is the only direct edit operation; create-new via <code>mcp__claude_ai_Google_Drive__create_file</code> works in folders where the OAuth principal has write permission (returned "User cannot add children to the specified folder" on the Prompt Eng folder); copy via <code>mcp__claude_ai_Google_Drive__copy_file</code>. <strong>No edit / replace / mid-doc insert. No delete or trash. No write at all on .docx files</strong> (<code>append_to_document</code> rejects with "This operation is not supported for this document. The document must not be an Office file."). Implication: Claude-authored content that needs revision over time must live in github, not Drive. Drive writes are appropriate only for one-shot append to existing native Google Docs, or net-new doc creation in OAuth-writable folders. The binding default is in <a href="https://github.com/scottwofford/sw-prv/blob/main/requirements/personal/scott-response-req.md">scott-response-req.md R9</a>.</p>
+<p><strong>Correction (verified 2026-06-14).</strong> The append-only / "no mid-doc insert" limit above is the MCP <strong>tools</strong> only. Via python reusing the gdrive MCP OAuth token (<code>~/.config/mcp-gdrive/credentials.json</code>; scopes <code>spreadsheets documents drive.readonly</code>; identity <code>scott@luthienresearch.org</code>), native Google <strong>Docs</strong> edit fully through the Docs API (<code>documents.batchUpdate</code> — insert-at-index, delete-range, replace-all, formatting) and <strong>Sheets</strong> through gspread (<code>update_cell</code> / <code>batch_update</code>). Demonstrated by deleting a mid-doc line via <code>replaceAllText</code> (<code>occurrencesChanged: 1</code>). Still no write on Office files (<code>.docx</code>/<code>.xlsx</code>); the Docs/Sheets APIs only edit native Google types. So Claude-authored content that needs revision over time CAN live in a native Google Doc/Sheet, not only github — github still wins where git diff history is the point. Auth copy pattern: <a href="https://github.com/LuthienResearch/luthien-org/blob/main/fundraising/pipeline/auth.py"><code>luthien-org/fundraising/pipeline/auth.py</code></a>. Full detail in <a href="https://github.com/scottwofford/sw-prv/blob/main/claude-ai-project-knowledge/architecture.md"><code>../claude-ai-project-knowledge/architecture.md</code></a> (2026-06-14 decisions).</p>
+<h3 id="verified-allowed-directories-desktop-mac-filesystem-mcp">Verified allowed directories (desktop-mac, Filesystem MCP)</h3>
+<ul>
+<li><code>/Users/scottwofford/Library/CloudStorage/GoogleDrive-scottwofford3@gmail.com/.shortcut-targets-by-id/129u3BtHRFBeILTbIFf1N2X-NlyphvCoO/Luthien</code></li>
+<li><code>/Users/scottwofford/Dropbox</code></li>
+<li><code>/Users/scottwofford/build</code></li>
+<li><code>/Users/scottwofford/Downloads</code></li>
+<li><code>/Users/scottwofford/Desktop</code></li>
+</ul>
+<h3 id="canonical-local-asset-paths-desktop-mac-claude-code">Canonical local asset paths (desktop-mac, claude-code)</h3>
+<p>Within the verified allowed directories above, these specific locations hold durable Claude-asset content that recurs across context-restoration requests. Treat as known addresses; do not discover via search.</p>
+<table>
+<thead>
+<tr>
+<th>Asset</th>
+<th>Path</th>
+<th>Format</th>
+<th>Filename pattern</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Claude Code session logs (~330+ files, Dec 2025–present)</td>
+<td><code>~/build/luthien-private-session-logs/</code></td>
+<td>named CSV</td>
+<td><code>YYYY-MM-DD_topic-slug.csv</code></td>
+</tr>
+<tr>
+<td>claude.ai chat backups, human-readable index</td>
+<td><code>~/build/claude-ai-sync/conversations/by-name/</code></td>
+<td>Markdown</td>
+<td><code>&lt;chat title&gt;.md</code></td>
+</tr>
+<tr>
+<td>claude.ai chat backups, raw</td>
+<td><code>~/build/claude-ai-sync/conversations/</code></td>
+<td>Markdown</td>
+<td><code>&lt;uuid&gt;.md</code></td>
+</tr>
+<tr>
+<td>Luthien Drive sync log</td>
+<td><code>~/Library/CloudStorage/GoogleDrive-scottwofford3@gmail.com/.shortcut-targets-by-id/129u3BtHRFBeILTbIFf1N2X-NlyphvCoO/Luthien/sync.csv</code></td>
+<td>CSV</td>
+<td><code>sync.csv</code></td>
+</tr>
+<tr>
+<td>Requirements + ops docs (this repo)</td>
+<td><code>~/build/private-claude-code-docs/</code></td>
+<td>git repo</td>
+<td>various</td>
+</tr>
+</tbody>
+</table>
+<p>Sync mechanisms: <code>~/build/claude-ai-sync/sync-claude-ai.sh</code> runs the claude.ai chat backup; <code>~/build/luthien-private-session-logs/sessions_to_csv.py</code> produces the Claude Code CSVs.</p>
+<h3 id="context-restoration-sop">Context restoration SOP</h3>
+<p>When the user issues a context-restoration request — phrasings include "look at logs," "get context on X," "where were we," "review past chats about Y," "before I take this on the road" — execute the following:</p>
+<ol>
+<li><strong>Extract scope.</strong> Date (today / last N days / specific date) and topic (current chat topic OR explicit topic from the request).</li>
+<li><strong>Filter at the filesystem level.</strong> Use <code>ls ~/build/luthien-private-session-logs/ | grep &lt;date-or-topic&gt;</code> (or equivalent for the other canonical paths) rather than listing the directory in full. Per <a href="https://github.com/scottwofford/sw-prv/blob/main/requirements/personal/scott-response-req.md"><code>personal/scott-response-req.md</code></a> R13 (filter chat output for signal), no full directory dumps to chat output.</li>
+<li><strong>Read at most three candidates.</strong> If filtering yields more, name the candidates in prose and ask which to read.</li>
+<li><strong>For mobile handoff, materialize content inline as text in the chat.</strong> Filesystem MCP is desktop-only per the matrix above, so file references do not survive the surface jump even when the same chat opens on mobile. Inline summary is the bridge; file paths in chat output are not.</li>
+</ol>
+<p>The first three steps apply to any context-restoration request. Step 4 is specifically how output discipline (per R13 in <code>scott-response-req.md</code>) cashes out for R1 when a mobile handoff is signaled.</p>
+<h3 id="current-message-access">Current message access</h3>
+<table>
+<thead>
+<tr>
+<th>Source</th>
+<th>Local Claude Code and Codex on Scott's configured Mac</th>
+<th>Other surfaces</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>WhatsApp, Signal, iMessage, Facebook Messenger, Instagram, LinkedIn messages, X, Beeper</td>
+<td>Sample discovery, message reads, and literal search verified through Beeper on September 14, 2026</td>
+<td>No inherited localhost access; verify a separate connection</td>
+</tr>
+<tr>
+<td>Redwood Research Slack</td>
+<td>Two identities. Beeper holds Scott's Redwood guest account: internal channels (devops, linuxarena-devs) and DMs, senders rendered as Matrix IDs, no thread tool, initial sync still backfilling on September 14, 2026. <code>slack-redwood</code> holds his Seattle AI Safety identity and reads the Redwood channels shared via Slack Connect (linuxarena-general, linuxarena-aio, linuxarena-lab-notes, redwood-0labs, ext-redwood-luthien, redwood-api-attack-collab, cmft_to_ctower) with resolved names and thread reads</td>
+<td>Verify workspace-specific access</td>
+</tr>
+<tr>
+<td>Seattle AI Safety Slack</td>
+<td><code>slack</code> and <code>slack-redwood</code> servers (same identity)</td>
+<td>Verify connected workspace on that surface</td>
+</tr>
+<tr>
+<td>High Impact Professionals Slack</td>
+<td><code>slack-hip</code>, registered in both local clients. Simultaneous HIP/Seattle identity, channel, history, search and HIP thread checks passed September 22, 2026; <a href="https://github.com/scottwofford/sw-prv/blob/main/setup.md#slack-lookup-preference">connection details</a>. Existing sessions may need reconnect/restart.</td>
+<td>No inherited local connection</td>
+</tr>
+<tr>
+<td>Neolithic Slack</td>
+<td><code>slack-neolithic</code>, registered in both local clients. Six simultaneous Neolithic/HIP/Seattle identity, channel, history and search checks plus Neolithic thread reads passed September 22, 2026; <a href="https://github.com/scottwofford/sw-prv/blob/main/setup.md#slack-lookup-preference">connection details</a>. Existing sessions may need reconnect/restart.</td>
+<td>No inherited local connection</td>
+</tr>
+<tr>
+<td>Other Slack workspaces</td>
+<td>Verify each remaining workspace separately.</td>
+<td>Browser sign-in alone is not agent access</td>
+</tr>
+<tr>
+<td>Phone/FaceTime logs, native Mail.app</td>
+<td>Not established by the Beeper audit</td>
+<td>Verify separately</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Before reply/sent/follow-up claims</strong>, query the corresponding live source, identify the ask, and read subsequent incoming/outgoing messages, thread replies, and enough history pages to cover the interval. If the channel is unspecified, check plausible channels from the relationship's history. Cite positive evidence; qualify any absence claim by the actual sources and interval checked. Empty results or incomplete access mean unverified status, not "no reply." Scott's direct confirmation is stronger than a tool-null. When asked "did I send X?" or "have I followed up?", explicitly enumerate which channels you can and cannot see and assert only within that visibility window; never make an absence-of-send claim without naming the caveat. This binds every agent, including agents without Beeper.</p>
+<p><code>get_accounts</code> omits iMessage despite working chat discovery and reads, and iMessage chats are not name-searchable: participants appear as opaque hashes and titles are phone numbers, short codes, or group names. Locate them by known number, group name, or a literal-word message search, then <code>list_messages</code>. Empty history with <code>hasMore: true</code> and null cursors means the chat is not yet synced (Beeper rate-limits the initial backfill; troubleshooting in setup.md), not that it is empty. Read access never authorizes sending messages.</p>
+<p>Implementation, permissions, troubleshooting, and the nine-network audit: <a href="https://github.com/scottwofford/sw-prv/blob/main/setup.md#beeper-message-access">Beeper message access</a>. Primary evidence: <a href="https://github.com/scottwofford/sw-prv/blob/main/session-logs/2026-09-14_whatsapp-signal-access-codex.csv">September 14 access session</a>.</p>
+<h3 id="tool_search-blind-spot-rule"><code>tool_search</code> blind spot rule</h3>
+<p><code>tool_search</code> returning "no matching tools found" does NOT mean the tool is absent on the current surface. Verified failure case (desktop-mac): <code>tool_search "filesystem"</code> returned no matches, but <code>Filesystem:list_allowed_directories</code> direct call worked and returned 5 paths. Either <code>tool_search</code> only returns deferred (not-yet-loaded) tools, or certain local MCPs register without being in the searchable catalog.</p>
+<p><strong>Rule:</strong> before asserting "tool X is unavailable on this surface," attempt the direct namespace call. If the call name does not exist or returns a clear "tool not found" error, the tool is absent. If <code>tool_search</code> returns nothing but the direct call works, the tool is present and <code>tool_search</code> was unreliable.</p>
+<h3 id="historical-per-surface-probe-evidence">Historical per-surface probe evidence</h3>
+<p>These dated observations explain earlier failures, not current blanket access limits. Use the current message-access table and live checks for status claims.</p>
+<p><strong>desktop-mac</strong> (Claude Desktop on macOS). Verified via direct probe: Google Calendar (5 tools loaded), Gmail (<code>list_labels</code> returned 14 labels; queries hit both <code>scott@luthienresearch.org</code> and <code>scottwofford3@gmail.com</code> from a single call), Google Drive (<code>list_recent_files</code> returned 3 files including Roberto Bandarra meeting notes), Filesystem (5 Mac paths returned, NOT discoverable via <code>tool_search</code>), web_search (9 results), bash_tool (<code>echo hello</code> returncode 0), conversation_search ("luthien" returned 3 past chats), recent_chats. Connectors panel confirmed: GitHub Integration <code>Connected</code> (cloud-MCP); Gmail / Calendar / Drive cloud-MCPs; Trello <code>LOCAL DEV</code>; Filesystem / iMessage / Office / Mac control / Chrome control all <code>DESKTOP</code>; Claude in Chrome appears twice (cloud <code>INCLUDED Beta</code> + desktop-bridged 22-tool version).</p>
+<p><strong>mobile-ios.</strong> Source: <a href="https://github.com/scottwofford/sw-prv/blob/main/session-logs/2026-05-04_surface-capability-probes.csv"><code>../session-logs/2026-05-04_surface-capability-probes.csv</code></a>. <code>bash_tool</code> runs on real Linux 6.18.5 x86_64 VM with allowlisted egress (PyPI/npm/GitHub/Anthropic API/Ubuntu repos), Python 3.12.3 callable from phone; <code>web_search</code> + <code>conversation_search</code> + <code>recent_chats</code> all verified working; Gmail / Calendar / Drive cloud MCPs all loaded via <code>tool_search</code> and direct-called; Drive auth confirmed personal (<code>scottwofford3@gmail.com</code>), not Workspace; Calendar <code>list_calendars</code> returned 9 calendars including both <code>scott@luthienresearch.org</code> and <code>scottwofford3@gmail.com</code>. Native iOS tools present in parallel to cloud MCPs: <code>event_create_v0/v1</code>, <code>event_search_v0</code>, <code>event_update_v0</code>, <code>event_delete_v0</code>, <code>calendar_search_v0</code>, full <code>reminder_*</code> family, <code>places_search</code> + <code>places_map_display_v0</code>, <code>chart_display_v0</code>, <code>recipe_display_v0</code>, <code>message_compose_v1</code>, <code>ask_user_input_v0</code>. Verified-missing: Filesystem, iMessage, Trello, Chrome / browser, Office MCPs, Slack/GitHub/Notion/Asana. Surprise: <code>tool_search</code> is fuzzy + Gmail-biased — single call insufficient to confirm absence (had to query "drive" with multiple phrasings to surface <code>list_recent_files</code> and <code>search_files</code>); reinforces the <code>tool_search</code> blind spot rule. Confidence (claude self-rating): 80%.</p>
+<p>Mobile also has a personal-only Gmail OAuth scope: search returns <code>scottwofford3@gmail.com</code> only, not <code>scott@luthienresearch.org</code>. Single-account limitation also observed in earlier probes.</p>
+<p><strong>web-claudeai</strong> (Code Execution + File Creation enabled). Source: <a href="https://github.com/scottwofford/sw-prv/blob/main/session-logs/2026-05-04_surface-capability-probes.csv"><code>../session-logs/2026-05-04_surface-capability-probes.csv</code></a>. Surface fingerprint identified by: <code>bash_tool</code> runs in Linux 6.18.5 sandbox with <code>/mnt/user-data/uploads</code>, <code>/mnt/transcripts</code>, <code>/mnt/skills/{public,examples}</code> mounted; network egress allowlisted (curl to <code>api.anthropic.com</code> works, arbitrary domains blocked); zero browser-control tools (rules out chrome-extension); no Filesystem/iMessage MCPs (rules out desktop-mac); full consumer suite present + <code>bash_tool</code> excludes mobile-only-without-bash framing. Verified-working: <code>bash_tool</code> (Python 3.12.3 + Node v22.22.2 in container); <code>view</code>/<code>create_file</code>/<code>str_replace</code> (sandbox FS rooted at <code>/mnt/</code>); <code>web_search</code> (9 results); <code>conversation_search</code> (returned 2 luthien chats); Google Calendar <code>list_calendars</code> (9 calendars incl both Scott accounts + Ping-Scott-Alert + Pike13); Gmail <code>list_labels</code> (INBOX, Banking, News, AMZN Consumer, etc.); Google Drive <code>list_recent_files</code>; <code>search_mcp_registry</code> (returned Notion, Slack, Egnyte, Shopify, Uber Eats, Thumbtack, Three.js — all <code>installState: "not_installed"</code>). Skills available at <code>/mnt/skills/public</code> for docx/pdf/pptx/xlsx + <code>frontend-design</code> (covers Office MCP absence via Python in <code>bash_tool</code>). Anthropic API in Artifacts (Sonnet 4 callable, can attach Calendar/Gmail/Drive MCP URLs). Verified-missing: Claude in Chrome / Control Chrome (browser MCPs); Filesystem MCP (Mac local FS — sandbox <code>/mnt/*</code> is separate); iMessage; Office MCPs (replaceable via skills). Confidence (claude self-rating): 92%.</p>
+<p><strong>chrome-extension</strong> (Claude for Chrome extension). Source: <a href="https://github.com/scottwofford/sw-prv/blob/main/session-logs/2026-05-04_surface-capability-probes.csv"><code>../session-logs/2026-05-04_surface-capability-probes.csv</code></a>. Surface fingerprint: real Chrome 147 on macOS (UA verified via <code>javascript_tool</code>); tab context delivered via <code>&lt;system-reminder&gt;</code> with <code>availableTabs</code>/<code>initialTabId</code>; tools scoped to a Chrome tab and require <code>tabId</code> parameter. Verified-working: <code>read_page</code>, <code>find</code> (returned 3 refs on claude.ai tab including input/stop/attach buttons), <code>computer</code> (browser-tab-scoped click/type/scroll/screenshot/key/hover/zoom — NOT OS-level), <code>navigate</code>, <code>tabs_context</code>, <code>tabs_create</code>, <code>form_input</code>, <code>get_page_text</code>, <code>javascript_tool</code> (evaluated <code>document.title</code>/<code>location.href</code>/UA), <code>read_console_messages</code>, <code>read_network_requests</code>, <code>resize_window</code>, <code>upload_image</code>, <code>file_upload</code>, <code>gif_creator</code> (record→export browser session), <code>update_plan</code>, <code>turn_answer_start</code>, <code>browser_batch</code> (chains steps in one round-trip). Critical verified-missing: <strong><code>tool_search</code> itself is absent</strong> on this surface (so the <code>tool_search</code> blind spot rule is moot here — there is no discovery layer at all); no cloud MCPs whatsoever (no Calendar, Gmail, Drive); no <code>web_search</code>, <code>web_fetch</code>, <code>bash_tool</code>, <code>conversation_search</code>, <code>recent_chats</code>; no Artifacts/REPL; no OS-level computer use. Net: <strong>narrow + deep browser-automation agent</strong> — extremely capable inside a Chrome tab (DOM, JS, network, console, screenshots, recordings, file inputs) and essentially powerless outside one. Heavy injection-defense framing in system prompt characteristic of agentic-browser surface where untrusted page content is in the loop.</p>
+<p><strong>claude-code, Gmail MCP scope blocker.</strong> Source: <a href="https://github.com/scottwofford/sw-prv/blob/main/session-logs/2026-05-02_investor-database-sync-mcp-account-blocker.csv"><code>../session-logs/2026-05-02_investor-database-sync-mcp-account-blocker.csv</code></a>. Verified failure mode while Scott was trying to sync investor database from Gmail sent mail: <code>from:scott@luthienresearch.org newer_than:3d</code> returned 0 results; <code>from:scottwofford3@gmail.com newer_than:3d</code> returned only personal calendar acceptances. Diagnosis: the <code>mcp__claude_ai_Gmail__*</code> namespace on Claude Code is OAuth-wired to <code>scottwofford3@gmail.com</code> (personal), NOT <code>scott@luthienresearch.org</code> (Workspace). The "Luthien MCP" Scott set up via Google Cloud Provider was the gdrive MCP at <code>~/.config/mcp-gdrive/</code>, not Gmail. Incoming Luthien threads are readable only because Scott has a forward rule to personal; outgoing Workspace mail bypasses the personal mailbox entirely and is invisible from claude-code. <strong>Implication for R2:</strong> when asked "did I send X from Luthien?" claude-code MUST flag this gap — the verification path does not exist on this surface and no amount of waiting for "MCP indexer lag" recovers it. Workarounds: (a) add <code>scott@luthienresearch.org</code> to claude.ai Gmail connector, then re-probe; (b) sweep from a surface that has Workspace auth (claude.ai mobile/desktop) and drop JSON files into the existing <code>pipeline/sweeps/row*.json</code> workflow.</p>
+<p><strong>claude-code, tool inventory.</strong> Tools available: Bash, Read, Edit, Write, Glob, Grep, Agent, WebSearch, WebFetch, mcp__trello__<em>, mcp__claude_ai_Gmail__</em> (personal only, see above), mcp__claude_ai_Google_Drive__<em>, mcp__claude_ai_Google_Calendar__</em>, mcp__gdrive__<em>, mcp__otter__</em>, mcp__slack__* (via MCP config). Native filesystem access via Bash + Read/Edit/Write. No <code>conversation_search</code> / <code>recent_chats</code>.</p>
+<h3 id="open-probes">Open probes</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Probe</th>
+<th>Surface</th>
+<th>Priority</th>
+<th>Protocol</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>GitHub Integration</td>
+<td>desktop-mac</td>
+<td>high</td>
+<td><code>tool_search "github"</code>, then attempt direct calls (<code>list_repos</code>, <code>read_file</code> on <code>scottwofford/private-claude-code-docs/requirements/cross-surface-context-mgmt-req.md</code>)</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Gmail account-scope on web-claudeai</td>
+<td>web-claudeai</td>
+<td>medium</td>
+<td>Explicitly run <code>from:scott@luthienresearch.org newer_than:1d</code> and <code>from:scottwofford3@gmail.com newer_than:1d</code> to confirm whether web-claudeai sees one account or both</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Cloud-MCP auth persistence</td>
+<td>cross-surface</td>
+<td>low</td>
+<td>Determine whether Calendar / Gmail / Drive cloud MCPs persist across surfaces with same auth, or require per-surface re-auth</td>
+</tr>
+</tbody>
+</table>
+<p>When a probe completes, update the matrix cell with date stamp + add to "Per-surface probe evidence" above.</p>
+<h2 id="b-5-whys">B. 5 Whys</h2>
+<ol>
+<li><strong>Surface problem:</strong> When I open a chat on mobile, the assistant doesn't know what happened in my Claude Code session this morning. I have to re-explain context, and sometimes I forget what I already explained.</li>
+<li><strong>Why?</strong> Claude Code and claude.ai mobile don't share storage. Auto-memory and session logs live on the laptop; claude.ai sees only its own backend.</li>
+<li><strong>Why does that matter beyond inconvenience?</strong> Three real costs: (a) wasted time and forgotten context, (b) mobile chat can make decisions inconsistent with what was decided on the laptop earlier, (c) when bridging with a derived snapshot (the Daily State doc), the snapshot decayed silently and the mobile chat confidently told stale things; worse than no bridge at all.</li>
+<li><strong>Why did the snapshot bridge fail?</strong> It duplicated source data into a derived doc that only refreshed when an explicit job ran (snapshot rot). More fundamentally: the system asserted things confidently without flagging that the source data was stale. Asserting wrong things confidently is the root failure: snapshot rot is one cause, mode bleed is another, opening mobile from scratch with no context is a third.</li>
+<li><strong>Why didn't we name the right requirement from the start?</strong> No written requirements. Every new session re-invented "what does Scott need" and landed on a single proposed solution. Deeper root: Claude makes solution-shaped suggestions confidently without validating against user need; Scott often goes along until enough has been built to feel wrong.</li>
+</ol>
+<p><strong>Root:</strong> The cross-surface Claude setup needs the system to be honest about what it knows and doesn't know, at the moment of asserting context, not after Scott catches the lie.</p>
+<h2 id="c-open-questions">C. Open questions</h2>
+<ol>
+<li>
+<p><strong>Mobile-from-scratch frequency.</strong> R2 is most load-bearing when Scott opens claude.ai mobile fresh, with no prior context loaded from another surface. R1 (continuity) is most load-bearing when there IS a prior session to continue from. The relative leverage of R1 vs R2 depends on which pattern dominates Scott's actual mobile usage. <strong>Instrument:</strong> Scott tags each mobile session for one week as "continuation" (picking up from laptop) or "fresh" (no prior context) in the session-log CSV. <strong>Decision rule:</strong> if "fresh" is ≥10% of mobile sessions, R2 is the higher-leverage focus. If &lt;10%, R1 (continuity-from-Desktop-bridge) wins.</p>
+</li>
+<li>
+<p><strong>Completeness check: are R1-R3 missing failure modes?</strong> Recent claude.ai threads + session logs surfaced four kinds of failure: stale-date stamping, UTC/PT timezone confusion, similarly-named-entity conflation, invented scene details. All four fit under R2 (verify-before-asserting). <strong>Instrument:</strong> Scott flags any future pain that doesn't fit R1, R2, or R3 as a candidate new requirement; re-analyze recent threads at next major doc revision.</p>
+</li>
+<li>
+<p><strong>Surface-capability probes pending.</strong> Desktop-mac and mobile-ios probes complete; web-claudeai, chrome-extension, and GitHub Integration probes pending. Process learning surfaced during the desktop probe: <code>tool_search</code> returning "no matching tools found" does NOT mean the tool is absent on the current surface (verified blind-spot via <code>Filesystem:list_allowed_directories</code> working despite <code>tool_search "filesystem"</code> returning nothing). <strong>Instrument:</strong> Scott runs the probe protocols documented in <a href="https://github.com/scottwofford/sw-prv/blob/main/requirements/surface-capabilities.md"><code>surface-capabilities.md</code></a> on each pending surface, attempting both <code>tool_search</code> AND direct namespace calls. <strong>Decision rule:</strong> any new gaps found update the matrix; any new behavioral failure modes get added to R1-R3 evidence columns or surface a candidate new requirement.</p>
+</li>
+</ol>
+<h2 id="d-method-note">D. Method note</h2>
+<p>This doc was drafted by Claude. Scott endorsed direction, structure, and the Epic + sub-stories shape, then read R1, R2, R3 and the acceptance criteria and confirmed they broadly make sense. Validation is the user reading the requirements; this is a single-user repo with no other reviewers.</p>
+<h2 id="e-r2-operational-recipes-verify-before-asserting">E. R2 operational recipes (verify-before-asserting)</h2>
+<p>Relocated from CLAUDE.md (2026-06-03) to keep the always-loaded file lean. The imperative bindings stay in CLAUDE.md; the recipes and evidence live here and load on demand.</p>
+<p><strong>Date and time.</strong> Run <code>date</code> before answering anything time-sensitive. Do not anchor on chat-history timestamps or the system-context <code>currentDate</code> field (set at session start; goes stale across midnight or in long sessions).</p>
+<p><strong>Derived dates in any artifact (weekday + duration + timezone).</strong> Never type a weekday from memory. Before writing <code>Tue, May 8</code> style pairs in any doc, compute via <code>date -j -f "%Y-%m-%d" "$D" "+%a, %b %-d"</code> (batch all the doc's dates in one Bash call). For UTC Slack timestamps between 00:00-08:00 UTC (PDT) / 00:00-09:00 UTC (PST), the PT date is the PREVIOUS day; always compute, never assume same-day. Meeting durations cite the transcript's last section heading or are omitted. Before any commit that adds dated content: <code>grep -nE '(Mon|Tue|Wed|Thu|Fri|Sat|Sun), (Jan|Feb|Mar) [0-9]+' &lt;files&gt;</code> and cross-check every match against <code>date -j</code>. Established 2026-05-20 after 7 weekday + 1 duration errors landed in <a href="https://github.com/LuthienResearch/luthien-org/pull/19">luthien-org PR #19</a> (Trajectory case study).</p>
+<p><strong>Subagent date awareness.</strong> When dispatching an Agent that may need date awareness, prepend the verified time to the subagent's prompt:</p>
+<pre><code>CURRENT-TIME (verified by parent agent via `date` at dispatch): &lt;output of `date '+%Y-%m-%d %H:%M:%S %Z'`&gt;
+
+&lt;actual subagent prompt&gt;
+</code></pre>
+<p>Empirical evidence: 5/5 subagents reported "Today is 2026-05-01" by reading <code>currentDate</code> without running <code>date</code>; with prompt-injection, 10/10 used the injected time. <code>additionalContext</code> from hooks does NOT reliably override system context for subagents; prompt injection does. A <code>PreToolUse</code> hook on <code>Task|Agent</code> (<code>scripts/inject-date-into-agent-prompt.sh</code>) auto-prepends CURRENT-TIME to every Agent dispatch via <code>updatedInput</code>; verified 3/3 PASS on auto-injection. Idempotent; skips if the prompt already starts with CURRENT-TIME.</p>
+<p><strong>Fact-to-source routing.</strong> Recent message from X: search the relevant channel (Gmail / direct Slack / Beeper conversation, including iMessage and Signal; skill <code>gmail-search-heuristics</code> for search order). Meeting time / agenda / attendees: Google Calendar <code>mcp__claude_ai_Google_Calendar__list_events</code> (try <code>scott@luthienresearch.org</code> for work; primary for personal). Trello card status: <code>mcp__trello__get_card</code>. Person's role / company / fund affiliation: Gmail signature / WebFetch / known reference doc. Dollar amounts, LOI counts, traction stats: cite the canonical source inline. If verification is not available on the surface, say "I do not have that loaded right now"; failed verification satisfies R2, fabricated verification violates it.</p>
+<h2 id="f-claudeai-saved-memory-hygiene">F. claude.ai Saved-memory hygiene</h2>
+<p>Saved memory is a nightly-regenerated snapshot, so Tenet 4 (source-system primacy) governs what belongs in it. Memory holds only: (1) durable identity facts still true 6+ months out (family, background, home, health patterns, gym equipment, childcare defaults); (2) standing preferences and tool notes; (3) pointers to canonical sources (file paths, doc IDs), never copies of their contents.</p>
+<p>Memory must NOT hold:</p>
+<ul>
+<li><strong>In-flight negotiations, deals, or job conversations.</strong> Verified 2026-07-17: a rapidly-evolving discussion was stored with a wrong org and wrong call date within days, plus a sensitive interpersonal note that should never have been snapshotted.</li>
+<li><strong>Open to-dos or pending confirmations.</strong> Calendar / Trello / email are the source of truth; remembered copies sat stale for weeks (the Broerman-meeting and insurance-confirmation items).</li>
+<li><strong>Unresolved technical issues.</strong> They outlive their fix; verified 2026-07-17: the Drive-connector item stayed "active" in memory after being resolved 2026-07-16.</li>
+<li><strong>Duplicates of rules in the fetched requirements docs.</strong> Copies diverge from canonical; verified 2026-07-17: static calibration caps in memory contradicted R3, which had replaced them in May 2026.</li>
+</ul>
+<p>Prefer dated past-tense facts over present-tense status claims. Storage test: still true, useful, and safe to act on in 6 months with no other context? The standing guidance was issued to the memory system 2026-07-17 via the Manage-memory instruction box; re-issue it if regeneration drifts.</p>
+<h2 id="g-propagate-status-corrections-to-canonical-sources">G. Propagate status corrections to canonical sources</h2>
+<p>When Scott corrects a stale task suggestion ("I already pinged Sevan", "that's done", "that changed"), acknowledging in chat is not enough: in the same turn, search the canonical surfaces that could regenerate the suggestion (Plan of Attack, Trello cards, objective.md, other planning docs) for mentions of that task, update each in place to current status, and report what was updated where. A correction that lives only in one session's context recurs in every future session that re-reads the stale source. Especially binding when the correction arrives via a source unavailable on the current surface (including screenshots): the doc update is the only durable record. On a surface that can't write to the stale source (e.g. claude.ai without the needed connector scope), name which source still carries the stale status so Scott or a Claude Code session can fix it.</p>
+<p><em>Origin: 2026-07-24 — "Request feedback from Sevan" re-suggested from Plan of Attack Tier 4 after Scott had sent Sevan the draft Jul 22 and corrected a prior session. Rule also in <a href="https://github.com/scottwofford/sw-prv/blob/main/CLAUDE.md"><code>../CLAUDE.md</code></a> Always-on conventions; rehomed here 2026-08-16 so it binds on claude.ai via the every-chat fetch.</em></p>
+<h2 id="related-docs">Related docs</h2>
+<ul>
+<li><a href="https://github.com/scottwofford/sw-prv/blob/main/claude-ai-project-knowledge/architecture.md"><code>../claude-ai-project-knowledge/architecture.md</code></a>: cross-surface architecture + design principles</li>
+<li><a href="https://github.com/scottwofford/sw-prv/blob/main/CLAUDE.md"><code>../CLAUDE.md</code></a>: Scott's Claude Code identity, workflow, preferences</li>
+<li><a href="https://github.com/scottwofford/sw-prv/blob/main/requirements/personal/scott-response-req.md"><code>personal/scott-response-req.md</code></a>: Scott's personal Claude-response requirements (Customize / claude.ai surface)</li>
+<li><a href="https://github.com/scottwofford/sw-prv/blob/main/requirements/personal/quentin-response-req.md"><code>personal/quentin-response-req.md</code></a>: Quentin Feuillade-Montixi's requirements distillation</li>
+<li><a href="https://github.com/scottwofford/sw-prv/blob/main/requirements/personal/matt-mandzel-response-req.md"><code>personal/matt-mandzel-response-req.md</code></a>: Matt Mandzel's requirements distillation</li>
+<li><a href="https://github.com/scottwofford/sw-prv/blob/main/requirements/design-principles.md"><code>design-principles.md</code></a>: meta doc on HOW to bind requirements to surfaces</li>
+<li><a href="https://github.com/LuthienResearch/luthien-org/blob/main/ui-fb-dev/2-versions-requirements/README.md">luthien-org canonical format</a></li>
+<li><a href="https://github.com/scottwofford/sw-prv/blob/main/session-logs">Session logs</a>: primary evidence source</li>
+</ul>
+
+  <hr>
+
+  <p><em>Last updated: 2026-10-31.</em></p>
+  <!-- GoatCounter analytics -->
+  <script data-goatcounter="https://scwoff.goatcounter.com/count"
+          async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

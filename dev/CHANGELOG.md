@@ -4,6 +4,12 @@ All notable changes to scottwofford.com. Plans for larger changes live in [`plan
 
 ---
 
+## 2026-10-31 — Publish response and cross-surface requirements
+
+- **Requirements pages**: `building/response-requirements.html` and `building/cross-surface-requirements.html`, the full bodies behind the one-line index on the CLAUDE.md page, rendered from the redacted public copy in luthien-contributors by `dev/build_requirements_pages.py` ([PR](https://github.com/scottwofford/personal-site/pull/32))
+- **CLAUDE.md page**: now generated from the real CLAUDE.md by the same script, so it can't drift; every generated page names its private source of truth
+- **Spanish CLAUDE.md page**: banner marking the June 2026 translation as possibly outdated, linking the current English page
+
 ## 2026-10-21 - Bottlenecks restructured around two problems ([PR #31](https://github.com/scottwofford/personal-site/pull/31))
 
 - `/bottlenecks/` now has two sections that open with problem statements: "Problem 1: Control Tower" (shared control tooling carried by a small team) and "Problem 2: Auditors" (investigation and testing, from Luthien's mission and theory of change). The talent stock-and-flow moves under Problem 2 as "Who can build the tools: cyber eval talent", next to the EAG NYC quotes. `/bottlenecks/talent.html` now redirects to that subsection. English only.
