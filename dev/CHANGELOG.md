@@ -6,7 +6,7 @@ All notable changes to scottwofford.com. Plans for larger changes live in [`plan
 
 ## 2026-10-31 — Publish response and cross-surface requirements
 
-- **Requirements pages**: `building/response-requirements.html` and `building/cross-surface-requirements.html`, the full bodies behind the one-line index on the CLAUDE.md page, rendered from the redacted public copy in luthien-contributors by `dev/build_requirements_pages.py` (PR_LINK)
+- **Requirements pages**: `building/response-requirements.html` and `building/cross-surface-requirements.html`, the full bodies behind the one-line index on the CLAUDE.md page, rendered from the redacted public copy in luthien-contributors by `dev/build_requirements_pages.py` ([PR](https://github.com/scottwofford/personal-site/pull/32))
 - **CLAUDE.md page (EN + ES)**: index now links to the new pages instead of "private for now"
 
 ## 2026-10-21 - Bottlenecks restructured around two problems ([PR #31](https://github.com/scottwofford/personal-site/pull/31))
