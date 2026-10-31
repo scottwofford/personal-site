@@ -16,19 +16,32 @@ import markdown
 
 # Where the public copy lives (default: a sibling checkout of luthien-contributors).
 CONTRIB = Path(sys.argv[1] if len(sys.argv) > 1 else Path.home() / "build/luthien-contributors")
-REQ_DIR = CONTRIB / "process/requirements"
+PROCESS = CONTRIB / "process"
 
 # Links in the docs are relative to their home in Scott's private repo.
 # Rewrite them to absolute GitHub URLs so they don't break on this site.
 PRIVATE_BASE = {
-    "scott-response-req.md": "https://github.com/scottwofford/sw-prv/blob/main/requirements/personal/",
-    "cross-surface-context-mgmt-req.md": "https://github.com/scottwofford/sw-prv/blob/main/requirements/",
+    "requirements/scott-response-req.md": "https://github.com/scottwofford/sw-prv/blob/main/requirements/personal/",
+    "requirements/cross-surface-context-mgmt-req.md": "https://github.com/scottwofford/sw-prv/blob/main/requirements/",
+    "scott-claude-md.md": "https://github.com/scottwofford/sw-prv/blob/main/",
 }
+# The private file each page mirrors (its source of truth).
+PRIVATE_NAME = {
+    "requirements/scott-response-req.md": "scott-response-req.md",
+    "requirements/cross-surface-context-mgmt-req.md": "cross-surface-context-mgmt-req.md",
+    "scott-claude-md.md": "CLAUDE.md",
+}
+INTRO_REQ = ('The full bodies behind the one-line index on <a href="/building/claude-code-config.html">my CLAUDE.md page</a>. '
+             "Generated from my private docs with personal details, other people's private business, and money amounts removed.")
+INTRO_CLAUDE = ('<a href="https://code.claude.com/docs/en/best-practices#write-an-effective-claude-md"><code>CLAUDE.md</code></a> '
+                "is a special file Claude Code reads at the start of every conversation. This is mine, generated from the real file "
+                "with personal details, other people's private business, and money amounts removed.")
 
 # Each page: source file, output path, page title.
 PAGES = [
-    ("scott-response-req.md", "building/response-requirements.html", "My response requirements"),
-    ("cross-surface-context-mgmt-req.md", "building/cross-surface-requirements.html", "My cross-surface requirements"),
+    ("requirements/scott-response-req.md", "building/response-requirements.html", "My response requirements", INTRO_REQ),
+    ("requirements/cross-surface-context-mgmt-req.md", "building/cross-surface-requirements.html", "My cross-surface requirements", INTRO_REQ),
+    ("scott-claude-md.md", "building/claude-code-config.html", "My CLAUDE.md", INTRO_CLAUDE),
 ]
 
 PUBLIC_COPY = "https://github.com/LuthienResearch/luthien-contributors/tree/main/process/requirements"
@@ -48,15 +61,20 @@ TEMPLATE = """<!DOCTYPE html>
   <div class="section-nav">
     <a href="/">← home</a> / <a href="/building/" class="section-name">building</a>
     <div class="siblings">
-      <a href="/building/claude-code-config.html">CLAUDE.md</a>
-      <a href="/building/response-requirements.html"{cur_resp}>Response requirements</a>
-      <a href="/building/cross-surface-requirements.html"{cur_cross}>Cross-surface requirements</a>
+      <a href="/building/day-1-philosophy.html">Day 1</a>
+      <a href="/building/making-decisions.html">Decisions</a>
+      <a href="/building/mini-prfaq-template.html">Mini-PRFAQ</a>
+      <a href="/building/tracker-templates.html">Trackers</a>
+      <a href="/building/onboarding-reading-list.html">Onboarding</a>
+      <a href="/building/claude-code-config.html"{cur_claude}>CLAUDE.md</a>
+      <a href="/building/response-requirements.html"{cur_resp}>Requirements</a>
+      <a href="/building/cross-surface-requirements.html"{cur_cross}>Cross-surface</a>
     </div>
   </div>
   <h1>{title}</h1>
 
   <div class="callout">
-    <p>The full bodies behind the one-line index on <a href="/building/claude-code-config.html">my CLAUDE.md page</a>. Generated from my private docs with personal details, other people's private business, and money amounts removed. Source of truth: <a href="{private_src}">my private copy</a>; this page is a redacted mirror and may lag behind it.</p>
+    <p>{intro} Source of truth: <a href="{private_src}">my private {private_name}</a>; this page is a redacted mirror and may lag behind it.</p>
   </div>
 
   <hr>
@@ -86,8 +104,8 @@ def absolutize(text, base):
     return re.sub(r"(\[[^\]]*\])\(([^)\s]+)\)", fix, text)
 
 
-for src, out, title in PAGES:
-    text = (REQ_DIR / src).read_text()
+for src, out, title, intro in PAGES:
+    text = (PROCESS / src).read_text()
     # Drop the generated-copy header line and the doc's own H1; the page supplies both.
     date = re.search(r"on (\d{4}-\d{2}-\d{2})", text.splitlines()[0]).group(1)
     lines = [l for l in text.splitlines() if not l.startswith("> Generated from")]
@@ -102,7 +120,10 @@ for src, out, title in PAGES:
         body=body,
         date=date,
         public_copy=PUBLIC_COPY,
-        private_src=PRIVATE_BASE[src] + src,
+        private_src=PRIVATE_BASE[src] + PRIVATE_NAME[src],
+        private_name=PRIVATE_NAME[src],
+        intro=intro,
+        cur_claude=' class="current"' if "claude-code" in out else "",
         cur_resp=' class="current"' if "response" in out else "",
         cur_cross=' class="current"' if "cross-surface" in out else "",
     )

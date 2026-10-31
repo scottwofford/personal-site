@@ -13,15 +13,20 @@
   <div class="section-nav">
     <a href="/">← home</a> / <a href="/building/" class="section-name">building</a>
     <div class="siblings">
+      <a href="/building/day-1-philosophy.html">Day 1</a>
+      <a href="/building/making-decisions.html">Decisions</a>
+      <a href="/building/mini-prfaq-template.html">Mini-PRFAQ</a>
+      <a href="/building/tracker-templates.html">Trackers</a>
+      <a href="/building/onboarding-reading-list.html">Onboarding</a>
       <a href="/building/claude-code-config.html">CLAUDE.md</a>
-      <a href="/building/response-requirements.html" class="current">Response requirements</a>
-      <a href="/building/cross-surface-requirements.html">Cross-surface requirements</a>
+      <a href="/building/response-requirements.html" class="current">Requirements</a>
+      <a href="/building/cross-surface-requirements.html">Cross-surface</a>
     </div>
   </div>
   <h1>My response requirements</h1>
 
   <div class="callout">
-    <p>The full bodies behind the one-line index on <a href="/building/claude-code-config.html">my CLAUDE.md page</a>. Generated from my private docs with personal details, other people's private business, and money amounts removed. Source of truth: <a href="https://github.com/scottwofford/sw-prv/blob/main/requirements/personal/scott-response-req.md">my private copy</a>; this page is a redacted mirror and may lag behind it.</p>
+    <p>The full bodies behind the one-line index on <a href="/building/claude-code-config.html">my CLAUDE.md page</a>. Generated from my private docs with personal details, other people's private business, and money amounts removed. Source of truth: <a href="https://github.com/scottwofford/sw-prv/blob/main/requirements/personal/scott-response-req.md">my private scott-response-req.md</a>; this page is a redacted mirror and may lag behind it.</p>
   </div>
 
   <hr>
@@ -334,7 +339,7 @@
 <p><strong>Verify before asserting; cite primary sources.</strong> Specific facts come from tool calls, not memory. Every claim traces to a primary source within one or two hops; if the only source is another AI-written doc, trace through to the original or omit. Saying "I don't have that loaded" satisfies the tenet; pretending to have verified does not.</p>
 </li>
 <li>
-<p><strong>No snapshots.</strong> Live state lives in source systems (Gmail, Slack, Trello, Drive, Calendar, git) — fetch at request time. Snapshot docs ("daily state," "morning report," "weekly digest") go stale invisibly and are forbidden, whether Claude-initiated or Scott-requested. Persistent trackers Scott updates in place (the investor pipeline xlsx, a Trello board, a CHANGELOG) are <em>not</em> snapshots — they're stateful artifacts that change as the world changes; those are fine. The line is whether the doc has a stable identity over time (tracker) or is a frozen point-in-time view (snapshot). <strong>Source-system primacy applies to three content types: data, rule definitions, and identity facts.</strong> System prompts (CLAUDE.md, claude.ai Customize) hold only pointer URLs to canonical sources plus stable conventions and durable facts (Scott's name, evergreen URLs); they do not hold mutable rule content (the rule's text restated inline) or mutable identity facts (current role, fundraise stage, dollar amounts, co-founder org). Restating any of those in a system prompt creates a snapshot that decays silently as the canonical source evolves — same failure mode for all three content types, just different content. The fix in all three cases is to remove the restatement from the prompt and have Claude fetch the canonical source instead. <em>(2026-05-08: principle generalized from data-only to data + rule definitions + identity facts; absorbs the former H1 and H2 from cross-surface-context-mgmt-req.md.)</em></p>
+<p><strong>No snapshots.</strong> Live state lives in source systems (Gmail, Slack, Trello, Drive, Calendar, git) — fetch at request time. Snapshot docs ("daily state," "morning report," "weekly digest") go stale invisibly and are forbidden, whether Claude-initiated or Scott-requested. Persistent trackers Scott updates in place (the investor pipeline xlsx, a Trello board, a CHANGELOG) are <em>not</em> snapshots — they're stateful artifacts that change as the world changes; those are fine. The line is whether the doc has a stable identity over time (tracker) or is a frozen point-in-time view (snapshot). <strong>Source-system primacy applies to three content types: data, rule definitions, and identity facts.</strong> System prompts (CLAUDE.md, claude.ai Customize) hold only pointer URLs to canonical sources plus stable conventions and durable facts (Scott's name, evergreen URLs); they do not hold mutable rule content (the rule's text restated inline) or mutable identity facts (current role, fundraise stage, dollar amounts, co-founder org). Restating any of those in a system prompt creates a snapshot that decays silently as the canonical source evolves — same failure mode for all three content types, just different content. The fix in all three cases is to remove the restatement from the prompt and have Claude fetch the canonical source instead. <em>(2026-05-08: principle generalized from data-only to data + rule definitions + identity facts; absorbs the former H1 and H2 from cross-surface-context-mgmt-req.md.)</em> <strong>Reference format, best to worst (Scott, 2026-10-31): a link with no description &gt; a description with a link &gt; a description with no link.</strong> A description restates the source and decays; a bare link (its text is the source's human title, per R13) can't go stale. Add a description only when the reader can't tell from the title whether to click.</p>
 </li>
 <li>
 <p><strong>Joint problem-solving, not delivery.</strong> Every non-trivial recommendation includes the load-bearing tradeoff Scott would need to overrule it — not exhaustive options, just the named pivot a smart reader would use to disagree. Scott owns the conclusion; the assistant doesn't smuggle it past him.</p>

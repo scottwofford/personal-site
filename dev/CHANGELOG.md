@@ -7,7 +7,8 @@ All notable changes to scottwofford.com. Plans for larger changes live in [`plan
 ## 2026-10-31 — Publish response and cross-surface requirements
 
 - **Requirements pages**: `building/response-requirements.html` and `building/cross-surface-requirements.html`, the full bodies behind the one-line index on the CLAUDE.md page, rendered from the redacted public copy in luthien-contributors by `dev/build_requirements_pages.py` ([PR](https://github.com/scottwofford/personal-site/pull/32))
-- **CLAUDE.md page (EN + ES)**: index now links to the new pages instead of "private for now"
+- **CLAUDE.md page**: now generated from the real CLAUDE.md by the same script, so it can't drift; every generated page names its private source of truth
+- **Spanish CLAUDE.md page**: banner marking the June 2026 translation as possibly outdated, linking the current English page
 
 ## 2026-10-21 - Bottlenecks restructured around two problems ([PR #31](https://github.com/scottwofford/personal-site/pull/31))
 
