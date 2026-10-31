@@ -56,7 +56,7 @@ TEMPLATE = """<!DOCTYPE html>
   <h1>{title}</h1>
 
   <div class="callout">
-    <p>The full bodies behind the one-line index on <a href="/building/claude-code-config.html">my CLAUDE.md page</a>. Generated from my private docs with personal details, other people's private business, and money amounts removed (<a href="{public_copy}">source copy</a>). Links into my private repos won't open for you; that's expected.</p>
+    <p>The full bodies behind the one-line index on <a href="/building/claude-code-config.html">my CLAUDE.md page</a>. Generated from my private docs with personal details, other people's private business, and money amounts removed (<a href="{public_copy}">source copy</a>).</p>
   </div>
 
   <hr>
