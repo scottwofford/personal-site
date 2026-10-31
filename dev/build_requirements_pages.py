@@ -44,10 +44,32 @@ PAGES = [
     ("scott-claude-md.md", "building/claude-code-config.html", "My CLAUDE.md", INTRO_CLAUDE),
 ]
 
+# Interface text per language. Spanish pages render hand-checked translations
+# kept in dev/sources/es/ (each says the English version is the source).
+LANG = {
+    "en": dict(lang="en", p="/", home="home", section="building", day1="Day 1", decisions="Decisions",
+               trackers="Trackers", req="Requirements", cross="Cross-surface", updated="Last updated",
+               sot='Source of truth: <a href="{src}">my private {name}</a>; this page is a redacted mirror and may lag behind it.'),
+    "es": dict(lang="es", p="/es/", home="inicio", section="construir", day1="Día 1", decisions="Decisiones",
+               trackers="Seguimiento", req="Requisitos", cross="Entre superficies", updated="Última actualización",
+               sot='Fuente de verdad: <a href="{src}">mi {name} privado</a>, en inglés; esta página es una traducción de una copia redactada y puede quedar atrasada.'),
+}
+INTRO_REQ_ES = ('Los cuerpos completos detrás del índice de una línea en <a href="/es/building/claude-code-config.html">mi página de CLAUDE.md</a>. '
+                "Generados a partir de mis documentos privados, sin detalles personales, asuntos privados de otras personas ni montos de dinero.")
+INTRO_CLAUDE_ES = ('<a href="https://code.claude.com/docs/en/best-practices#write-an-effective-claude-md"><code>CLAUDE.md</code></a> '
+                   "es un archivo especial que Claude Code lee al inicio de cada conversación. Este es el mío, generado a partir del archivo real "
+                   "sin detalles personales, asuntos privados de otras personas ni montos de dinero.")
+ES_SOURCES = Path("dev/sources/es")
+ES_PAGES = [
+    ("requirements/scott-response-req.md", "es/building/response-requirements.html", "Mis requisitos de respuesta", INTRO_REQ_ES),
+    ("requirements/cross-surface-context-mgmt-req.md", "es/building/cross-surface-requirements.html", "Mis requisitos entre superficies", INTRO_REQ_ES),
+    ("scott-claude-md.md", "es/building/claude-code-config.html", "Mi CLAUDE.md", INTRO_CLAUDE_ES),
+]
+
 PUBLIC_COPY = "https://github.com/LuthienResearch/luthien-contributors/tree/main/process/requirements"
 
 TEMPLATE = """<!DOCTYPE html>
-<html lang="en">
+<html lang="{lang}">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -59,22 +81,22 @@ TEMPLATE = """<!DOCTYPE html>
 </head>
 <body>
   <div class="section-nav">
-    <a href="/">← home</a> / <a href="/building/" class="section-name">building</a>
+    <a href="{p}">← {home}</a> / <a href="{p}building/" class="section-name">{section}</a>
     <div class="siblings">
-      <a href="/building/day-1-philosophy.html">Day 1</a>
-      <a href="/building/making-decisions.html">Decisions</a>
-      <a href="/building/mini-prfaq-template.html">Mini-PRFAQ</a>
-      <a href="/building/tracker-templates.html">Trackers</a>
-      <a href="/building/onboarding-reading-list.html">Onboarding</a>
-      <a href="/building/claude-code-config.html"{cur_claude}>CLAUDE.md</a>
-      <a href="/building/response-requirements.html"{cur_resp}>Requirements</a>
-      <a href="/building/cross-surface-requirements.html"{cur_cross}>Cross-surface</a>
+      <a href="{p}building/day-1-philosophy.html">{day1}</a>
+      <a href="{p}building/making-decisions.html">{decisions}</a>
+      <a href="{p}building/mini-prfaq-template.html">Mini-PRFAQ</a>
+      <a href="{p}building/tracker-templates.html">{trackers}</a>
+      <a href="{p}building/onboarding-reading-list.html">Onboarding</a>
+      <a href="{p}building/claude-code-config.html"{cur_claude}>CLAUDE.md</a>
+      <a href="{p}building/response-requirements.html"{cur_resp}>{req}</a>
+      <a href="{p}building/cross-surface-requirements.html"{cur_cross}>{cross}</a>
     </div>
   </div>
   <h1>{title}</h1>
 
   <div class="callout">
-    <p>{intro} Source of truth: <a href="{private_src}">my private {private_name}</a>; this page is a redacted mirror and may lag behind it.</p>
+    <p>{intro} {sot}</p>
   </div>
 
   <hr>
@@ -83,7 +105,7 @@ TEMPLATE = """<!DOCTYPE html>
 
   <hr>
 
-  <p><em>Last updated: {date}.</em></p>
+  <p><em>{updated}: {date}.</em></p>
   <!-- GoatCounter analytics -->
   <script data-goatcounter="https://scwoff.goatcounter.com/count"
           async src="//gc.zgo.at/count.js"></script>
@@ -104,11 +126,17 @@ def absolutize(text, base):
     return re.sub(r"(\[[^\]]*\])\(([^)\s]+)\)", fix, text)
 
 
-for src, out, title, intro in PAGES:
-    text = (PROCESS / src).read_text()
-    # Drop the generated-copy header line and the doc's own H1; the page supplies both.
-    date = re.search(r"on (\d{4}-\d{2}-\d{2})", text.splitlines()[0]).group(1)
-    lines = [l for l in text.splitlines() if not l.startswith("> Generated from")]
+JOBS = [("en", src, out, title, intro, PROCESS / src) for src, out, title, intro in PAGES]
+JOBS += [("es", src, out, title, intro, ES_SOURCES / Path(src).name) for src, out, title, intro in ES_PAGES]
+
+for lang, src, out, title, intro, path in JOBS:
+    text = path.read_text()
+    L = LANG[lang]
+    # Drop the generated-copy header (first line, a blockquote) and the doc's own H1; the page supplies both.
+    date = re.search(r"(\d{4}-\d{2}-\d{2})", text.splitlines()[0]).group(1)
+    lines = text.splitlines()
+    if lines and lines[0].startswith("> "):
+        lines = lines[1:]
     if lines and not lines[0].strip():
         lines = lines[1:]
     if lines and lines[0].startswith("# "):
@@ -120,9 +148,9 @@ for src, out, title, intro in PAGES:
         body=body,
         date=date,
         public_copy=PUBLIC_COPY,
-        private_src=PRIVATE_BASE[src] + PRIVATE_NAME[src],
-        private_name=PRIVATE_NAME[src],
+        sot=L["sot"].format(src=PRIVATE_BASE[src] + PRIVATE_NAME[src], name=PRIVATE_NAME[src]),
         intro=intro,
+        **{k: v for k, v in L.items() if k != "sot"},
         cur_claude=' class="current"' if "claude-code" in out else "",
         cur_resp=' class="current"' if "response" in out else "",
         cur_cross=' class="current"' if "cross-surface" in out else "",

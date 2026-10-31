@@ -4,6 +4,10 @@ All notable changes to scottwofford.com. Plans for larger changes live in [`plan
 
 ---
 
+## 2026-10-31 — Spanish versions of the generated pages
+
+- **Spanish CLAUDE.md and requirements pages**: `es/building/claude-code-config.html`, `es/building/response-requirements.html`, `es/building/cross-surface-requirements.html`, rendered by `dev/build_requirements_pages.py` from translations in `dev/sources/es/`; each names the English private file as its source of truth (PR_LINK)
+
 ## 2026-10-31 — Publish response and cross-surface requirements
 
 - **Requirements pages**: `building/response-requirements.html` and `building/cross-surface-requirements.html`, the full bodies behind the one-line index on the CLAUDE.md page, rendered from the redacted public copy in luthien-contributors by `dev/build_requirements_pages.py` ([PR](https://github.com/scottwofford/personal-site/pull/32))

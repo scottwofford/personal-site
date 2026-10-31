@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mis requisitos entre superficies - Scott Wofford</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="section-nav">
+    <a href="/es/">← inicio</a> / <a href="/es/building/" class="section-name">construir</a>
+    <div class="siblings">
+      <a href="/es/building/day-1-philosophy.html">Día 1</a>
+      <a href="/es/building/making-decisions.html">Decisiones</a>
+      <a href="/es/building/mini-prfaq-template.html">Mini-PRFAQ</a>
+      <a href="/es/building/tracker-templates.html">Seguimiento</a>
+      <a href="/es/building/onboarding-reading-list.html">Onboarding</a>
+      <a href="/es/building/claude-code-config.html">CLAUDE.md</a>
+      <a href="/es/building/response-requirements.html">Requisitos</a>
+      <a href="/es/building/cross-surface-requirements.html" class="current">Entre superficies</a>
+    </div>
+  </div>
+  <h1>Mis requisitos entre superficies</h1>
+
+  <div class="callout">
+    <p>Los cuerpos completos detrás del índice de una línea en <a href="/es/building/claude-code-config.html">mi página de CLAUDE.md</a>. Generados a partir de mis documentos privados, sin detalles personales, asuntos privados de otras personas ni montos de dinero. Fuente de verdad: <a href="https://github.com/scottwofford/sw-prv/blob/main/requirements/cross-surface-context-mgmt-req.md">mi cross-surface-context-mgmt-req.md privado</a>, en inglés; esta página es una traducción de una copia redactada y puede quedar atrasada.</p>
+  </div>
+
+  <hr>
+
+<p><strong>Responsable:</strong> Scott
+<strong>Última actualización:</strong> 2026-09-14
+<strong>Método:</strong> <a href="https://github.com/LuthienResearch/luthien-org/blob/main/ui-fb-dev/2-versions-requirements/README.md">formato canónico de luthien-org</a>.
+<strong>Fuente de retroalimentación:</strong> el uso directo que hace Scott de Claude en distintas superficies. Registros primarios en <a href="https://github.com/scottwofford/sw-prv/blob/main/session-logs"><code>../session-logs/</code></a>.</p>
+<hr />
+<h2 id="epica">Épica</h2>
+<p><u>Continuidad o ausencia honesta.</u> Cuando paso de una superficie de Claude a otra, quiero retomar donde lo dejé o que se me diga con claridad que la nueva superficie no tiene el contexto previo. "System asserts something stale or out-of-context with confidence" es peor que "system says it doesn't know."</p>
+<hr />
+<h2 id="requisitos-historias-de-usuario-que-se-suman-a-la-epica">Requisitos (historias de usuario que se suman a la Épica)</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Requisito (solo el problema)</th>
+<th>Estado actual</th>
+<th>Evidencia clave</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>R1</strong></td>
+<td><u>Continuidad entre superficies.</u> Cuando abro un chat de Claude en cualquier dispositivo, debería saber lo que hice en superficies anteriores.</td>
+<td>Parcial. Claude Code ↔ Desktop continúa a través del MCP del sistema de archivos local. claude.ai web ↔ móvil a través de un backend compartido. Code → móvil en frío no tiene visibilidad de la memoria automática ni de los registros de sesión recientes.</td>
+<td><a href="https://github.com/scottwofford/sw-prv/blob/main/session-logs/2026-04-29_thread-prioritization-context-pull.csv">Evidencia de sesión móvil</a>: el móvil quedó bloqueado porque no se había hecho el push del registro de sesión.</td>
+</tr>
+<tr>
+<td><strong>R2</strong></td>
+<td><u>Ausencia honesta y verificar antes de afirmar.</u> Cuando el sistema no sabe algo, debería decirlo. Cuando el sistema cree saber algo sensible al tiempo o específico (una fecha, un nombre, un estado), debería verificarlo antes de afirmarlo, no suponerlo a partir de contexto desactualizado.</td>
+<td>No satisfecho. Claude ha mezclado contenido de otras líneas de trabajo en chats de trabajo; ha afirmado fechas desactualizadas con confianza; ha confundido entidades con nombres parecidos; ha inventado detalles de escenas que Scott no había descrito.</td>
+<td><a href="https://github.com/scottwofford/sw-prv/blob/main/session-logs/2026-04-29_thread-prioritization-context-pull.csv">Transcripción del 27 de abril</a>: contenido personal apareció en un chat de trabajo sin advertencia; Scott respondió con una grosería. <a href="https://github.com/scottwofford/sw-prv/blob/main/session-logs/2026-04-29_thread-prioritization-context-pull.csv">Daily State</a>: creado y eliminado en menos de 90 minutos después de presentar con confianza datos desactualizados. Hilo de claude.ai sobre prioridad de inversionistas: estampó una fecha de 8 días antes en una respuesta nueva. Otro hilo de claude.ai: confusión de zona horaria + mezcla de nombres + detalle de escena inventado.</td>
+</tr>
+<tr>
+<td><strong>R3</strong></td>
+<td><u>Visibilidad del contexto cargado.</u> Debería poder preguntarle a cualquier chat de Claude "what context have you loaded?" y obtener una respuesta precisa.</td>
+<td>No satisfecho. No hay una superficie de introspección de primera clase. Claude a menudo responde por inferencia, no por conocimiento real.</td>
+<td><a href="https://github.com/scottwofford/sw-prv/blob/main/session-logs/2026-04-29_thread-prioritization-context-pull.csv">Prueba de conectores</a>: el móvil no advirtió los conectores faltantes (Slack <code>not_installed</code>, Trello sin conector propio).</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<hr />
+<h2 id="formas-de-solucion-descartadas">Formas de solución descartadas</h2>
+<p>Enfoques que se consideraron y se rechazaron. Las sesiones futuras no deberían volver a proponerlos sin abordar la refutación. Los titulares son lo esencial; las fuentes al final de cada entrada son principalmente para Claude.</p>
+<h3 id="carga-de-contexto-por-proyecto">Carga de contexto por proyecto</h3>
+<p>No se puede probar como mecanismo para resolver la contaminación entre modos. La propuesta era que las Instrucciones por proyecto evitarían que el contenido personal apareciera en chats de trabajo, pero no existía una forma de validarlo; la propuesta pasó de requisito a principio de diseño y luego quedó refutada cuando la falla real de contaminación entre modos (27 de abril: contenido personal apareció sin advertencia en un chat de trabajo, lo que provocó una grosería de Scott) demostró que el aislamiento por proyecto no estaba garantizando lo que decía garantizar.</p>
+<p><em>Fuente: iteración de /devil que reveló la falta de una vía de refutación; <a href="https://github.com/scottwofford/sw-prv/blob/main/session-logs/2026-04-29_thread-prioritization-context-pull.csv">transcripción del 27 de abril en el registro de sesión</a>.</em></p>
+<h3 id="aislamiento-por-proyecto-como-mecanismo-de-priorizacion">Aislamiento por proyecto como mecanismo de priorización</h3>
+<p>Priorizar de verdad requiere elegir ENTRE modos dentro de una misma ventana de atención. Los proyectos no pueden aislar lo que la atención tiene que priorizar. Refutación concreta: un mensaje de mi esposa que llega en la misma hora que un seguimiento de un inversionista; ambos compiten por el mismo presupuesto de atención sin importar en qué "proyecto" esté archivado cada uno. El aislamiento por proyecto solo funciona si el usuario tiene presupuestos de atención paralelos por proyecto, lo cual no ocurre en el flujo de trabajo de un fundador en solitario.</p>
+<p><em>Fuente: <a href="https://github.com/scottwofford/sw-prv/blob/main/claude-ai-project-knowledge/architecture.md"><code>../claude-ai-project-knowledge/architecture.md</code></a>, nota sobre aislamiento por proyecto + refutación del 2026-05-01.</em></p>
+<h3 id="documento-de-drive-daily-state-como-puente-de-contexto-entre-superficies">Documento de Drive Daily State como puente de contexto entre superficies</h3>
+<p>Se adoptó un documento de Drive actualizado a diario para tender un puente de contexto de Claude Code → claude.ai móvil, y luego se eliminó a unos ~90 minutos de su creación después de que presentara con confianza datos desactualizados en su primera lectura. Patrón de deterioro de instantáneas: cualquier documento derivado que duplica datos de origen empieza a deteriorarse en el momento en que cambian los datos de origen. El sustrato correcto para el contexto entre superficies son los propios sistemas de origen (documentos de referencia de Gmail / Slack / Trello / Drive) consultados en el momento del chat mediante conectores de claude.ai a nivel de cuenta, no instantáneas derivadas.</p>
+<p>Este es el ejemplo canónico de por qué la primacía del sistema de origen (<a href="https://github.com/scottwofford/sw-prv/blob/main/requirements/personal/scott-response-req.md"><code>personal/scott-response-req.md</code></a> Principio 4) se generaliza a datos, definiciones de reglas y datos de identidad: el mismo modo de falla en los tres.</p>
+<p><em>Fuente: <a href="https://github.com/scottwofford/sw-prv/blob/main/claude-ai-project-knowledge/architecture.md"><code>../claude-ai-project-knowledge/architecture.md</code></a>, adopción + reversión de Daily State.</em></p>
+<hr />
+<h2 id="criterios-de-aceptacion">Criterios de aceptación</h2>
+<p>Por incidente, binario S/N:</p>
+<ul>
+<li>¿Se satisface <strong>R1</strong>? ¿La nueva superficie sabía lo que hicieron las superficies anteriores, o lo obtuvo de una fuente accesible?</li>
+<li>¿Se satisface <strong>R2</strong>? Cuando el sistema no tenía contexto, ¿lo dijo? Cuando el sistema afirmó un dato sensible al tiempo o específico (fecha, nombre, estado, monto en dólares), ¿lo verificó antes de afirmarlo?</li>
+<li>¿Se satisface <strong>R3</strong>? ¿Pudo Scott preguntar "what do you know about my situation?" y obtener un inventario preciso de lo que está cargado frente a lo que falta?</li>
+</ul>
+<p>Agregado = % satisfecho durante una ventana de medición. Se registra en los registros de sesión.</p>
+<hr />
+<h1 id="apendice">Apéndice</h1>
+<h2 id="a-matriz-de-capacidades-por-superficie">A. Matriz de capacidades por superficie</h2>
+<p>R1 + R2 están limitados por las herramientas y conectores que están conectados en la superficie actual. Donde faltan canales, R2 (ausencia honesta) es el requisito esencial: Claude debe enumerar qué canales puede ver y cuáles no antes de afirmar. Se actualiza empíricamente por superficie. Enfoque: herramienta/conector × superficie para cualquier comportamiento de respuesta de Claude.</p>
+<p>Para la capacidad de lectura/escritura por canal de origen en la construcción de la base de datos de recaudación de fondos (otro enfoque: origen × lectura/escritura, limitado a ese pipeline), consulta <a href="https://github.com/LuthienResearch/luthien-org/blob/main/fundraising/fundraising-db-requirements.md#toolmcp-boundaries-as-of-2026-05-01"><code>luthien-org/fundraising/fundraising-db-requirements.md</code> § Límites de herramientas/MCP</a>. Consumidor distinto (fase de diseño de la base de datos de recaudación frente a comportamiento de Claude entre superficies); ambos son esenciales.</p>
+<h3 id="superficies-monitoreadas">Superficies monitoreadas</h3>
+<ul>
+<li><strong>desktop-mac</strong>: Claude Desktop en macOS con servidores MCP locales (Filesystem, iMessage, Office by Anthropic, Trello LOCAL DEV, control de Mac, puente de Chrome)</li>
+<li><strong>mobile-ios</strong>: app de Claude para iOS</li>
+<li><strong>web-claudeai</strong>: claude.ai en cualquier navegador, sin extensión</li>
+<li><strong>chrome-extension</strong>: panel lateral de Claude in Chrome (extensión activa)</li>
+<li><strong>claude-code</strong>: CLI de Claude Code (laptop)</li>
+<li><strong>codex-local</strong>: Codex en la Mac configurada de Scott; el acceso a mensajes se cubre por separado más abajo.</li>
+</ul>
+<h3 id="matriz-de-capacidades">Matriz de capacidades</h3>
+<p>El acceso a mensajes se mantiene en <a href="#acceso-actual-a-mensajes">Acceso actual a mensajes</a>, incluido Codex. Las demás celdas se derivan de las pruebas fechadas que aparecen más abajo; vuelve a probar antes de confiar en ellas. La disponibilidad técnica nunca autoriza el envío de mensajes.</p>
+<table>
+<thead>
+<tr>
+<th>Herramienta / conector</th>
+<th>Categoría</th>
+<th>desktop-mac</th>
+<th>mobile-ios</th>
+<th>web-claudeai</th>
+<th>chrome-extension</th>
+<th>claude-code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GitHub Integration</td>
+<td>MCP en la nube</td>
+<td>✅ Conectado (aún no probado)</td>
+<td>❓</td>
+<td>❓</td>
+<td>❓</td>
+<td>n/a (usa git nativo vía Bash)</td>
+</tr>
+<tr>
+<td>Gmail</td>
+<td>MCP en la nube</td>
+<td>✅ ambas cuentas consultables</td>
+<td>⚠️ solo personal</td>
+<td>✅ verificado (alcance de cuenta no probado explícitamente)</td>
+<td>❌ verificado</td>
+<td>✅ servidores locales personal + Luthien + sw4</td>
+</tr>
+<tr>
+<td>Google Calendar</td>
+<td>MCP en la nube</td>
+<td>✅ verificado</td>
+<td>✅ verificado (9 calendarios incl. ambas cuentas)</td>
+<td>✅ verificado (9 calendarios incl. ambas cuentas)</td>
+<td>❌ verificado</td>
+<td>✅ vía configuración MCP</td>
+</tr>
+<tr>
+<td>Google Drive</td>
+<td>MCP en la nube</td>
+<td>✅ verificado</td>
+<td>⚠️ solo personal</td>
+<td>✅ verificado</td>
+<td>❌ verificado</td>
+<td>✅ vía configuración MCP</td>
+</tr>
+<tr>
+<td>Trello</td>
+<td>LOCAL DEV (MCP personalizado, solo escritorio)</td>
+<td>✅ solo escritorio</td>
+<td>❌ verificado</td>
+<td>⚠️ disponible en el registro, no conectado</td>
+<td>❌ verificado</td>
+<td>✅ vía configuración MCP</td>
+</tr>
+<tr>
+<td>Filesystem</td>
+<td>MCP local (DESKTOP)</td>
+<td>✅ verificado</td>
+<td>❌ verificado</td>
+<td>❌ verificado (solo sandbox <code>/mnt/*</code>, no el sistema de archivos de la Mac)</td>
+<td>❌ verificado</td>
+<td>✅ nativo (Bash, Read, Edit, Write)</td>
+</tr>
+<tr>
+<td>Read and Send iMessages</td>
+<td>MCP local (DESKTOP)</td>
+<td>✅ disponible, no probado directamente</td>
+<td>❌ verificado</td>
+<td>❌ verificado</td>
+<td>❌ verificado</td>
+<td>✅ lectura vía Beeper (ver Acceso actual a mensajes)</td>
+</tr>
+<tr>
+<td>Word/Excel/PowerPoint by Anthropic</td>
+<td>MCP local (DESKTOP)</td>
+<td>✅ disponible, no probado directamente</td>
+<td>❌ verificado</td>
+<td>❌ verificado (reemplazado por <code>/mnt/skills</code> python-pptx/openpyxl/python-docx vía bash)</td>
+<td>❌ verificado</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>Control your Mac (osascript)</td>
+<td>MCP local (DESKTOP)</td>
+<td>✅ disponible, no probado</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌ (requeriría osascript vía Bash)</td>
+</tr>
+<tr>
+<td>Control Chrome</td>
+<td>MCP local (DESKTOP)</td>
+<td>✅ disponible, no probado</td>
+<td>❌</td>
+<td>❌ verificado</td>
+<td>❌ verificado (la extensión tiene sus propias herramientas de navegador, NO el MCP Control Chrome)</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>Claude in Chrome (extensión, herramientas nativas de navegador)</td>
+<td>extensión</td>
+<td>✅ vía puente de escritorio</td>
+<td>❌</td>
+<td>❌ verificado</td>
+<td>✅ nativo (read_page, find, computer, navigate, tabs_context, tabs_create, form_input, javascript_tool, read_console_messages, read_network_requests, gif_creator, etc.)</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>web_search / web_fetch</td>
+<td>creado por Anthropic</td>
+<td>✅ verificado</td>
+<td>✅ verificado (9 resultados)</td>
+<td>✅ verificado (9 resultados)</td>
+<td>❌ verificado</td>
+<td>✅ vía WebSearch / WebFetch</td>
+</tr>
+<tr>
+<td>image_search</td>
+<td>creado por Anthropic</td>
+<td>✅ probable</td>
+<td>✅ disponible (sin probar)</td>
+<td>✅ disponible (sin probar)</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>bash_tool / sandbox de computer-use</td>
+<td>creado por Anthropic</td>
+<td>✅ verificado</td>
+<td>✅ verificado (VM Linux 6.18.5, Python 3.12.3, salida de red con lista de permitidos)</td>
+<td>✅ verificado (mismo sandbox Linux 6.18.5)</td>
+<td>❌ verificado</td>
+<td>✅ nativo (Bash)</td>
+</tr>
+<tr>
+<td>conversation_search</td>
+<td>creado por Anthropic</td>
+<td>✅ verificado</td>
+<td>✅ verificado</td>
+<td>✅ verificado</td>
+<td>❌ verificado</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>recent_chats</td>
+<td>creado por Anthropic</td>
+<td>✅ verificado</td>
+<td>✅ verificado</td>
+<td>✅ disponible</td>
+<td>❌ verificado</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>memory_user_edits</td>
+<td>creado por Anthropic</td>
+<td>✅ probable</td>
+<td>✅ disponible</td>
+<td>✅ disponible</td>
+<td>❌</td>
+<td>❌ (Claude Code usa memoria automática + CLAUDE.md en su lugar)</td>
+</tr>
+<tr>
+<td>event_<em> / reminder_</em> / calendar_search_v0 nativos de iOS</td>
+<td>creado por Anthropic (iOS)</td>
+<td>❌</td>
+<td>✅ verificado (en paralelo al MCP de Google Calendar)</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>Control de navegador (read_page, find, computer-tab, javascript_tool, gif_creator, etc.)</td>
+<td>nativo de la extensión</td>
+<td>✅ vía puente de escritorio</td>
+<td>❌</td>
+<td>❌</td>
+<td>✅ verificado</td>
+<td>❌</td>
+</tr>
+</tbody>
+</table>
+<p>Leyenda: ✅ verificado que funciona · ❌ verificado que falta · ⚠️ parcial / limitado · ❓ aún no probado · "probable" = inferido de la arquitectura, no probado directamente.</p>
+<p><strong>Alcance de cuentas de Gmail.</strong> En Claude Code/Codex local, dirige las lecturas a los servidores específicos por cuenta configurados, <code>gmail-sw3</code>, <code>gmail-luthien</code> y <code>gmail-sw4</code>, y verifica la identidad. El punto ciego del conector personal de Gmail de claude.ai respecto al correo enviado desde Workspace no aplica a un servidor de Luthien autenticado por separado. En web/móvil, verifica la cobertura de cuentas del propio conector; una búsqueda negativa en el correo personal no establece ausencia en Enviados de Workspace. Consulta la <a href="https://github.com/scottwofford/sw-prv/blob/main/skills/gmail-search-heuristics/SKILL.md">guía de búsqueda en Gmail</a>.</p>
+<p><strong><code>create_event</code> de Calendar descarta <code>location</code> (verificado el 2026-06-22 en claude-code, eventos de Camp CRAZ).</strong> El <code>create_event</code> del conector de Google Calendar ignora en silencio el campo <code>location</code>: la llamada tiene éxito y devuelve el evento, pero la ubicación nunca se establece y no se genera ningún error. Crea el evento y luego llama a <code>update_event</code> para establecer la ubicación (ese sí respeta el campo). Probablemente afecta también a otros campos opcionales; trata las omisiones silenciosas de campos como una clase. Lista más completa de peculiaridades (bytes de adjuntos de Gmail, límites de alcance/anexado de gdrive): <a href="https://github.com/scottwofford/sw-prv/blob/main/connector-quirks.md"><code>connector-quirks.md</code></a>.</p>
+<p><strong>Modo de escritura en Drive (capacidad asimétrica, verificado el 2026-05-09 en claude-code).</strong> El ✅ de la matriz para Google Drive junta dos capacidades muy distintas. <strong>La lectura</strong> funciona en todos los tipos de archivo compatibles (<code>read_file_content</code>, <code>download_file_content</code>, <code>search_files</code>, <code>get_file_metadata</code>, <code>list_recent_files</code>). <strong>La escritura</strong> está muy limitada: anexar al final de un Google Doc nativo mediante <code>mcp__gdrive__append_to_document</code> es la única operación de edición directa; crear uno nuevo mediante <code>mcp__claude_ai_Google_Drive__create_file</code> funciona en carpetas donde el principal de OAuth tiene permiso de escritura (devolvió "User cannot add children to the specified folder" en la carpeta Prompt Eng); copiar mediante <code>mcp__claude_ai_Google_Drive__copy_file</code>. <strong>No hay edición / reemplazo / inserción a mitad del documento. No hay eliminación ni envío a la papelera. No hay ninguna escritura en archivos .docx</strong> (<code>append_to_document</code> los rechaza con "This operation is not supported for this document. The document must not be an Office file."). Implicación: el contenido escrito por Claude que necesita revisarse con el tiempo debe vivir en github, no en Drive. Las escrituras en Drive solo son apropiadas para anexar una sola vez a Google Docs nativos existentes, o para crear documentos nuevos en carpetas donde OAuth tiene permiso de escritura. La regla vinculante por defecto está en <a href="https://github.com/scottwofford/sw-prv/blob/main/requirements/personal/scott-response-req.md">scott-response-req.md R9</a>.</p>
+<p><strong>Corrección (verificado el 2026-06-14).</strong> El límite de solo anexar / "sin inserción a mitad del documento" descrito arriba aplica únicamente a las <strong>herramientas</strong> MCP. Mediante python reutilizando el token OAuth del MCP de gdrive (<code>~/.config/mcp-gdrive/credentials.json</code>; alcances <code>spreadsheets documents drive.readonly</code>; identidad <code>scott@luthienresearch.org</code>), los <strong>Docs</strong> nativos de Google se editan por completo a través de la Docs API (<code>documents.batchUpdate</code>: insertar en un índice, eliminar un rango, reemplazar todo, formato) y las <strong>Sheets</strong> a través de gspread (<code>update_cell</code> / <code>batch_update</code>). Se demostró eliminando una línea a mitad de un documento mediante <code>replaceAllText</code> (<code>occurrencesChanged: 1</code>). Sigue sin haber escritura en archivos de Office (<code>.docx</code>/<code>.xlsx</code>); las APIs de Docs/Sheets solo editan tipos nativos de Google. Así que el contenido escrito por Claude que necesita revisarse con el tiempo SÍ PUEDE vivir en un Doc/Sheet nativo de Google, no solo en github; github sigue ganando cuando lo importante es el historial de diffs de git. Patrón para copiar la autenticación: <a href="https://github.com/LuthienResearch/luthien-org/blob/main/fundraising/pipeline/auth.py"><code>luthien-org/fundraising/pipeline/auth.py</code></a>. Detalle completo en <a href="https://github.com/scottwofford/sw-prv/blob/main/claude-ai-project-knowledge/architecture.md"><code>../claude-ai-project-knowledge/architecture.md</code></a> (decisiones del 2026-06-14).</p>
+<h3 id="directorios-permitidos-verificados-desktop-mac-mcp-filesystem">Directorios permitidos verificados (desktop-mac, MCP Filesystem)</h3>
+<ul>
+<li><code>/Users/scottwofford/Library/CloudStorage/GoogleDrive-scottwofford3@gmail.com/.shortcut-targets-by-id/129u3BtHRFBeILTbIFf1N2X-NlyphvCoO/Luthien</code></li>
+<li><code>/Users/scottwofford/Dropbox</code></li>
+<li><code>/Users/scottwofford/build</code></li>
+<li><code>/Users/scottwofford/Downloads</code></li>
+<li><code>/Users/scottwofford/Desktop</code></li>
+</ul>
+<h3 id="rutas-canonicas-de-recursos-locales-desktop-mac-claude-code">Rutas canónicas de recursos locales (desktop-mac, claude-code)</h3>
+<p>Dentro de los directorios permitidos verificados de arriba, estas ubicaciones específicas guardan contenido duradero de recursos de Claude que aparece una y otra vez en las solicitudes de restauración de contexto. Trátalas como direcciones conocidas; no las descubras mediante búsqueda.</p>
+<table>
+<thead>
+<tr>
+<th>Recurso</th>
+<th>Ruta</th>
+<th>Formato</th>
+<th>Patrón de nombre de archivo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Registros de sesión de Claude Code (~330+ archivos, dic. 2025 a la fecha)</td>
+<td><code>~/build/luthien-private-session-logs/</code></td>
+<td>CSV con nombre</td>
+<td><code>YYYY-MM-DD_topic-slug.csv</code></td>
+</tr>
+<tr>
+<td>Respaldos de chats de claude.ai, índice legible por humanos</td>
+<td><code>~/build/claude-ai-sync/conversations/by-name/</code></td>
+<td>Markdown</td>
+<td><code>&lt;chat title&gt;.md</code></td>
+</tr>
+<tr>
+<td>Respaldos de chats de claude.ai, sin procesar</td>
+<td><code>~/build/claude-ai-sync/conversations/</code></td>
+<td>Markdown</td>
+<td><code>&lt;uuid&gt;.md</code></td>
+</tr>
+<tr>
+<td>Registro de sincronización del Drive de Luthien</td>
+<td><code>~/Library/CloudStorage/GoogleDrive-scottwofford3@gmail.com/.shortcut-targets-by-id/129u3BtHRFBeILTbIFf1N2X-NlyphvCoO/Luthien/sync.csv</code></td>
+<td>CSV</td>
+<td><code>sync.csv</code></td>
+</tr>
+<tr>
+<td>Documentos de requisitos + operaciones (este repo)</td>
+<td><code>~/build/private-claude-code-docs/</code></td>
+<td>repo de git</td>
+<td>varios</td>
+</tr>
+</tbody>
+</table>
+<p>Mecanismos de sincronización: <code>~/build/claude-ai-sync/sync-claude-ai.sh</code> ejecuta el respaldo de chats de claude.ai; <code>~/build/luthien-private-session-logs/sessions_to_csv.py</code> produce los CSV de Claude Code.</p>
+<h3 id="procedimiento-estandar-de-restauracion-de-contexto">Procedimiento estándar de restauración de contexto</h3>
+<p>Cuando el usuario hace una solicitud de restauración de contexto (las frases incluyen "look at logs," "get context on X," "where were we," "review past chats about Y," "before I take this on the road"), ejecuta lo siguiente:</p>
+<ol>
+<li><strong>Extrae el alcance.</strong> Fecha (hoy / últimos N días / fecha específica) y tema (el tema del chat actual O un tema explícito de la solicitud).</li>
+<li><strong>Filtra a nivel del sistema de archivos.</strong> Usa <code>ls ~/build/luthien-private-session-logs/ | grep &lt;date-or-topic&gt;</code> (o el equivalente para las otras rutas canónicas) en lugar de listar el directorio completo. Según <a href="https://github.com/scottwofford/sw-prv/blob/main/requirements/personal/scott-response-req.md"><code>personal/scott-response-req.md</code></a> R13 (filtrar la salida del chat para quedarse con lo relevante), no se vuelcan directorios completos en la salida del chat.</li>
+<li><strong>Lee como máximo tres candidatos.</strong> Si el filtro da más, nombra los candidatos en prosa y pregunta cuáles leer.</li>
+<li><strong>Para el traspaso al móvil, materializa el contenido en línea como texto en el chat.</strong> El MCP Filesystem es solo de escritorio según la matriz de arriba, así que las referencias a archivos no sobreviven el salto de superficie, incluso cuando el mismo chat se abre en el móvil. El resumen en línea es el puente; las rutas de archivo en la salida del chat no lo son.</li>
+</ol>
+<p>Los primeros tres pasos aplican a cualquier solicitud de restauración de contexto. El paso 4 es específicamente cómo la disciplina de salida (según R13 en <code>scott-response-req.md</code>) se concreta para R1 cuando se señala un traspaso al móvil.</p>
+<h3 id="acceso-actual-a-mensajes">Acceso actual a mensajes</h3>
+<table>
+<thead>
+<tr>
+<th>Fuente</th>
+<th>Claude Code y Codex locales en la Mac configurada de Scott</th>
+<th>Otras superficies</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>WhatsApp, Signal, iMessage, Facebook Messenger, Instagram, mensajes de LinkedIn, X, Beeper</td>
+<td>Descubrimiento de muestras, lectura de mensajes y búsqueda literal verificados mediante Beeper el 14 de septiembre de 2026</td>
+<td>Sin acceso heredado a localhost; verifica una conexión aparte</td>
+</tr>
+<tr>
+<td>Slack de Redwood Research</td>
+<td>Dos identidades. Beeper tiene la cuenta de invitado de Scott en Redwood: canales internos (devops, linuxarena-devs) y mensajes directos, remitentes mostrados como IDs de Matrix, sin herramienta de hilos, sincronización inicial todavía cargando historial el 14 de septiembre de 2026. <code>slack-redwood</code> tiene su identidad de Seattle AI Safety y lee los canales de Redwood compartidos mediante Slack Connect (linuxarena-general, linuxarena-aio, linuxarena-lab-notes, redwood-0labs, ext-redwood-luthien, redwood-api-attack-collab, cmft_to_ctower) con nombres resueltos y lectura de hilos</td>
+<td>Verifica el acceso específico por espacio de trabajo</td>
+</tr>
+<tr>
+<td>Slack de Seattle AI Safety</td>
+<td>servidores <code>slack</code> y <code>slack-redwood</code> (misma identidad)</td>
+<td>Verifica el espacio de trabajo conectado en esa superficie</td>
+</tr>
+<tr>
+<td>Slack de High Impact Professionals</td>
+<td><code>slack-hip</code>, registrado en ambos clientes locales. Las pruebas simultáneas de identidad, canales, historial y búsqueda de HIP/Seattle y de hilos de HIP pasaron el 22 de septiembre de 2026; <a href="https://github.com/scottwofford/sw-prv/blob/main/setup.md#slack-lookup-preference">detalles de conexión</a>. Las sesiones existentes pueden necesitar reconectarse/reiniciarse.</td>
+<td>Sin conexión local heredada</td>
+</tr>
+<tr>
+<td>Slack de Neolithic</td>
+<td><code>slack-neolithic</code>, registrado en ambos clientes locales. Seis pruebas simultáneas de identidad, canales, historial y búsqueda de Neolithic/HIP/Seattle, más lecturas de hilos de Neolithic, pasaron el 22 de septiembre de 2026; <a href="https://github.com/scottwofford/sw-prv/blob/main/setup.md#slack-lookup-preference">detalles de conexión</a>. Las sesiones existentes pueden necesitar reconectarse/reiniciarse.</td>
+<td>Sin conexión local heredada</td>
+</tr>
+<tr>
+<td>Otros espacios de trabajo de Slack</td>
+<td>Verifica cada espacio de trabajo restante por separado.</td>
+<td>Iniciar sesión en el navegador por sí solo no da acceso al agente</td>
+</tr>
+<tr>
+<td>Registros de teléfono/FaceTime, Mail.app nativo</td>
+<td>No establecido por la auditoría de Beeper</td>
+<td>Verifica por separado</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Antes de afirmar algo sobre respuestas/envíos/seguimientos</strong>, consulta la fuente en vivo correspondiente, identifica la petición y lee los mensajes entrantes/salientes posteriores, las respuestas en hilos y suficientes páginas de historial para cubrir el intervalo. Si no se especifica el canal, revisa los canales plausibles según el historial de la relación. Cita la evidencia positiva; matiza cualquier afirmación de ausencia según las fuentes reales y el intervalo revisado. Resultados vacíos o acceso incompleto significan estado no verificado, no "no reply." La confirmación directa de Scott es más fuerte que un resultado nulo de una herramienta. Cuando se pregunte "did I send X?" o "have I followed up?", enumera explícitamente qué canales puedes ver y cuáles no, y afirma solo dentro de esa ventana de visibilidad; nunca hagas una afirmación de que algo no se envió sin mencionar la salvedad. Esto obliga a todos los agentes, incluidos los que no tienen Beeper.</p>
+<p><code>get_accounts</code> omite iMessage a pesar de que el descubrimiento y la lectura de chats funcionan, y los chats de iMessage no se pueden buscar por nombre: los participantes aparecen como hashes opacos y los títulos son números de teléfono, códigos cortos o nombres de grupo. Localízalos por número conocido, nombre de grupo o una búsqueda literal de palabras en los mensajes, y luego <code>list_messages</code>. Un historial vacío con <code>hasMore: true</code> y cursores nulos significa que el chat todavía no se sincroniza (Beeper limita la frecuencia de la carga inicial del historial; solución de problemas en setup.md), no que esté vacío. El acceso de lectura nunca autoriza el envío de mensajes.</p>
+<p>Implementación, permisos, solución de problemas y la auditoría de nueve redes: <a href="https://github.com/scottwofford/sw-prv/blob/main/setup.md#beeper-message-access">acceso a mensajes con Beeper</a>. Evidencia primaria: <a href="https://github.com/scottwofford/sw-prv/blob/main/session-logs/2026-09-14_whatsapp-signal-access-codex.csv">sesión de acceso del 14 de septiembre</a>.</p>
+<h3 id="regla-del-punto-ciego-de-tool_search">Regla del punto ciego de <code>tool_search</code></h3>
+<p>Que <code>tool_search</code> devuelva "no matching tools found" NO significa que la herramienta falte en la superficie actual. Caso de falla verificado (desktop-mac): <code>tool_search "filesystem"</code> no devolvió coincidencias, pero la llamada directa a <code>Filesystem:list_allowed_directories</code> funcionó y devolvió 5 rutas. O bien <code>tool_search</code> solo devuelve herramientas diferidas (aún no cargadas), o ciertos MCP locales se registran sin estar en el catálogo buscable.</p>
+<p><strong>Regla:</strong> antes de afirmar "la herramienta X no está disponible en esta superficie", intenta la llamada directa por espacio de nombres. Si el nombre de la llamada no existe o devuelve un error claro de "tool not found", la herramienta está ausente. Si <code>tool_search</code> no devuelve nada pero la llamada directa funciona, la herramienta está presente y <code>tool_search</code> no fue confiable.</p>
+<h3 id="evidencia-historica-de-pruebas-por-superficie">Evidencia histórica de pruebas por superficie</h3>
+<p>Estas observaciones fechadas explican fallas anteriores, no límites generales de acceso actuales. Usa la tabla de acceso actual a mensajes y las verificaciones en vivo para cualquier afirmación sobre el estado.</p>
+<p><strong>desktop-mac</strong> (Claude Desktop en macOS). Verificado mediante prueba directa: Google Calendar (5 herramientas cargadas), Gmail (<code>list_labels</code> devolvió 14 etiquetas; las consultas alcanzan tanto <code>scott@luthienresearch.org</code> como <code>scottwofford3@gmail.com</code> desde una sola llamada), Google Drive (<code>list_recent_files</code> devolvió 3 archivos, incluidas notas de reunión con Roberto Bandarra), Filesystem (devolvió 5 rutas de la Mac, NO descubribles mediante <code>tool_search</code>), web_search (9 resultados), bash_tool (<code>echo hello</code> con código de retorno 0), conversation_search ("luthien" devolvió 3 chats anteriores), recent_chats. El panel de conectores confirmó: GitHub Integration <code>Connected</code> (MCP en la nube); MCP en la nube de Gmail / Calendar / Drive; Trello <code>LOCAL DEV</code>; Filesystem / iMessage / Office / control de Mac / control de Chrome, todos <code>DESKTOP</code>; Claude in Chrome aparece dos veces (en la nube <code>INCLUDED Beta</code> + versión de 22 herramientas con puente de escritorio).</p>
+<p><strong>mobile-ios.</strong> Fuente: <a href="https://github.com/scottwofford/sw-prv/blob/main/session-logs/2026-05-04_surface-capability-probes.csv"><code>../session-logs/2026-05-04_surface-capability-probes.csv</code></a>. <code>bash_tool</code> se ejecuta en una VM real Linux 6.18.5 x86_64 con salida de red con lista de permitidos (PyPI/npm/GitHub/Anthropic API/repos de Ubuntu), Python 3.12.3 invocable desde el teléfono; <code>web_search</code> + <code>conversation_search</code> + <code>recent_chats</code>, todos verificados funcionando; los MCP en la nube de Gmail / Calendar / Drive se cargaron todos mediante <code>tool_search</code> y se llamaron directamente; la autenticación de Drive se confirmó como personal (<code>scottwofford3@gmail.com</code>), no Workspace; <code>list_calendars</code> de Calendar devolvió 9 calendarios, incluidos <code>scott@luthienresearch.org</code> y <code>scottwofford3@gmail.com</code>. Herramientas nativas de iOS presentes en paralelo a los MCP en la nube: <code>event_create_v0/v1</code>, <code>event_search_v0</code>, <code>event_update_v0</code>, <code>event_delete_v0</code>, <code>calendar_search_v0</code>, la familia completa <code>reminder_*</code>, <code>places_search</code> + <code>places_map_display_v0</code>, <code>chart_display_v0</code>, <code>recipe_display_v0</code>, <code>message_compose_v1</code>, <code>ask_user_input_v0</code>. Verificado que faltan: Filesystem, iMessage, Trello, Chrome / navegador, MCP de Office, Slack/GitHub/Notion/Asana. Sorpresa: <code>tool_search</code> es difuso + sesgado hacia Gmail; una sola llamada no basta para confirmar ausencia (hubo que consultar "drive" con varias formulaciones para que aparecieran <code>list_recent_files</code> y <code>search_files</code>); refuerza la regla del punto ciego de <code>tool_search</code>. Confianza (autoevaluación de Claude): 80%.</p>
+<p>El móvil también tiene un alcance OAuth de Gmail solo personal: la búsqueda devuelve solo <code>scottwofford3@gmail.com</code>, no <code>scott@luthienresearch.org</code>. La limitación a una sola cuenta también se observó en pruebas anteriores.</p>
+<p><strong>web-claudeai</strong> (Code Execution + File Creation habilitados). Fuente: <a href="https://github.com/scottwofford/sw-prv/blob/main/session-logs/2026-05-04_surface-capability-probes.csv"><code>../session-logs/2026-05-04_surface-capability-probes.csv</code></a>. Huella de la superficie identificada por: <code>bash_tool</code> se ejecuta en un sandbox Linux 6.18.5 con <code>/mnt/user-data/uploads</code>, <code>/mnt/transcripts</code>, <code>/mnt/skills/{public,examples}</code> montados; salida de red con lista de permitidos (curl a <code>api.anthropic.com</code> funciona, dominios arbitrarios bloqueados); cero herramientas de control de navegador (descarta chrome-extension); sin MCP de Filesystem/iMessage (descarta desktop-mac); suite completa de consumidor presente + <code>bash_tool</code> descarta la hipótesis de móvil sin bash. Verificado que funcionan: <code>bash_tool</code> (Python 3.12.3 + Node v22.22.2 en el contenedor); <code>view</code>/<code>create_file</code>/<code>str_replace</code> (sistema de archivos del sandbox con raíz en <code>/mnt/</code>); <code>web_search</code> (9 resultados); <code>conversation_search</code> (devolvió 2 chats de luthien); <code>list_calendars</code> de Google Calendar (9 calendarios, incl. ambas cuentas de Scott + Ping-Scott-Alert + Pike13); <code>list_labels</code> de Gmail (INBOX, Banking, News, AMZN Consumer, etc.); <code>list_recent_files</code> de Google Drive; <code>search_mcp_registry</code> (devolvió Notion, Slack, Egnyte, Shopify, Uber Eats, Thumbtack, Three.js, todos con <code>installState: "not_installed"</code>). Skills disponibles en <code>/mnt/skills/public</code> para docx/pdf/pptx/xlsx + <code>frontend-design</code> (cubre la ausencia de los MCP de Office mediante Python en <code>bash_tool</code>). Anthropic API en Artifacts (Sonnet 4 invocable, puede adjuntar URLs de MCP de Calendar/Gmail/Drive). Verificado que faltan: Claude in Chrome / Control Chrome (MCP de navegador); MCP Filesystem (sistema de archivos local de la Mac; el sandbox <code>/mnt/*</code> es independiente); iMessage; MCP de Office (reemplazables mediante skills). Confianza (autoevaluación de Claude): 92%.</p>
+<p><strong>chrome-extension</strong> (extensión Claude for Chrome). Fuente: <a href="https://github.com/scottwofford/sw-prv/blob/main/session-logs/2026-05-04_surface-capability-probes.csv"><code>../session-logs/2026-05-04_surface-capability-probes.csv</code></a>. Huella de la superficie: Chrome 147 real en macOS (agente de usuario verificado mediante <code>javascript_tool</code>); contexto de pestañas entregado mediante <code>&lt;system-reminder&gt;</code> con <code>availableTabs</code>/<code>initialTabId</code>; herramientas limitadas a una pestaña de Chrome que requieren el parámetro <code>tabId</code>. Verificado que funcionan: <code>read_page</code>, <code>find</code> (devolvió 3 referencias en la pestaña de claude.ai, incluidos los botones de entrada/detener/adjuntar), <code>computer</code> (clic/escritura/desplazamiento/captura de pantalla/tecla/hover/zoom limitados a la pestaña del navegador, NO a nivel del sistema operativo), <code>navigate</code>, <code>tabs_context</code>, <code>tabs_create</code>, <code>form_input</code>, <code>get_page_text</code>, <code>javascript_tool</code> (evaluó <code>document.title</code>/<code>location.href</code>/agente de usuario), <code>read_console_messages</code>, <code>read_network_requests</code>, <code>resize_window</code>, <code>upload_image</code>, <code>file_upload</code>, <code>gif_creator</code> (grabar→exportar una sesión del navegador), <code>update_plan</code>, <code>turn_answer_start</code>, <code>browser_batch</code> (encadena pasos en un solo viaje de ida y vuelta). Faltantes críticos verificados: <strong>el propio <code>tool_search</code> está ausente</strong> en esta superficie (así que la regla del punto ciego de <code>tool_search</code> no aplica aquí: no hay ninguna capa de descubrimiento); ningún MCP en la nube (ni Calendar, ni Gmail, ni Drive); sin <code>web_search</code>, <code>web_fetch</code>, <code>bash_tool</code>, <code>conversation_search</code>, <code>recent_chats</code>; sin Artifacts/REPL; sin computer use a nivel del sistema operativo. En resumen: <strong>agente de automatización de navegador estrecho + profundo</strong>, extremadamente capaz dentro de una pestaña de Chrome (DOM, JS, red, consola, capturas de pantalla, grabaciones, entradas de archivos) y prácticamente impotente fuera de ella. Fuerte encuadre de defensa contra inyecciones en el prompt de sistema, característico de una superficie de navegador agéntico donde hay contenido no confiable de las páginas en el circuito.</p>
+<p><strong>claude-code, bloqueo por alcance del MCP de Gmail.</strong> Fuente: <a href="https://github.com/scottwofford/sw-prv/blob/main/session-logs/2026-05-02_investor-database-sync-mcp-account-blocker.csv"><code>../session-logs/2026-05-02_investor-database-sync-mcp-account-blocker.csv</code></a>. Modo de falla verificado mientras Scott intentaba sincronizar la base de datos de inversionistas a partir del correo enviado de Gmail: <code>from:scott@luthienresearch.org newer_than:3d</code> devolvió 0 resultados; <code>from:scottwofford3@gmail.com newer_than:3d</code> devolvió solo aceptaciones de calendario personales. Diagnóstico: el espacio de nombres <code>mcp__claude_ai_Gmail__*</code> en Claude Code está conectado por OAuth a <code>scottwofford3@gmail.com</code> (personal), NO a <code>scott@luthienresearch.org</code> (Workspace). El "Luthien MCP" que Scott configuró mediante Google Cloud Provider era el MCP de gdrive en <code>~/.config/mcp-gdrive/</code>, no Gmail. Los hilos entrantes de Luthien solo se pueden leer porque Scott tiene una regla de reenvío a la cuenta personal; el correo saliente de Workspace no pasa en absoluto por el buzón personal y es invisible desde claude-code. <strong>Implicación para R2:</strong> cuando se pregunte "did I send X from Luthien?", claude-code DEBE señalar este vacío: la vía de verificación no existe en esta superficie y ninguna espera por un "MCP indexer lag" lo resuelve. Alternativas: (a) agregar <code>scott@luthienresearch.org</code> al conector de Gmail de claude.ai y luego volver a probar; (b) hacer el barrido desde una superficie que tenga autenticación de Workspace (claude.ai móvil/escritorio) y dejar archivos JSON en el flujo de trabajo existente <code>pipeline/sweeps/row*.json</code>.</p>
+<p><strong>claude-code, inventario de herramientas.</strong> Herramientas disponibles: Bash, Read, Edit, Write, Glob, Grep, Agent, WebSearch, WebFetch, mcp__trello__<em>, mcp__claude_ai_Gmail__</em> (solo personal, ver arriba), mcp__claude_ai_Google_Drive__<em>, mcp__claude_ai_Google_Calendar__</em>, mcp__gdrive__<em>, mcp__otter__</em>, mcp__slack__* (vía configuración MCP). Acceso nativo al sistema de archivos mediante Bash + Read/Edit/Write. Sin <code>conversation_search</code> / <code>recent_chats</code>.</p>
+<h3 id="pruebas-pendientes">Pruebas pendientes</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Prueba</th>
+<th>Superficie</th>
+<th>Prioridad</th>
+<th>Protocolo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>GitHub Integration</td>
+<td>desktop-mac</td>
+<td>alta</td>
+<td><code>tool_search "github"</code>, luego intentar llamadas directas (<code>list_repos</code>, <code>read_file</code> sobre <code>scottwofford/private-claude-code-docs/requirements/cross-surface-context-mgmt-req.md</code>)</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Alcance de cuentas de Gmail en web-claudeai</td>
+<td>web-claudeai</td>
+<td>media</td>
+<td>Ejecutar explícitamente <code>from:scott@luthienresearch.org newer_than:1d</code> y <code>from:scottwofford3@gmail.com newer_than:1d</code> para confirmar si web-claudeai ve una cuenta o ambas</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Persistencia de autenticación de los MCP en la nube</td>
+<td>entre superficies</td>
+<td>baja</td>
+<td>Determinar si los MCP en la nube de Calendar / Gmail / Drive persisten entre superficies con la misma autenticación, o si requieren volver a autenticarse en cada superficie</td>
+</tr>
+</tbody>
+</table>
+<p>Cuando se complete una prueba, actualiza la celda de la matriz con la fecha + agrégala a "Evidencia de pruebas por superficie" arriba.</p>
+<h2 id="b-5-porques">B. 5 porqués</h2>
+<ol>
+<li><strong>Problema superficial:</strong> cuando abro un chat en el móvil, el asistente no sabe lo que pasó en mi sesión de Claude Code de esta mañana. Tengo que volver a explicar el contexto y a veces olvido lo que ya expliqué.</li>
+<li><strong>¿Por qué?</strong> Claude Code y claude.ai móvil no comparten almacenamiento. La memoria automática y los registros de sesión viven en la laptop; claude.ai solo ve su propio backend.</li>
+<li><strong>¿Por qué importa más allá de la incomodidad?</strong> Tres costos reales: (a) tiempo perdido y contexto olvidado, (b) el chat móvil puede tomar decisiones inconsistentes con lo que se decidió antes en la laptop, (c) al tender el puente con una instantánea derivada (el documento Daily State), la instantánea se deterioró en silencio y el chat móvil dijo con confianza cosas desactualizadas; peor que no tener ningún puente.</li>
+<li><strong>¿Por qué falló el puente de instantánea?</strong> Duplicaba datos de origen en un documento derivado que solo se actualizaba cuando se ejecutaba un trabajo explícito (deterioro de instantáneas). Más en el fondo: el sistema afirmaba cosas con confianza sin advertir que los datos de origen estaban desactualizados. Afirmar cosas incorrectas con confianza es la falla de raíz: el deterioro de instantáneas es una causa, la contaminación entre modos es otra, abrir el móvil desde cero sin contexto es una tercera.</li>
+<li><strong>¿Por qué no nombramos el requisito correcto desde el principio?</strong> No había requisitos escritos. Cada sesión nueva reinventaba "what does Scott need" y aterrizaba en una única solución propuesta. Raíz más profunda: Claude hace sugerencias con forma de solución con confianza sin validarlas contra la necesidad del usuario; Scott a menudo las acepta hasta que se ha construido lo suficiente como para que se sienta mal.</li>
+</ol>
+<p><strong>Raíz:</strong> la configuración de Claude entre superficies necesita que el sistema sea honesto sobre lo que sabe y lo que no sabe, en el momento de afirmar contexto, no después de que Scott descubra la mentira.</p>
+<h2 id="c-preguntas-abiertas">C. Preguntas abiertas</h2>
+<ol>
+<li>
+<p><strong>Frecuencia de móvil desde cero.</strong> R2 es más esencial cuando Scott abre claude.ai móvil desde cero, sin contexto previo cargado desde otra superficie. R1 (continuidad) es más esencial cuando SÍ hay una sesión previa que continuar. La influencia relativa de R1 frente a R2 depende de qué patrón domina el uso real que Scott hace del móvil. <strong>Instrumento:</strong> Scott etiqueta cada sesión móvil durante una semana como "continuation" (retomando desde la laptop) o "fresh" (sin contexto previo) en el CSV del registro de sesión. <strong>Regla de decisión:</strong> si "fresh" es ≥10% de las sesiones móviles, R2 es el enfoque de mayor influencia. Si es &lt;10%, gana R1 (continuidad mediante el puente desde Desktop).</p>
+</li>
+<li>
+<p><strong>Verificación de completitud: ¿a R1-R3 les faltan modos de falla?</strong> Hilos recientes de claude.ai + registros de sesión revelaron cuatro tipos de falla: estampar fechas desactualizadas, confusión de zona horaria UTC/PT, mezcla de entidades con nombres parecidos, detalles de escenas inventados. Los cuatro encajan en R2 (verificar antes de afirmar). <strong>Instrumento:</strong> Scott señala cualquier molestia futura que no encaje en R1, R2 o R3 como candidata a nuevo requisito; volver a analizar los hilos recientes en la próxima revisión importante del documento.</p>
+</li>
+<li>
+<p><strong>Pruebas de capacidades por superficie pendientes.</strong> Las pruebas de desktop-mac y mobile-ios están completas; las de web-claudeai, chrome-extension y GitHub Integration están pendientes. Aprendizaje de proceso surgido durante la prueba de escritorio: que <code>tool_search</code> devuelva "no matching tools found" NO significa que la herramienta falte en la superficie actual (punto ciego verificado mediante <code>Filesystem:list_allowed_directories</code> que funcionó a pesar de que <code>tool_search "filesystem"</code> no devolvió nada). <strong>Instrumento:</strong> Scott ejecuta los protocolos de prueba documentados en <a href="https://github.com/scottwofford/sw-prv/blob/main/requirements/surface-capabilities.md"><code>surface-capabilities.md</code></a> en cada superficie pendiente, intentando tanto <code>tool_search</code> COMO llamadas directas por espacio de nombres. <strong>Regla de decisión:</strong> cualquier vacío nuevo que se encuentre actualiza la matriz; cualquier modo de falla de comportamiento nuevo se agrega a las columnas de evidencia de R1-R3 o plantea un candidato a nuevo requisito.</p>
+</li>
+</ol>
+<h2 id="d-nota-de-metodo">D. Nota de método</h2>
+<p>Este documento fue redactado por Claude. Scott respaldó la dirección, la estructura y la forma de Épica + subhistorias, luego leyó R1, R2, R3 y los criterios de aceptación y confirmó que en general tienen sentido. La validación es que el usuario lea los requisitos; este es un repo de un solo usuario sin otros revisores.</p>
+<h2 id="e-recetas-operativas-de-r2-verificar-antes-de-afirmar">E. Recetas operativas de R2 (verificar antes de afirmar)</h2>
+<p>Trasladadas desde CLAUDE.md (2026-06-03) para mantener ligero el archivo que siempre se carga. Las reglas imperativas se quedan en CLAUDE.md; las recetas y la evidencia viven aquí y se cargan cuando se necesitan.</p>
+<p><strong>Fecha y hora.</strong> Ejecuta <code>date</code> antes de responder cualquier cosa sensible al tiempo. No te ancles en las marcas de tiempo del historial del chat ni en el campo <code>currentDate</code> del contexto del sistema (se fija al inicio de la sesión; se desactualiza al pasar la medianoche o en sesiones largas).</p>
+<p><strong>Fechas derivadas en cualquier artefacto (día de la semana + duración + zona horaria).</strong> Nunca escribas un día de la semana de memoria. Antes de escribir pares del estilo <code>Tue, May 8</code> en cualquier documento, calcúlalos con <code>date -j -f "%Y-%m-%d" "$D" "+%a, %b %-d"</code> (agrupa todas las fechas del documento en una sola llamada a Bash). Para marcas de tiempo de Slack en UTC entre 00:00-08:00 UTC (PDT) / 00:00-09:00 UTC (PST), la fecha en PT es el día ANTERIOR; siempre calcula, nunca supongas que es el mismo día. Las duraciones de reuniones citan el último encabezado de sección de la transcripción o se omiten. Antes de cualquier commit que agregue contenido con fechas: <code>grep -nE '(Mon|Tue|Wed|Thu|Fri|Sat|Sun), (Jan|Feb|Mar) [0-9]+' &lt;files&gt;</code> y verifica cada coincidencia contra <code>date -j</code>. Establecido el 2026-05-20 después de que 7 errores de día de la semana + 1 de duración llegaran a <a href="https://github.com/LuthienResearch/luthien-org/pull/19">luthien-org PR #19</a> (caso de estudio de Trajectory).</p>
+<p><strong>Conciencia de fecha en subagentes.</strong> Al despachar un Agent que pueda necesitar conocer la fecha, antepón la hora verificada al prompt del subagente:</p>
+<pre><code>CURRENT-TIME (verified by parent agent via `date` at dispatch): &lt;output of `date '+%Y-%m-%d %H:%M:%S %Z'`&gt;
+
+&lt;actual subagent prompt&gt;
+</code></pre>
+<p>Evidencia empírica: 5/5 subagentes reportaron "Today is 2026-05-01" leyendo <code>currentDate</code> sin ejecutar <code>date</code>; con inyección en el prompt, 10/10 usaron la hora inyectada. El <code>additionalContext</code> de los hooks NO sustituye de forma confiable el contexto del sistema para los subagentes; la inyección en el prompt sí. Un hook <code>PreToolUse</code> sobre <code>Task|Agent</code> (<code>scripts/inject-date-into-agent-prompt.sh</code>) antepone automáticamente CURRENT-TIME a cada despacho de Agent mediante <code>updatedInput</code>; verificado 3/3 APROBADO en la inyección automática. Idempotente; se omite si el prompt ya empieza con CURRENT-TIME.</p>
+<p><strong>Enrutamiento de datos a su fuente.</strong> Mensaje reciente de X: busca en el canal correspondiente (Gmail / Slack directo / conversación de Beeper, incluidos iMessage y Signal; skill <code>gmail-search-heuristics</code> para el orden de búsqueda). Hora / agenda / asistentes de una reunión: Google Calendar <code>mcp__claude_ai_Google_Calendar__list_events</code> (prueba <code>scott@luthienresearch.org</code> para trabajo; el principal para lo personal). Estado de una tarjeta de Trello: <code>mcp__trello__get_card</code>. Cargo / empresa / afiliación a un fondo de una persona: firma de Gmail / WebFetch / documento de referencia conocido. Montos en dólares, conteos de LOI, estadísticas de tracción: cita la fuente canónica en línea. Si la verificación no está disponible en la superficie, di "I do not have that loaded right now"; una verificación fallida satisface R2, una verificación inventada lo viola.</p>
+<h2 id="f-higiene-de-la-memoria-guardada-de-claudeai">F. Higiene de la memoria guardada de claude.ai</h2>
+<p>La memoria guardada es una instantánea que se regenera cada noche, así que el Principio 4 (primacía del sistema de origen) rige lo que pertenece en ella. La memoria solo contiene: (1) datos de identidad duraderos que seguirán siendo ciertos dentro de 6+ meses (familia, trayectoria, hogar, patrones de salud, equipo de gimnasio, acuerdos predeterminados de cuidado infantil); (2) preferencias permanentes y notas sobre herramientas; (3) punteros a fuentes canónicas (rutas de archivo, IDs de documentos), nunca copias de su contenido.</p>
+<p>La memoria NO debe contener:</p>
+<ul>
+<li><strong>Negociaciones, tratos o conversaciones de trabajo en curso.</strong> Verificado el 2026-07-17: una conversación que evolucionaba rápidamente se guardó con una organización equivocada y una fecha de llamada equivocada en cuestión de días, además de una nota interpersonal sensible que nunca debió haberse guardado como instantánea.</li>
+<li><strong>Pendientes abiertos o confirmaciones por recibir.</strong> Calendar / Trello / el correo son la fuente de verdad; las copias recordadas se quedaron desactualizadas durante semanas (los elementos de la reunión con Broerman y de la confirmación del seguro).</li>
+<li><strong>Problemas técnicos sin resolver.</strong> Sobreviven a su solución; verificado el 2026-07-17: el elemento del conector de Drive siguió "activo" en la memoria después de haberse resuelto el 2026-07-16.</li>
+<li><strong>Duplicados de reglas que están en los documentos de requisitos que se consultan.</strong> Las copias divergen de lo canónico; verificado el 2026-07-17: límites de calibración estáticos en la memoria contradecían R3, que los había reemplazado en mayo de 2026.</li>
+</ul>
+<p>Prefiere datos fechados en tiempo pasado sobre afirmaciones de estado en tiempo presente. Prueba de almacenamiento: ¿seguirá siendo cierto, útil y seguro para actuar dentro de 6 meses sin ningún otro contexto? La guía permanente se le dio al sistema de memoria el 2026-07-17 mediante el cuadro de instrucciones de Manage-memory; vuelve a darla si la regeneración se desvía.</p>
+<h2 id="g-propagar-las-correcciones-de-estado-a-las-fuentes-canonicas">G. Propagar las correcciones de estado a las fuentes canónicas</h2>
+<p>Cuando Scott corrige una sugerencia de tarea desactualizada ("I already pinged Sevan", "that's done", "that changed"), reconocerlo en el chat no basta: en el mismo turno, busca en las superficies canónicas que podrían regenerar la sugerencia (Plan of Attack, tarjetas de Trello, objective.md, otros documentos de planeación) las menciones de esa tarea, actualiza cada una en su lugar al estado actual e informa qué se actualizó y dónde. Una corrección que vive solo en el contexto de una sesión reaparece en cada sesión futura que vuelva a leer la fuente desactualizada. Esto es especialmente obligatorio cuando la corrección llega por una fuente no disponible en la superficie actual (incluidas capturas de pantalla): la actualización del documento es el único registro duradero. En una superficie que no puede escribir en la fuente desactualizada (por ejemplo, claude.ai sin el alcance de conector necesario), nombra qué fuente todavía tiene el estado desactualizado para que Scott o una sesión de Claude Code puedan corregirlo.</p>
+<p><em>Origen: 2026-07-24, "Request feedback from Sevan" se volvió a sugerir desde el Nivel 4 del Plan of Attack después de que Scott le había enviado el borrador a Sevan el 22 de julio y había corregido a una sesión anterior. La regla también está en <a href="https://github.com/scottwofford/sw-prv/blob/main/CLAUDE.md"><code>../CLAUDE.md</code></a> en las convenciones siempre activas; se reubicó aquí el 2026-08-16 para que aplique en claude.ai mediante la consulta que se hace en cada chat.</em></p>
+<h2 id="documentos-relacionados">Documentos relacionados</h2>
+<ul>
+<li><a href="https://github.com/scottwofford/sw-prv/blob/main/claude-ai-project-knowledge/architecture.md"><code>../claude-ai-project-knowledge/architecture.md</code></a>: arquitectura entre superficies + principios de diseño</li>
+<li><a href="https://github.com/scottwofford/sw-prv/blob/main/CLAUDE.md"><code>../CLAUDE.md</code></a>: identidad, flujo de trabajo y preferencias de Scott en Claude Code</li>
+<li><a href="https://github.com/scottwofford/sw-prv/blob/main/requirements/personal/scott-response-req.md"><code>personal/scott-response-req.md</code></a>: requisitos personales de Scott para las respuestas de Claude (superficie Customize / claude.ai)</li>
+<li><a href="https://github.com/scottwofford/sw-prv/blob/main/requirements/personal/quentin-response-req.md"><code>personal/quentin-response-req.md</code></a>: destilación de requisitos de Quentin Feuillade-Montixi</li>
+<li><a href="https://github.com/scottwofford/sw-prv/blob/main/requirements/personal/matt-mandzel-response-req.md"><code>personal/matt-mandzel-response-req.md</code></a>: destilación de requisitos de Matt Mandzel</li>
+<li><a href="https://github.com/scottwofford/sw-prv/blob/main/requirements/design-principles.md"><code>design-principles.md</code></a>: metadocumento sobre CÓMO vincular requisitos a superficies</li>
+<li><a href="https://github.com/LuthienResearch/luthien-org/blob/main/ui-fb-dev/2-versions-requirements/README.md">formato canónico de luthien-org</a></li>
+<li><a href="https://github.com/scottwofford/sw-prv/blob/main/session-logs">Registros de sesión</a>: fuente primaria de evidencia</li>
+</ul>
+
+  <hr>
+
+  <p><em>Última actualización: 2026-10-31.</em></p>
+  <!-- GoatCounter analytics -->
+  <script data-goatcounter="https://scwoff.goatcounter.com/count"
+          async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
