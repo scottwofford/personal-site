@@ -4,6 +4,10 @@ All notable changes to scottwofford.com. Plans for larger changes live in [`plan
 
 ---
 
+## 2026-11-02 — Writing section links the public writing-process files
+
+- **`/writing/` + `es/writing/`**: new "My Writing Process" section linking the canonical writing-process doc and the Claude skill, both public generated copies in [luthien-contributors process docs](https://github.com/LuthienResearch/luthien-contributors/tree/main/process) (canonical doc published via [luthien-contributors PR #6](https://github.com/LuthienResearch/luthien-contributors/pull/6)) ([PR](https://github.com/scottwofford/personal-site/pull/PENDING))
+
 ## 2026-11-01 — Spanish twin check
 
 - **Workflow** `.github/workflows/es-twin-check.yml`: comments on a PR when an English page with an `es/` twin changes and the twin doesn't ([PR](https://github.com/scottwofford/personal-site/pull/34))
