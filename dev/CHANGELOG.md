@@ -4,6 +4,11 @@ All notable changes to scottwofford.com. Plans for larger changes live in [`plan
 
 ---
 
+## 2026-11-01 — Spanish twin check
+
+- **Workflow** `.github/workflows/es-twin-check.yml`: comments on a PR when an English page with an `es/` twin changes and the twin doesn't (PR_LINK)
+- **CLAUDE.md**: Spanish updates ship in the same PR as the English change
+
 ## 2026-10-31 — Spanish versions of the generated pages
 
 - **Spanish CLAUDE.md and requirements pages**: `es/building/claude-code-config.html`, `es/building/response-requirements.html`, `es/building/cross-surface-requirements.html`, rendered by `dev/build_requirements_pages.py` from translations in `dev/sources/es/`; each names the English private file as its source of truth ([PR](https://github.com/scottwofford/personal-site/pull/33))
