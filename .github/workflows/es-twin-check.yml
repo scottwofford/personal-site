@@ -1,0 +1,45 @@
+# When a PR changes an English page that has a Spanish twin under es/,
+# but leaves the twin untouched, comment on the PR listing the twins.
+# It warns rather than blocks, so an urgent English fix can still ship.
+name: Spanish twin check
+
+on:
+  pull_request:
+    paths: ["**.html"]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  es-twin:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Find English pages changed without their Spanish twin
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BASE: ${{ github.event.pull_request.base.sha }}
+          HEAD: ${{ github.event.pull_request.head.sha }}
+          PR: ${{ github.event.pull_request.number }}
+        run: |
+          # Every file this PR changed.
+          changed=$(git diff --name-only "$BASE" "$HEAD")
+          missing=""
+          for f in $(echo "$changed" | grep '\.html$' | grep -v '^es/' | grep -v '^dev/'); do
+            twin="es/$f"
+            # Only pages that already have a Spanish version, and whose twin wasn't touched.
+            if [ -f "$twin" ] && ! echo "$changed" | grep -qx "$twin"; then
+              missing="$missing"$'\n'"- \`$f\` → \`$twin\`"
+            fi
+          done
+          if [ -z "$missing" ]; then
+            echo "Every changed English page with a Spanish twin has its twin updated."
+            exit 0
+          fi
+          body="**Spanish twin check:** these English pages changed but their Spanish versions didn't. Update them in this PR, or say why not:$missing"
+          echo "::warning::English pages changed without their es/ twin"
+          # Edit our earlier comment if there is one, so the PR doesn't collect duplicates.
+          gh pr comment "$PR" --edit-last --body "$body" 2>/dev/null || gh pr comment "$PR" --body "$body"
