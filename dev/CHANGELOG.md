@@ -4,6 +4,10 @@ All notable changes to scottwofford.com. Plans for larger changes live in [`plan
 
 ---
 
+## 2026-11-06 — Retrospective Template links the copyable Google Doc
+
+- **Retrospective Template (EN + ES)**: "Make your own copy" link under the subtitle, pointing at the Google Doc's `/copy` URL so readers get their own editable copy without touching the original
+
 ## 2026-11-02 — Writing Guide: canonical-doc link follows the file out of requirements/
 
 - **Writing Guide (EN + ES)**: the canonical writing-process doc moved from `process/requirements/` to `process/` in luthien-contributors (requirements are for building things, not writing; [luthien-contributors PR #7](https://github.com/LuthienResearch/luthien-contributors/pull/7)), so both links update to the new path ([PR](https://github.com/scottwofford/personal-site/pull/36))
