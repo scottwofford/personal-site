@@ -6,7 +6,7 @@ All notable changes to scottwofford.com. Plans for larger changes live in [`plan
 
 ## 2026-11-06 — Retrospective Template links the copyable Google Doc
 
-- **Retrospective Template (EN + ES)**: "Make your own copy" link under the subtitle, pointing at the Google Doc's `/copy` URL so readers get their own editable copy without touching the original
+- **Retrospective Template (EN + ES)**: "Make your own copy" link under the subtitle, pointing at the Google Doc's `/copy` URL so readers get their own editable copy without touching the original; Reference Links hint now reads "docs from project, sprint, launch, etc."
 
 ## 2026-11-02 — Writing Guide: canonical-doc link follows the file out of requirements/
 
